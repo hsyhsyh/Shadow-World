@@ -11,7 +11,9 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-public class GameStage extends AbstractGameStage implements Runnable {
+import processing.core.PApplet;
+
+public class GameStage extends PApplet implements Runnable {
 	
 	/**
 	 * 
@@ -37,16 +39,16 @@ public class GameStage extends AbstractGameStage implements Runnable {
 		
 	}
 
-	protected void paintComponent(Graphics g) {
-		
-		super.paintComponent(g);
-		g.drawImage(this.duck, 50, 50, this	);
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, 1000, 50);
-		g.fillRect(0, 420, 1000, 50);
-		g.fillRect(0, 50, 50, 370);
-		g.fillRect(950, 50, 50, 370);
-	}
+//	protected void paintComponent(Graphics g) {
+//		
+//		super.paintComponent(g);
+//		g.drawImage(this.duck, 50, 50, this	);
+//		g.setColor(Color.BLACK);
+//		g.fillRect(0, 0, 1000, 50);
+//		g.fillRect(0, 420, 1000, 50);
+//		g.fillRect(0, 50, 50, 370);
+//		g.fillRect(950, 50, 50, 370);
+//	}
 
 	@Override
 	public void run() {

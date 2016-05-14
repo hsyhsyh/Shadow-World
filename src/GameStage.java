@@ -42,6 +42,9 @@ public class GameStage extends AbstractGameStage implements Runnable {
 		g.drawImage(this.duck, 50, 50, this	);
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 1000, 50);
+		g.fillRect(0, 420, 1000, 50);
+		g.fillRect(0, 50, 50, 370);
+		g.fillRect(950, 50, 50, 370);
 	}
 
 	@Override

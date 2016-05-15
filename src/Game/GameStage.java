@@ -8,20 +8,20 @@ public class GameStage extends PApplet {
 	private static final long serialVersionUID = 1L;
 	private final static int width = 1000, height = 500;
 	
-	private PImage duck;
+	private PImage man2;
 	
 	public void setup() {
 		
 		size(width, height);
 		smooth();
-		this.duck = loadImage("man2.jpg");
+		this.man2 = loadImage("man2.jpg");
 		
 	}
 	
 	public void draw() {
 		
 		background(255);
-        image(this.duck, 100, 100);
+        image(this.man2, 100, 100);
         stroke(0);
         fill(0);
         this.rect(0, 0, 1000, 50);

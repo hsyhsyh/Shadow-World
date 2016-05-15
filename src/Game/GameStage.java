@@ -14,7 +14,7 @@ public class GameStage extends PApplet {
 		
 		size(width, height);
 		smooth();
-		this.duck = loadImage("duck.png");
+		this.duck = loadImage("man2.jpg");
 		
 	}
 	

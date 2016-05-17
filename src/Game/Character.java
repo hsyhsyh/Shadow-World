@@ -57,8 +57,18 @@ public class Character implements Runnable{
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
+		int i = 1;
 		while(true) {
-			fallDown();
+			
+			try {
+				fallDown();
+				System.out.println(i);
+				i ++;
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	

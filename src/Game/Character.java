@@ -19,7 +19,7 @@ public class Character implements Runnable{
 	GameStage gs;
 	
 	public Character(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs){
-		gs = this.gs;
+		this.gs = gs;
 		Thread ch = new Thread(this);
 		ch.start();
 		this.x=x;
@@ -66,17 +66,18 @@ public class Character implements Runnable{
 			
 			try {
 				fallDown();
-				System.out.println(i);
-				i ++;
-				//if(gs.isLoading == false)
-				//if(i%3 == 0)
-				//if(gs.getImage(gs.man1)!=null)
-					chaImage = gs.getImage();
-				/*if(i%3 == 1)
+				Thread.sleep(100);
+				if(i%4 == 0)
+				if(gs.getImage(gs.man1)!=null)
+					chaImage = gs.getImage(gs.man1);
+				if(i%4 == 1)
 					chaImage = gs.getImage(gs.man2);
-				if(i%3 == 2)
-					chaImage = gs.getImage(gs.man3);*/
-				Thread.sleep(1000);
+				if(i%4 == 2)
+					chaImage = gs.getImage(gs.man3);
+				if(i%4 == 3)
+					chaImage = gs.getImage(gs.man4);
+				//System.out.println(i);
+				i ++;
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

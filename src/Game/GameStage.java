@@ -13,7 +13,7 @@ public class GameStage extends PApplet implements KeyListener{
 	private static final long serialVersionUID = 1L;
 	private final static int width = 1000, height = 500;
 	
-	public PImage man, books, monster, strike, box, bed, lader, door1, man1, man2, man3;
+	public PImage man, books, monster, strike, box, bed, lader, door1, man1, man2, man3, man4;
 	private Character mainCharacter; 
 	private Map map;
 	private ArrayList<Character> characters;
@@ -28,6 +28,7 @@ public class GameStage extends PApplet implements KeyListener{
 		this.man1 = loadImage("man_run1.jpg");
 		this.man2 = loadImage("man_run2.jpg");
 		this.man3 = loadImage("man_run3.jpg");
+		this.man4 = loadImage("man_run4.jpg");
 		this.monster = loadImage("monster.jpg");
 		this.strike = loadImage("strike.png");
 		this.box = loadImage("box.png");
@@ -90,8 +91,8 @@ public class GameStage extends PApplet implements KeyListener{
 		//System.out.println(userEnter);
 	}
 	
-	public PImage getImage() {
-		return man1;
+	public PImage getImage(PImage image) {
+		return image;
 	}
 
 	

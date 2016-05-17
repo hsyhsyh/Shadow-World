@@ -4,7 +4,7 @@ import de.looksgood.ani.Ani;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Character {
+public class Character implements Runnable{
 	
 	private int MAX_HP,now_HP;
 	private String name;
@@ -16,6 +16,8 @@ public class Character {
 	private PApplet parent;
 	
 	public Character(PApplet parent, PImage chaImage, String name, float x, float y , int HP){
+		Thread ch = new Thread(this);
+		ch.start();
 		this.x=x;
 		this.y=y;
 		this.name=name;
@@ -51,6 +53,14 @@ public class Character {
     public PImage getImage(){
     	return this.chaImage;
     }
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		while(true) {
+			fallDown();
+		}
+	}
 	
 
 }

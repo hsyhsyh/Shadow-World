@@ -1,5 +1,7 @@
 package Game;
 
+import java.io.IOException;
+
 import de.looksgood.ani.Ani;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -14,8 +16,10 @@ public class Character implements Runnable{
 	private int gravity;
 	private PImage chaImage;
 	private PApplet parent;
+	GameStage gs;
 	
-	public Character(PApplet parent, PImage chaImage, String name, float x, float y , int HP){
+	public Character(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs){
+		gs = this.gs;
 		Thread ch = new Thread(this);
 		ch.start();
 		this.x=x;
@@ -64,6 +68,14 @@ public class Character implements Runnable{
 				fallDown();
 				System.out.println(i);
 				i ++;
+				//if(gs.isLoading == false)
+				//if(i%3 == 0)
+				//if(gs.getImage(gs.man1)!=null)
+					chaImage = gs.getImage();
+				/*if(i%3 == 1)
+					chaImage = gs.getImage(gs.man2);
+				if(i%3 == 2)
+					chaImage = gs.getImage(gs.man3);*/
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block

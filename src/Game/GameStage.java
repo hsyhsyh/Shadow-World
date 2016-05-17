@@ -13,10 +13,11 @@ public class GameStage extends PApplet implements KeyListener{
 	private static final long serialVersionUID = 1L;
 	private final static int width = 1000, height = 500;
 	
-	private PImage man, books, monster, strike, box, bed, lader, door1;
+	public PImage man, books, monster, strike, box, bed, lader, door1, man1, man2, man3;
 	private Character mainCharacter; 
 	private Map map;
-	private ArrayList<Character> characters; 
+	private ArrayList<Character> characters;
+	public boolean isLoading = true;
 	
 	public void setup() {
 		
@@ -24,6 +25,9 @@ public class GameStage extends PApplet implements KeyListener{
 		smooth();
 		this.books = loadImage("books.jpg");
 		this.man = loadImage("man2.jpg");
+		this.man1 = loadImage("man_run1.jpg");
+		this.man2 = loadImage("man_run2.jpg");
+		this.man3 = loadImage("man_run3.jpg");
 		this.monster = loadImage("monster.jpg");
 		this.strike = loadImage("strike.png");
 		this.box = loadImage("box.png");
@@ -33,6 +37,7 @@ public class GameStage extends PApplet implements KeyListener{
 		characters = new ArrayList<Character>();
 		loadData();
 		this.addKeyListener(this);
+		isLoading = false;
 		
 	}
 	
@@ -48,6 +53,7 @@ public class GameStage extends PApplet implements KeyListener{
         image(this.monster, 650, 300);
         image(this.door1, 80, 300);*/
 		image(this.mainCharacter.getImage(), mainCharacter.x, mainCharacter.y);
+		
         stroke(0);
         fill(0);
         this.rect(0, 0, 1000, 50);
@@ -59,7 +65,7 @@ public class GameStage extends PApplet implements KeyListener{
 	
 	private void loadData(){
 		
-		mainCharacter=new Character(this,man,"none",120,320,100);
+		mainCharacter=new Character(this,man,"none",120,320,100,this);
 	}
 	
 	@Override
@@ -82,6 +88,10 @@ public class GameStage extends PApplet implements KeyListener{
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		//System.out.println(userEnter);
+	}
+	
+	public PImage getImage() {
+		return man1;
 	}
 
 	

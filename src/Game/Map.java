@@ -4,8 +4,11 @@ public class Map{
 	
 	private int supHeight,infHeight,supWidth,infWidth;
 	
-	public Map(){
-		
+	public Map(int supHeight,int infHeight,int supWidth,int infWidth){
+		this.supHeight=supHeight;
+		this.infHeight=infHeight;
+		this.supWidth=supWidth;
+		this.infWidth=infWidth;
 	}
 	
 	public int getSupHeight(){

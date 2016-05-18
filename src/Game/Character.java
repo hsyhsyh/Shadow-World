@@ -11,9 +11,9 @@ public class Character implements Runnable{
 	private int MAX_HP,now_HP;
 	private String name;
 	public float x,y;
-	private int velocityForDirectionX=20; //unit: unit_length/second
-	private int velocityForDirectionY=0;
-	private int gravity;
+	private float velocityForDirectionX=20; //unit: unit_length/second
+	private float velocityForDirectionY=0;
+	private float gravity=2;
 	private PImage chaImage;
 	private PApplet parent;
 	GameStage gs;
@@ -34,7 +34,13 @@ public class Character implements Runnable{
 	
 	//the effect of gravity that make character falldown
     public void fallDown(){
+    	if(this.y<320)
+    		Ani.to(this,1,"velocityForDirectionY",velocityForDirectionY-gravity);
+    	else if(this.y>=320 && velocityForDirectionY<0)
+    		velocityForDirectionY=0;
+    	//because the coordinate y become small when "move up", if velocityForDirectionY>0, y-velocityForDirectionY is "move up"
     	Ani.to(this,1,"y",y-velocityForDirectionY);
+    	
 	}
 	
     public void move(String direction){
@@ -47,7 +53,7 @@ public class Character implements Runnable{
 	}
 	
 	public void jump(){
-		
+		Ani.to(this,1,"velocityForDirectionY",velocityForDirectionY+20);
 	}
 	
     public void attack(){

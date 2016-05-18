@@ -35,6 +35,7 @@ public class GameStage extends PApplet implements KeyListener{
 		this.bed = loadImage("bed.jpg");
 		this.lader = loadImage("lader.png");
 		this.door1 = loadImage("opendoor.png");
+		map=new Map(50,420,950,50);
 		characters = new ArrayList<Character>();
 		loadData();
 		this.addKeyListener(this);
@@ -57,10 +58,10 @@ public class GameStage extends PApplet implements KeyListener{
 		
         stroke(0);
         fill(0);
-        this.rect(0, 0, 1000, 50);
-        this.rect(0, 420, 1000, 50);
-        this.rect(0, 50, 50, 370);
-        this.rect(950, 50, 50, 370);
+        this.rect(0, 0, 1000, map.getSupHeight());
+        this.rect(0, map.getInfHeight(), 1000, 500-map.getInfHeight());
+        this.rect(0, 0, map.getInfWidth(), 500);
+        this.rect(map.getSupWidth(),0,1000-map.getSupWidth(), 500);
         
 	}
 	
@@ -82,6 +83,9 @@ public class GameStage extends PApplet implements KeyListener{
 		}
 		else if(e.getKeyCode()==KeyEvent.VK_RIGHT){
 			mainCharacter.move("right");
+		}
+		if(e.getKeyCode()==KeyEvent.VK_UP && mainCharacter.y >= map.getInfHeight()-100){
+			mainCharacter.jump();
 		}
 	}
 

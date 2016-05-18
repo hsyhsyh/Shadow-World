@@ -23,16 +23,16 @@ public class GameStage extends PApplet implements KeyListener{
 		
 		size(width, height);
 		smooth();
-		this.books = loadImage("books.jpg");
-		this.man = loadImage("man2.jpg");
-		this.man1 = loadImage("man_run1.jpg");
-		this.man2 = loadImage("man_run2.jpg");
-		this.man3 = loadImage("man_run3.jpg");
-		this.man4 = loadImage("man_run4.jpg");
-		this.monster = loadImage("monster.jpg");
+		this.books = loadImage("books.png");
+		this.man = loadImage("man2.png");
+		this.man1 = loadImage("man_run1.png");
+		this.man2 = loadImage("man_run2.png");
+		this.man3 = loadImage("man_run3.png");
+		this.man4 = loadImage("man_run4.png");
+		this.monster = loadImage("monster.png");
 		this.strike = loadImage("strike.png");
 		this.box = loadImage("box.png");
-		this.bed = loadImage("bed.jpg");
+		this.bed = loadImage("bed.png");
 		this.lader = loadImage("lader.png");
 		this.door1 = loadImage("opendoor.png");
 		map=new Map(50,420,950,50);

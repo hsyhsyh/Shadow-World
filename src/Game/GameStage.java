@@ -54,6 +54,7 @@ public class GameStage extends PApplet implements KeyListener{
         image(this.man, 600, 300);
         image(this.monster, 650, 300);
         image(this.door1, 80, 300);*/
+		image(this.door1, 80, 300);
 		image(this.mainCharacter.getImage(), mainCharacter.x, mainCharacter.y);
 		
         stroke(0);

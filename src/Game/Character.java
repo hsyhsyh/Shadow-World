@@ -37,7 +37,10 @@ public class Character implements Runnable{
     	if(this.y<320)
     		Ani.to(this,1,"velocityForDirectionY",velocityForDirectionY-gravity);
     	else if(this.y>=320 && velocityForDirectionY<0)
+    	{   this.y=320;
     		velocityForDirectionY=0;
+    	}
+    		
     	//because the coordinate y become small when "move up", if velocityForDirectionY>0, y-velocityForDirectionY is "move up"
     	Ani.to(this,1,"y",y-velocityForDirectionY);
     	
@@ -53,7 +56,7 @@ public class Character implements Runnable{
 	}
 	
 	public void jump(){
-		Ani.to(this,1,"velocityForDirectionY",velocityForDirectionY+20);
+		velocityForDirectionY += 10;
 	}
 	
     public void attack(){

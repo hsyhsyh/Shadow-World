@@ -13,7 +13,8 @@ public class GameStage extends PApplet implements KeyListener{
 	private static final long serialVersionUID = 1L;
 	private final static int width = 1000, height = 500;
 	
-	public PImage man, books, monster, strike, box, bed, lader, door1, man1, man2, man3, man4;
+	public PImage man, books, monster, strike, box, bed, lader, door1, man1, man2, man3, man4
+	              , man5, man6, man7, man8;
 	private Character mainCharacter; 
 	private Map map;
 	private ArrayList<Character> characters;
@@ -29,6 +30,10 @@ public class GameStage extends PApplet implements KeyListener{
 		this.man2 = loadImage("man_run2.png");
 		this.man3 = loadImage("man_run3.png");
 		this.man4 = loadImage("man_run4.png");
+		this.man5 = loadImage("man_run5.png");
+		this.man6 = loadImage("man_run6.png");
+		this.man7 = loadImage("man_run7.png");
+		this.man8 = loadImage("man_run8.png");
 		this.monster = loadImage("monster.png");
 		this.strike = loadImage("strike.png");
 		this.box = loadImage("box.png");
@@ -80,9 +85,11 @@ public class GameStage extends PApplet implements KeyListener{
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getKeyCode()==KeyEvent.VK_LEFT){
+			mainCharacter.direction = "left";
 			mainCharacter.move("left");
 		}
 		else if(e.getKeyCode()==KeyEvent.VK_RIGHT){
+			mainCharacter.direction = "right";
 			mainCharacter.move("right");
 		}
 		if(e.getKeyCode()==KeyEvent.VK_UP && mainCharacter.y >= map.getInfHeight()-100){

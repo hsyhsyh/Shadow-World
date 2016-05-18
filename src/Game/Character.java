@@ -17,6 +17,7 @@ public class Character implements Runnable{
 	private PImage chaImage;
 	private PApplet parent;
 	GameStage gs;
+	public String direction = "";
 	
 	public Character(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs){
 		this.gs = gs;
@@ -76,15 +77,26 @@ public class Character implements Runnable{
 			try {
 				fallDown();
 				Thread.sleep(100);
-				if(i%4 == 0)
-				if(gs.getImage(gs.man1)!=null)
-					chaImage = gs.getImage(gs.man1);
-				if(i%4 == 1)
-					chaImage = gs.getImage(gs.man2);
-				if(i%4 == 2)
-					chaImage = gs.getImage(gs.man3);
-				if(i%4 == 3)
-					chaImage = gs.getImage(gs.man4);
+				if(direction.equals("right")) {
+					if(i%4 == 0)
+						chaImage = gs.getImage(gs.man1);
+					if(i%4 == 1)
+						chaImage = gs.getImage(gs.man2);
+					if(i%4 == 2)
+						chaImage = gs.getImage(gs.man3);
+					if(i%4 == 3)
+						chaImage = gs.getImage(gs.man4);
+				}
+				if(direction.equals("left")) {
+					if(i%4 == 0)
+						chaImage = gs.getImage(gs.man5);
+					if(i%4 == 1)
+						chaImage = gs.getImage(gs.man6);
+					if(i%4 == 2)
+						chaImage = gs.getImage(gs.man7);
+					if(i%4 == 3)
+						chaImage = gs.getImage(gs.man8);
+				}
 				//System.out.println(i);
 				i ++;
 			} catch (InterruptedException e) {

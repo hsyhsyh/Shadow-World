@@ -73,7 +73,7 @@ public class GameStage extends PApplet implements KeyListener{
 	
 	private void loadData(){
 		
-		mainCharacter=new Character(this,man,"none",120,320,100,this);
+		mainCharacter=new Character(this,man,"none",120,320,100,this,map);
 	}
 	
 	@Override
@@ -87,12 +87,14 @@ public class GameStage extends PApplet implements KeyListener{
 		if(e.getKeyCode()==KeyEvent.VK_LEFT){
 			mainCharacter.direction = "left";
 			mainCharacter.move("left");
+			mainCharacter.isWalk=true;
 		}
 		else if(e.getKeyCode()==KeyEvent.VK_RIGHT){
-			mainCharacter.direction = "right";
+	    	mainCharacter.direction = "right";
 			mainCharacter.move("right");
+			mainCharacter.isWalk=true;
 		}
-		if(e.getKeyCode()==KeyEvent.VK_UP && mainCharacter.y >= map.getInfHeight()-100){
+		if(e.getKeyCode()==KeyEvent.VK_UP && mainCharacter.getMap().IsGround(mainCharacter)){
 			mainCharacter.jump();
 		}
 	}
@@ -100,7 +102,12 @@ public class GameStage extends PApplet implements KeyListener{
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		//System.out.println(userEnter);
+		if(e.getKeyCode()==KeyEvent.VK_LEFT||e.getKeyCode()==KeyEvent.VK_RIGHT){
+			mainCharacter.isWalk=false;
+			mainCharacter.move("stop");
+			mainCharacter.direction = "";
+		}
+			
 	}
 	
 	public PImage getImage(PImage image) {

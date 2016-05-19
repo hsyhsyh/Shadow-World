@@ -11,16 +11,19 @@ public class Character implements Runnable{
 	private int MAX_HP,now_HP;
 	private String name;
 	public float x,y;
-	private float velocityForDirectionX=20; //unit: unit_length/second
+	private float velocityForDirectionX=0; //unit: unit_length/second
 	private float velocityForDirectionY=0;
-	private float gravity=2;
+	private float gravity=5;
+	private Map map;
+	public boolean isWalk=false;
 	private PImage chaImage;
 	private PApplet parent;
 	GameStage gs;
 	public String direction = "";
 	
-	public Character(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs){
+	public Character(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs,Map map){
 		this.gs = gs;
+		this.map = map;
 		Thread ch = new Thread(this);
 		ch.start();
 		this.x=x;
@@ -33,12 +36,12 @@ public class Character implements Runnable{
 		Ani.init(parent);
 	}
 	
-	//the effect of gravity that make character falldown
+	//the effect of gravity that make character fall down
     public void fallDown(){
-    	if(this.y<320)
+    	if(!this.map.IsGround(this))
     		Ani.to(this,1,"velocityForDirectionY",velocityForDirectionY-gravity);
-    	else if(this.y>=320 && velocityForDirectionY<0)
-    	{   this.y=320;
+    	else if(this.map.IsGround(this) && velocityForDirectionY<0)
+    	{   this.map.setToGround(this);
     		velocityForDirectionY=0;
     	}
     		
@@ -47,12 +50,20 @@ public class Character implements Runnable{
     	
 	}
 	
+    //always character move, stop when velocityForDirectionX=0, 
+    public void move(){
+			Ani.to(this,1,"x",x+velocityForDirectionX);
+	}
+    
     public void move(String direction){
 		if(direction.equals("left")){
-			Ani.to(this,1,"x",x-velocityForDirectionX);
+			velocityForDirectionX=-20;
 		}
 		else if(direction.equals("right")){
-			Ani.to(this,1,"x",x+velocityForDirectionX);
+			velocityForDirectionX=20;
+		}
+		else if(direction.equals("stop")){
+			velocityForDirectionX=0;
 		}
 	}
 	
@@ -67,6 +78,10 @@ public class Character implements Runnable{
     public PImage getImage(){
     	return this.chaImage;
     }
+    
+    public Map getMap(){
+    	return this.map;
+    }
 
 	@Override
 	public void run() {
@@ -75,9 +90,10 @@ public class Character implements Runnable{
 		while(true) {
 			
 			try {
+				move();
 				fallDown();
 				Thread.sleep(100);
-				if(direction.equals("right")) {
+				if(direction.equals("right") && this.isWalk) {
 					if(i%4 == 0)
 						chaImage = gs.getImage(gs.man1);
 					if(i%4 == 1)
@@ -87,7 +103,7 @@ public class Character implements Runnable{
 					if(i%4 == 3)
 						chaImage = gs.getImage(gs.man4);
 				}
-				if(direction.equals("left")) {
+				else if(direction.equals("left") && this.isWalk) {
 					if(i%4 == 0)
 						chaImage = gs.getImage(gs.man5);
 					if(i%4 == 1)
@@ -97,6 +113,8 @@ public class Character implements Runnable{
 					if(i%4 == 3)
 						chaImage = gs.getImage(gs.man8);
 				}
+				else if(map.IsGround(this))
+					chaImage = gs.getImage(gs.man);
 				//System.out.println(i);
 				i ++;
 			} catch (InterruptedException e) {

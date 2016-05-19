@@ -3,8 +3,10 @@ package Game;
 public class Map{
 	
 	private int supHeight,infHeight,supWidth,infWidth;
+
 	
 	public Map(int supHeight,int infHeight,int supWidth,int infWidth){
+
 		this.supHeight=supHeight;
 		this.infHeight=infHeight;
 		this.supWidth=supWidth;
@@ -27,5 +29,18 @@ public class Map{
 		return this.infWidth;
 	}
 	
+	public boolean IsGround(Character ch){
+		if(ch.y>=infHeight-100)
+			return true;
+		else
+			return false;
+	}
+	
+	//When the Character jump and fall down to the ground, set the coordinate y for Character
+	public void setToGround(Character ch){
+		if(ch.y>=infHeight-100)
+			ch.y=infHeight-100;
+	}
+
 
 }

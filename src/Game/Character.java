@@ -68,7 +68,8 @@ public class Character implements Runnable{
 	}
 	
 	public void jump(){
-		velocityForDirectionY += 10;
+		if(velocityForDirectionY<=20)
+			velocityForDirectionY += 10;
 	}
 	
     public void attack(){

@@ -96,6 +96,7 @@ public class GameStage extends PApplet implements KeyListener{
 		}
 		if(e.getKeyCode()==KeyEvent.VK_UP && mainCharacter.getMap().IsGround(mainCharacter)){
 			mainCharacter.jump();
+			//mainCharacter.isWalk=false;
 		}
 	}
 
@@ -103,7 +104,7 @@ public class GameStage extends PApplet implements KeyListener{
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getKeyCode()==KeyEvent.VK_LEFT||e.getKeyCode()==KeyEvent.VK_RIGHT){
-			mainCharacter.isWalk=false;
+			//mainCharacter.isWalk=false;
 			mainCharacter.move("stop");
 			mainCharacter.direction = "";
 		}

@@ -29,7 +29,7 @@ public class Map{
 		return this.infWidth;
 	}
 	
-	public boolean IsGround(Character ch){
+	public boolean IsGround(AbstractCharacter ch){
 		if(ch.y>=infHeight-100)
 			return true;
 		else
@@ -37,7 +37,7 @@ public class Map{
 	}
 	
 	//When the Character jump and fall down to the ground, set the coordinate y for Character
-	public void setToGround(Character ch){
+	public void setToGround(AbstractCharacter ch){
 		if(ch.y>=infHeight-100)
 			ch.y=infHeight-100;
 	}

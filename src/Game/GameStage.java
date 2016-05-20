@@ -17,7 +17,7 @@ public class GameStage extends PApplet implements KeyListener{
 	              , man5, man6, man7, man8;
 	private Character mainCharacter; 
 	private Map map;
-	private ArrayList<Character> characters;
+	private ArrayList<Monster> monsters;
 	public boolean isLoading = true;
 	
 	public void setup() {
@@ -41,7 +41,7 @@ public class GameStage extends PApplet implements KeyListener{
 		this.lader = loadImage("lader.png");
 		this.door1 = loadImage("opendoor.png");
 		map=new Map(50,420,950,50);
-		characters = new ArrayList<Character>();
+		monsters = new ArrayList<Monster>();
 		loadData();
 		this.addKeyListener(this);
 		isLoading = false;
@@ -61,6 +61,9 @@ public class GameStage extends PApplet implements KeyListener{
         image(this.door1, 80, 300);*/
 		image(this.door1, 80, 300);
 		image(this.mainCharacter.getImage(), mainCharacter.x, mainCharacter.y);
+		for(Monster monster : monsters){
+			image(monster.getImage(),monster.x, monster.y);
+		}
 		
         stroke(0);
         fill(0);
@@ -74,6 +77,9 @@ public class GameStage extends PApplet implements KeyListener{
 	private void loadData(){
 		
 		mainCharacter=new Character(this,man,"none",120,320,100,this,map);
+		Monster mons;
+		mons=new Monster(this,monster,"none",400,320,100,this,map);
+		monsters.add(mons);
 	}
 	
 	@Override

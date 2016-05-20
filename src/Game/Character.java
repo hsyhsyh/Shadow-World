@@ -6,20 +6,7 @@ import de.looksgood.ani.Ani;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Character implements Runnable{
-	
-	private int MAX_HP,now_HP;
-	private String name;
-	public float x,y;
-	private float velocityForDirectionX=0; //unit: unit_length/second
-	private float velocityForDirectionY=0;
-	private float gravity=5;
-	private Map map;
-	public boolean isWalk=false;
-	private PImage chaImage;
-	private PApplet parent;
-	GameStage gs;
-	public String direction = "";
+public class Character extends AbstractCharacter implements Runnable{
 	
 	public Character(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs,Map map){
 		this.gs = gs;
@@ -51,10 +38,12 @@ public class Character implements Runnable{
 	}
 	
     //always character move, stop when velocityForDirectionX=0, 
+    @Override
     public void move(){
 			Ani.to(this,1,"x",x+velocityForDirectionX);
 	}
     
+    @Override
     public void move(String direction){
 		if(direction.equals("left")){
 			velocityForDirectionX=-20;
@@ -72,17 +61,11 @@ public class Character implements Runnable{
 			velocityForDirectionY += 10;
 	}
 	
+	@Override
     public void attack(){
 		
 	}
     
-    public PImage getImage(){
-    	return this.chaImage;
-    }
-    
-    public Map getMap(){
-    	return this.map;
-    }
 
 	@Override
 	public void run() {

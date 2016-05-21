@@ -19,6 +19,7 @@ public class GameStage extends PApplet{
 	private Map map;
 	private ArrayList<Monster> monsters;
 	private Dialog dialog;
+	private boolean hasdialog;
 	private int stage_num;
 	public boolean isLoading = true;
 	
@@ -42,13 +43,14 @@ public class GameStage extends PApplet{
 		this.bed = loadImage("bed.png");
 		this.lader = loadImage("lader.png");
 		this.door1 = loadImage("opendoor.png");
-		map=new Map(50,420,950,50);
+		map = new Map(50,420,950,50);
 		monsters = new ArrayList<Monster>();
+		dialog = new Dialog();
 		loadData();
 		//this.addKeyListener(this);
 		isLoading = false;
 		stage_num = 0;
-		
+		hasdialog = false;
 	}
 	
 	public void draw() 
@@ -101,12 +103,12 @@ public class GameStage extends PApplet{
 		case KeyEvent.VK_LEFT:
 			mainCharacter.direction = "left";
 			mainCharacter.move("left");
-			mainCharacter.isWalk=true;
+			mainCharacter.isWalk = true;
 			break;
 		case KeyEvent.VK_RIGHT:
 			mainCharacter.direction = "right";
 			mainCharacter.move("right");
-			mainCharacter.isWalk=true;
+			mainCharacter.isWalk = true;
 			break;
 		case KeyEvent.VK_UP://jump or up to ladder
 			if(mainCharacter.getMap().IsGround(mainCharacter))
@@ -119,16 +121,15 @@ public class GameStage extends PApplet{
 			break;
 		case KeyEvent.VK_SPACE://find
 			
-			if(true)
+			if(!hasdialog)
 			{
 				have_dialog();
 				dialog.open();
-				System.out.println("AAA");
-				while(dialog.isopen)
-				{
-					dialog.display();
-				}
-				
+				dialog.showtext();
+			}
+			else
+			{
+				dialog.closed();
 			}
 			break;
 		}
@@ -136,7 +137,8 @@ public class GameStage extends PApplet{
 
 	public void keyReleased() {
 		// TODO Auto-generated method stub
-		if(keyCode==KeyEvent.VK_LEFT||keyCode==KeyEvent.VK_RIGHT){
+		if(keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_RIGHT)
+		{
 			//mainCharacter.isWalk=false;
 			mainCharacter.move("stop");
 			mainCharacter.direction = "";
@@ -211,48 +213,75 @@ public class GameStage extends PApplet{
         this.rect(0, map.getInfHeight(), 1000, 500-map.getInfHeight());
         this.rect(0, 0, map.getInfWidth(), 500);
         this.rect(map.getSupWidth(),0,1000-map.getSupWidth(), 500);
+        if(hasdialog)
+        {
+        	dialog.display();
+//			Ani.to(dialog, (float)3.0, "wide", 970);
+//			Ani.to(dialog, (float)3.0, "high", 170);
+        }
 	}
 	
 	private void have_dialog()//character will use this to talk
 	{
-		dialog = new Dialog(this);
-		dialog.display();
+		hasdialog = true;
+		
 	}
 	
 	class Dialog
 	{
-		public boolean isopen;
-//		public boolean opening;
-		public boolean canclosed;
-		private PApplet parent;
-		private int wide;
-		private int high;
-		public Dialog(PApplet p)
+		public int wide;
+		public int high;
+		private String text;
+		private int textnum;
+		public Dialog()
 		{
-			parent = p;
 			wide = 1;
 			high = 1;
-			isopen = true;
-//			opening = true;
-			canclosed = false;
+			hasdialog = true;
+			textnum = 0;//
+			text = "test";//
 		}
 		public void display()
 		{
+			stroke(125);
 			strokeWeight(10);
-			fill(255,0,0);
-			parent.rect(500,300,wide,high);
+			fill(255);
+			rect(22,300,wide,high);
+			if(dialog.wide == 1)
+			{
+				hasdialog = false;
+			}
+			fill(0);
+			textSize(32);
+//			if(textnum == text.length() + 1)
+//			{
+//				text(text, 40, 340);
+//			}
+//			else
+//			{
+				text(text.substring(0, textnum), 40, 340);
+//			}
+			System.out.println(textnum);
 		}
 		public void open()
 		{
-			Ani.to(this, 3.0f, "wide", 200);
-			Ani.to(this, 3.0f, "high", 200);
-			isopen = true;
-			canclosed = true;
+			Ani.to(this, (float)1.0, "wide", 950, Ani.SINE_OUT);
+			Ani.to(this, (float)1.0, "high", 150, Ani.SINE_OUT);
 		}
 		public void closed()
 		{
-			Ani.to(this, 0.5f, "wide", 0);
-			Ani.to(this, 0.5f, "high", 0);
+			textnum = 0;
+			Ani.to(this, (float)0.5, "wide", 1, Ani.SINE_OUT);
+			Ani.to(this, (float)0.5, "high", 1, Ani.SINE_OUT);
+		}
+		public void settext(String t)
+		{
+			text = t;
+			textnum = 0;
+		}
+		public void showtext()
+		{
+			Ani.to(this, (float)(text.length()*0.5), "textnum", text.length(), Ani.LINEAR);
 		}
 	}
 	

@@ -1,7 +1,6 @@
 package Game;
 
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import processing.core.PApplet;

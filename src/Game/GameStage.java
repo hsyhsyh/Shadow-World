@@ -8,7 +8,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 
-public class GameStage extends PApplet implements KeyListener{
+public class GameStage extends PApplet{
 	
 	private static final long serialVersionUID = 1L;
 	private final static int width = 1000, height = 500;
@@ -43,7 +43,7 @@ public class GameStage extends PApplet implements KeyListener{
 		map=new Map(50,420,950,50);
 		monsters = new ArrayList<Monster>();
 		loadData();
-		this.addKeyListener(this);
+		//this.addKeyListener(this);
 		isLoading = false;
 		
 	}
@@ -76,40 +76,43 @@ public class GameStage extends PApplet implements KeyListener{
 	
 	private void loadData(){
 		
-		mainCharacter=new Character(this,man,"none",120,320,100,this,map);
+		mainCharacter = new Character(this,man,"none",120,320,100,this,map);
 		Monster mons;
-		mons=new Monster(this,monster,"none",400,320,100,this,map);
+		mons = new Monster(this,monster,"none",400,320,100,this,map);
 		monsters.add(mons);
 	}
 	
-	@Override
-	public void keyTyped(KeyEvent e) {
+	public void keyPressed() {
 		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getKeyCode()==KeyEvent.VK_LEFT){
+		switch(keyCode)
+		{
+		case KeyEvent.VK_LEFT:
 			mainCharacter.direction = "left";
 			mainCharacter.move("left");
 			mainCharacter.isWalk=true;
-		}
-		else if(e.getKeyCode()==KeyEvent.VK_RIGHT){
-	    	mainCharacter.direction = "right";
+			break;
+		case KeyEvent.VK_RIGHT:
+			mainCharacter.direction = "right";
 			mainCharacter.move("right");
 			mainCharacter.isWalk=true;
-		}
-		if(e.getKeyCode()==KeyEvent.VK_UP && mainCharacter.getMap().IsGround(mainCharacter)){
-			mainCharacter.jump();
-			//mainCharacter.isWalk=false;
+			break;
+		case KeyEvent.VK_UP://jump or up to ladder
+			if(mainCharacter.getMap().IsGround(mainCharacter))
+			{
+				mainCharacter.jump();
+				//mainCharacter.isWalk=false;
+			}
+			break;
+		case KeyEvent.VK_DOWN://down to ladder
+			break;
+		case KeyEvent.VK_SPACE://find
+			break;
 		}
 	}
 
-	@Override
-	public void keyReleased(KeyEvent e) {
+	public void keyReleased() {
 		// TODO Auto-generated method stub
-		if(e.getKeyCode()==KeyEvent.VK_LEFT||e.getKeyCode()==KeyEvent.VK_RIGHT){
+		if(keyCode==KeyEvent.VK_LEFT||keyCode==KeyEvent.VK_RIGHT){
 			//mainCharacter.isWalk=false;
 			mainCharacter.move("stop");
 			mainCharacter.direction = "";

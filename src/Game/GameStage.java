@@ -1,9 +1,9 @@
 package Game;
 
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
+import de.looksgood.ani.Ani;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -18,6 +18,8 @@ public class GameStage extends PApplet{
 	private Character mainCharacter; 
 	private Map map;
 	private ArrayList<Monster> monsters;
+	private Dialog dialog;
+	private int stage_num;
 	public boolean isLoading = true;
 	
 	public void setup() {
@@ -45,33 +47,42 @@ public class GameStage extends PApplet{
 		loadData();
 		//this.addKeyListener(this);
 		isLoading = false;
+		stage_num = 0;
 		
 	}
 	
-	public void draw() {
-		
-		background(255);
-        /*image(this.books, 200, 100);
-        image(this.bed, 600, 50);
-        image(this.lader, 600, 100);
-        image(this.strike, 800, 330);
-        image(this.box, 200, 330);
-        image(this.man, 600, 300);
-        image(this.monster, 650, 300);
-        image(this.door1, 80, 300);*/
-		image(this.door1, 80, 300);
-		image(this.mainCharacter.getImage(), mainCharacter.x, mainCharacter.y);
-		for(Monster monster : monsters){
-			image(monster.getImage(),monster.x, monster.y);
-		}
-		
-        stroke(0);
-        fill(0);
-        this.rect(0, 0, 1000, map.getSupHeight());
-        this.rect(0, map.getInfHeight(), 1000, 500-map.getInfHeight());
-        this.rect(0, 0, map.getInfWidth(), 500);
-        this.rect(map.getSupWidth(),0,1000-map.getSupWidth(), 500);
-        
+	public void draw() 
+	{
+		switch(stage_num)
+		{
+		case 0:
+			test_stage();
+			break;
+		case 1:
+			stage_1();
+			break;
+		case 2:
+			stage_2();
+			break;
+		case 3:
+			stage_3();
+			break;
+		case 4:
+			stage_4();
+			break;
+		case 5:
+			stage_5();
+			break;
+		case 6:
+			stage_6();
+			break;
+		case 7:
+			stage_7();
+			break;
+		case 8:
+			stage_8();
+			break;
+		}     
 	}
 	
 	private void loadData(){
@@ -84,6 +95,7 @@ public class GameStage extends PApplet{
 	
 	public void keyPressed() {
 		// TODO Auto-generated method stub
+		//WARNING: 需切換至英文輸入法才可以正常運作
 		switch(keyCode)
 		{
 		case KeyEvent.VK_LEFT:
@@ -106,6 +118,18 @@ public class GameStage extends PApplet{
 		case KeyEvent.VK_DOWN://down to ladder
 			break;
 		case KeyEvent.VK_SPACE://find
+			
+			if(true)
+			{
+				have_dialog();
+				dialog.open();
+				System.out.println("AAA");
+				while(dialog.isopen)
+				{
+					dialog.display();
+				}
+				
+			}
 			break;
 		}
 	}
@@ -124,5 +148,112 @@ public class GameStage extends PApplet{
 		return image;
 	}
 
+	private void stage_1()
+	{
+		;
+	}
+	
+	private void stage_2()
+	{
+		;
+	}
+	
+	private void stage_3()
+	{
+		;
+	}
+	
+	private void stage_4()
+	{
+		;
+	}
+	
+	private void stage_5()
+	{
+		;
+	}
+	
+	private void stage_6()
+	{
+		;
+	}
+	
+	private void stage_7()
+	{
+		;
+	}
+	
+	private void stage_8()
+	{
+		;
+	}
+	
+	private void test_stage()
+	{
+		background(255);
+        /*image(this.books, 200, 100);
+        image(this.bed, 600, 50);
+        image(this.lader, 600, 100);
+        image(this.strike, 800, 330);
+        image(this.box, 200, 330);
+        image(this.man, 600, 300);
+        image(this.monster, 650, 300);
+        image(this.door1, 80, 300);*/
+		image(this.door1, 80, 300);
+		image(this.mainCharacter.getImage(), mainCharacter.x, mainCharacter.y);
+		for(Monster monster : monsters){
+			image(monster.getImage(),monster.x, monster.y);
+		}
+		
+        stroke(0);
+        fill(0);
+        this.rect(0, 0, 1000, map.getSupHeight());
+        this.rect(0, map.getInfHeight(), 1000, 500-map.getInfHeight());
+        this.rect(0, 0, map.getInfWidth(), 500);
+        this.rect(map.getSupWidth(),0,1000-map.getSupWidth(), 500);
+	}
+	
+	private void have_dialog()//character will use this to talk
+	{
+		dialog = new Dialog(this);
+		dialog.display();
+	}
+	
+	class Dialog
+	{
+		public boolean isopen;
+//		public boolean opening;
+		public boolean canclosed;
+		private PApplet parent;
+		private int wide;
+		private int high;
+		public Dialog(PApplet p)
+		{
+			parent = p;
+			wide = 1;
+			high = 1;
+			isopen = true;
+//			opening = true;
+			canclosed = false;
+		}
+		public void display()
+		{
+			strokeWeight(10);
+			fill(255,0,0);
+			parent.rect(500,300,wide,high);
+		}
+		public void open()
+		{
+			Ani.to(this, 3.0f, "wide", 200);
+			Ani.to(this, 3.0f, "high", 200);
+			isopen = true;
+			canclosed = true;
+		}
+		public void closed()
+		{
+			Ani.to(this, 0.5f, "wide", 0);
+			Ani.to(this, 0.5f, "high", 0);
+		}
+	}
 	
 }

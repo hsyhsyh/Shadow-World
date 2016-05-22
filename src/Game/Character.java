@@ -55,8 +55,8 @@ public class Character extends AbstractCharacter implements Runnable{
 	}
 	
 	public void jump(){
-		if(velocityForDirectionY<=20)
-			velocityForDirectionY += 10;
+		if(velocityForDirectionY<20)
+			velocityForDirectionY += 20;
 	}
 	
 	@Override

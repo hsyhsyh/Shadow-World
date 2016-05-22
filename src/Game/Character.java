@@ -1,7 +1,5 @@
 package Game;
 
-import java.io.IOException;
-
 import de.looksgood.ani.Ani;
 import processing.core.PApplet;
 import processing.core.PImage;

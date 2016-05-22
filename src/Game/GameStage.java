@@ -1,14 +1,14 @@
 package Game;
 
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
+import de.looksgood.ani.Ani;
 import processing.core.PApplet;
 import processing.core.PImage;
 
 
-public class GameStage extends PApplet implements KeyListener{
+public class GameStage extends PApplet{
 	
 	private static final long serialVersionUID = 1L;
 	private final static int width = 1000, height = 500;
@@ -18,6 +18,9 @@ public class GameStage extends PApplet implements KeyListener{
 	private Character mainCharacter; 
 	private Map map;
 	private ArrayList<Monster> monsters;
+	private Dialog dialog;
+	private boolean hasdialog;
+	private int stage_num;
 	public boolean isLoading = true;
 	
 	public void setup() {
@@ -40,16 +43,155 @@ public class GameStage extends PApplet implements KeyListener{
 		this.bed = loadImage("bed.png");
 		this.lader = loadImage("lader.png");
 		this.door1 = loadImage("opendoor.png");
-		map=new Map(50,420,950,50);
+		map = new Map(50,420,950,50);
 		monsters = new ArrayList<Monster>();
+		dialog = new Dialog();
 		loadData();
-		this.addKeyListener(this);
+		//this.addKeyListener(this);
 		isLoading = false;
-		
+		stage_num = 0;
+		hasdialog = false;
 	}
 	
-	public void draw() {
+	public void draw() 
+	{
+		switch(stage_num)
+		{
+		case 0:
+			test_stage();
+			break;
+		case 1:
+			stage_1();
+			break;
+		case 2:
+			stage_2();
+			break;
+		case 3:
+			stage_3();
+			break;
+		case 4:
+			stage_4();
+			break;
+		case 5:
+			stage_5();
+			break;
+		case 6:
+			stage_6();
+			break;
+		case 7:
+			stage_7();
+			break;
+		case 8:
+			stage_8();
+			break;
+		}     
+	}
+	
+	private void loadData(){
 		
+		mainCharacter = new Character(this,man,"none",120,320,100,this,map);
+		Monster mons;
+		mons = new Monster(this,monster,"none",400,320,100,this,map);
+		monsters.add(mons);
+	}
+	
+	public void keyPressed() {
+		// TODO Auto-generated method stub
+		//WARNING: 需切換至英文輸入法才可以正常運作
+		switch(keyCode)
+		{
+		case KeyEvent.VK_LEFT:
+			mainCharacter.direction = "left";
+			mainCharacter.move("left");
+			mainCharacter.isWalk = true;
+			break;
+		case KeyEvent.VK_RIGHT:
+			mainCharacter.direction = "right";
+			mainCharacter.move("right");
+			mainCharacter.isWalk = true;
+			break;
+		case KeyEvent.VK_UP://jump or up to ladder
+			if(mainCharacter.getMap().IsGround(mainCharacter))
+			{
+				mainCharacter.jump();
+				//mainCharacter.isWalk=false;
+			}
+			break;
+		case KeyEvent.VK_DOWN://down to ladder
+			break;
+		case KeyEvent.VK_SPACE://find
+			
+			if(!hasdialog)
+			{
+				have_dialog();
+				dialog.open();
+				dialog.showtext();
+			}
+			else
+			{
+				dialog.closed();
+			}
+			break;
+		}
+	}
+
+	public void keyReleased() {
+		// TODO Auto-generated method stub
+		if(keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_RIGHT)
+		{
+			//mainCharacter.isWalk=false;
+			mainCharacter.move("stop");
+			mainCharacter.direction = "";
+		}
+			
+	}
+	
+	public PImage getImage(PImage image) {
+		return image;
+	}
+
+	private void stage_1()
+	{
+		;
+	}
+	
+	private void stage_2()
+	{
+		;
+	}
+	
+	private void stage_3()
+	{
+		;
+	}
+	
+	private void stage_4()
+	{
+		;
+	}
+	
+	private void stage_5()
+	{
+		;
+	}
+	
+	private void stage_6()
+	{
+		;
+	}
+	
+	private void stage_7()
+	{
+		;
+	}
+	
+	private void stage_8()
+	{
+		;
+	}
+	
+	private void test_stage()
+	{
 		background(255);
         /*image(this.books, 200, 100);
         image(this.bed, 600, 50);
@@ -71,55 +213,76 @@ public class GameStage extends PApplet implements KeyListener{
         this.rect(0, map.getInfHeight(), 1000, 500-map.getInfHeight());
         this.rect(0, 0, map.getInfWidth(), 500);
         this.rect(map.getSupWidth(),0,1000-map.getSupWidth(), 500);
-        
+        if(hasdialog)
+        {
+        	dialog.display();
+//			Ani.to(dialog, (float)3.0, "wide", 970);
+//			Ani.to(dialog, (float)3.0, "high", 170);
+        }
 	}
 	
-	private void loadData(){
+	private void have_dialog()//character will use this to talk
+	{
+		hasdialog = true;
 		
-		mainCharacter=new Character(this,man,"none",120,320,100,this,map);
-		Monster mons;
-		mons=new Monster(this,monster,"none",400,320,100,this,map);
-		monsters.add(mons);
 	}
 	
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getKeyCode()==KeyEvent.VK_LEFT){
-			mainCharacter.direction = "left";
-			mainCharacter.move("left");
-			mainCharacter.isWalk=true;
+	class Dialog
+	{
+		public int wide;
+		public int high;
+		private String text;
+		private int textnum;
+		public Dialog()
+		{
+			wide = 1;
+			high = 1;
+			hasdialog = true;
+			textnum = 0;//
+			text = "test";//
 		}
-		else if(e.getKeyCode()==KeyEvent.VK_RIGHT){
-	    	mainCharacter.direction = "right";
-			mainCharacter.move("right");
-			mainCharacter.isWalk=true;
+		public void display()
+		{
+			stroke(125);
+			strokeWeight(10);
+			fill(255);
+			rect(22,300,wide,high);
+			if(dialog.wide == 1)
+			{
+				hasdialog = false;
+			}
+			fill(0);
+			textSize(32);
+//			if(textnum == text.length() + 1)
+//			{
+//				text(text, 40, 340);
+//			}
+//			else
+//			{
+				text(text.substring(0, textnum), 40, 340);
+//			}
+			System.out.println(textnum);
 		}
-		if(e.getKeyCode()==KeyEvent.VK_UP && mainCharacter.getMap().IsGround(mainCharacter)){
-			mainCharacter.jump();
-			//mainCharacter.isWalk=false;
+		public void open()
+		{
+			Ani.to(this, (float)1.0, "wide", 950, Ani.SINE_OUT);
+			Ani.to(this, (float)1.0, "high", 150, Ani.SINE_OUT);
+		}
+		public void closed()
+		{
+			textnum = 0;
+			Ani.to(this, (float)0.5, "wide", 1, Ani.SINE_OUT);
+			Ani.to(this, (float)0.5, "high", 1, Ani.SINE_OUT);
+		}
+		public void settext(String t)
+		{
+			text = t;
+			textnum = 0;
+		}
+		public void showtext()
+		{
+			Ani.to(this, (float)(text.length()*0.5), "textnum", text.length(), Ani.LINEAR);
 		}
 	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getKeyCode()==KeyEvent.VK_LEFT||e.getKeyCode()==KeyEvent.VK_RIGHT){
-			//mainCharacter.isWalk=false;
-			mainCharacter.move("stop");
-			mainCharacter.direction = "";
-		}
-			
-	}
-	
-	public PImage getImage(PImage image) {
-		return image;
-	}
-
 	
 }

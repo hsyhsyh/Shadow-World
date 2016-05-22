@@ -7,7 +7,6 @@ public class Main extends JFrame{
 	private final static int windowWidth = 1000, windowHeight = 500;
 	
 	public static void main(String [] args){
-		
 		GameStage applet = new GameStage();
 		applet.init();
 		applet.start();

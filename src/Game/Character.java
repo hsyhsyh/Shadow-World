@@ -38,11 +38,14 @@ public class Character extends AbstractCharacter implements Runnable{
     //always character move, stop when velocityForDirectionX=0, 
     @Override
     public void move(){
-			Ani.to(this,1,"x",x+velocityForDirectionX);
+    	
+    	Ani.to(this,1,"x",x+velocityForDirectionX);	
+
 	}
     
     @Override
     public void move(String direction){
+
 		if(direction.equals("left")){
 			velocityForDirectionX=-20;
 		}
@@ -72,7 +75,8 @@ public class Character extends AbstractCharacter implements Runnable{
 		while(true) {
 			
 			try {
-				move();
+				if((direction.equals("left")||direction.equals("right"))&& map.BoundFor(direction , this))
+					move();
 				fallDown();
 				Thread.sleep(100);
 				if(direction.equals("right") && this.isWalk) {

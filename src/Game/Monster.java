@@ -27,7 +27,6 @@ public class Monster extends AbstractCharacter implements Runnable{
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		RandomMove();
 		Ani.to(this,1,"x",x+velocityForDirectionX);
 	}
 
@@ -50,11 +49,13 @@ public class Monster extends AbstractCharacter implements Runnable{
 		Random random=new Random();
 		int a=random.nextInt(100);
 		if(a%100<40)
-			move("left");
+			direction="left";
 		else if(a%100>=59)
-			move("right");
+			direction="right";
 		else 
-			move("stop");
+			direction="stop";
+		move(direction);
+			
 	}
 
 	@Override
@@ -68,9 +69,10 @@ public class Monster extends AbstractCharacter implements Runnable{
 		// TODO Auto-generated method stub
 		int i = 0;
 		while(true) {
-			
 			try {
-				move();
+				RandomMove();
+				if((direction.equals("left")||direction.equals("right"))&& map.BoundFor(direction , this))
+					move();
 				Thread.sleep(200);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block

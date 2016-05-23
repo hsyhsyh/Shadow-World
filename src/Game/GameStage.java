@@ -120,16 +120,30 @@ public class GameStage extends PApplet{
 		case KeyEvent.VK_DOWN://down to ladder
 			break;
 		case KeyEvent.VK_SPACE://find
-			
-			if(!hasdialog)
+			if(true)//if need dialog
 			{
-				have_dialog();
-				dialog.open();
-				dialog.showtext();
+				if(!hasdialog)
+				{
+					have_dialog();
+					dialog.open();
+					String text[] = new String[2];
+					text[0] = "just";
+					text[1] = "test";
+					dialog.settext(text);
+					dialog.showtext();
+				}
+				else
+				{
+					dialog.dosomething();
+				}
 			}
-			else
+			else if(false)//open door
 			{
-				dialog.closed();
+				;
+			}
+			else//attack
+			{
+				;
 			}
 			break;
 		}
@@ -231,18 +245,26 @@ public class GameStage extends PApplet{
 	{
 		public int wide;
 		public int high;
-		private String text;
+		private int manX, manY;
+		private String text[];
 		private int textnum;
+		private int textpagenum;
+		private int now_textpagenum;
 		public Dialog()
 		{
 			wide = 1;
 			high = 1;
 			hasdialog = true;
-			textnum = 0;//
-			text = "test";//
+			textpagenum = 0;
+			now_textpagenum = 0;
+			textnum = 0;//one row 45 letters, at most 3 column
+//			text = "1234567890\n1234567890\n1234567890";
+			manX = -200;
+			manY = 160;
 		}
 		public void display()
 		{
+			image(man, manX, manY, 130, 350);
 			stroke(125);
 			strokeWeight(10);
 			fill(255);
@@ -253,35 +275,51 @@ public class GameStage extends PApplet{
 			}
 			fill(0);
 			textSize(32);
-//			if(textnum == text.length() + 1)
-//			{
-//				text(text, 40, 340);
-//			}
-//			else
-//			{
-				text(text.substring(0, textnum), 40, 340);
-//			}
-			System.out.println(textnum);
+			text(text[now_textpagenum].substring(0, textnum), 40, 340);
+			
+			
+		}
+		public void dosomething()
+		{
+			if(textnum == text[now_textpagenum].length() && now_textpagenum < textpagenum)
+			{
+				now_textpagenum++;
+				textnum = 0;
+				Ani.to(this, (float)(text[now_textpagenum].length()*0.3),
+						"textnum", text[now_textpagenum].length(), Ani.LINEAR);
+			}
+			else if (textnum == text[now_textpagenum].length() && now_textpagenum == textpagenum)
+			{
+				closed();
+			}
 		}
 		public void open()
 		{
 			Ani.to(this, (float)1.0, "wide", 950, Ani.SINE_OUT);
 			Ani.to(this, (float)1.0, "high", 150, Ani.SINE_OUT);
+			Ani.to(this, (float)0.3, "manX", 20, Ani.SINE_OUT);
 		}
-		public void closed()
+		private void closed()
 		{
 			textnum = 0;
+			textpagenum = 0;
+			now_textpagenum = 0;
 			Ani.to(this, (float)0.5, "wide", 1, Ani.SINE_OUT);
 			Ani.to(this, (float)0.5, "high", 1, Ani.SINE_OUT);
+			Ani.to(this, (float)0.3, "manX", -200, Ani.SINE_OUT);
 		}
-		public void settext(String t)
+		public void settext(String[] t)
 		{
+			textpagenum = t.length - 1;
+			text = new String[textpagenum];
+			now_textpagenum = 0;
 			text = t;
 			textnum = 0;
 		}
 		public void showtext()
 		{
-			Ani.to(this, (float)(text.length()*0.5), "textnum", text.length(), Ani.LINEAR);
+			Ani.to(this, (float)(text[now_textpagenum].length()*0.3),
+							"textnum", text[now_textpagenum].length(), Ani.LINEAR);
 		}
 	}
 	

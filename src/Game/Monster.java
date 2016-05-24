@@ -67,7 +67,6 @@ public class Monster extends AbstractCharacter implements Runnable{
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		int i = 0;
 		while(true) {
 			try {
 				RandomMove();

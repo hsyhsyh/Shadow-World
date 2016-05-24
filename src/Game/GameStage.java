@@ -16,8 +16,8 @@ public class GameStage extends PApplet{
 	public PImage man, books, monster, strike, box, bed, lader, door1, man1, man2, man3, man4
 	              , man5, man6, man7, man8;
 	private Character mainCharacter; 
-	private Map map;
 	private ArrayList<Monster> monsters;
+	private ArrayList<Floor> floors;
 	private Dialog dialog;
 	private boolean hasdialog;
 	private int stage_num;
@@ -43,8 +43,8 @@ public class GameStage extends PApplet{
 		this.bed = loadImage("bed.png");
 		this.lader = loadImage("lader.png");
 		this.door1 = loadImage("opendoor.png");
-		map = new Map(50,420,950,50);
 		monsters = new ArrayList<Monster>();
+		floors=new ArrayList<Floor>();
 		dialog = new Dialog();
 		loadData();
 		//this.addKeyListener(this);
@@ -89,10 +89,26 @@ public class GameStage extends PApplet{
 	
 	private void loadData(){
 		
-		mainCharacter = new Character(this,man,"none",120,320,100,this,map);
+		mainCharacter = new Character(this,man,"none",120,320,100,this,floors);
 		Monster mons;
-		mons = new Monster(this,monster,"none",400,320,100,this,map);
+		mons = new Monster(this,monster,"none",400,320,100,this);
 		monsters.add(mons);
+		Floor floor1=new Floor(0, 0, 1000, 50);
+		Floor floor2=new Floor(0, 420, 1000, 80);
+		Floor floor3=new Floor(0, 0, 50, 500);
+		Floor floor4=new Floor(950,0,50, 500);
+		Floor floor5=new Floor(300,380,100, 20);
+		Floor floor6=new Floor(420,340,100, 20);
+		Floor floor7=new Floor(540,300,100, 20);
+		Floor floor8=new Floor(660,360,100, 20);
+		floors.add(floor1);
+		floors.add(floor2);
+		floors.add(floor3);
+		floors.add(floor4);
+		floors.add(floor5);
+		floors.add(floor6);
+		floors.add(floor7);
+		floors.add(floor8);
 	}
 	
 	public void keyPressed() {
@@ -111,7 +127,7 @@ public class GameStage extends PApplet{
 			mainCharacter.isWalk = true;
 			break;
 		case KeyEvent.VK_UP://jump or up to ladder
-			if(mainCharacter.getMap().IsGround(mainCharacter))
+			if(mainCharacter.velocityForDirectionY == 0)
 			{
 				mainCharacter.jump();
 				//mainCharacter.isWalk=false;
@@ -223,10 +239,9 @@ public class GameStage extends PApplet{
 		
         stroke(0);
         fill(0);
-        this.rect(0, 0, 1000, map.getSupHeight());
-        this.rect(0, map.getInfHeight(), 1000, 500-map.getInfHeight());
-        this.rect(0, 0, map.getInfWidth(), 500);
-        this.rect(map.getSupWidth(),0,1000-map.getSupWidth(), 500);
+        for(Floor floor : floors){
+        	this.rect(floor.getX(),floor.getY(),floor.getWidth(),floor.getHeight());
+        }
         if(hasdialog)
         {
         	dialog.display();

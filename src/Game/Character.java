@@ -1,14 +1,17 @@
 package Game;
 
+import java.util.ArrayList;
+
 import de.looksgood.ani.Ani;
 import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Character extends AbstractCharacter implements Runnable{
 	
-	public Character(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs,Map map){
+	public Character(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs,ArrayList<Floor> floors){
+		Ani.init(parent);
 		this.gs = gs;
-		this.map = map;
+		this.floors = floors;
 		Thread ch = new Thread(this);
 		ch.start();
 		this.x=x;
@@ -18,20 +21,33 @@ public class Character extends AbstractCharacter implements Runnable{
 		this.MAX_HP=HP;
 		this.now_HP=HP;
 		this.chaImage=chaImage;
-		Ani.init(parent);
 	}
 	
 	//the effect of gravity that make character fall down
     public void fallDown(){
-    	if(!this.map.IsGround(this))
-    		Ani.to(this,1,"velocityForDirectionY",velocityForDirectionY-gravity);
-    	else if(this.map.IsGround(this) && velocityForDirectionY<0)
-    	{   this.map.setToGround(this);
-    		velocityForDirectionY=0;
+    	boolean isGround=false;
+    	for(Floor floor : floors){
+    		if(floor.IsOnGround(this))
+    		{
+    			isGround=true;
+    			break;
+    		}
     	}
+    	for(Floor floor : floors){
+    		if( floor.IsCeiling(this)&&velocityForDirectionY>0 ) 
+    		{
+    			velocityForDirectionY = 0;
+    		}
+    		else if(floor.IsGround(this) && velocityForDirectionY<0)
+    		{
+    			velocityForDirectionY=0;
+    		}
+    	}
+       if(!isGround && velocityForDirectionY>=-10)
+    	   Ani.to(this,1,"velocityForDirectionY",velocityForDirectionY-gravity);
     		
     	//because the coordinate y become small when "move up", if velocityForDirectionY>0, y-velocityForDirectionY is "move up"
-    	Ani.to(this,1,"y",y-velocityForDirectionY);
+    	Ani.to(this,(float)0.5,"y",y-velocityForDirectionY);
     	
 	}
 	
@@ -39,7 +55,7 @@ public class Character extends AbstractCharacter implements Runnable{
     @Override
     public void move(){
     	
-    	Ani.to(this,1,"x",x+velocityForDirectionX);	
+    	Ani.to(this,(float)0.5,"x",x+velocityForDirectionX);	
 
 	}
     
@@ -58,7 +74,7 @@ public class Character extends AbstractCharacter implements Runnable{
 	}
 	
 	public void jump(){
-		if(velocityForDirectionY<20)
+		if(velocityForDirectionY==0)
 			velocityForDirectionY += 20;
 	}
 	
@@ -75,8 +91,19 @@ public class Character extends AbstractCharacter implements Runnable{
 		while(true) {
 			
 			try {
-				if((direction.equals("left")||direction.equals("right"))&& map.BoundFor(direction , this))
-					move();
+				if(this.velocityForDirectionY>0)
+					UpDown="Up";
+				else if(this.velocityForDirectionY<0)
+					UpDown="Down";
+				if(direction.equals("left")||direction.equals("right")){
+					int moving=1;
+					for(Floor floor : floors){
+						if(floor.IsFloor(this))
+							moving=0;
+						}
+					if(moving==1)
+						move();
+				}
 				fallDown();
 				Thread.sleep(100);
 				if(direction.equals("right") && this.isWalk) {
@@ -99,8 +126,15 @@ public class Character extends AbstractCharacter implements Runnable{
 					if(i%4 == 3)
 						chaImage = gs.getImage(gs.man8);
 				}
-				else if(map.IsGround(this))
-					chaImage = gs.getImage(gs.man);
+				else 
+				{
+					for(Floor floor : floors){
+						if(floor.IsGround(this)){
+							chaImage = gs.getImage(gs.man);
+							break;
+						}
+					}
+				}	
 				//System.out.println(i);
 				i ++;
 			} catch (InterruptedException e) {

@@ -1,5 +1,7 @@
 package Game;
 
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -11,12 +13,13 @@ public abstract class AbstractCharacter {
 	protected float velocityForDirectionX=0; //unit: unit_length/second
 	protected float velocityForDirectionY=0;
 	protected float gravity=5;
-	protected Map map;
+	protected ArrayList<Floor> floors;
 	public boolean isWalk=false;
 	protected PImage chaImage;
 	protected PApplet parent;
 	protected GameStage gs;
 	public String direction = "";
+	public String UpDown = "";
 	abstract public void move();
 	abstract public void move(String direction);
 	abstract public void attack();
@@ -25,8 +28,5 @@ public abstract class AbstractCharacter {
     	return this.chaImage;
     }
     
-    public Map getMap(){
-    	return this.map;
-    }
 
 }

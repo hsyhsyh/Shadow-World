@@ -8,9 +8,10 @@ import processing.core.PImage;
 
 public class Monster extends AbstractCharacter implements Runnable{
 	
-	public Monster(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs,Map map){
+	public Monster(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs){
+		
+		Ani.init(parent);
 		this.gs = gs;
-		this.map = map;
 		Thread ms = new Thread(this);
 		ms.start();
 		this.x=x;
@@ -20,7 +21,6 @@ public class Monster extends AbstractCharacter implements Runnable{
 		this.MAX_HP=HP;
 		this.now_HP=HP;
 		this.chaImage=chaImage;
-		Ani.init(parent);
 	}
 
 
@@ -71,9 +71,9 @@ public class Monster extends AbstractCharacter implements Runnable{
 		while(true) {
 			try {
 				RandomMove();
-				if((direction.equals("left")||direction.equals("right"))&& map.BoundFor(direction , this))
+				//if((direction.equals("left")||direction.equals("right"))&& map.BoundFor(direction , this))
 					move();
-				Thread.sleep(200);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

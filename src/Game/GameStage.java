@@ -46,7 +46,7 @@ public class GameStage extends PApplet{
 		monsters = new ArrayList<Monster>();
 		floors=new ArrayList<Floor>();
 		dialog = new Dialog();
-		loadData();
+		loadData(0);
 		//this.addKeyListener(this);
 		isLoading = false;
 		stage_num = 0;
@@ -87,28 +87,57 @@ public class GameStage extends PApplet{
 		}     
 	}
 	
-	private void loadData(){
+	private void loadData(int num){
 		
-		mainCharacter = new Character(this,man,"none",120,320,100,this,floors);
-		Monster mons;
-		mons = new Monster(this,monster,"none",400,320,100,this);
-		monsters.add(mons);
-		Floor floor1=new Floor(0, 0, 1000, 50);
-		Floor floor2=new Floor(0, 420, 1000, 80);
-		Floor floor3=new Floor(0, 0, 50, 500);
-		Floor floor4=new Floor(950,0,50, 500);
-		Floor floor5=new Floor(300,380,100, 20);
-		Floor floor6=new Floor(420,340,100, 20);
-		Floor floor7=new Floor(540,300,100, 20);
-		Floor floor8=new Floor(660,360,100, 20);
-		floors.add(floor1);
-		floors.add(floor2);
-		floors.add(floor3);
-		floors.add(floor4);
-		floors.add(floor5);
-		floors.add(floor6);
-		floors.add(floor7);
-		floors.add(floor8);
+		switch(num)
+		{
+		case 0:
+			
+			Monster mons;
+			mons = new Monster(this,monster,"none",400,320,100,this);
+			monsters.add(mons);
+			Floor floor1=new Floor(0, 0, 1000, 50);
+			Floor floor2=new Floor(0, 420, 1000, 80);
+			Floor floor3=new Floor(0, 0, 50, 500);
+			Floor floor4=new Floor(950,0,50, 500);
+			Floor floor5=new Floor(300,380,100, 20);
+			Floor floor6=new Floor(420,340,100, 20);
+			Floor floor7=new Floor(540,300,100, 20);
+			Floor floor8=new Floor(660,360,100, 20);
+			floors.add(floor1);
+			floors.add(floor2);
+			floors.add(floor3);
+			floors.add(floor4);
+			floors.add(floor5);
+			floors.add(floor6);
+			floors.add(floor7);
+			floors.add(floor8);
+			mainCharacter = new Character(this,man,"none",120,320,100,this);
+			mainCharacter.addFloor(floors);
+			break;
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			break;
+		case 6:
+			break;
+		case 7:
+			break;
+		case 8:
+			break;
+		case 9:
+			break;
+		case 10:
+			break;
+		}
+		//mainCharacter.deleteFloor();
+		//mainCharacter.addFloor(floors);
 	}
 	
 	public void keyPressed() {
@@ -135,7 +164,7 @@ public class GameStage extends PApplet{
 			break;
 		case KeyEvent.VK_DOWN://down to ladder
 			break;
-		case KeyEvent.VK_SPACE://find
+		case KeyEvent.VK_A:
 			if(true)//if need dialog
 			{
 				if(!hasdialog)
@@ -153,14 +182,13 @@ public class GameStage extends PApplet{
 					dialog.dosomething();
 				}
 			}
-			else if(false)//open door
+			else if(true)//open door
 			{
 				;
 			}
-			else//attack
-			{
-				;
-			}
+			break;
+		case KeyEvent.VK_SPACE://find
+			//attack
 			break;
 		}
 	}

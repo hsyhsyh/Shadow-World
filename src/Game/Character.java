@@ -8,10 +8,10 @@ import processing.core.PImage;
 
 public class Character extends AbstractCharacter implements Runnable{
 	
-	public Character(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs,ArrayList<Floor> floors){
+	public Character(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs){
 		Ani.init(parent);
+		floors = new ArrayList<Floor>();
 		this.gs = gs;
-		this.floors = floors;
 		Thread ch = new Thread(this);
 		ch.start();
 		this.x=x;
@@ -144,5 +144,14 @@ public class Character extends AbstractCharacter implements Runnable{
 		}
 	}
 	
+	public void addFloor(ArrayList<Floor> floors)
+	{
+		this.floors = floors;
+	}
+	
+	public void deleteFloor()
+	{
+		floors.clear();
+	}
 
 }

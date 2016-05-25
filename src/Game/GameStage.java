@@ -1,7 +1,10 @@
 package Game;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+
+import javax.swing.JPanel;
 
 import de.looksgood.ani.Ani;
 import processing.core.PApplet;
@@ -22,11 +25,14 @@ public class GameStage extends PApplet{
 	private boolean hasdialog;
 	private int stage_num;
 	public boolean isLoading = true;
+	private boolean is_transport;
+	private int alpha;
 	
 	public void setup() {
 		
 		size(width, height);
 		smooth();
+		
 		this.books = loadImage("books.png");
 		this.man = loadImage("man2.png");
 		this.man1 = loadImage("man_run1.png");
@@ -43,14 +49,17 @@ public class GameStage extends PApplet{
 		this.bed = loadImage("bed.png");
 		this.lader = loadImage("lader.png");
 		this.door1 = loadImage("opendoor.png");
+		mainCharacter = new Character(this,man,"none",0,0,100,this);
 		monsters = new ArrayList<Monster>();
 		floors=new ArrayList<Floor>();
 		dialog = new Dialog();
-		loadData(0);
+		stage_num = 0;
+		loadData();
 		//this.addKeyListener(this);
 		isLoading = false;
-		stage_num = 0;
 		hasdialog = false;
+		is_transport = false;
+		
 	}
 	
 	public void draw() 
@@ -85,34 +94,44 @@ public class GameStage extends PApplet{
 			stage_8();
 			break;
 		}     
+		
+		if(is_transport)
+        {
+			System.out.println(alpha);
+			fill(0,0,0,alpha);
+        	rect(0,0,width,height);
+        	if(alpha == 255)
+        	{
+        		loadData();
+        		Ani.to(this, (float)3.0, "alpha", 0);
+        	}
+        	if(alpha == 0)
+        	{
+        		is_transport = false;
+        	}
+        }
 	}
 	
-	private void loadData(int num){
-		
-		switch(num)
+	private void loadData(){
+		System.out.println("NO");
+		switch(stage_num)
 		{
 		case 0:
-			
+			mainCharacter.x = 120;
+			mainCharacter.y = 320;
 			Monster mons;
 			mons = new Monster(this,monster,"none",400,320,100,this);
 			monsters.add(mons);
-			Floor floor1=new Floor(0, 0, 1000, 50);
-			Floor floor2=new Floor(0, 420, 1000, 80);
-			Floor floor3=new Floor(0, 0, 50, 500);
-			Floor floor4=new Floor(950,0,50, 500);
-			Floor floor5=new Floor(300,380,100, 20);
-			Floor floor6=new Floor(420,340,100, 20);
-			Floor floor7=new Floor(540,300,100, 20);
-			Floor floor8=new Floor(660,360,100, 20);
-			floors.add(floor1);
-			floors.add(floor2);
-			floors.add(floor3);
-			floors.add(floor4);
-			floors.add(floor5);
-			floors.add(floor6);
-			floors.add(floor7);
-			floors.add(floor8);
-			mainCharacter = new Character(this,man,"none",120,320,100,this);
+			
+			floors.add(new Floor(0, 0, 1000, 50));
+			floors.add(new Floor(0, 420, 1000, 80));
+			floors.add(new Floor(0, 0, 50, 500));
+			floors.add(new Floor(950,0,50, 500));
+			floors.add(new Floor(300,380,100, 20));
+			floors.add(new Floor(420,340,100, 20));
+			floors.add(new Floor(540,300,100, 20));
+			floors.add(new Floor(660,360,100, 20));
+			
 			mainCharacter.addFloor(floors);
 			break;
 		case 1:
@@ -130,6 +149,17 @@ public class GameStage extends PApplet{
 		case 7:
 			break;
 		case 8:
+			mainCharacter.deleteFloor();
+//			floors.add(new Floor(0, 0, 1000, 50));
+//			floors.add(new Floor(0, 420, 1000, 80));
+//			floors.add(new Floor(0, 0, 50, 500));
+//			floors.add(new Floor(950,0,50, 500));
+			floors.add(new Floor(300,380,100, 20));
+			floors.add(new Floor(420,340,100, 20));
+			floors.add(new Floor(540,300,100, 20));
+			floors.add(new Floor(660,360,100, 20));
+//			
+			mainCharacter.addFloor(floors);
 			break;
 		case 9:
 			break;
@@ -189,7 +219,9 @@ public class GameStage extends PApplet{
 			break;
 		case KeyEvent.VK_SPACE://find
 			//attack
+			transport(8);
 			break;
+			
 		}
 	}
 
@@ -245,7 +277,12 @@ public class GameStage extends PApplet{
 	
 	private void stage_8()
 	{
-		;
+		background(255);
+        stroke(0);
+        fill(0);
+        for(Floor floor : floors){
+        	this.rect(floor.getX(),floor.getY(),floor.getWidth(),floor.getHeight());
+        }
 	}
 	
 	private void test_stage()
@@ -259,7 +296,7 @@ public class GameStage extends PApplet{
         image(this.man, 600, 300);
         image(this.monster, 650, 300);
         image(this.door1, 80, 300);*/
-		image(this.door1, 80, 300);
+//		image(this.door1, 80, 300);
 		image(this.mainCharacter.getImage(), mainCharacter.x, mainCharacter.y);
 		for(Monster monster : monsters){
 			image(monster.getImage(),monster.x, monster.y);
@@ -276,6 +313,7 @@ public class GameStage extends PApplet{
 //			Ani.to(dialog, (float)3.0, "wide", 970);
 //			Ani.to(dialog, (float)3.0, "high", 170);
         }
+        
 	}
 	
 	private void have_dialog()//character will use this to talk
@@ -365,5 +403,17 @@ public class GameStage extends PApplet{
 							"textnum", text[now_textpagenum].length(), Ani.LINEAR);
 		}
 	}
+	
+	public void transport(int num)
+	{
+		is_transport = true;
+		alpha = 1;
+		Ani.to(this, (float)3.0, "alpha", 255);
+
+		stage_num = num;
+		
+		
+	}
+	
 	
 }

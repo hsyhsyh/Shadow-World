@@ -16,16 +16,19 @@ public class GameStage extends PApplet{
 	private static final long serialVersionUID = 1L;
 	private final static int width = 1000, height = 500;
 	
-	public PImage man, books, monster, strike, box, bed, lader, door1, man1, man2, man3, man4
+	public PImage man, books, monster, strike, box, bed, lader, door1, door2, man1, man2, man3, man4
 	              , man5, man6, man7, man8;
 	private Character mainCharacter; 
 	private ArrayList<Monster> monsters;
 	private ArrayList<Floor> floors;
+	private ArrayList<Door> doors;
+//	private ArrayList<strike> traps;
 	private Dialog dialog;
 	private boolean hasdialog;
 	private int stage_num;
 	public boolean isLoading = true;
 	private boolean is_transport;
+	private boolean is_hurt;
 	private int alpha;
 	
 	public void setup() {
@@ -48,56 +51,80 @@ public class GameStage extends PApplet{
 		this.box = loadImage("box.png");
 		this.bed = loadImage("bed.png");
 		this.lader = loadImage("lader.png");
-		this.door1 = loadImage("opendoor.png");
+		this.door1 = loadImage("closedoor.png");
+		this.door2 = loadImage("opendoor.png");
 		mainCharacter = new Character(this,man,"none",0,0,100,this);
 		monsters = new ArrayList<Monster>();
-		floors=new ArrayList<Floor>();
+		floors = new ArrayList<Floor>();
+		doors = new ArrayList<Door>();
 		dialog = new Dialog();
-		stage_num = 0;
+		
+		stage_num = 3;
+		
 		loadData();
-		//this.addKeyListener(this);
 		isLoading = false;
 		hasdialog = false;
 		is_transport = false;
+		
 		
 	}
 	
 	public void draw() 
 	{
-		switch(stage_num)
-		{
-		case 0:
-			test_stage();
-			break;
-		case 1:
-			stage_1();
-			break;
-		case 2:
-			stage_2();
-			break;
-		case 3:
-			stage_3();
-			break;
-		case 4:
-			stage_4();
-			break;
-		case 5:
-			stage_5();
-			break;
-		case 6:
-			stage_6();
-			break;
-		case 7:
-			stage_7();
-			break;
-		case 8:
-			stage_8();
-			break;
-		}     
 		
+		background(255);
+        /*image(this.books, 200, 100);
+        image(this.bed, 600, 50);
+        image(this.lader, 600, 100);
+        image(this.strike, 800, 330);
+        image(this.box, 200, 330);
+        image(this.man, 600, 300);
+        image(this.monster, 650, 300);*/
+        image(this.door1, 80, 320);
+		image(this.door2, 800, 320);
+		image(this.mainCharacter.getImage(), mainCharacter.x, mainCharacter.y);
+		if(!monsters.isEmpty())
+		{
+			for(Monster monster : monsters){
+				image(monster.getImage(),monster.x, monster.y);
+			}
+		}
+		
+		
+        stroke(0);
+        fill(0);
+        if(!floors.isEmpty())
+        {
+        	for(Floor floor : floors){
+            	this.rect(floor.getX(),floor.getY(),floor.getWidth(),floor.getHeight());
+            }
+        }
+        
+        if(!doors.isEmpty())
+        {
+        	for(Door door : doors){
+//        		image(door.getImage(),door.x, door.y);
+            }
+        }
+        
+        if(hasdialog)
+        {
+        	dialog.display();
+        } 
+		
+        if(is_hurt)
+        {
+			fill(255,0,0,alpha);
+        	rect(0,0,width,height);
+        	if(alpha == 0)
+        	{
+        		is_hurt = false;
+        	}
+        }
+        
 		if(is_transport)
         {
-			System.out.println(alpha);
+			is_hurt = false;
 			fill(0,0,0,alpha);
         	rect(0,0,width,height);
         	if(alpha == 255)
@@ -113,16 +140,14 @@ public class GameStage extends PApplet{
 	}
 	
 	private void loadData(){
-		System.out.println("NO");
 		switch(stage_num)
 		{
 		case 0:
+			mainCharacter.deleteFloor();
 			mainCharacter.x = 120;
 			mainCharacter.y = 320;
-			Monster mons;
-			mons = new Monster(this,monster,"none",400,320,100,this);
-			monsters.add(mons);
-			
+			monsters.add(new Monster(this,monster,"none",400,320,100,this) );
+			clearplace();
 			floors.add(new Floor(0, 0, 1000, 50));
 			floors.add(new Floor(0, 420, 1000, 80));
 			floors.add(new Floor(0, 0, 50, 500));
@@ -132,38 +157,126 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(540,300,100, 20));
 			floors.add(new Floor(660,360,100, 20));
 			
+			doors.add(new Door( (float)80, (float)300, door2));
+			doors.add(new Door( (float)300, (float)100, door2));
+			
 			mainCharacter.addFloor(floors);
 			break;
 		case 1:
+			mainCharacter.deleteFloor();
+			clearplace();
+			mainCharacter.x = 120;
+			mainCharacter.y = 320;
+			floors.add(new Floor(0, 0, 1000, 50));
+			floors.add(new Floor(0, 420, 1000, 80));
+			floors.add(new Floor(0, 0, 50, 500));
+			floors.add(new Floor(950,0,50, 500));
+			mainCharacter.addFloor(floors);
 			break;
 		case 2:
+			mainCharacter.deleteFloor();
+			clearplace();
+			mainCharacter.x = 120;
+			mainCharacter.y = 320;
+			floors.add(new Floor(0, 0, 1000, 50));
+			floors.add(new Floor(0, 420, 1000, 80));
+			floors.add(new Floor(0, 0, 50, 500));
+			floors.add(new Floor(950,0,50, 500));
+			floors.add(new Floor(0,220,450, 20));
+			floors.add(new Floor(550,320,450, 20));
+			floors.add(new Floor(550,120,450, 20));
+			mainCharacter.addFloor(floors);
 			break;
 		case 3:
+			mainCharacter.deleteFloor();
+			clearplace();
+			mainCharacter.x = 120;
+			mainCharacter.y = 220;
+			floors.add(new Floor(0, 0, 1000, 150));
+			floors.add(new Floor(0, 320, 1000, 180));
+			floors.add(new Floor(0, 0, 50, 500));
+			floors.add(new Floor(950,0,50, 500));
+			doors.add(new Door( (float)80, (float)100, door2));
+			doors.add(new Door( (float)300, (float)100, door2));
+			monsters.add(new Monster(this,monster,"none",400,220,100,this));
+			mainCharacter.addFloor(floors);
 			break;
 		case 4:
+			mainCharacter.deleteFloor();
+			clearplace();
+			mainCharacter.x = 120;
+			mainCharacter.y = 320;
+			floors.add(new Floor(0, 0, 1000, 50));
+			floors.add(new Floor(0, 420, 1000, 80));
+			floors.add(new Floor(0, 0, 50, 500));
+			floors.add(new Floor(950,0,50, 500));
+			mainCharacter.addFloor(floors);
 			break;
 		case 5:
+			mainCharacter.deleteFloor();
+			clearplace();
+			mainCharacter.x = 120;
+			mainCharacter.y = 320;
+			floors.add(new Floor(0, 0, 1000, 50));
+			floors.add(new Floor(0, 420, 1000, 80));
+			floors.add(new Floor(0, 0, 50, 500));
+			floors.add(new Floor(950,0,50, 500));
+			mainCharacter.addFloor(floors);
 			break;
 		case 6:
+			mainCharacter.deleteFloor();
+			clearplace();
+			mainCharacter.x = 120;
+			mainCharacter.y = 320;
+			floors.add(new Floor(0, 0, 1000, 50));
+			floors.add(new Floor(0, 420, 1000, 80));
+			floors.add(new Floor(0, 0, 50, 500));
+			floors.add(new Floor(950,0,50, 500));
+			mainCharacter.addFloor(floors);
 			break;
 		case 7:
+			mainCharacter.deleteFloor();
+			clearplace();
+			mainCharacter.x = 120;
+			mainCharacter.y = 320;
+			floors.add(new Floor(0, 0, 1000, 50));
+			floors.add(new Floor(0, 420, 1000, 80));
+			floors.add(new Floor(0, 0, 50, 500));
+			floors.add(new Floor(950,0,50, 500));
+			mainCharacter.addFloor(floors);
 			break;
 		case 8:
 			mainCharacter.deleteFloor();
-//			floors.add(new Floor(0, 0, 1000, 50));
-//			floors.add(new Floor(0, 420, 1000, 80));
-//			floors.add(new Floor(0, 0, 50, 500));
-//			floors.add(new Floor(950,0,50, 500));
-			floors.add(new Floor(300,380,100, 20));
-			floors.add(new Floor(420,340,100, 20));
-			floors.add(new Floor(540,300,100, 20));
-			floors.add(new Floor(660,360,100, 20));
-//			
+			clearplace();
+			mainCharacter.x = 120;
+			mainCharacter.y = 320;
+			floors.add(new Floor(0, 0, 1000, 50));
+			floors.add(new Floor(0, 420, 1000, 80));
+			floors.add(new Floor(0, 0, 50, 500));
+			floors.add(new Floor(950,0,50, 500));
 			mainCharacter.addFloor(floors);
 			break;
 		case 9:
+			mainCharacter.deleteFloor();
+			clearplace();
+			mainCharacter.x = 120;
+			mainCharacter.y = 320;
+			floors.add(new Floor(0, 0, 1000, 50));
+			floors.add(new Floor(0, 420, 1000, 80));
+			floors.add(new Floor(0, 0, 50, 500));
+			floors.add(new Floor(950,0,50, 500));
+			mainCharacter.addFloor(floors);
 			break;
 		case 10:
+			mainCharacter.deleteFloor();
+			clearplace();
+			mainCharacter.x = 120;
+			mainCharacter.y = 320;
+			floors.add(new Floor(0, 0, 1000, 50));
+			floors.add(new Floor(0, 420, 1000, 80));
+			floors.add(new Floor(0, 0, 50, 500));
+			floors.add(new Floor(950,0,50, 500));
+			mainCharacter.addFloor(floors);
 			break;
 		}
 		//mainCharacter.deleteFloor();
@@ -195,27 +308,35 @@ public class GameStage extends PApplet{
 		case KeyEvent.VK_DOWN://down to ladder
 			break;
 		case KeyEvent.VK_A:
-			if(true)//if need dialog
+			
+			for(Door d : doors)
 			{
-				if(!hasdialog)
+				if( whereisch(d) )
 				{
-					have_dialog();
-					dialog.open();
-					String text[] = new String[2];
-					text[0] = "just";
-					text[1] = "test";
-					dialog.settext(text);
-					dialog.showtext();
-				}
-				else
-				{
-					dialog.dosomething();
+//					transport(d.goal);
 				}
 			}
-			else if(true)//open door
-			{
-				;
-			}
+			
+//			for(Item i : items)
+//			{
+//				if( whereisch(i) )//if need dialog
+//				{
+					if(!hasdialog)
+					{
+						have_dialog();
+						dialog.open();
+						String text[] = new String[2];
+						text[0] = "just";
+						text[1] = "test";
+						dialog.settext(text);
+						dialog.showtext();
+					}
+					else
+					{
+						dialog.dosomething();
+					}
+//				}
+//			}
 			break;
 		case KeyEvent.VK_SPACE://find
 			//attack
@@ -240,81 +361,7 @@ public class GameStage extends PApplet{
 		return image;
 	}
 
-	private void stage_1()
-	{
-		;
-	}
-	
-	private void stage_2()
-	{
-		;
-	}
-	
-	private void stage_3()
-	{
-		;
-	}
-	
-	private void stage_4()
-	{
-		;
-	}
-	
-	private void stage_5()
-	{
-		;
-	}
-	
-	private void stage_6()
-	{
-		;
-	}
-	
-	private void stage_7()
-	{
-		;
-	}
-	
-	private void stage_8()
-	{
-		background(255);
-        stroke(0);
-        fill(0);
-        for(Floor floor : floors){
-        	this.rect(floor.getX(),floor.getY(),floor.getWidth(),floor.getHeight());
-        }
-	}
-	
-	private void test_stage()
-	{
-		background(255);
-        /*image(this.books, 200, 100);
-        image(this.bed, 600, 50);
-        image(this.lader, 600, 100);
-        image(this.strike, 800, 330);
-        image(this.box, 200, 330);
-        image(this.man, 600, 300);
-        image(this.monster, 650, 300);
-        image(this.door1, 80, 300);*/
-//		image(this.door1, 80, 300);
-		image(this.mainCharacter.getImage(), mainCharacter.x, mainCharacter.y);
-		for(Monster monster : monsters){
-			image(monster.getImage(),monster.x, monster.y);
-		}
-		
-        stroke(0);
-        fill(0);
-        for(Floor floor : floors){
-        	this.rect(floor.getX(),floor.getY(),floor.getWidth(),floor.getHeight());
-        }
-        if(hasdialog)
-        {
-        	dialog.display();
-//			Ani.to(dialog, (float)3.0, "wide", 970);
-//			Ani.to(dialog, (float)3.0, "high", 170);
-        }
-        
-	}
+
 	
 	private void have_dialog()//character will use this to talk
 	{
@@ -415,5 +462,52 @@ public class GameStage extends PApplet{
 		
 	}
 	
+	public boolean whereisch(Object thing)
+	{		
+		if(thing.getClass().getName().equals("Game.Door"))
+		{
+			Door d = (Door)thing;
+//			if( (d.x < mainCharacter.x) && (d.x + d.width > mainCharacter.x)
+//					&& (d.y < mainCharacter.y + mainCharacter.height) 
+//						&& (d.y + d.height > mainCharacter.y + mainCharacter.height) )
+//			{//if charater is at the door
+//				return true;
+//			}
+//			else
+//			{
+//				return false;
+//			}
+		}
+//		else if(thing.getClass().getName().equals("Game.Trap"))
+//		{
+//			Trap t = (Trap)thing;
+//			if( (t.x < mainCharacter.x) && (t.x + t.width > mainCharacter.x)
+//					&& (t.y < mainCharacter.y + mainCharacter.height) 
+//						&& (t.y + t.height > mainCharacter.y + mainCharacter.height) )
+//			{//if charater is at the trap
+//				return true;
+//			}
+//			else
+//			{
+//				return false;
+//			}
+//		}
+		
+		return false;
+	}
 	
+	public void hurt()
+	{
+		is_hurt = true;
+		alpha = 255;
+		Ani.to(this, (float)0.5, "alpha", 0);
+	}
+	
+	private void clearplace()
+	{
+		floors.clear();
+		doors.clear();
+		monsters.clear();
+//		items.clear();
+	}
 }

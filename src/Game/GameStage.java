@@ -79,7 +79,7 @@ public class GameStage extends PApplet{
 		
 		background(255);
 
-        image(this.book, 200, 200);
+        //image(this.book, 200, 200);
 
         image(this.door1, 80, 320);
 		image(this.door2, 800, 320);

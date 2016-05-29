@@ -16,10 +16,13 @@ public abstract class AbstractCharacter {
 	protected ArrayList<Floor> floors;
 	public boolean isWalk=false;
 	public boolean isGround=false;
+	public boolean isAttack=false;
+	public boolean canAttack=true; //make sure character not continuously attack without waiting time
 	protected PImage chaImage;
 	protected PApplet parent;
 	protected GameStage gs;
 	public String direction = "";
+	public String bulletDirection = "right";
 	public String UpDown = "";
 	abstract public void move();
 	abstract public void move(String direction);

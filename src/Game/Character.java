@@ -8,6 +8,9 @@ import processing.core.PImage;
 
 public class Character extends AbstractCharacter implements Runnable{
 	
+	private ArrayList<Bullet> bullets;
+	public int waitAttackTime=0;
+	
 	public Character(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs){
         Ani.init(parent);
 		floors = new ArrayList<Floor>();
@@ -21,6 +24,7 @@ public class Character extends AbstractCharacter implements Runnable{
 		this.MAX_HP=HP;
 		this.now_HP=HP;
 		this.chaImage=chaImage;
+		this.bullets=new ArrayList<Bullet>();
 	}
 	
 	//the effect of gravity that make character fall down
@@ -81,14 +85,23 @@ public class Character extends AbstractCharacter implements Runnable{
 	
 	@Override
     public void attack(){
-		
+		if(bulletDirection.equals("right"))
+			bullets.add(new Bullet(gs.bullet,x+40,y+15,30));
+		else if(bulletDirection.equals("left"))
+			bullets.add(new Bullet(gs.bullet,x-12,y+15,-30));
 	}
     
+
+	
+	public ArrayList<Bullet> getBullet(){
+		return bullets;
+	}
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		int i = 1;
+		
 		while(true) {
 			
 			try {
@@ -106,8 +119,46 @@ public class Character extends AbstractCharacter implements Runnable{
 						move();
 				}
 				fallDown();
+				if(!bullets.isEmpty())
+					for(Bullet bullet: bullets){
+							bullet.move();
+					}
+				System.out.println(bullets.size());
 				Thread.sleep(5);
-				if(direction.equals("right") && this.isWalk) {
+				if(waitAttackTime>0)
+					waitAttackTime--;
+				if(waitAttackTime==0){
+					this.canAttack=true;
+				}
+				if(this.isAttack){
+					if(this.canAttack){
+						this.attack();
+						this.waitAttackTime=100;
+						this.canAttack = false;
+					}
+					if(bulletDirection.equals("right")){
+						if(i%80 == 0)
+							chaImage = gs.getImage(gs.man_a[1]);
+						if(i%80 == 20)
+							chaImage = gs.getImage(gs.man_a[2]);
+						if(i%80 == 40)
+							chaImage = gs.getImage(gs.man_a[3]);
+						if(i%80 == 60)
+							chaImage = gs.getImage(gs.man_a[4]);
+					}
+					else if(bulletDirection.equals("left")){
+						if(i%80 == 0)
+							chaImage = gs.getImage(gs.man_a[5]);
+						if(i%80 == 20)
+							chaImage = gs.getImage(gs.man_a[6]);
+						if(i%80 == 40)
+							chaImage = gs.getImage(gs.man_a[7]);
+						if(i%80 == 60)
+							chaImage = gs.getImage(gs.man_a[8]);
+					}
+					
+				}
+				else if(direction.equals("right") && this.isWalk) {
 					if(i%80 == 0)
 						chaImage = gs.getImage(gs.man1);
 					if(i%80 == 20)

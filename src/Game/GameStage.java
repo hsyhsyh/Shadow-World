@@ -16,12 +16,14 @@ public class GameStage extends PApplet{
 	private static final long serialVersionUID = 1L;
 	private final static int width = 1000, height = 500;
 	
-	public PImage man, books, book, bloodletter, diamand, phone, skull, monster, strike, box, bed, lader, door1, door2, man1, man2, man3, man4
+	public PImage man, bullet, books, book, bloodletter, diamand, phone, skull, monster, strike, box, bed, lader, door1, door2, man1, man2, man3, man4
 	              , man5, man6, man7, man8;
+	public PImage[] man_a = new PImage[10];
 	private Character mainCharacter; 
 	private ArrayList<Monster> monsters;
 	private ArrayList<Floor> floors;
 	private ArrayList<Door> doors;
+	//private ArrayList<Bullet> bullets;
 //	private ArrayList<strike> traps;
 	private Dialog dialog;
 	private boolean hasdialog;
@@ -35,8 +37,9 @@ public class GameStage extends PApplet{
 		
 		size(width, height);
 		smooth();
-		
+		int i;
 		this.books = loadImage("books.png");
+		this.bullet = loadImage("bullet.png");
 		this.book = loadImage("book.png");
 		this.bloodletter = loadImage("bloodletter.png");
 		this.phone = loadImage("phone.png");
@@ -51,6 +54,9 @@ public class GameStage extends PApplet{
 		this.man6 = loadImage("man_run6.png");
 		this.man7 = loadImage("man_run7.png");
 		this.man8 = loadImage("man_run8.png");
+		for(i=1;i<=8;i++){
+			this.man_a[i] = loadImage("man_gun"+Integer.toString(i)+".png");
+		}
 		this.monster = loadImage("monster.png");
 		this.strike = loadImage("strike.png");
 		this.box = loadImage("box.png");
@@ -62,6 +68,7 @@ public class GameStage extends PApplet{
 		monsters = new ArrayList<Monster>();
 		floors = new ArrayList<Floor>();
 		doors = new ArrayList<Door>();
+		//bullets = new ArrayList<Bullet>();
 		dialog = new Dialog();
 		
 		stage_num = 2;
@@ -106,6 +113,13 @@ public class GameStage extends PApplet{
         	for(Door door : doors){
 //        		image(door.getImage(),door.x, door.y);
             }
+        }
+        
+
+        if(!mainCharacter.getBullet().isEmpty()){
+        	for(Bullet bullet: mainCharacter.getBullet()){
+        		image(bullet.getImage(),bullet.x,bullet.y);
+        		}
         }
         
         if(hasdialog)
@@ -291,15 +305,17 @@ public class GameStage extends PApplet{
 		{
 		case KeyEvent.VK_LEFT:
 			mainCharacter.direction = "left";
+			mainCharacter.bulletDirection="left";
 			mainCharacter.move("left");
 			mainCharacter.isWalk = true;
 			break;
 		case KeyEvent.VK_RIGHT:
 			mainCharacter.direction = "right";
+			mainCharacter.bulletDirection="right";
 			mainCharacter.move("right");
 			mainCharacter.isWalk = true;
 			break;
-		case KeyEvent.VK_UP://jump or up to ladder
+		case KeyEvent.VK_SPACE://jump or up to ladder
 			if(mainCharacter.isGround)
 			{
 				mainCharacter.jump();
@@ -339,9 +355,10 @@ public class GameStage extends PApplet{
 //				}
 //			}
 			break;
-		case KeyEvent.VK_SPACE://find
+		case KeyEvent.VK_Z://find
 			//attack
-			transport(8);
+			mainCharacter.isAttack = true;
+			//transport(8);
 			break;
 			
 		}
@@ -354,6 +371,9 @@ public class GameStage extends PApplet{
 			//mainCharacter.isWalk=false;
 			mainCharacter.move("stop");
 			mainCharacter.direction = "";
+		}
+		else if(keyCode == KeyEvent.VK_Z){
+			mainCharacter.isAttack = false;
 		}
 			
 	}

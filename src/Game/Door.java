@@ -13,5 +13,9 @@ public class Door {
 		this.y=y;
 		this.image=image;
 	}
+	
+    public PImage getImage(){
+    	return this.image;
+    }
 
 }

@@ -25,7 +25,7 @@ public class Character extends AbstractCharacter implements Runnable{
 	
 	//the effect of gravity that make character fall down
     public void fallDown(){
-    	boolean isGround=false;
+    	isGround=false;
     	for(Floor floor : floors){
     		if(floor.IsOnGround(this))
     		{

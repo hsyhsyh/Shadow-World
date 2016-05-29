@@ -64,7 +64,7 @@ public class GameStage extends PApplet{
 		doors = new ArrayList<Door>();
 		dialog = new Dialog();
 		
-		stage_num = 3;
+		stage_num = 2;
 		
 		loadData();
 		isLoading = false;
@@ -300,7 +300,7 @@ public class GameStage extends PApplet{
 			mainCharacter.isWalk = true;
 			break;
 		case KeyEvent.VK_UP://jump or up to ladder
-			if(mainCharacter.velocityForDirectionY == 0)
+			if(mainCharacter.isGround)
 			{
 				mainCharacter.jump();
 				//mainCharacter.isWalk=false;

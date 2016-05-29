@@ -15,6 +15,7 @@ public abstract class AbstractCharacter {
 	protected float gravity=5;
 	protected ArrayList<Floor> floors;
 	public boolean isWalk=false;
+	public boolean isGround=false;
 	protected PImage chaImage;
 	protected PApplet parent;
 	protected GameStage gs;

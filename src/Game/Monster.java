@@ -1,8 +1,8 @@
 package Game;
 
+import java.util.ArrayList;
 import java.util.Random;
 
-import de.looksgood.ani.Ani;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -10,7 +10,8 @@ public class Monster extends AbstractCharacter implements Runnable{
 	
 	public Monster(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs){
 		
-		Ani.init(parent);
+		
+		floors = new ArrayList<Floor>();
 		this.gs = gs;
 		Thread ms = new Thread(this);
 		ms.start();
@@ -27,7 +28,7 @@ public class Monster extends AbstractCharacter implements Runnable{
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		Ani.to(this,1,"x",x+velocityForDirectionX);
+		x+=velocityForDirectionX/20;
 	}
 
 	@Override
@@ -48,12 +49,29 @@ public class Monster extends AbstractCharacter implements Runnable{
 	private void RandomMove(){
 		Random random=new Random();
 		int a=random.nextInt(100);
-		if(a%100<40)
-			direction="left";
-		else if(a%100>=59)
-			direction="right";
-		else 
-			direction="stop";
+		if(direction.equals("left")){
+			if(a%100<90)
+				direction="left";
+			else if(a%100>=94)
+				direction="right";
+			else 
+				direction="stop";
+		}
+		else if(direction.equals("right")){
+			if(a%100<90)
+				direction="right";
+			else if(a%100>=94)
+				direction="left";
+			else 
+				direction="stop";
+		}
+		else{
+			if(a%100<50)
+				direction="left";
+			else if(a%100>=50)
+				direction="right";
+		}
+
 		move(direction);
 			
 	}
@@ -70,9 +88,16 @@ public class Monster extends AbstractCharacter implements Runnable{
 		while(true) {
 			try {
 				RandomMove();
-				//if((direction.equals("left")||direction.equals("right"))&& map.BoundFor(direction , this))
-					move();
-				Thread.sleep(100);
+				if(direction.equals("left")||direction.equals("right")){
+					int moving=1;
+					for(Floor floor : floors){
+						if(floor.IsFloor(this))
+							moving=0;
+						}
+					if(moving==1)
+						move();
+				}
+				Thread.sleep(5);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

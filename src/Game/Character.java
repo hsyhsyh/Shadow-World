@@ -9,7 +9,7 @@ import processing.core.PImage;
 public class Character extends AbstractCharacter implements Runnable{
 	
 	public Character(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs){
-		Ani.init(parent);
+        Ani.init(parent);
 		floors = new ArrayList<Floor>();
 		this.gs = gs;
 		Thread ch = new Thread(this);
@@ -43,11 +43,12 @@ public class Character extends AbstractCharacter implements Runnable{
     			velocityForDirectionY=0;
     		}
     	}
-       if(!isGround && velocityForDirectionY>=-10)
-    	   Ani.to(this,1,"velocityForDirectionY",velocityForDirectionY-gravity);
+       if(!isGround && velocityForDirectionY>=-15)
+    	   velocityForDirectionY-=gravity/20;
     		
     	//because the coordinate y become small when "move up", if velocityForDirectionY>0, y-velocityForDirectionY is "move up"
-    	Ani.to(this,(float)0.5,"y",y-velocityForDirectionY);
+
+       y-=velocityForDirectionY/20;
     	
 	}
 	
@@ -55,7 +56,7 @@ public class Character extends AbstractCharacter implements Runnable{
     @Override
     public void move(){
     	
-    	Ani.to(this,(float)0.5,"x",x+velocityForDirectionX);	
+    	x+=velocityForDirectionX/20;
 
 	}
     
@@ -75,7 +76,7 @@ public class Character extends AbstractCharacter implements Runnable{
 	
 	public void jump(){
 		if(velocityForDirectionY==0)
-			velocityForDirectionY += 20;
+			velocityForDirectionY += 35;
 	}
 	
 	@Override
@@ -105,25 +106,25 @@ public class Character extends AbstractCharacter implements Runnable{
 						move();
 				}
 				fallDown();
-				Thread.sleep(100);
+				Thread.sleep(5);
 				if(direction.equals("right") && this.isWalk) {
-					if(i%4 == 0)
+					if(i%80 == 0)
 						chaImage = gs.getImage(gs.man1);
-					if(i%4 == 1)
+					if(i%80 == 20)
 						chaImage = gs.getImage(gs.man2);
-					if(i%4 == 2)
+					if(i%80 == 40)
 						chaImage = gs.getImage(gs.man3);
-					if(i%4 == 3)
+					if(i%80 == 60)
 						chaImage = gs.getImage(gs.man4);
 				}
 				else if(direction.equals("left") && this.isWalk) {
-					if(i%4 == 0)
+					if(i%80 == 0)
 						chaImage = gs.getImage(gs.man5);
-					if(i%4 == 1)
+					if(i%80 == 20)
 						chaImage = gs.getImage(gs.man6);
-					if(i%4 == 2)
+					if(i%80 == 40)
 						chaImage = gs.getImage(gs.man7);
-					if(i%4 == 3)
+					if(i%80 == 60)
 						chaImage = gs.getImage(gs.man8);
 				}
 				else 

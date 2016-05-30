@@ -200,6 +200,9 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(0,220,450, 20));
 			floors.add(new Floor(550,320,450, 20));
 			floors.add(new Floor(550,120,450, 20));
+			monsters.add(new Monster(this,monster,"none",400,300,100,this));
+			monsters.add(new Monster(this,monster,"none",430,300,100,this));
+			monsters.add(new Monster(this,monster,"none",480,210,100,this));
 			mainCharacter.addFloor(floors);
 			break;
 		case 3:
@@ -530,5 +533,10 @@ public class GameStage extends PApplet{
 		doors.clear();
 		monsters.clear();
 //		items.clear();
+	}
+
+	public Character getCharacter() {
+		// TODO Auto-generated method stub
+		return this.mainCharacter;
 	}
 }

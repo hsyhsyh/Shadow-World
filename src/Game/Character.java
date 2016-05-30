@@ -90,9 +90,13 @@ public class Character extends AbstractCharacter implements Runnable{
 		else if(bulletDirection.equals("left"))
 			bullets.add(new Bullet(gs.bullet,x-12,y+15,-30));
 	}
-    
-
 	
+
+	public void beAttacked() {
+		
+		
+	}
+    
 	public ArrayList<Bullet> getBullet(){
 		return bullets;
 	}
@@ -205,5 +209,7 @@ public class Character extends AbstractCharacter implements Runnable{
 	{
 		floors.clear();
 	}
+
+
 
 }

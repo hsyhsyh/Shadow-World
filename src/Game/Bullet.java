@@ -30,4 +30,10 @@ public class Bullet {
 		else return true;
 	}
 
+	public void vanish() {
+		// TODO Auto-generated method stub
+		this.x=10000;
+		this.y=10000;
+	}
+
 }

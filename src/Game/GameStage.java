@@ -16,7 +16,7 @@ public class GameStage extends PApplet{
 	private static final long serialVersionUID = 1L;
 	private final static int width = 1000, height = 500;
 	
-	public PImage man, bullet, books, book, bloodletter, diamand, phone, skull, monster, strike, box, bed, lader, door1, door2, man1, man2, man3, man4
+	public PImage man, bullet, books, book, bloodletter, diamand, phone, skull, monster, monster2, strike, box, bed, lader, door1, door2, man1, man2, man3, man4
 	              , man5, man6, man7, man8;
 	public PImage[] man_a = new PImage[10];
 	private Character mainCharacter; 
@@ -58,6 +58,7 @@ public class GameStage extends PApplet{
 			this.man_a[i] = loadImage("man_gun"+Integer.toString(i)+".png");
 		}
 		this.monster = loadImage("monster.png");
+		this.monster2 = loadImage("monster2.png");
 		this.strike = loadImage("strike.png");
 		this.box = loadImage("box.png");
 		this.bed = loadImage("bed.png");

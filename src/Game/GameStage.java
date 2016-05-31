@@ -18,7 +18,7 @@ public class GameStage extends PApplet{
 	private static final long serialVersionUID = 1L;
 	private final static int width = 1000, height = 500;
 	
-	public PImage man, bullet, books, book, bloodletter, diamand, phone, skull, monster, strike, box, bed, lader, door1, door2, man1, man2, man3, man4
+	public PImage man, bullet, books, book, bloodletter, diamand, phone, skull, monster, monster2, strike, box, bed, lader, door1, door2, man1, man2, man3, man4
 	              , man5, man6, man7, man8;
 	public PImage[] man_a = new PImage[10];
 	private Character mainCharacter; 
@@ -65,6 +65,7 @@ public class GameStage extends PApplet{
 			this.man_a[i] = loadImage("man_gun"+Integer.toString(i)+".png");
 		}
 		this.monster = loadImage("monster.png");
+		this.monster2 = loadImage("monster2.png");
 		this.strike = loadImage("strike.png");
 		this.box = loadImage("box.png");
 		this.bed = loadImage("bed.png");
@@ -202,17 +203,7 @@ public class GameStage extends PApplet{
 			clearplace();
 			mainCharacter.x = 120;
 			mainCharacter.y = 320;
-			floors.add(new Floor(0, 0, 1000, 40));
-			floors.add(new Floor(0, 430, 1000, 40));
-			floors.add(new Floor(0, 0, 40, 500));
-			floors.add(new Floor(960,0,40, 500));
-			floors.add(new Floor(0,225,450, 15));
-			floors.add(new Floor(550,315,450, 15));
-			floors.add(new Floor(550,160,450, 15));
-		
-			doors.add(new Door( (float)50, (float)330, door2));
-			doors.add(new Door( (float)860, (float)330, door2));
-			doors.add(new Door( (float)860, (float)60, door2));
+
 			mainCharacter.addFloor(floors);
 			break;
 		case 3:
@@ -600,5 +591,10 @@ public class GameStage extends PApplet{
 		doors.clear();
 		monsters.clear();
 //		items.clear();
+	}
+
+	public Character getCharacter() {
+		// TODO Auto-generated method stub
+		return this.mainCharacter;
 	}
 }

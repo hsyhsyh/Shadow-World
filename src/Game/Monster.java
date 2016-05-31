@@ -8,10 +8,11 @@ import processing.core.PImage;
 
 public class Monster extends AbstractCharacter implements Runnable{
 	
+	private boolean isboom = false;
+	
 	public Monster(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs){
 		
 		
-		floors = new ArrayList<Floor>();
 		this.gs = gs;
 		Thread ms = new Thread(this);
 		ms.start();
@@ -82,27 +83,60 @@ public class Monster extends AbstractCharacter implements Runnable{
 		
 	}
 	
+	
+	public void beAttacked(Character ch) {
+		
+		if(!ch.getBullet().isEmpty())
+			for(Bullet bullet: ch.getBullet()){
+					if(bullet.x>=this.x+20 && bullet.x<=this.x+this.chaImage.width-20 && bullet.y>=this.y+10 && bullet.y<=this.y+this.chaImage.height-10){
+						bullet.vanish();
+						isBoomed();
+						this.now_HP-=20;
+					}
+			}
+	}
+	
+	public boolean isDead() {
+		
+		if(this.now_HP<=0)
+			return true;
+		else 
+			return false;
+	}
+	
+	private void vanish(){
+		this.x=10000;
+		this.y=10000;
+	}
+	
+	int i = 0;
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		while(true) {
 			try {
 				RandomMove();
-				if(direction.equals("left")||direction.equals("right")){
-					int moving=1;
-					for(Floor floor : floors){
-						if(floor.IsFloor(this))
-							moving=0;
-						}
-					if(moving==1)
-						move();
+				beAttacked(gs.getCharacter());
+				if(this.isDead())
+					vanish();
+				if(this.isboom == true) i ++;
+				if(i == 25) {
+					i = 0;
+					this.chaImage=gs.monster;
+					this.isboom = false;
 				}
+				move();
 				Thread.sleep(5);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public void isBoomed() {
+		this.chaImage=gs.monster2;
+		this.isboom = true;
 	}
 
 }

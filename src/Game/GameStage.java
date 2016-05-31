@@ -18,7 +18,7 @@ public class GameStage extends PApplet{
 	private static final long serialVersionUID = 1L;
 	private final static int width = 1000, height = 500;
 	
-	public PImage man, bullet, books, book, bloodletter, diamand, phone, skull, monster, monster2, strike, box, bed, lader, door1, door2, man1, man2, man3, man4
+	public PImage man, bullet, books, book, bloodletter, diamand, phone, skull, monster, monster2, strike, box, bed, ladder, door1, door2, man1, man2, man3, man4
 	              , man5, man6, man7, man8;
 	public PImage[] man_a = new PImage[10];
 	private Character mainCharacter; 
@@ -26,6 +26,7 @@ public class GameStage extends PApplet{
 	private ArrayList<Floor> floors;
 	private ArrayList<Door> doors;
 	private ArrayList<AbstractItem> items;
+	private ArrayList<Ladder> ladders;
 	//private ArrayList<Bullet> bullets;
 //	private ArrayList<strike> traps;
 	private Dialog dialog;
@@ -34,7 +35,7 @@ public class GameStage extends PApplet{
 	public boolean isLoading = true;
 	private boolean is_transport;
 	private boolean is_hurt;
-	private boolean stage_3_door,stage_5_floor, stage_5_box;
+	private boolean firststart,stage_3_door,stage_5_floor, stage_5_box;
 	private int alpha;
 	private int goalX,goalY;
 	private PFont cnFont;
@@ -73,7 +74,7 @@ public class GameStage extends PApplet{
 		this.strike = loadImage("strike.png");
 		this.box = loadImage("box.png");
 		this.bed = loadImage("bed.png");
-		this.lader = loadImage("lader.png");
+		this.ladder = loadImage("lader.png");
 		this.door1 = loadImage("closedoor.png");
 		this.door2 = loadImage("opendoor.png");
 		mainCharacter = new Character(this,man,"none",0,0,100,this);
@@ -81,6 +82,7 @@ public class GameStage extends PApplet{
 		floors = new ArrayList<Floor>();
 		doors = new ArrayList<Door>();
 		items = new ArrayList<AbstractItem>();
+		ladders = new ArrayList<Ladder>();
 		//bullets = new ArrayList<Bullet>();
 		dialog = new Dialog();
 		
@@ -93,7 +95,7 @@ public class GameStage extends PApplet{
 		stage_3_door = false;
 		stage_5_floor = false;
 		stage_5_box = false;
-		
+		firststart = true;
 		
 		
 	}
@@ -118,12 +120,7 @@ public class GameStage extends PApplet{
 			}
 		}
 		
-		if(!items.isEmpty())
-		{
-			for(AbstractItem i : items){
-				image(i.getImage(),i.x, i.y);
-			}
-		}
+
         
         if(!floors.isEmpty())
         {
@@ -136,6 +133,21 @@ public class GameStage extends PApplet{
         {
         	for(Door door : doors){
         		image(door.getImage(),door.x, door.y);
+            }
+        }
+        
+		if(!items.isEmpty())
+		{
+			for(AbstractItem i : items){
+				i.display();
+			}
+		}
+        
+        if(!ladders.isEmpty())
+        {
+        	for(Ladder ladder : ladders){
+//        		image(ladder.getImage(),ladder.x, ladder.y);
+        		ladder.display();
             }
         }
         
@@ -182,10 +194,11 @@ public class GameStage extends PApplet{
 	
 	private void loadData(){
 		clearplace();
+		mainCharacter.deleteFloor();
+		System.out.println(stage_num);
 		switch(stage_num)
 		{
 		case 0://test stage
-			mainCharacter.deleteFloor();
 			mainCharacter.x = 120;
 			mainCharacter.y = 320;
 			monsters.add(new Monster(this,monster,"none",400,320,100,this,350,450) );
@@ -205,20 +218,31 @@ public class GameStage extends PApplet{
 			mainCharacter.addFloor(floors);
 			break;
 		case 1:
-			mainCharacter.deleteFloor();
-			//clearplace();
 			mainCharacter.x = 120;
-			mainCharacter.y = 320;
+			mainCharacter.y = 20;
 			floors.add(new Floor(0, 0, 1000, 50));
 			floors.add(new Floor(0, 420, 1000, 80));
 			floors.add(new Floor(0, 0, 50, 500));
 			floors.add(new Floor(950,0,50, 500));
+			floors.add(new Floor(75,180,270, 10));
 			doors.add(new Door( 860, 320, door2, 2, 50, 330));
+			ladders.add(new Ladder(280, 160, 4, ladder, this));
+			ladders.add(new Ladder(280, 365, 1, ladder, this));
+			String[] s = new String[2];
+			s[0] = "雖然失去了色彩，但還是看的出來這就是自己的位置。\n在書桌的正中央貼著一張紙條。";
+			s[1] = "左右方向鍵行走，上方向鍵可以開門以及爬梯子，下方向鍵可以蹲下以及下梯子\nA鍵可以調查事物，Z鍵可以發射子彈。";
+			items.add(new Bed(bed, 60, 110, this ,s, null));
 			mainCharacter.addFloor(floors);
+			if(firststart)
+			{
+				String[] start = new String[4];
+				s[0] = "煩耶！誰一直吵我睡覺啦！\n......紙條？";
+				s[1] = "左右方向鍵行走，上方向鍵可以開門以及爬梯子，下方向鍵可以蹲下以及下梯子\nA鍵可以調查事物，Z鍵可以發射子彈。";
+				s[2] = "什麼鬼東西啊？扔掉算了！\n......嗯？";
+				s[3] = "這裡是......宿舍？為什麼都是黑白的？";
+			}
 			break;
 		case 2:
-			mainCharacter.deleteFloor();
-			clearplace();
 //			mainCharacter.x = 120;
 //			mainCharacter.y = 320;
 			floors.add(new Floor(0, 0, 1000, 40));
@@ -239,8 +263,6 @@ public class GameStage extends PApplet{
 			mainCharacter.addFloor(floors);
 			break;
 		case 3:
-			mainCharacter.deleteFloor();
-			clearplace();
 //			mainCharacter.x = 120;
 //			mainCharacter.y = 220;
 			floors.add(new Floor(0, 0, 1000, 150));
@@ -253,8 +275,6 @@ public class GameStage extends PApplet{
 			mainCharacter.addFloor(floors);
 			break;
 		case 4:
-			mainCharacter.deleteFloor();
-			clearplace();
 //			mainCharacter.x = 120;
 //			mainCharacter.y = 320;
 			floors.add(new Floor(0, 0, 1000, 50));
@@ -272,19 +292,21 @@ public class GameStage extends PApplet{
 			mainCharacter.addFloor(floors);
 			break;
 		case 5:
-			mainCharacter.deleteFloor();
-			clearplace();
 //			mainCharacter.x = 120;
 //			mainCharacter.y = 320;
 			floors.add(new Floor(0, 0, 1000, 50));
 			floors.add(new Floor(0, 420, 1000, 80));
 			floors.add(new Floor(0, 0, 50, 500));
 			floors.add(new Floor(950,0,50, 500));
+			floors.add(new Floor(50,200,250, 15));
+			floors.add(new Floor(750,305,250, 15));
+			if(stage_5_floor)
+			{
+				floors.add(new Floor(450,250,150, 15));
+			}
 			mainCharacter.addFloor(floors);
 			break;
 		case 6:
-			mainCharacter.deleteFloor();
-			clearplace();
 //			mainCharacter.x = 120;
 //			mainCharacter.y = 320;
 			floors.add(new Floor(0, 0, 1000, 50));
@@ -295,8 +317,6 @@ public class GameStage extends PApplet{
 			mainCharacter.addFloor(floors);
 			break;
 		case 7:
-			mainCharacter.deleteFloor();
-			clearplace();
 //			mainCharacter.x = 120;
 //			mainCharacter.y = 320;
 			floors.add(new Floor(0, 0, 1000, 50));
@@ -307,8 +327,6 @@ public class GameStage extends PApplet{
 			mainCharacter.addFloor(floors);
 			break;
 		case 8:
-			mainCharacter.deleteFloor();
-			//clearplace();
 			mainCharacter.x = 120;
 			mainCharacter.y = 320;
 			floors.add(new Floor(0, 0, 1000, 50));
@@ -318,8 +336,6 @@ public class GameStage extends PApplet{
 			mainCharacter.addFloor(floors);
 			break;
 		case 9:
-			mainCharacter.deleteFloor();
-			//clearplace();
 			mainCharacter.x = 120;
 			mainCharacter.y = 320;
 			floors.add(new Floor(0, 0, 1000, 50));
@@ -329,8 +345,6 @@ public class GameStage extends PApplet{
 			mainCharacter.addFloor(floors);
 			break;
 		case 10:
-			mainCharacter.deleteFloor();
-			//clearplace();
 			mainCharacter.x = 120;
 			mainCharacter.y = 320;
 			floors.add(new Floor(0, 0, 1000, 50));
@@ -389,17 +403,18 @@ public class GameStage extends PApplet{
 				
 				for(AbstractItem i : items)
 				{
-//					String text[] = i.gettext();
+//					String text[] = i.dialog_event();
 					String text[] = new String[2];
 					textFont(cnFont);
 					text[0] = "測試";
 					text[1] = "test";
-					if( isnotdone && whereisch(i) && (text.length != 0) )//if need dialog
+					if( isnotdone && whereisch(i) && (text != null) )//if need dialog
 					{
 						hasdialog = true;
 						dialog.open();
 						dialog.settext(text);
 						dialog.showtext();
+						break;
 					}
 				}
 			}

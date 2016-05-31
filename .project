@@ -14,4 +14,21 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/Game/Bullet.java</name>
+			<type>1</type>
+			<location>C:/Users/ASUS/Desktop/software/Shadow-World/src/Game/Bullet.java</location>
+		</link>
+		<link>
+			<name>src/Game/Door.java</name>
+			<type>1</type>
+			<location>C:/Users/ASUS/Desktop/software/Shadow-World/src/Game/Door.java</location>
+		</link>
+		<link>
+			<name>src/Game/Floor.java</name>
+			<type>1</type>
+			<location>C:/Users/ASUS/Desktop/software/Shadow-World/src/Game/Floor.java</location>
+		</link>
+	</linkedResources>
 </projectDescription>

@@ -2,9 +2,7 @@ package Game;
 
 import java.awt.Button;
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -17,8 +15,7 @@ public class Gamestart extends PApplet implements KeyListener{
 	private PImage startbg;
 	Button start, stop, achievement;
 	public void setup() {
-		this.startbg = new PImage();
-		this.startbg = loadImage("/startbg.png");
+		//this.startbg = loadImage("startbg.png");
 		size(width, height);
 		smooth();
 		this.start = new Button("Start");
@@ -30,10 +27,11 @@ public class Gamestart extends PApplet implements KeyListener{
 		this.stop();
 	}
 	public void paint(Graphics g) {
-	     if (!this.laidOut) {
+		if (!this.laidOut) {
+			this.background(255);
 	    	this.setLayout(null);
-	    	image(this.startbg, 80, 300);
-	    	this.start.setLocation(500, 200);
+	    	//image(this.startbg, 80, 320);
+	    	this.start.setLocation(500,200);
 	    	this.start.setSize(100, 40);
 	 		this.stop.setLocation(500, 400);
 	 		this.stop.setSize(100, 40);
@@ -42,7 +40,5 @@ public class Gamestart extends PApplet implements KeyListener{
 	        this.laidOut = true;
 	     }
 	   }
-	public void draw(){
 		
-	}
 }

@@ -180,7 +180,7 @@ public class GameStage extends PApplet{
 			mainCharacter.deleteFloor();
 			mainCharacter.x = 120;
 			mainCharacter.y = 320;
-			monsters.add(new Monster(this,monster,"none",400,320,100,this) );
+			monsters.add(new Monster(this,monster,"none",400,320,100,this,350,450) );
 			clearplace();
 			floors.add(new Floor(0, 0, 1000, 50));
 			floors.add(new Floor(0, 420, 1000, 80));
@@ -223,9 +223,9 @@ public class GameStage extends PApplet{
 			doors.add(new Door( (float)50, (float)330, door2, 1));
 			doors.add(new Door( (float)860, (float)330, door2, 3));
 			doors.add(new Door( (float)860, (float)60, door2, 4));
-			monsters.add(new Monster(this,monster,"none",400,300,100,this));
-			monsters.add(new Monster(this,monster,"none",430,300,100,this));
-			monsters.add(new Monster(this,monster,"none",480,210,100,this));
+			monsters.add(new Monster(this,monster,"none",400,300,100,this,350,450));
+			monsters.add(new Monster(this,monster,"none",430,300,100,this,350,450));
+			monsters.add(new Monster(this,monster,"none",480,210,100,this,460,520));
 			mainCharacter.addFloor(floors);
 			break;
 		case 3:
@@ -239,7 +239,7 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(950,0,50, 500));
 			doors.add(new Door( (float)50, (float)220, door2, 2));
 			doors.add(new Door( (float)800, (float)220, door1, 5));
-			monsters.add(new Monster(this,monster,"none",400,220,100,this));
+			monsters.add(new Monster(this,monster,"none",400,220,100,this,350,450));
 			mainCharacter.addFloor(floors);
 			break;
 		case 4:
@@ -256,8 +256,8 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(400,250,100, 15));//maybe can move
 			doors.add(new Door( (float)50, (float)320, door2, 3));
 			doors.add(new Door( (float)850, (float)320, door1, 5));
-			monsters.add(new Monster(this,monster,"none",200,220,100,this));
-			monsters.add(new Monster(this,monster,"none",400,220,100,this));
+			monsters.add(new Monster(this,monster,"none",200,220,100,this,150,250));
+			monsters.add(new Monster(this,monster,"none",400,220,100,this,350,450));
 			mainCharacter.addFloor(floors);
 			break;
 		case 5:

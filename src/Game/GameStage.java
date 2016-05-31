@@ -79,10 +79,11 @@ public class GameStage extends PApplet{
 		monsters = new ArrayList<Monster>();
 		floors = new ArrayList<Floor>();
 		doors = new ArrayList<Door>();
+		items = new ArrayList<AbstractItem>();
 		//bullets = new ArrayList<Bullet>();
 		dialog = new Dialog();
 		
-		stage_num = 2;
+		stage_num = 4;
 		
 		loadData();
 		isLoading = false;
@@ -103,10 +104,7 @@ public class GameStage extends PApplet{
 		stroke(0);
         fill(0);
         strokeWeight(1);
-        //image(this.book, 200, 200);
 
-//        image(this.door1, 80, 320);
-//		image(this.door2, 800, 320);
 		
 		if(!monsters.isEmpty())
 		{
@@ -115,7 +113,12 @@ public class GameStage extends PApplet{
 			}
 		}
 		
-		
+		if(!items.isEmpty())
+		{
+			for(AbstractItem i : items){
+				image(i.getImage(),i.x, i.y);
+			}
+		}
         
         if(!floors.isEmpty())
         {
@@ -354,20 +357,21 @@ public class GameStage extends PApplet{
 		case KeyEvent.VK_DOWN://down to ladder
 			break;
 		case KeyEvent.VK_UP://up to ladder
+			for(Door d : doors)
+			{
+				if( whereisch(d) )
+				{
+					transport(d.getgoal());
+//					isnotdone = false;
+					break;
+				}
+			}
 			break;
 		case KeyEvent.VK_A:
 			if(!hasdialog)
 			{
 				boolean isnotdone = true;
-				for(Door d : doors)
-				{
-					if( whereisch(d) )
-					{
-						transport(d.getgoal());
-						isnotdone = false;
-						break;
-					}
-				}
+				
 				
 				for(AbstractItem i : items)
 				{

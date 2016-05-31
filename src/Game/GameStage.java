@@ -25,6 +25,7 @@ public class GameStage extends PApplet{
 	private ArrayList<Monster> monsters;
 	private ArrayList<Floor> floors;
 	private ArrayList<Door> doors;
+	private ArrayList<AbstractItem> items;
 	//private ArrayList<Bullet> bullets;
 //	private ArrayList<strike> traps;
 	private Dialog dialog;
@@ -33,6 +34,7 @@ public class GameStage extends PApplet{
 	public boolean isLoading = true;
 	private boolean is_transport;
 	private boolean is_hurt;
+	private boolean stage_3_door,stage_5_floor, stage_5_box;
 	private int alpha;
 	private PFont cnFont;
 	
@@ -86,6 +88,10 @@ public class GameStage extends PApplet{
 		isLoading = false;
 		hasdialog = false;
 		is_transport = false;
+		stage_3_door = false;
+		stage_5_floor = false;
+		stage_5_box = false;
+		
 		
 		
 	}
@@ -155,7 +161,7 @@ public class GameStage extends PApplet{
         	if(alpha == 255)
         	{
         		loadData();
-        		Ani.to(this, (float)3.0, "alpha", 0);
+        		Ani.to(this, (float)1.5, "alpha", 0);
         	}
         	if(alpha == 0)
         	{
@@ -338,7 +344,7 @@ public class GameStage extends PApplet{
 			mainCharacter.move("right");
 			mainCharacter.isWalk = true;
 			break;
-		case KeyEvent.VK_SPACE://jump or up to ladder
+		case KeyEvent.VK_SPACE://jump
 			if(mainCharacter.isGround)
 			{
 				mainCharacter.jump();
@@ -347,38 +353,42 @@ public class GameStage extends PApplet{
 			break;
 		case KeyEvent.VK_DOWN://down to ladder
 			break;
+		case KeyEvent.VK_UP://up to ladder
+			break;
 		case KeyEvent.VK_A:
-			
-			for(Door d : doors)
+			if(!hasdialog)
 			{
-				if( whereisch(d) )
+				boolean isnotdone = true;
+				for(Door d : doors)
 				{
-//					transport(d.goal);
-				}
-			}
-			
-//			for(Item i : items)
-//			{
-//				if( whereisch(i) )//if need dialog
-//				{
-					if(!hasdialog)
+					if( whereisch(d) )
 					{
-						have_dialog();
+						transport(d.getgoal());
+						isnotdone = false;
+						break;
+					}
+				}
+				
+				for(AbstractItem i : items)
+				{
+//					String text[] = i.gettext();
+					String text[] = new String[2];
+					textFont(cnFont);
+					text[0] = "ด๚ธี";
+					text[1] = "test";
+					if( isnotdone && whereisch(i) && (text.length != 0) )//if need dialog
+					{
+						hasdialog = true;
 						dialog.open();
-						String text[] = new String[2];
-						textFont(cnFont);
-						text[0] = "ด๚ธี";
-					System.out.println(text[0].substring(0, 2));
-						text[1] = "test";
 						dialog.settext(text);
 						dialog.showtext();
 					}
-					else
-					{
-						dialog.dosomething();
-					}
-//				}
-//			}
+				}
+			}
+			else
+			{
+				dialog.dosomething();
+			}
 			break;
 		case KeyEvent.VK_Z://find
 			//attack
@@ -404,14 +414,6 @@ public class GameStage extends PApplet{
 	
 	public PImage getImage(PImage image) {
 		return image;
-	}
-
-
-	
-	private void have_dialog()//character will use this to talk
-	{
-		hasdialog = true;
-		
 	}
 	
 	class Dialog
@@ -460,30 +462,6 @@ public class GameStage extends PApplet{
 				textnum = 0;
 				Ani.to(this, (float)(text[now_textpagenum].length()*0.3),
 						"textnum", text[now_textpagenum].length(), Ani.LINEAR);
-//				Thread a = new Thread(new Runnable(){
-//					public void run(){
-//						while(textnum < text[now_textpagenum].length())
-//						{
-//							textnum+=2;
-//						
-////						else if()
-////						{
-////							;
-////						}
-////						else
-////						{
-////							;
-////						}
-//						try {
-//							Thread.sleep(300);
-//						} catch (InterruptedException e) {
-//							// TODO Auto-generated catch block
-//							e.printStackTrace();
-//						}
-//						}
-//					}
-//				});
-//				a.start();
 			}
 			else if (textnum == text[now_textpagenum].length() && now_textpagenum == textpagenum)
 			{
@@ -517,30 +495,6 @@ public class GameStage extends PApplet{
 		{
 			Ani.to(this, (float)(text[now_textpagenum].length()*0.3),
 							"textnum", text[now_textpagenum].length(), Ani.LINEAR);
-//			Thread a = new Thread(new Runnable(){
-//				public void run(){
-//					while(textnum < text[now_textpagenum].length())
-//					{
-//						textnum+=2;
-//					
-////					else if()
-////					{
-////						;
-////					}
-////					else
-////					{
-////						;
-////					}
-//					try {
-//						Thread.sleep(300);
-//					} catch (InterruptedException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
-//					}
-//				}
-//			});
-//			a.start();
 		}
 	}
 	
@@ -548,7 +502,7 @@ public class GameStage extends PApplet{
 	{
 		is_transport = true;
 		alpha = 1;
-		Ani.to(this, (float)3.0, "alpha", 255);
+		Ani.to(this, (float)1.0, "alpha", 255);
 
 		stage_num = num;
 		
@@ -560,16 +514,16 @@ public class GameStage extends PApplet{
 		if(thing.getClass().getName().equals("Game.Door"))
 		{
 			Door d = (Door)thing;
-//			if( (d.x < mainCharacter.x) && (d.x + d.width > mainCharacter.x)
-//					&& (d.y < mainCharacter.y + mainCharacter.height) 
-//						&& (d.y + d.height > mainCharacter.y + mainCharacter.height) )
-//			{//if charater is at the door
-//				return true;
-//			}
-//			else
-//			{
-//				return false;
-//			}
+			if( (d.x - 10 < mainCharacter.x) && (d.x + door1.width + 10 > mainCharacter.x)
+					&& (d.y - 10 < mainCharacter.y + man1.height) 
+						&& (d.y + door1.height + 10 > mainCharacter.y + man1.height) )
+			{//if charater is at the door
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 //		else if(thing.getClass().getName().equals("Game.Trap"))
 //		{
@@ -601,7 +555,7 @@ public class GameStage extends PApplet{
 		floors.clear();
 		doors.clear();
 		monsters.clear();
-//		items.clear();
+		items.clear();
 	}
 
 	public Character getCharacter() {

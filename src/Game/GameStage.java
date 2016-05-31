@@ -351,6 +351,7 @@ public class GameStage extends PApplet{
 		case KeyEvent.VK_DOWN://down to ladder
 			break;
 //<<<<<<< HEAD
+//<<<<<<< HEAD
 //		case KeyEvent.VK_UP://up to ladder
 //			for(Door d : doors)
 //			{
@@ -392,7 +393,23 @@ public class GameStage extends PApplet{
 ////				if( whereisch(i) )//if need dialog
 ////				{
 //					if(!hasdialog)
-//>>>>>>> ef8b682587cb34de2797ff83ab28ed8b32f154a6
+//=======
+		case KeyEvent.VK_A:
+			
+			for(Door d : doors)
+			{
+				if( whereisch(d) )
+				{
+//					transport(d.goal);
+				}
+			}
+			
+//			for(Item i : items)
+//			{
+//				if( whereisch(i) )//if need dialog
+//				{
+					if(!hasdialog)
+>>>>>>> ef8b682587cb34de2797ff83ab28ed8b32f154a6
 					{
 						have_dialog();
 						dialog.open();

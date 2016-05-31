@@ -4,15 +4,17 @@ import processing.core.PImage;
 
 public class Door {
 	
-	public float x,y;
+	public int x,y, goalX, goalY;
 	private PImage image;
 	private boolean isOpen;
 	private int goal;
-	public Door(float x, float y, PImage image, int goal){
+	public Door(int x, int y, PImage image, int goal, int goalX, int goalY){
 		this.x=x;
 		this.y=y;
 		this.image=image;
 		this.goal = goal;
+		this.goalX = goalX;
+		this.goalY = goalY;
 	}
 	
 	public int getgoal()

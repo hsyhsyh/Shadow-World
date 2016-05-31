@@ -1,6 +1,5 @@
 package Game;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import processing.core.PApplet;
@@ -9,8 +8,9 @@ import processing.core.PImage;
 public class Monster extends AbstractCharacter implements Runnable{
 	
 	private boolean isboom = false;
+	private int leftBound, rightBound;
 	
-	public Monster(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs){
+	public Monster(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs, int leftBound, int rightBound){
 		
 		
 		this.gs = gs;
@@ -23,6 +23,9 @@ public class Monster extends AbstractCharacter implements Runnable{
 		this.MAX_HP=HP;
 		this.now_HP=HP;
 		this.chaImage=chaImage;
+		this.leftBound = leftBound;
+		this.rightBound = rightBound;
+		this.direction="right";
 	}
 
 
@@ -37,10 +40,10 @@ public class Monster extends AbstractCharacter implements Runnable{
 		// TODO Auto-generated method stub
 		
 		if(direction.equals("left")){
-			velocityForDirectionX=-20;
+			velocityForDirectionX=-15;
 		}
 		else if(direction.equals("right")){
-			velocityForDirectionX=20;
+			velocityForDirectionX=15;
 		}
 		else if(direction.equals("stop")){
 			velocityForDirectionX=0;
@@ -50,29 +53,11 @@ public class Monster extends AbstractCharacter implements Runnable{
 	private void RandomMove(){
 		Random random=new Random();
 		int a=random.nextInt(100);
-		if(direction.equals("left")){
-			if(a%100<90)
-				direction="left";
-			else if(a%100>=94)
-				direction="right";
-			else 
-				direction="stop";
-		}
-		else if(direction.equals("right")){
-			if(a%100<90)
-				direction="right";
-			else if(a%100>=94)
-				direction="left";
-			else 
-				direction="stop";
-		}
-		else{
-			if(a%100<50)
-				direction="left";
-			else if(a%100>=50)
-				direction="right";
-		}
-
+		if(this.x<this.leftBound)
+			direction="right";
+		else if(this.x>this.rightBound)
+			direction="left";
+			
 		move(direction);
 			
 	}
@@ -103,7 +88,7 @@ public class Monster extends AbstractCharacter implements Runnable{
 			return false;
 	}
 	
-	private void vanish(){
+	public void vanish(){
 		this.x=10000;
 		this.y=10000;
 	}

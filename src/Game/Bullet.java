@@ -6,7 +6,7 @@ public class Bullet {
 	
 
 	private PImage image;
-	private float velocity;
+	public float velocity;
 	public float x,y;
 	
 	Bullet(PImage image, float x, float y,float velocity){

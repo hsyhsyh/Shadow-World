@@ -8,8 +8,10 @@ import processing.core.PImage;
 
 public class Character extends AbstractCharacter implements Runnable{
 	
-	private ArrayList<Bullet> bullets;
+	//private ArrayList<Bullet> bullets;
+	private Bullet bullets[]=new Bullet[10];
 	public int waitAttackTime=0;
+	private int bulletNumber=0;
 	
 	public Character(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs){
         Ani.init(parent);
@@ -24,7 +26,9 @@ public class Character extends AbstractCharacter implements Runnable{
 		this.MAX_HP=HP;
 		this.now_HP=HP;
 		this.chaImage=chaImage;
-		this.bullets=new ArrayList<Bullet>();
+		for(int i=0;i<10;i++){
+			bullets[i]= new Bullet(gs.bullet,10000,10000,0);
+		}
 	}
 	
 	//the effect of gravity that make character fall down
@@ -85,10 +89,17 @@ public class Character extends AbstractCharacter implements Runnable{
 	
 	@Override
     public void attack(){
-		if(bulletDirection.equals("right"))
-			bullets.add(new Bullet(gs.bullet,x+40,y+15,30));
-		else if(bulletDirection.equals("left"))
-			bullets.add(new Bullet(gs.bullet,x-12,y+15,-30));
+		if(bulletDirection.equals("right")){
+			bullets[bulletNumber%10].x=this.x+40;
+			bullets[bulletNumber%10].y=this.y+15;
+			bullets[bulletNumber%10].velocity=30;
+		}
+		else if(bulletDirection.equals("left")){
+			bullets[bulletNumber%10].x=this.x-12;
+			bullets[bulletNumber%10].y=this.y+15;
+			bullets[bulletNumber%10].velocity=-30;
+		}
+		bulletNumber++;
 	}
 	
 
@@ -97,7 +108,7 @@ public class Character extends AbstractCharacter implements Runnable{
 		
 	}
     
-	public ArrayList<Bullet> getBullet(){
+	public Bullet[] getBullet(){
 		return bullets;
 	}
 
@@ -123,7 +134,6 @@ public class Character extends AbstractCharacter implements Runnable{
 						move();
 				}
 				fallDown();
-				if(!bullets.isEmpty())
 					for(Bullet bullet: bullets){
 							bullet.move();
 					}

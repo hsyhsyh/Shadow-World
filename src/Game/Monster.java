@@ -86,7 +86,6 @@ public class Monster extends AbstractCharacter implements Runnable{
 	
 	public void beAttacked(Character ch) {
 		
-		if(!ch.getBullet().isEmpty())
 			for(Bullet bullet: ch.getBullet()){
 					if(bullet.x>=this.x+20 && bullet.x<=this.x+this.chaImage.width-20 && bullet.y>=this.y+10 && bullet.y<=this.y+this.chaImage.height-10){
 						bullet.vanish();

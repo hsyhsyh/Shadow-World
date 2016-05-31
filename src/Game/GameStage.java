@@ -135,11 +135,10 @@ public class GameStage extends PApplet{
         }
         
         image(this.mainCharacter.getImage(), mainCharacter.x, mainCharacter.y);
-        if(!mainCharacter.getBullet().isEmpty()){
-        	for(Bullet bullet: mainCharacter.getBullet()){
-        		image(bullet.getImage(),bullet.x,bullet.y);
-        		}
-        }
+        for(Bullet bullet: mainCharacter.getBullet()){
+        	image(bullet.getImage(),bullet.x,bullet.y);
+        	}
+   
         
         if(hasdialog)
         {

@@ -1,7 +1,5 @@
 package Game;
 
-import java.util.Random;
-
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -51,8 +49,8 @@ public class Monster extends AbstractCharacter implements Runnable{
 	}
 	
 	private void RandomMove(){
-		Random random=new Random();
-		int a=random.nextInt(100);
+		//Random random=new Random();
+		//int a=random.nextInt(100);
 		if(this.x<this.leftBound)
 			direction="right";
 		else if(this.x>this.rightBound)

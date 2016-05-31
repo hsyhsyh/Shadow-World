@@ -9,7 +9,7 @@ import processing.core.PImage;
 public class Character extends AbstractCharacter implements Runnable{
 	
 	//private ArrayList<Bullet> bullets;
-	private Bullet bullets[]=new Bullet[10];
+	private Bullet bullets[]=new Bullet[20];
 	public int waitAttackTime=0;
 	private int bulletNumber=0;
 	
@@ -26,7 +26,7 @@ public class Character extends AbstractCharacter implements Runnable{
 		this.MAX_HP=HP;
 		this.now_HP=HP;
 		this.chaImage=chaImage;
-		for(int i=0;i<10;i++){
+		for(int i=0;i<20;i++){
 			bullets[i]= new Bullet(gs.bullet,10000,10000,0);
 		}
 	}
@@ -89,15 +89,16 @@ public class Character extends AbstractCharacter implements Runnable{
 	
 	@Override
     public void attack(){
+		
 		if(bulletDirection.equals("right")){
-			bullets[bulletNumber%10].x=this.x+40;
-			bullets[bulletNumber%10].y=this.y+15;
-			bullets[bulletNumber%10].velocity=30;
+			bullets[bulletNumber%20].x=this.x+40;
+			bullets[bulletNumber%20].y=this.y+15;
+			bullets[bulletNumber%20].velocity=30;
 		}
 		else if(bulletDirection.equals("left")){
-			bullets[bulletNumber%10].x=this.x-12;
-			bullets[bulletNumber%10].y=this.y+15;
-			bullets[bulletNumber%10].velocity=-30;
+			bullets[bulletNumber%20].x=this.x-12;
+			bullets[bulletNumber%20].y=this.y+15;
+			bullets[bulletNumber%20].velocity=-30;
 		}
 		bulletNumber++;
 	}
@@ -134,10 +135,9 @@ public class Character extends AbstractCharacter implements Runnable{
 						move();
 				}
 				fallDown();
-					for(Bullet bullet: bullets){
-							bullet.move();
-					}
-//				System.out.println(bullets.size());
+				for(Bullet bullet: bullets){
+					bullet.move();
+				}
 				Thread.sleep(5);
 				if(waitAttackTime>0)
 					waitAttackTime--;

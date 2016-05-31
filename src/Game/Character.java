@@ -123,7 +123,7 @@ public class Character extends AbstractCharacter implements Runnable{
 					for(Bullet bullet: bullets){
 							bullet.move();
 					}
-				System.out.println(bullets.size());
+//				System.out.println(bullets.size());
 				Thread.sleep(5);
 				if(waitAttackTime>0)
 					waitAttackTime--;

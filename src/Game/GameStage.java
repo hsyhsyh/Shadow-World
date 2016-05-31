@@ -1,6 +1,7 @@
 package Game;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -8,6 +9,7 @@ import javax.swing.JPanel;
 
 import de.looksgood.ani.Ani;
 import processing.core.PApplet;
+import processing.core.PFont;
 import processing.core.PImage;
 
 
@@ -32,8 +34,13 @@ public class GameStage extends PApplet{
 	private boolean is_transport;
 	private boolean is_hurt;
 	private int alpha;
+//	private PFont cnFont;
 	
 	public void setup() {
+		
+//		cnFont = new PFont(new Font
+//				(this.getClass().getResource("../NotoSansHantRegular.otf").getPath()
+//						, Font.PLAIN, 30), true);
 		
 		size(width, height);
 		smooth();
@@ -71,7 +78,7 @@ public class GameStage extends PApplet{
 		//bullets = new ArrayList<Bullet>();
 		dialog = new Dialog();
 		
-		stage_num = 2;
+		stage_num = 4;
 		
 		loadData();
 		isLoading = false;
@@ -85,12 +92,14 @@ public class GameStage extends PApplet{
 	{
 		
 		background(255);
-
+		stroke(0);
+        fill(0);
+        strokeWeight(1);
         //image(this.book, 200, 200);
 
-        image(this.door1, 80, 320);
-		image(this.door2, 800, 320);
-		image(this.mainCharacter.getImage(), mainCharacter.x, mainCharacter.y);
+//        image(this.door1, 80, 320);
+//		image(this.door2, 800, 320);
+		
 		if(!monsters.isEmpty())
 		{
 			for(Monster monster : monsters){
@@ -99,8 +108,7 @@ public class GameStage extends PApplet{
 		}
 		
 		
-        stroke(0);
-        fill(0);
+        
         if(!floors.isEmpty())
         {
         	for(Floor floor : floors){
@@ -111,11 +119,11 @@ public class GameStage extends PApplet{
         if(!doors.isEmpty())
         {
         	for(Door door : doors){
-//        		image(door.getImage(),door.x, door.y);
+        		image(door.getImage(),door.x, door.y);
             }
         }
         
-
+        image(this.mainCharacter.getImage(), mainCharacter.x, mainCharacter.y);
         if(!mainCharacter.getBullet().isEmpty()){
         	for(Bullet bullet: mainCharacter.getBullet()){
         		image(bullet.getImage(),bullet.x,bullet.y);
@@ -152,12 +160,13 @@ public class GameStage extends PApplet{
         		is_transport = false;
         	}
         }
+		
 	}
 	
 	private void loadData(){
 		switch(stage_num)
 		{
-		case 0:
+		case 0://test stage
 			mainCharacter.deleteFloor();
 			mainCharacter.x = 120;
 			mainCharacter.y = 320;
@@ -193,13 +202,17 @@ public class GameStage extends PApplet{
 			clearplace();
 			mainCharacter.x = 120;
 			mainCharacter.y = 320;
-			floors.add(new Floor(0, 0, 1000, 50));
-			floors.add(new Floor(0, 420, 1000, 80));
-			floors.add(new Floor(0, 0, 50, 500));
-			floors.add(new Floor(950,0,50, 500));
-			floors.add(new Floor(0,220,450, 20));
-			floors.add(new Floor(550,320,450, 20));
-			floors.add(new Floor(550,120,450, 20));
+			floors.add(new Floor(0, 0, 1000, 40));
+			floors.add(new Floor(0, 430, 1000, 40));
+			floors.add(new Floor(0, 0, 40, 500));
+			floors.add(new Floor(960,0,40, 500));
+			floors.add(new Floor(0,225,450, 15));
+			floors.add(new Floor(550,315,450, 15));
+			floors.add(new Floor(550,160,450, 15));
+		
+			doors.add(new Door( (float)50, (float)330, door2));
+			doors.add(new Door( (float)860, (float)330, door2));
+			doors.add(new Door( (float)860, (float)60, door2));
 			mainCharacter.addFloor(floors);
 			break;
 		case 3:
@@ -211,8 +224,8 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(0, 320, 1000, 180));
 			floors.add(new Floor(0, 0, 50, 500));
 			floors.add(new Floor(950,0,50, 500));
-			doors.add(new Door( (float)80, (float)100, door2));
-			doors.add(new Door( (float)300, (float)100, door2));
+			doors.add(new Door( (float)50, (float)220, door2));
+			doors.add(new Door( (float)800, (float)220, door1));
 			monsters.add(new Monster(this,monster,"none",400,220,100,this));
 			mainCharacter.addFloor(floors);
 			break;
@@ -225,6 +238,13 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(0, 420, 1000, 80));
 			floors.add(new Floor(0, 0, 50, 500));
 			floors.add(new Floor(950,0,50, 500));
+			floors.add(new Floor(750,305,250, 15));
+			floors.add(new Floor(50,200,200, 15));
+			floors.add(new Floor(400,250,100, 15));//maybe can move
+			doors.add(new Door( (float)50, (float)320, door2));
+			doors.add(new Door( (float)850, (float)320, door1));
+			monsters.add(new Monster(this,monster,"none",200,220,100,this));
+			monsters.add(new Monster(this,monster,"none",400,220,100,this));
 			mainCharacter.addFloor(floors);
 			break;
 		case 5:
@@ -300,7 +320,7 @@ public class GameStage extends PApplet{
 	
 	public void keyPressed() {
 		// TODO Auto-generated method stub
-		//WARNING: 需切換至英文輸入法才可以正常運作
+		//WARNING: 需切換至英文輸入法
 		switch(keyCode)
 		{
 		case KeyEvent.VK_LEFT:
@@ -343,7 +363,9 @@ public class GameStage extends PApplet{
 						have_dialog();
 						dialog.open();
 						String text[] = new String[2];
-						text[0] = "just";
+//						textFont(cnFont);
+						text[0] = "測試";
+					System.out.println(text[0].substring(0, 2));
 						text[1] = "test";
 						dialog.settext(text);
 						dialog.showtext();
@@ -436,6 +458,30 @@ public class GameStage extends PApplet{
 				textnum = 0;
 				Ani.to(this, (float)(text[now_textpagenum].length()*0.3),
 						"textnum", text[now_textpagenum].length(), Ani.LINEAR);
+//				Thread a = new Thread(new Runnable(){
+//					public void run(){
+//						while(textnum < text[now_textpagenum].length())
+//						{
+//							textnum+=2;
+//						
+////						else if()
+////						{
+////							;
+////						}
+////						else
+////						{
+////							;
+////						}
+//						try {
+//							Thread.sleep(300);
+//						} catch (InterruptedException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
+//						}
+//					}
+//				});
+//				a.start();
 			}
 			else if (textnum == text[now_textpagenum].length() && now_textpagenum == textpagenum)
 			{
@@ -469,6 +515,30 @@ public class GameStage extends PApplet{
 		{
 			Ani.to(this, (float)(text[now_textpagenum].length()*0.3),
 							"textnum", text[now_textpagenum].length(), Ani.LINEAR);
+//			Thread a = new Thread(new Runnable(){
+//				public void run(){
+//					while(textnum < text[now_textpagenum].length())
+//					{
+//						textnum+=2;
+//					
+////					else if()
+////					{
+////						;
+////					}
+////					else
+////					{
+////						;
+////					}
+//					try {
+//						Thread.sleep(300);
+//					} catch (InterruptedException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//					}
+//				}
+//			});
+//			a.start();
 		}
 	}
 	

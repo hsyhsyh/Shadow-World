@@ -350,7 +350,6 @@ public class GameStage extends PApplet{
 			break;
 		case KeyEvent.VK_DOWN://down to ladder
 			break;
-<<<<<<< HEAD
 //<<<<<<< HEAD
 //<<<<<<< HEAD
 //		case KeyEvent.VK_UP://up to ladder
@@ -397,10 +396,6 @@ public class GameStage extends PApplet{
 //=======
 		case KeyEvent.VK_A:
 			
-=======
-<<<<<<< HEAD
-		case KeyEvent.VK_UP://up to ladder
->>>>>>> parent of 311f519... Revert "test"
 			for(Door d : doors)
 			{
 				if( whereisch(d) )
@@ -408,34 +403,6 @@ public class GameStage extends PApplet{
 //					transport(d.goal);
 				}
 			}
-<<<<<<< HEAD
-=======
-			break;
-=======
->>>>>>> ef8b682587cb34de2797ff83ab28ed8b32f154a6
-		case KeyEvent.VK_A:
-			
-			for(Door d : doors)
-			{
-<<<<<<< HEAD
-				boolean isnotdone = true;
-				
-				
-				for(AbstractItem i : items)
-				{
-//					String text[] = i.gettext();
-					String text[] = new String[2];
-					textFont(cnFont);
-					text[0] = "ด๚ธี";
-					text[1] = "test";
-					if( isnotdone && whereisch(i) && (text.length != 0) )//if need dialog
-=======
-				if( whereisch(d) )
-				{
-//					transport(d.goal);
-				}
-			}
->>>>>>> parent of 311f519... Revert "test"
 			
 //			for(Item i : items)
 //			{

@@ -1,11 +1,8 @@
 package Game;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-
-import javax.swing.JPanel;
 
 import de.looksgood.ani.Ani;
 import processing.core.PApplet;
@@ -102,15 +99,30 @@ public class GameStage extends PApplet{
 	{
 		
 		background(255);
-		stroke(0);
-        fill(0);
         strokeWeight(1);
         
-        this.textFont(createFont("Arial", 12), 20);
-        this.text("HP", 70, 80);
-        this.rect(70, 85, 100, 5);
-
-		
+        //blood
+        if(stage_num == 3) {
+	        fill(200);
+	        stroke(200);
+	        this.rect(80+mainCharacter.now_HP, 195, 100-mainCharacter.now_HP, 5);
+	        fill(0);
+	        stroke(0);
+	        this.rect(80, 195, mainCharacter.now_HP, 5);
+	        this.textFont(createFont("Arial", 12), 20);
+	        this.text("HP", 80, 190);
+        }
+        else {
+	        fill(200);
+	        stroke(200);
+	        this.rect(70+mainCharacter.now_HP, 85, 100-mainCharacter.now_HP, 5);
+	        fill(0);
+	        stroke(0);
+	        this.rect(70, 85, mainCharacter.now_HP, 5);
+	        this.textFont(createFont("Arial", 12), 20);
+	        this.text("HP", 70, 80);
+        }
+        
 		if(!monsters.isEmpty())
 		{
 			for(Monster monster : monsters){
@@ -243,6 +255,7 @@ public class GameStage extends PApplet{
 			clearplace();
 //			mainCharacter.x = 120;
 //			mainCharacter.y = 220;
+			
 			floors.add(new Floor(0, 0, 1000, 150));
 			floors.add(new Floor(0, 320, 1000, 180));
 			floors.add(new Floor(0, 0, 50, 500));

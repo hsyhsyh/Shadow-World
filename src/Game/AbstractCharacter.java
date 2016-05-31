@@ -7,7 +7,7 @@ import processing.core.PImage;
 
 public abstract class AbstractCharacter {
 	
-	protected int MAX_HP,now_HP;
+	public int MAX_HP, now_HP;
 	protected String name;
 	public float x,y;
 	protected float velocityForDirectionX=0; //unit: unit_length/second

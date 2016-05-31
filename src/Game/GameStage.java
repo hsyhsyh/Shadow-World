@@ -1,11 +1,8 @@
 package Game;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-
-import javax.swing.JPanel;
 
 import de.looksgood.ani.Ani;
 import processing.core.PApplet;
@@ -104,15 +101,30 @@ public class GameStage extends PApplet{
 	{
 		
 		background(255);
-		stroke(0);
-        fill(0);
         strokeWeight(1);
         
-        this.textFont(createFont("Arial", 12), 20);
-        this.text("HP", 70, 80);
-        this.rect(70, 85, 100, 5);
-
-		
+        //blood
+        if(stage_num == 3) {
+	        fill(200);
+	        stroke(200);
+	        this.rect(80+mainCharacter.now_HP, 195, 100-mainCharacter.now_HP, 5);
+	        fill(0);
+	        stroke(0);
+	        this.rect(80, 195, mainCharacter.now_HP, 5);
+	        this.textFont(createFont("Arial", 12), 20);
+	        this.text("HP", 80, 190);
+        }
+        else {
+	        fill(200);
+	        stroke(200);
+	        this.rect(70+mainCharacter.now_HP, 85, 100-mainCharacter.now_HP, 5);
+	        fill(0);
+	        stroke(0);
+	        this.rect(70, 85, mainCharacter.now_HP, 5);
+	        this.textFont(createFont("Arial", 12), 20);
+	        this.text("HP", 70, 80);
+        }
+        
 		if(!monsters.isEmpty())
 		{
 			for(Monster monster : monsters){
@@ -193,6 +205,7 @@ public class GameStage extends PApplet{
 	}
 	
 	private void loadData(){
+		mainCharacter.deleteFloor();
 		clearplace();
 		mainCharacter.deleteFloor();
 		System.out.println(stage_num);
@@ -202,7 +215,6 @@ public class GameStage extends PApplet{
 			mainCharacter.x = 120;
 			mainCharacter.y = 320;
 			monsters.add(new Monster(this,monster,"none",400,320,100,this,350,450) );
-			//clearplace();
 			floors.add(new Floor(0, 0, 1000, 50));
 			floors.add(new Floor(0, 420, 1000, 80));
 			floors.add(new Floor(0, 0, 50, 500));
@@ -211,10 +223,8 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(420,340,100, 20));
 			floors.add(new Floor(540,300,100, 20));
 			floors.add(new Floor(660,360,100, 20));
-			
 			doors.add(new Door( 80, 300, door2, 0, 120, 320));
 			doors.add(new Door( 300, 100, door2, 0, 120, 320));
-			
 			mainCharacter.addFloor(floors);
 			break;
 		case 1:
@@ -252,14 +262,12 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(0,225,450, 15));
 			floors.add(new Floor(550,315,450, 15));
 			floors.add(new Floor(550,160,450, 15));
-		
 			doors.add(new Door( 50, 330, door2, 1, 860, 330));
 			doors.add(new Door( 860, 330, door2, 3, 50, 220));
 			doors.add(new Door( 860, 60, door2, 4, 50 ,320));
 			monsters.add(new Monster(this,monster,"none",400,300,100,this,350,450));
 			monsters.add(new Monster(this,monster,"none",430,300,100,this,350,450));
 			monsters.add(new Monster(this,monster,"none",480,210,100,this,460,520));
-
 			mainCharacter.addFloor(floors);
 			break;
 		case 3:
@@ -284,7 +292,6 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(750,305,250, 15));
 			floors.add(new Floor(50,200,200, 15));
 			floors.add(new Floor(400,250,100, 15));//maybe can move
-			
 			doors.add(new Door( 50, 320, door2, 2, 860, 60));
 			doors.add(new Door( 850, 320, door1, 5, 120, 320));
 			monsters.add(new Monster(this,monster,"none",200,220,100,this,150,250));
@@ -323,7 +330,6 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(0, 420, 1000, 80));
 			floors.add(new Floor(0, 0, 50, 500));
 			floors.add(new Floor(950,0,50, 500));
-			
 			mainCharacter.addFloor(floors);
 			break;
 		case 8:

@@ -1,7 +1,5 @@
 package Game;
 
-import processing.core.PImage;
-
 public class Floor {
 	
 	private int x,y,width,height;

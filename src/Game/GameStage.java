@@ -104,6 +104,10 @@ public class GameStage extends PApplet{
 		stroke(0);
         fill(0);
         strokeWeight(1);
+        
+        this.textFont(createFont("Arial", 12), 20);
+        this.text("HP", 70, 80);
+        this.rect(70, 85, 100, 5);
 
 		
 		if(!monsters.isEmpty())

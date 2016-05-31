@@ -88,7 +88,7 @@ public class Monster extends AbstractCharacter implements Runnable{
 			return false;
 	}
 	
-	private void vanish(){
+	public void vanish(){
 		this.x=10000;
 		this.y=10000;
 	}

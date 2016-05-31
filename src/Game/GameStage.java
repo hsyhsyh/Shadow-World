@@ -174,6 +174,7 @@ public class GameStage extends PApplet{
 	}
 	
 	private void loadData(){
+		clearplace();
 		switch(stage_num)
 		{
 		case 0://test stage
@@ -181,7 +182,7 @@ public class GameStage extends PApplet{
 			mainCharacter.x = 120;
 			mainCharacter.y = 320;
 			monsters.add(new Monster(this,monster,"none",400,320,100,this,350,450) );
-			clearplace();
+			//clearplace();
 			floors.add(new Floor(0, 0, 1000, 50));
 			floors.add(new Floor(0, 420, 1000, 80));
 			floors.add(new Floor(0, 0, 50, 500));
@@ -198,7 +199,7 @@ public class GameStage extends PApplet{
 			break;
 		case 1:
 			mainCharacter.deleteFloor();
-			clearplace();
+			//clearplace();
 			mainCharacter.x = 120;
 			mainCharacter.y = 320;
 			floors.add(new Floor(0, 0, 1000, 50));
@@ -209,7 +210,7 @@ public class GameStage extends PApplet{
 			break;
 		case 2:
 			mainCharacter.deleteFloor();
-			clearplace();
+			//clearplace();
 			mainCharacter.x = 120;
 			mainCharacter.y = 320;
 			floors.add(new Floor(0, 0, 1000, 40));
@@ -230,7 +231,7 @@ public class GameStage extends PApplet{
 			break;
 		case 3:
 			mainCharacter.deleteFloor();
-			clearplace();
+			//clearplace();
 			mainCharacter.x = 120;
 			mainCharacter.y = 220;
 			floors.add(new Floor(0, 0, 1000, 150));
@@ -244,7 +245,7 @@ public class GameStage extends PApplet{
 			break;
 		case 4:
 			mainCharacter.deleteFloor();
-			clearplace();
+			//clearplace();
 			mainCharacter.x = 120;
 			mainCharacter.y = 320;
 			floors.add(new Floor(0, 0, 1000, 50));
@@ -262,7 +263,7 @@ public class GameStage extends PApplet{
 			break;
 		case 5:
 			mainCharacter.deleteFloor();
-			clearplace();
+			//clearplace();
 			mainCharacter.x = 120;
 			mainCharacter.y = 320;
 			floors.add(new Floor(0, 0, 1000, 50));
@@ -273,7 +274,7 @@ public class GameStage extends PApplet{
 			break;
 		case 6:
 			mainCharacter.deleteFloor();
-			clearplace();
+			//clearplace();
 			mainCharacter.x = 120;
 			mainCharacter.y = 320;
 			floors.add(new Floor(0, 0, 1000, 50));
@@ -284,7 +285,7 @@ public class GameStage extends PApplet{
 			break;
 		case 7:
 			mainCharacter.deleteFloor();
-			clearplace();
+			//clearplace();
 			mainCharacter.x = 120;
 			mainCharacter.y = 320;
 			floors.add(new Floor(0, 0, 1000, 50));
@@ -295,7 +296,7 @@ public class GameStage extends PApplet{
 			break;
 		case 8:
 			mainCharacter.deleteFloor();
-			clearplace();
+			//clearplace();
 			mainCharacter.x = 120;
 			mainCharacter.y = 320;
 			floors.add(new Floor(0, 0, 1000, 50));
@@ -306,7 +307,7 @@ public class GameStage extends PApplet{
 			break;
 		case 9:
 			mainCharacter.deleteFloor();
-			clearplace();
+			//clearplace();
 			mainCharacter.x = 120;
 			mainCharacter.y = 320;
 			floors.add(new Floor(0, 0, 1000, 50));
@@ -317,7 +318,7 @@ public class GameStage extends PApplet{
 			break;
 		case 10:
 			mainCharacter.deleteFloor();
-			clearplace();
+			//clearplace();
 			mainCharacter.x = 120;
 			mainCharacter.y = 320;
 			floors.add(new Floor(0, 0, 1000, 50));
@@ -555,6 +556,9 @@ public class GameStage extends PApplet{
 	
 	private void clearplace()
 	{
+		for(Monster monster:monsters) {
+			monster.vanish();
+		}
 		floors.clear();
 		doors.clear();
 		monsters.clear();

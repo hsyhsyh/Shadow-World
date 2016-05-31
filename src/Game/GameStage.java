@@ -34,17 +34,17 @@ public class GameStage extends PApplet{
 	private boolean is_transport;
 	private boolean is_hurt;
 	private int alpha;
-//	private PFont cnFont;
+	private PFont cnFont;
 	
 	public void setup() {
 		
-//		cnFont = new PFont(new Font
-//				(this.getClass().getResource("../NotoSansHantRegular.otf").getPath()
-//						, Font.PLAIN, 30), true);
+		cnFont = new PFont(new Font
+				(this.getClass().getResource("/NotoSansHantRegular.otf").getPath()
+						, Font.PLAIN, 30), true);
 		
 		size(width, height);
 		smooth();
-		int i;
+		
 		this.books = loadImage("books.png");
 		this.bullet = loadImage("bullet.png");
 		this.book = loadImage("book.png");
@@ -61,7 +61,8 @@ public class GameStage extends PApplet{
 		this.man6 = loadImage("man_run6.png");
 		this.man7 = loadImage("man_run7.png");
 		this.man8 = loadImage("man_run8.png");
-		for(i=1;i<=8;i++){
+		int i;
+		for(i = 1; i <= 8; i++){
 			this.man_a[i] = loadImage("man_gun"+Integer.toString(i)+".png");
 		}
 		this.monster = loadImage("monster.png");
@@ -79,7 +80,7 @@ public class GameStage extends PApplet{
 		//bullets = new ArrayList<Bullet>();
 		dialog = new Dialog();
 		
-		stage_num = 4;
+		stage_num = 2;
 		
 		loadData();
 		isLoading = false;
@@ -182,8 +183,8 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(540,300,100, 20));
 			floors.add(new Floor(660,360,100, 20));
 			
-			doors.add(new Door( (float)80, (float)300, door2));
-			doors.add(new Door( (float)300, (float)100, door2));
+			doors.add(new Door( (float)80, (float)300, door2, 0));
+			doors.add(new Door( (float)300, (float)100, door2, 0));
 			
 			mainCharacter.addFloor(floors);
 			break;
@@ -203,7 +204,20 @@ public class GameStage extends PApplet{
 			clearplace();
 			mainCharacter.x = 120;
 			mainCharacter.y = 320;
-
+			floors.add(new Floor(0, 0, 1000, 40));
+			floors.add(new Floor(0, 430, 1000, 40));
+			floors.add(new Floor(0, 0, 40, 500));
+			floors.add(new Floor(960,0,40, 500));
+			floors.add(new Floor(0,225,450, 15));
+			floors.add(new Floor(550,315,450, 15));
+			floors.add(new Floor(550,160,450, 15));
+		
+			doors.add(new Door( (float)50, (float)330, door2, 1));
+			doors.add(new Door( (float)860, (float)330, door2, 3));
+			doors.add(new Door( (float)860, (float)60, door2, 4));
+			monsters.add(new Monster(this,monster,"none",400,300,100,this));
+			monsters.add(new Monster(this,monster,"none",430,300,100,this));
+			monsters.add(new Monster(this,monster,"none",480,210,100,this));
 			mainCharacter.addFloor(floors);
 			break;
 		case 3:
@@ -215,8 +229,8 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(0, 320, 1000, 180));
 			floors.add(new Floor(0, 0, 50, 500));
 			floors.add(new Floor(950,0,50, 500));
-			doors.add(new Door( (float)50, (float)220, door2));
-			doors.add(new Door( (float)800, (float)220, door1));
+			doors.add(new Door( (float)50, (float)220, door2, 2));
+			doors.add(new Door( (float)800, (float)220, door1, 5));
 			monsters.add(new Monster(this,monster,"none",400,220,100,this));
 			mainCharacter.addFloor(floors);
 			break;
@@ -232,8 +246,8 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(750,305,250, 15));
 			floors.add(new Floor(50,200,200, 15));
 			floors.add(new Floor(400,250,100, 15));//maybe can move
-			doors.add(new Door( (float)50, (float)320, door2));
-			doors.add(new Door( (float)850, (float)320, door1));
+			doors.add(new Door( (float)50, (float)320, door2, 3));
+			doors.add(new Door( (float)850, (float)320, door1, 5));
 			monsters.add(new Monster(this,monster,"none",200,220,100,this));
 			monsters.add(new Monster(this,monster,"none",400,220,100,this));
 			mainCharacter.addFloor(floors);
@@ -305,8 +319,6 @@ public class GameStage extends PApplet{
 			mainCharacter.addFloor(floors);
 			break;
 		}
-		//mainCharacter.deleteFloor();
-		//mainCharacter.addFloor(floors);
 	}
 	
 	public void keyPressed() {
@@ -354,7 +366,7 @@ public class GameStage extends PApplet{
 						have_dialog();
 						dialog.open();
 						String text[] = new String[2];
-//						textFont(cnFont);
+						textFont(cnFont);
 						text[0] = "ด๚ธี";
 					System.out.println(text[0].substring(0, 2));
 						text[1] = "test";
@@ -371,7 +383,6 @@ public class GameStage extends PApplet{
 		case KeyEvent.VK_Z://find
 			//attack
 			mainCharacter.isAttack = true;
-			//transport(8);
 			break;
 			
 		}

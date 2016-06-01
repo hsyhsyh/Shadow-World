@@ -649,10 +649,14 @@ public class GameStage extends PApplet{
 		for(Monster monster:monsters) {
 			monster.vanish();
 		}
+		for(Ladder ladder : ladders){
+			ladder.vanish();
+		}
 		floors.clear();
 		doors.clear();
 		monsters.clear();
 		items.clear();
+		ladders.clear();
 	}
 
 	public Character getCharacter() {

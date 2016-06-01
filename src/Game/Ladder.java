@@ -32,4 +32,9 @@ public class Ladder {
 	{
 		return image;
 	}
+	
+	public void vanish(){
+		this.x=10000;
+		this.y=10000;
+	}
 }

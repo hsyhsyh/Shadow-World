@@ -1,8 +1,6 @@
 package Game;
 import javax.swing.JFrame;
 
-import processing.core.PApplet;
-
 @SuppressWarnings("serial")
 public class Main extends JFrame{
 	

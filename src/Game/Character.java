@@ -17,6 +17,7 @@ public class Character extends AbstractCharacter implements Runnable{
 	public Character(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs){
         Ani.init(parent);
 		floors = new ArrayList<Floor>();
+		ladders = new ArrayList<Ladder>();
 		this.gs = gs;
 		Thread ch = new Thread(this);
 		ch.start();
@@ -43,7 +44,7 @@ public class Character extends AbstractCharacter implements Runnable{
     		}
     	}
     	for(Floor floor : floors){
-    		if( floor.IsCeiling(this)&&velocityForDirectionY>0 ) 
+    		if( floor.IsCeiling(this)&&velocityForDirectionY>0 && !isOnLadder) 
     		{
     			velocityForDirectionY = 0;
     		}
@@ -146,8 +147,10 @@ public class Character extends AbstractCharacter implements Runnable{
 					this.canAttack=true;
 				}
 				if(this.isOnLadder){
-					chaImage = gs.getImage(gs.man_c1);
-					chaImage = gs.getImage(gs.man_c2);
+					if(i%80 == 0)
+						chaImage = gs.getImage(gs.man_c1);
+					if(i%80 == 40)
+						chaImage = gs.getImage(gs.man_c2);
 				}
 				else if(this.isAttack){
 					if(this.canAttack){
@@ -223,6 +226,16 @@ public class Character extends AbstractCharacter implements Runnable{
 	public void deleteFloor()
 	{
 		floors.clear();
+	}
+	
+	public void addLadder(ArrayList<Ladder> ladders)
+	{
+		this.ladders = ladders;
+	}
+	
+	public void deleteLadder()
+	{
+		ladders.clear();
 	}
 	
 

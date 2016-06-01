@@ -14,6 +14,7 @@ public abstract class AbstractCharacter {
 	protected float velocityForDirectionY=0;
 	protected float gravity=5;
 	protected ArrayList<Floor> floors;
+	protected ArrayList<Ladder> ladders;
 	public boolean isWalk=false;
 	public boolean isGround=false;
 	public boolean isAttack=false;

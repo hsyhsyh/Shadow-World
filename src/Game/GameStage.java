@@ -301,7 +301,7 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(950,0,50, 500));
 			floors.add(new Floor(750,305,250, 15));
 			floors.add(new Floor(50,200,200, 15));
-			floors.add(new Floor(400,250,100, 15));//maybe can move
+			floors.add(new Floor(400,250,100, 15,300,550));//maybe can move(add left and right bound in the end)
 			doors.add(new Door( 50, 320, door2, 2, 860, 60));
 			doors.add(new Door( 850, 320, door1, 5, 50, 320));
 			monsters.add(new Monster(this,monster,"none",200,220,100,this,150,250));

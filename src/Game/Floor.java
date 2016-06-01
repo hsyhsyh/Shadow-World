@@ -1,14 +1,31 @@
 package Game;
 
-public class Floor {
+public class Floor implements Runnable{
 	
-	private int x,y,width,height;
+	private int x,y,width,height,leftBound, rightBound;
+	String direction = "right";
 	
+	//不可移動
 	public Floor(int x, int y,int width,int height){
+		
 		this.x=x;
 		this.y=y;
 		this.height=height;
 		this.width=width;
+
+	}
+	
+	//可移動
+    public Floor(int x, int y,int width,int height,int leftBound,int rightBound){
+		
+		Thread fr = new Thread(this);
+		fr.start();
+		this.x=x;
+		this.y=y;
+		this.height=height;
+		this.width=width;
+		this.leftBound=leftBound;
+		this.rightBound=rightBound;
 
 	}
 	
@@ -68,6 +85,28 @@ public class Floor {
 		}
 		else
 			return false;
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		while(true){
+			try {
+				if(this.x>=this.rightBound)
+					this.direction = "left";
+				if(this.x<=this.leftBound)
+					this.direction = "right";
+				if(this.direction == "right")
+				    this.x++;
+				else
+					this.x--;
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 	}
 
 }

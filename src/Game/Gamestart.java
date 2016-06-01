@@ -13,32 +13,31 @@ public class Gamestart extends PApplet implements KeyListener{
 	private final static int width = 1000, height = 500;
 	private boolean laidOut = false;
 	private PImage startbg;
-	Button start, stop, achievement;
+	Button start, stop, achievement, statis;
 	public void setup() {
-		//this.startbg = loadImage("startbg.png");
+		this.startbg = loadImage("startbg.png");
 		size(width, height);
 		smooth();
 		this.start = new Button("Start");
 		this.stop = new Button("Exit");
 		this.achievement = new Button("achievement");
+		this.statis = new Button("statis");
 		this.add(start);
 		this.add(stop);
 		this.add(achievement);
-		this.stop();
-	}
-	public void paint(Graphics g) {
-		if (!this.laidOut) {
-			this.background(255);
+		this.add(statis);
+		}
+	public void draw() {
 	    	this.setLayout(null);
-	    	//image(this.startbg, 80, 320);
-	    	this.start.setLocation(500,200);
+	    	image(this.startbg, -300, -300);
+	    	this.start.setLocation(500,100);
 	    	this.start.setSize(100, 40);
 	 		this.stop.setLocation(500, 400);
 	 		this.stop.setSize(100, 40);
-	 		this.achievement.setLocation(500, 300);
+	 		this.achievement.setLocation(500, 200);
 	 		this.achievement.setSize(100, 40);
-	        this.laidOut = true;
-	     }
+	 		this.statis.setSize(100,40);
+	 		this.statis.setLocation(500, 300);
 	   }
 		
 }

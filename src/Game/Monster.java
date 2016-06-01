@@ -78,6 +78,17 @@ public class Monster extends AbstractCharacter implements Runnable{
 			}
 	}
 	
+	public void CharacterBeAttacked(Character ch) {
+		if(ch.isMonsterTouch == false)
+			if(ch.x<this.x+this.chaImage.width && ch.x+ch.chaImage.width>this.x && ch.y<this.y+this.chaImage.height && ch.y+ch.chaImage.height>this.y){
+				gs.hurt();
+				ch.now_HP -=5;
+				if(ch.now_HP < 0)
+					ch.now_HP = 0;
+				ch.isMonsterTouch = true;
+			}
+   }
+	
 	public boolean isDead() {
 		
 		if(this.now_HP<=0)
@@ -91,7 +102,7 @@ public class Monster extends AbstractCharacter implements Runnable{
 		this.y=10000;
 	}
 	
-	int i = 0;
+	int i = 0,j = 0;
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -99,6 +110,7 @@ public class Monster extends AbstractCharacter implements Runnable{
 			try {
 				RandomMove();
 				beAttacked(gs.getCharacter());
+				CharacterBeAttacked(gs.getCharacter());
 				if(this.isDead())
 					vanish();
 				if(this.isboom == true) i ++;
@@ -106,6 +118,11 @@ public class Monster extends AbstractCharacter implements Runnable{
 					i = 0;
 					this.chaImage=gs.monster;
 					this.isboom = false;
+				}
+				if(gs.getCharacter().isMonsterTouch == true) j ++;
+				if(j == 80) {
+					j = 0;
+					gs.getCharacter().isMonsterTouch = false;
 				}
 				move();
 				Thread.sleep(5);

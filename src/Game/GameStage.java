@@ -110,7 +110,8 @@ public class GameStage extends PApplet{
 	        this.rect(80+mainCharacter.now_HP, 195, 100-mainCharacter.now_HP, 5);
 	        fill(0);
 	        stroke(0);
-	        this.rect(80, 195, mainCharacter.now_HP, 5);
+	        if(mainCharacter.now_HP > 0)
+	        	this.rect(80, 195, mainCharacter.now_HP, 5);
 	        this.textFont(createFont("Arial", 12), 20);
 	        this.text("HP", 80, 190);
         }
@@ -120,7 +121,8 @@ public class GameStage extends PApplet{
 	        this.rect(70+mainCharacter.now_HP, 85, 100-mainCharacter.now_HP, 5);
 	        fill(0);
 	        stroke(0);
-	        this.rect(70, 85, mainCharacter.now_HP, 5);
+	        if(mainCharacter.now_HP > 0)
+	        	this.rect(70, 85, mainCharacter.now_HP, 5);
 	        this.textFont(createFont("Arial", 12), 20);
 	        this.text("HP", 70, 80);
         }

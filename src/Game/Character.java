@@ -12,6 +12,7 @@ public class Character extends AbstractCharacter implements Runnable{
 	private Bullet bullets[]=new Bullet[20];
 	public int waitAttackTime=0;
 	private int bulletNumber=0;
+	public boolean isMonsterTouch = false;
 	
 	public Character(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs){
         Ani.init(parent);

@@ -14,26 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/Game/AbstractItem.java</name>
-			<type>1</type>
-			<location>C:/Users/ASUS/Desktop/software/Shadow-World/src/Game/AbstractItem.java</location>
-		</link>
-		<link>
-			<name>src/Game/Bed.java</name>
-			<type>1</type>
-			<location>C:/Users/ASUS/Desktop/software/Shadow-World/src/Game/Bed.java</location>
-		</link>
-		<link>
-			<name>src/Game/Box.java</name>
-			<type>1</type>
-			<location>C:/Users/ASUS/Desktop/software/Shadow-World/src/Game/Box.java</location>
-		</link>
-		<link>
-			<name>src/Game/Ladder.java</name>
-			<type>1</type>
-			<location>C:/Users/ASUS/Desktop/software/Shadow-World/src/Game/Ladder.java</location>
-		</link>
-	</linkedResources>
 </projectDescription>

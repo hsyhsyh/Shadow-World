@@ -32,7 +32,7 @@ public class GameStage extends PApplet{
 	public boolean isLoading = true;
 	private boolean is_transport;
 	private boolean is_hurt;
-	private boolean firststart,stage_3_door,stage_5_floor, stage_5_box;
+	public boolean firststart,stage_3_door,stage_5_floor, stage_5_box;
 	private int alpha;
 	public int goalX,goalY;
 	private PFont cnFont;
@@ -85,7 +85,7 @@ public class GameStage extends PApplet{
 		//bullets = new ArrayList<Bullet>();
 		dialog = new Dialog();
 		
-		stage_num = 7;
+		stage_num = 8;
 		
 		
 		isLoading = false;
@@ -327,6 +327,7 @@ public class GameStage extends PApplet{
 			doors.add(new Door( 50, 100, door2, 3, 800, 220));
 			doors.add(new Door( 50, 320, door2, 4, 850, 320));
 			doors.add(new Door( 850, 320, door2, 7, 120, 320));
+			doors.add(new Door( 850, 320, door2, 8, 120, 320));
 //			s = new String[1];
 			s = null;
 //			s[0] = "雖然失去了色彩，但還是看的出來這就是自己的位置。\n在枕頭和書桌的正中央各貼著一張紙條。";
@@ -358,16 +359,26 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(0, 0, 50, 500));
 			floors.add(new Floor(950,0,50, 500));
 			doors.add(new Door( 50, 320, door2, 5, 850, 320));
-			doors.add(new Door( 850, 320, door2, 0, 120, 320));
+			doors.add(new Door( 850, 320, door2, 8, 50, 150));
 			mainCharacter.addFloor(floors);
 			break;
 		case 8:
 //			mainCharacter.x = 120;
 //			mainCharacter.y = 320;
 			floors.add(new Floor(0, 0, 1000, 50));
-			floors.add(new Floor(0, 420, 1000, 80));
+			floors.add(new Floor(0, 420, 1000, 50));
 			floors.add(new Floor(0, 0, 50, 500));
 			floors.add(new Floor(950,0,50, 500));
+			floors.add(new Floor(50,250,100,20));
+			floors.add(new Floor(850,350,100,100));
+			floors.add(new Floor(700,150,300,20));
+			floors.add(new Floor(450,250,150,20));
+			ladders.add(new Ladder(85, 240, 2, ladder, this));
+			ladders.add(new Ladder(85, 330, 1, ladder, this));
+			ladders.add(new Ladder(85, 370, 1, ladder, this));
+			ladders.add(new Ladder(880, 130, 4, ladder, this));
+			doors.add(new Door( 50, 150, door2, 7, 850, 320));
+			items.add(new Book(books,500,150,this,null,null, null, true));
 			mainCharacter.addFloor(floors);
 			break;
 //		case 9:

@@ -33,6 +33,13 @@ public class Ladder {
 		return image;
 	}
 	
+	public boolean isLadder(AbstractCharacter ch){
+		if(ch.x<this.x+this.image.width && ch.x+ch.chaImage.width>this.x && ch.y<this.y+this.image.height && ch.y+ch.chaImage.height>this.y)
+			return true;
+		else 
+			return false;
+	}
+	
 	public void vanish(){
 		this.x=10000;
 		this.y=10000;

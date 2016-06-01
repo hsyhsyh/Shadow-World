@@ -8,11 +8,11 @@ import processing.core.PImage;
 
 public class Character extends AbstractCharacter implements Runnable{
 	
-	//private ArrayList<Bullet> bullets;
 	private Bullet bullets[]=new Bullet[20];
 	public int waitAttackTime=0;
 	private int bulletNumber=0;
 	public boolean isMonsterTouch = false;
+	public boolean isOnLadder = false;
 	
 	public Character(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs){
         Ani.init(parent);
@@ -52,7 +52,7 @@ public class Character extends AbstractCharacter implements Runnable{
     			velocityForDirectionY=0;
     		}
     	}
-       if(!isGround && velocityForDirectionY>=-15)
+       if(!isGround && !isOnLadder && velocityForDirectionY>=-15)
     	   velocityForDirectionY-=gravity/20;
     		
     	//because the coordinate y become small when "move up", if velocityForDirectionY>0, y-velocityForDirectionY is "move up"
@@ -145,7 +145,11 @@ public class Character extends AbstractCharacter implements Runnable{
 				if(waitAttackTime==0){
 					this.canAttack=true;
 				}
-				if(this.isAttack){
+				if(this.isOnLadder){
+					chaImage = gs.getImage(gs.man_c1);
+					chaImage = gs.getImage(gs.man_c2);
+				}
+				else if(this.isAttack){
 					if(this.canAttack){
 						this.attack();
 						this.waitAttackTime=100;
@@ -220,7 +224,7 @@ public class Character extends AbstractCharacter implements Runnable{
 	{
 		floors.clear();
 	}
-
+	
 
 
 }

@@ -16,7 +16,7 @@ public class GameStage extends PApplet{
 	private final static int width = 1000, height = 500;
 	
 	public PImage man, bullet, books, book, bloodletter, diamand, phone, skull, monster, monster2, strike, box, bed, ladder, door1, door2, man1, man2, man3, man4
-	              , man5, man6, man7, man8;
+	              , man5, man6, man7, man8, man_c1, man_c2;
 	public PImage[] man_a = new PImage[10];
 	private Character mainCharacter; 
 	private ArrayList<Monster> monsters;
@@ -62,6 +62,8 @@ public class GameStage extends PApplet{
 		this.man6 = loadImage("man_run6.png");
 		this.man7 = loadImage("man_run7.png");
 		this.man8 = loadImage("man_run8.png");
+		this.man_c1 = loadImage("man_climb1.png");
+		this.man_c2 = loadImage("man_climb2.png");
 		int i;
 		for(i = 1; i <= 8; i++){
 			this.man_a[i] = loadImage("man_gun"+Integer.toString(i)+".png");
@@ -275,9 +277,9 @@ public class GameStage extends PApplet{
 			doors.add(new Door( 50, 330, door2, 1, 860, 320));
 			doors.add(new Door( 860, 330, door2, 3, 50, 220));
 			doors.add(new Door( 860, 60, door2, 4, 50 ,320));
-			monsters.add(new Monster(this,monster,"none",400,300,100,this,350,450));
-			monsters.add(new Monster(this,monster,"none",430,300,100,this,350,450));
-			monsters.add(new Monster(this,monster,"none",480,210,100,this,460,520));
+			monsters.add(new Monster(this,monster,"none",400,300,100,this,300,460));
+			monsters.add(new Monster(this,monster,"none",430,300,100,this,300,460));
+			monsters.add(new Monster(this,monster,"none",480,210,100,this,460,700));
 			mainCharacter.addFloor(floors);
 			break;
 		case 3:
@@ -395,12 +397,20 @@ public class GameStage extends PApplet{
 		switch(keyCode)
 		{
 		case KeyEvent.VK_LEFT:
+			if(mainCharacter.isOnLadder){
+				mainCharacter.isOnLadder=false;
+				mainCharacter.y-=20;
+			}
 			mainCharacter.direction = "left";
 			mainCharacter.bulletDirection="left";
 			mainCharacter.move("left");
 			mainCharacter.isWalk = true;
 			break;
 		case KeyEvent.VK_RIGHT:
+			if(mainCharacter.isOnLadder){
+				mainCharacter.isOnLadder=false;
+				mainCharacter.y-=20;
+			}
 			mainCharacter.direction = "right";
 			mainCharacter.bulletDirection="right";
 			mainCharacter.move("right");
@@ -425,6 +435,13 @@ public class GameStage extends PApplet{
 					goalY = d.goalY - 3;
 //					isnotdone = false;
 					break;
+				}
+			}
+			for(Ladder ladder : ladders)
+			{
+				if(ladder.isLadder(mainCharacter)){
+					mainCharacter.isOnLadder=true;
+					mainCharacter.velocityForDirectionY=5;
 				}
 			}
 			break;
@@ -458,6 +475,10 @@ public class GameStage extends PApplet{
 			break;
 		case KeyEvent.VK_Z://find
 			//attack
+			if(mainCharacter.isOnLadder){
+				mainCharacter.isOnLadder=false;
+				mainCharacter.y-=20;
+			}
 			mainCharacter.isAttack = true;
 			break;
 			

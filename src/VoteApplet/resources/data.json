@@ -1,0 +1,147 @@
+{
+  "nodes": [
+    {
+      "name": "QUI-GON",
+      "value": 60,
+      "colour": "#FF4f4fb1",
+      "pic0": "src/VoteApplet/resources/1_0.png",
+      "v0": 1,
+      "v1": 2,
+      "v2": 3,
+      "v3": 4,
+      "v4": 5,
+      "total":15,
+      "subject":"Computer Architecture"
+    },
+    {
+      "name": "OBI-WAN",
+      "value": 33,
+      "colour": "#FF48D1CC",
+      "pic0": "src/VoteApplet/resources/2_0.png",
+      "v0": 1,
+      "v1": 2,
+      "v2": 3,
+      "v3": 4,
+      "v4": 5,
+      "total":15,
+      "subject":"Software Studio"
+    },
+    {
+      "name": "EMPEROR",
+      "value": 13,
+      "colour": "#FF191970",
+      "pic0": "src/VoteApplet/resources/3_0.png",
+      "v0": 1,
+      "v1": 2,
+      "v2": 3,
+      "v3": 4,
+      "v4": 5,
+      "total":15,
+      "subject":"Discrete Mathematics"
+    },
+    {
+      "name": "PADME",
+      "value": 30,
+      "colour": "#FFDDA0DD",
+      "pic0": "src/VoteApplet/resources/4_0.png",
+      "v0": 1,
+      "v1": 2,
+      "v2": 3,
+      "v3": 4,
+      "v4": 5,
+      "total":15,
+      "subject":"Fundamentals of English"
+    },
+    {
+      "name": "ANAKIN",
+      "value": 40,
+      "colour": "#FFce3b59",
+      "pic0": "src/VoteApplet/resources/5_0.png",
+      "v0": 1,
+      "v1": 2,
+      "v2": 3,
+      "v3": 4,
+      "v4": 5,
+      "total":15,
+      "subject":"Geometric Construction"
+    },
+    {
+      "name": "C-3PO",
+      "value": 5,
+      "colour": "#FFFFD700",
+      "pic0": "src/VoteApplet/resources/6_0.png",
+      "v0": 1,
+      "v1": 2,
+      "v2": 3,
+      "v3": 4,
+      "v4": 5,
+      "total":15,
+      "subject":"Linear Algebra"
+    },
+    {
+      "name": "YODA",
+      "value": 6,
+      "colour": "#FF9ACD32",
+      "pic0": "src/VoteApplet/resources/7_0.png",
+      "v0": 1,
+      "v1": 2,
+      "v2": 3,
+      "v3": 4,
+      "v4": 5,
+      "total":15,
+      "subject":"Statistics"
+    }
+  ],
+  "links": [
+    {
+      "source": 0,
+      "target": 6,
+      "value": 2
+    },
+    {
+      "source": 4,
+      "target": 6,
+      "value": 3
+    },
+    {
+      "source": 5,
+      "target": 3,
+      "value": 2
+    },
+    {
+      "source": 5,
+      "target": 0,
+      "value": 1
+    },
+    {
+      "source": 3,
+      "target": 0,
+      "value": 16
+    },
+    {
+      "source": 2,
+      "target": 0,
+      "value": 1
+    },
+    {
+      "source": 2,
+      "target": 3,
+      "value": 1
+    },
+    {
+      "source": 1,
+      "target": 0,
+      "value": 26
+    },
+    {
+      "source": 1,
+      "target": 6,
+      "value": 3
+    },
+    {
+      "source": 1,
+      "target": 3,
+      "value": 1
+    }
+  ]
+}

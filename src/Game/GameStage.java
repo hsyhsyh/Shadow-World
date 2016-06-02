@@ -16,7 +16,7 @@ public class GameStage extends PApplet{
 	private final static int width = 1000, height = 500;
 	
 	public PImage man, bullet, books, book, bloodletter, diamand, phone, skull, monster, monster2, strike, box, bed, ladder, door1, door2, man1, man2, man3, man4
-	              , man5, man6, man7, man8, man_c1, man_c2;
+	              , man5, man6, man7, man8, man_c1, man_c2, fireBall1, fireBall2;
 	public PImage[] man_a = new PImage[10];
 	private Character mainCharacter; 
 	private ArrayList<Monster> monsters;
@@ -76,6 +76,8 @@ public class GameStage extends PApplet{
 		this.ladder = loadImage("lader.png");
 		this.door1 = loadImage("closedoor.png");
 		this.door2 = loadImage("opendoor.png");
+		this.fireBall1 = loadImage("fireball.png");
+		this.fireBall2 = loadImage("fireball2.png");
 		mainCharacter = new Character(this,man,"none",0,0,100,this);
 		monsters = new ArrayList<Monster>();
 		floors = new ArrayList<Floor>();
@@ -85,7 +87,7 @@ public class GameStage extends PApplet{
 		//bullets = new ArrayList<Bullet>();
 		dialog = new Dialog();
 		
-		stage_num = 8;
+		stage_num = 3;
 		
 		
 		isLoading = false;
@@ -169,6 +171,11 @@ public class GameStage extends PApplet{
         
         image(this.mainCharacter.getImage(), mainCharacter.x, mainCharacter.y);
         for(Bullet bullet: mainCharacter.getBullet()){
+        	image(bullet.getImage(),bullet.x,bullet.y);
+        	}
+        
+        for(Monster monster: monsters)
+        	for(Bullet bullet: monster.getBullet()){
         	image(bullet.getImage(),bullet.x,bullet.y);
         	}
    
@@ -279,8 +286,8 @@ public class GameStage extends PApplet{
 			doors.add(new Door( 50, 330, door2, 1, 860, 320));
 			doors.add(new Door( 860, 330, door2, 3, 50, 220));
 			doors.add(new Door( 860, 60, door2, 4, 50 ,320));
-			monsters.add(new Monster(this,monster,"none",400,300,100,this,300,460));
-			monsters.add(new Monster(this,monster,"none",430,300,100,this,300,460));
+			monsters.add(new Monster(this,monster,"none",400,300,100,this,200,460));
+			monsters.add(new Monster(this,monster,"none",430,300,100,this,200,460));
 			monsters.add(new Monster(this,monster,"none",480,210,100,this,460,700));
 			mainCharacter.addFloor(floors);
 			break;

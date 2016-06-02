@@ -58,9 +58,10 @@ public class VoteCharacter {
 		this.votevalue[2]=v2;
 		this.votevalue[3]=v3;
 		this.votevalue[4]=v4;
-		showinf_b=new boolean[2];
+		showinf_b=new boolean[3];
 		this.showinf_b[0]=false;
-		this.showinf_b[1]=false;
+		this.showinf_b[1]=true;
+		this.showinf_b[2]=true;
 		
 		/*cp5=new ControlP5(this.parent);
 		cp5.addRadioButton("checkBox").setPosition(this.x+pic_width,this.y) 
@@ -109,7 +110,7 @@ public class VoteCharacter {
 				this.parent.rect(x+pic_width, y+pic_width+10, bar_width, 40, 12, 12, 12, 12);
 			}
 			this.parent.fill(0);
-			this.parent.text("Click To Vote",x+pic_width+20,(int)(y+pic_width+40));
+			this.parent.text("Click To Vote",x+pic_width+10,(int)(y+pic_width+40));
 		}else{
 			
 			if(showinf_b[0]){
@@ -180,96 +181,42 @@ public class VoteCharacter {
 		}
 	}
 	
-	public void display_inf(){
-		//this.parent.noStroke();
-		this.parent.fill(2, 247, 141);
-		this.parent.rect(x-subject.length()*10+bar_width/2, y-50, subject.length()*15, 40, 12, 12, 12, 12);
-		
-		this.parent.textSize(26);
-		this.parent.fill(255);
-		this.parent.text(subject, x-subject.length()*10+10+bar_width/2, y-20);
-		this.parent.textSize(20);
-		
-		if(pic[0]!= null){
-		int largest=0;
-		for(int i:votevalue){
-			if(i>largest){
-				largest=i;
-			}
-		}
-		this.parent.image(pic[0], this.x, this.y, pic_width, pic_width);
-		this.parent.fill(250,250,250);
-		this.parent.rect(x+pic_width,y,bar_width+10,bar_height);
-		this.parent.rect(x+pic_width,y+bar_height*1,bar_width+10,bar_height);
-		this.parent.rect(x+pic_width,y+bar_height*2,bar_width+10,bar_height);
-		this.parent.rect(x+pic_width,y+bar_height*3,bar_width+10,bar_height);
-		this.parent.rect(x+pic_width,y+bar_height*4,bar_width+10,bar_height);
-		this.parent.rect(x, y+pic_width,pic_width,bar_height);
-		//==================
-		if(total !=0){
-			
-		if(option_b[0][0]){
-			this.parent.fill(0,250,0);
-		}else{
-			this.parent.fill(250,250,0);
-		}
-		this.parent.rect(x+pic_width, y,(int)(bar_width*((double)votevalue[0]/(double)largest)), bar_height);
-		this.parent.fill(0);
-		this.parent.text("Excellent",x+(int)(bar_width)+5,y+(int)(bar_height*0.5)+5);
-		
-		if(option_b[0][1]){
-			this.parent.fill(0,250,0);
-		}else{
-			this.parent.fill(250,250,0);
-		}
-		this.parent.rect(x+pic_width, y+bar_height, (int)(bar_width*((double)votevalue[1]/(double)largest)), bar_height);
-		this.parent.fill(0);
-		this.parent.text("Good",x+(int)(bar_width)+5,y+(int)(bar_height*1.5)+5);
-		
-		if(option_b[0][2]){
-			this.parent.fill(0,250,0);
-		}else{
-			this.parent.fill(250,250,0);
-		}
-		this.parent.rect(x+pic_width, y+bar_height*2,(int)(bar_width*((double)votevalue[2]/(double)largest)) , bar_height);
-		this.parent.fill(0);
-		this.parent.text("Normal",x+(int)(bar_width)+5,y+(int)(bar_height*2.5)+5);
-	
-		if(option_b[0][3]){
-			this.parent.fill(0,250,0);
-		}else{
-			this.parent.fill(250,250,0);
-		}
-		this.parent.rect(x+pic_width, y+bar_height*3, (int)(bar_width*((double)votevalue[3]/(double)largest)), bar_height);
-		this.parent.fill(0);
-		this.parent.text("Bad",x+(int)(bar_width)+5,y+(int)(bar_height*3.5)+5);
-		
-		if(option_b[0][4]){
-			this.parent.fill(0,250,0);
-		}else{
-			this.parent.fill(250,250,0);
-		}
-		this.parent.rect(x+pic_width, y+bar_height*4,(int)(bar_width*((double)votevalue[4]/(double)largest)) , bar_height);
-		this.parent.fill(0);
-		this.parent.text("VeryBad",x+(int)(bar_width)+5,y+(int)(bar_height*4.5)+5);
-		}
-		}
-		
-		if(all_total!=0){
-			this.parent.rect(x,y+pic_width,(int)(pic_width*(double)total/(double)all_total),bar_height);
-		}
-	}
 	
 	public void display_server(){
 		//this.parent.noStroke();
 		this.parent.fill(2, 247, 141);
-		this.parent.rect(x-subject.length()*6+bar_width/2, y-50, subject.length()*15, 40, 12, 12, 12, 12);
+		this.parent.rect(x-subject.length()*6+bar_width/2+10, y-50, subject.length()*15, 40, 12, 12, 12, 12);
+		this.parent.fill(0,255,255);
+		this.parent.rect(x-name.length()*5+pic_width/4, y+pic_width+10, name.length()*20, 40, 12, 12, 12, 12);
 		
 		this.parent.textSize(26);
 		this.parent.fill(255);
-		this.parent.text(subject, x-subject.length()*6+10+bar_width/2, y-20);
+		this.parent.text(subject, x-subject.length()*6+10+bar_width/2+10, y-20);
+		this.parent.text(name, x-name.length()*5+10+pic_width/4,(int)(y+pic_width+40));
 		this.parent.textSize(20);
+		this.parent.image(pic[0], this.x, this.y, pic_width, pic_width);
 		
+		if(showinf_b[1]){
+			if(showinf_b[0]){
+				this.parent.fill(0,255,0);
+				this.parent.rect(x+pic_width, y+pic_width+10, bar_width, 40, 12, 12, 12, 12);
+			}else{
+				this.parent.fill(0,128,255);
+				this.parent.rect(x+pic_width, y+pic_width+10, bar_width, 40, 12, 12, 12, 12);
+			}
+			this.parent.fill(0);
+			this.parent.text("Click To Vote",x+pic_width+10,(int)(y+pic_width+40));
+		}else{
+			if(showinf_b[0]){
+				this.parent.fill(0,255,0);
+				this.parent.rect(x+pic_width, y+pic_width+10, bar_width, 40, 12, 12, 12, 12);
+			}else{
+				this.parent.fill(255,128,0);
+				this.parent.rect(x+pic_width, y+pic_width+10, bar_width, 40, 12, 12, 12, 12);
+			}
+			this.parent.fill(0);
+			this.parent.text("Click To Inf",x+pic_width+20,(int)(y+pic_width+40));
+			
 		if(pic[0]!= null){
 		int largest=0;
 		for(int i:votevalue){
@@ -277,14 +224,13 @@ public class VoteCharacter {
 				largest=i;
 			}
 		}
-		this.parent.image(pic[0], this.x, this.y, pic_width, pic_width);
 		this.parent.fill(250,250,250);
 		this.parent.rect(x+pic_width,y,bar_width+10,bar_height);
 		this.parent.rect(x+pic_width,y+bar_height*1,bar_width+10,bar_height);
 		this.parent.rect(x+pic_width,y+bar_height*2,bar_width+10,bar_height);
 		this.parent.rect(x+pic_width,y+bar_height*3,bar_width+10,bar_height);
 		this.parent.rect(x+pic_width,y+bar_height*4,bar_width+10,bar_height);
-		this.parent.rect(x, y+pic_width,pic_width,bar_height);
+		this.parent.rect(x, y+pic_width+55,pic_width*2,bar_height);
 		//==================
 		if(total !=0){
 			
@@ -336,19 +282,19 @@ public class VoteCharacter {
 		}
 		
 		if(all_total!=0){
-			this.parent.rect(x,y+pic_width,(int)(pic_width*(double)total/(double)all_total),bar_height);
+			this.parent.rect(x,y+pic_width+55,(int)(pic_width*2*(double)total/(double)all_total),bar_height);
+		}
 		}
 	}	
 	public void boxClick(float mx,float my){
-		
+		boolean[] temp=new boolean[2];
+		temp[0]=showinf_b[1];
+		temp[1]=showinf_b[2];
 		if(this.x+pic_width<=mx && mx <=x+pic_width+bar_width){
 			if(this.y+pic_width+10<=my && my<=this.y+pic_width+50){
-				/*if(showinf_b[1]){
-					showinf_b[1]=false;
-				}else{
-					showinf_b[1]=true;
-				}*/
-				showinf_b[1]= !showinf_b[1];
+				showinf_b[2]=temp[0];
+				showinf_b[1]=!temp[1];
+				System.out.println("btn_click_"+showinf_b[1]);
 			}
 		}
 		

@@ -34,7 +34,7 @@ public class Ladder {
 	}
 	
 	public boolean isLadder(AbstractCharacter ch){
-		if(ch.x<this.x+this.image.width && ch.x+ch.chaImage.width>this.x && ch.y<this.y+this.image.height && ch.y+ch.chaImage.height>this.y)
+		if(ch.x<this.x+this.width && ch.x+ch.chaImage.width>this.x && ch.y<this.y+this.height && ch.y+ch.chaImage.height>this.y)
 			return true;
 		else 
 			return false;

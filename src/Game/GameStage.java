@@ -209,9 +209,10 @@ public class GameStage extends PApplet{
 	}
 	
 	private void loadData(){
-		mainCharacter.deleteFloor();
+		
 		clearplace();
 		mainCharacter.deleteFloor();
+		mainCharacter.deleteLadder();
 		System.out.println(stage_num);
 		String[] s;
 		switch(stage_num)
@@ -248,6 +249,7 @@ public class GameStage extends PApplet{
 			s[1] = "左右方向鍵行走，上方向鍵可以開門以及爬梯子，下方向鍵可以蹲下\n以及下梯子，A鍵可以調查事物，Z鍵可以發射子彈。";
 			items.add(new Bed(bed, 60, 110, this ,s, null));
 			mainCharacter.addFloor(floors);
+			mainCharacter.addLadder(ladders);
 //			if(firststart)
 //			{
 //				String[] start = new String[6];
@@ -350,6 +352,7 @@ public class GameStage extends PApplet{
 			doors.add(new Door( 850, 100, door2, 5, 450, 282));
 			ladders.add(new Ladder(750, 196, 4, ladder, this));
 			mainCharacter.addFloor(floors);
+			mainCharacter.addLadder(ladders);
 			break;
 		case 7:
 //			mainCharacter.x = 120;
@@ -380,6 +383,7 @@ public class GameStage extends PApplet{
 			doors.add(new Door( 50, 150, door2, 7, 850, 320));
 			items.add(new Book(books,500,150,this,null,null, null, true));
 			mainCharacter.addFloor(floors);
+			mainCharacter.addLadder(ladders);
 			break;
 //		case 9:
 //			mainCharacter.x = 120;

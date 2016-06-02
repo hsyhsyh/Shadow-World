@@ -136,6 +136,17 @@ public class Character extends AbstractCharacter implements Runnable{
 					if(moving==1)
 						move();
 				}
+				
+				if(isOnLadder){
+					isOnLadder=false;
+					for(Ladder ladder : ladders){
+						if(ladder.isLadder(this))
+						{
+							isOnLadder=true;
+							break;
+						}
+					}
+				}
 				fallDown();
 				for(Bullet bullet: bullets){
 					bullet.move();

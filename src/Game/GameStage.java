@@ -269,18 +269,18 @@ public class GameStage extends PApplet{
 			items.add(new Bed(bed, 60, 110, this ,s, null));
 			mainCharacter.addFloor(floors);
 			mainCharacter.addLadder(ladders);
-//			if(firststart)
-//			{
-//				String[] start = new String[6];
-//				start[0] = "煩耶！誰一直吵我睡覺啦！\n......紙條？";
-//				start[1] = "左右方向鍵行走，上方向鍵可以開門以及爬梯子，下方向鍵可以蹲下\n以及下梯子，A鍵可以調查事物，Z鍵可以發射子彈。";
-//				start[2] = "什麼鬼東西啊？扔掉算了！\n......嗯？";
-//				start[3] = "這裡是......宿舍？為什麼都是黑白的？\n到底......發生什麼事了？";
-//				start[4] = "呃？在我枕頭底下這個難道是......槍？\n為什麼我會有這種東西？";
-//				start[5] = "......\n不管了，先到處看看再說。";
-//				opendialog(start);
-//				firststart = false;
-//			}
+			if(firststart)
+			{
+				String[] start = new String[6];
+				start[0] = "煩耶！誰一直吵我睡覺啦！\n......紙條？";
+				start[1] = "左右方向鍵行走，上方向鍵可以開門以及爬梯子，下方向鍵可以蹲下\n以及下梯子，A鍵可以調查事物，Z鍵可以發射子彈。";
+				start[2] = "什麼鬼東西啊？扔掉算了！\n......嗯？";
+				start[3] = "這裡是......宿舍？為什麼都是黑白的？\n到底......發生什麼事了？";
+				start[4] = "呃？在我枕頭底下這個難道是......槍？\n為什麼我會有這種東西？";
+				start[5] = "......\n不管了，先到處看看再說。";
+				opendialog(start);
+				firststart = false;
+			}
 			break;
 		case 2:
 			floors.add(new Floor(0, 0, 1000, 40));

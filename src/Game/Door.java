@@ -8,13 +8,15 @@ public class Door {
 	private PImage image;
 	private boolean isOpen;
 	private int goal;
-	public Door(int x, int y, PImage image, int goal, int goalX, int goalY){
+	private boolean isopen;
+	public Door(int x, int y, PImage image, int goal, int goalX, int goalY, boolean open){
 		this.x=x;
 		this.y=y;
 		this.image=image;
 		this.goal = goal;
 		this.goalX = goalX;
 		this.goalY = goalY;
+		isopen = open;
 	}
 	
 	public int getgoal()
@@ -26,4 +28,8 @@ public class Door {
     	return this.image;
     }
 
+    public boolean isopen()
+    {
+    	return isopen;
+    }
 }

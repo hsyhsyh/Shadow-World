@@ -33,7 +33,7 @@ public class GameStage extends PApplet{
 	public boolean isLoading = true;
 	private boolean is_transport;
 	private boolean is_hurt;
-	public boolean firststart,stage_3_door,stage_5_floor, stage_5_box;
+	public boolean firststart,stage_2_door,stage_3_door,stage_5_floor, stage_5_box;
 	private int alpha;
 	public int goalX,goalY;
 	private PFont cnFont;
@@ -92,15 +92,13 @@ public class GameStage extends PApplet{
 		//bullets = new ArrayList<Bullet>();
 		dialog = new Dialog();
 		
-		stage_num = 1;
+		stage_num = 4;
 		
 		
-		isLoading = false;
+		isLoading  = false;
 		hasdialog = false;
 		is_transport = false;
-		stage_3_door = false;
-		stage_5_floor = false;
-		stage_5_box = false;
+		stage_2_door = stage_3_door = stage_5_floor = stage_5_box = false;
 		firststart = true;
 		loadData();
 		
@@ -235,7 +233,7 @@ public class GameStage extends PApplet{
 		mainCharacter.deleteFloor();
 		mainCharacter.deleteLadder();
 		System.out.println(stage_num);
-		String[] s;
+		String[] s,t,u;
 		switch(stage_num)
 		{
 		case 0://test stage
@@ -250,8 +248,8 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(420,340,100, 20));
 			floors.add(new Floor(540,300,100, 20));
 			floors.add(new Floor(660,360,100, 20));
-			doors.add(new Door( 80, 300, door2, 0, 120, 320));
-			doors.add(new Door( 300, 100, door2, 0, 120, 320));
+			doors.add(new Door( 80, 300, door2, 0, 120, 320,true));
+			doors.add(new Door( 300, 100, door2, 0, 120, 320,true));
 			mainCharacter.addFloor(floors);
 			break;
 		case 1:
@@ -262,7 +260,7 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(0, 0, 50, 500));
 			floors.add(new Floor(950,0,50, 500));
 			floors.add(new Floor(75,180,270, 10));
-			doors.add(new Door( 860, 320, door2, 2, 50, 330));
+			doors.add(new Door( 860, 320, door2, 2, 50, 330,true));
 			ladders.add(new Ladder(280, 160, 4, ladder, this));
 			ladders.add(new Ladder(280, 365, 1, ladder, this));
 			s = new String[2];
@@ -292,9 +290,16 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(0,225,450, 15));
 			floors.add(new Floor(550,315,450, 15));
 			floors.add(new Floor(550,160,450, 15));
-			doors.add(new Door( 50, 330, door2, 1, 860, 320));
-			doors.add(new Door( 860, 330, door2, 3, 50, 220));
-			doors.add(new Door( 860, 60, door2, 4, 50 ,320));
+			doors.add(new Door( 50, 330, door2, 1, 860, 320,true));
+			doors.add(new Door( 860, 330, door2, 3, 50, 220,true));
+			if(stage_2_door)
+			{
+				doors.add(new Door( 860, 60, door2, 4, 50 ,320,true));
+			}
+			else
+			{
+				doors.add(new Door( 860, 60, door1, 4, 50 ,320,false));
+			}
 
 			monsters.add(new Monster(this,monster,"none",400,300,100,this,200,460));
 			monsters.add(new Monster(this,monster,"none",430,300,100,this,200,460));
@@ -302,29 +307,25 @@ public class GameStage extends PApplet{
 			mainCharacter.addFloor(floors);
 			break;
 		case 3:
-//			mainCharacter.x = 120;
-//			mainCharacter.y = 220;
 			floors.add(new Floor(0, 0, 1000, 150));
 			floors.add(new Floor(0, 320, 1000, 180));
 			floors.add(new Floor(0, 0, 50, 500));
 			floors.add(new Floor(950,0,50, 500));
-			doors.add(new Door( 50, 220, door2, 2, 860, 330));
-			doors.add(new Door( 800, 220, door1, 5, 50, 100));
-//			s = new String[4];
-//			s[0] = "喂！你還好嗎？沒事吧？\n......你說什麼？太小聲我聽不清楚？";
-//			s[1] = "喂？......喂！\n「沒想到我最後一次跟我媽說話竟然是跟她吵架」？\n不要隨便替自己立flag啊！";
-//			s[2] = "喂！什麼叫「我把希望交給你了」，說的好像是你的遺言似的\n想點正面的東西對你的生命比較好不是嗎？";
-//			s[3] = "喂喂！\n......交給我這把鑰匙之後居然就真的死了\n嘖，這種被託付希望的感覺真不好受。";
-//			t = new String[2];
-//			t[0] = "雖然找不到任何傷口，卻一動也不動的冰冷遺體。";
-//			t[1] = "嘖......\n我會連你的份一起活下去的，你就好好安息吧。";
-//			items.add(new Deadman(dead_man,600,265,this,s,t));
+			doors.add(new Door( 50, 220, door2, 2, 860, 330,true));
+			doors.add(new Door( 800, 220, door1, 5, 50, 100,true));
+			s = new String[4];
+			s[0] = "喂！你還好嗎？沒事吧？\n......你說什麼？太小聲我聽不清楚？";
+			s[1] = "喂？......喂！\n「沒想到我最後一次跟我媽說話竟然是跟她吵架」？\n不要隨便替自己立flag啊！";
+			s[2] = "喂！什麼叫「我把希望交給你了」，說的好像是你的遺言似的\n想點正面的東西對你的生命比較好不是嗎？";
+			s[3] = "喂喂！\n......交給我這把鑰匙之後居然就真的死了\n嘖，這種被託付希望的感覺真不好受。";
+			t = new String[2];
+			t[0] = "雖然找不到任何傷口，卻一動也不動的冰冷遺體。";
+			t[1] = "嘖......\n我會連你的份一起活下去的，你就好好安息吧。";
+			items.add(new Deadman(dead_man,600,265,this,s,t));
 			monsters.add(new Monster(this,monster,"none",400,220,100,this,350,450));
 			mainCharacter.addFloor(floors);
 			break;
 		case 4:
-//			mainCharacter.x = 120;
-//			mainCharacter.y = 320;
 			floors.add(new Floor(0, 0, 1000, 50));
 			floors.add(new Floor(0, 420, 1000, 80));
 			floors.add(new Floor(0, 0, 50, 500));
@@ -332,35 +333,45 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(750,305,250, 15));
 			floors.add(new Floor(50,200,200, 15));
 			floors.add(new Floor(400,250,100, 15,300,550));//maybe can move(add left and right bound in the end)
-			doors.add(new Door( 50, 320, door2, 2, 860, 60));
-			doors.add(new Door( 850, 320, door1, 5, 50, 320));
+			doors.add(new Door( 50, 320, door2, 2, 860, 60,true));
+			doors.add(new Door( 850, 320, door1, 5, 50, 320,true));
 			monsters.add(new Monster(this,monster,"none",200,220,100,this,150,250));
 			monsters.add(new Monster(this,monster,"none",400,220,100,this,350,450));
-//			s = new String[1];
-			s = null;
-//			s[0] = "雖然失去了色彩，但還是看的出來這就是自己的位置。\n在枕頭和書桌的正中央各貼著一張紙條。";
-//			s[1] = "左右方向鍵行走，上方向鍵可以開門以及爬梯子，下方向鍵可以蹲下\n以及下梯子，A鍵可以調查事物，Z鍵可以發射子彈。";
-			items.add(new Box(box, 250, 282, this ,s, null, false));
+			s = new String[2];
+			s[0] = "宛如壁紙一般，側面看過去甚至看不見的箱子\n詭異的是，從正面伸手居然還摸的到木質般的實體";
+			s[1] = "這是什麼鬼箱子啊......\n碰都不想碰......";
+			items.add(new Box(box, 250, 282, this ,s, null, null, false));
+			t = new String[4];
+			t[0] = "牆壁上貼著一張便利貼，似乎才剛貼上去不久。\n上面以潦草的字跡寫了一段話。";
+			t[1] = "我是@%#，我家閃光正要去前面那個房間，說是在箱子中找到一扇門\n如果你有看到的話，就往前走吧";
+			t[2] = "對不起，跟你分開之後，我想了一想，我不應該為了開冷氣這種小事跟你吵架的，如果可以從這裡出去，我們還會是好室友，好閨蜜口";
+			t[3] = "嘖，最後一句話好像沒寫完，真令人在意......\n那個遮住名字的污漬也是......";
+			items.add(new Paper(bloodletter, 90, 140, this ,t, null));
 			mainCharacter.addFloor(floors);
 			break;
 		case 5:
-//			mainCharacter.x = 120;
-//			mainCharacter.y = 320;
 			floors.add(new Floor(0, 0, 1000, 50));
 			floors.add(new Floor(0, 420, 1000, 80));
 			floors.add(new Floor(0, 0, 50, 500));
 			floors.add(new Floor(950,0,50, 500));
 			floors.add(new Floor(50,200,250, 15));
 			floors.add(new Floor(750,305,250, 15));
-			doors.add(new Door( 50, 100, door2, 3, 800, 220));
-			doors.add(new Door( 50, 320, door2, 4, 850, 320));
-			doors.add(new Door( 850, 320, door2, 7, 120, 320));
-			doors.add(new Door( 850, 320, door2, 8, 120, 320));
-//			s = new String[1];
-			s = null;
-//			s[0] = "雖然失去了色彩，但還是看的出來這就是自己的位置。\n在枕頭和書桌的正中央各貼著一張紙條。";
-//			s[1] = "左右方向鍵行走，上方向鍵可以開門以及爬梯子，下方向鍵可以蹲下\n以及下梯子，A鍵可以調查事物，Z鍵可以發射子彈。";
-			items.add(new Box(box, 400, 282, this ,s, null, true));
+			doors.add(new Door( 50, 100, door2, 3, 800, 220,true));
+			doors.add(new Door( 50, 320, door2, 4, 850, 320,true));
+			doors.add(new Door( 850, 320, door2, 7, 120, 320,true));
+			doors.add(new Door( 850, 320, door2, 8, 120, 320,true));
+			s = new String[2];
+			s[0] = "宛如壁紙一般，側面看過去甚至看不見的箱子\n詭異的是，從正面伸手居然還摸的到木質般的實體";
+			s[1] = "這是什麼鬼箱子啊......\n碰都不想碰......";
+			t = new String[3];
+			t[0] = "";
+			t[1] = "";
+			t[2] = "";
+			u = new String[3];
+			u[0] = "";
+			u[1] = "";
+			u[2] = "";
+			items.add(new Box(box, 400, 282, this ,s,null, null, true));
 			if(stage_5_floor)
 			{
 				floors.add(new Floor(450,250,150, 15));
@@ -375,7 +386,7 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(0, 0, 50, 500));
 			floors.add(new Floor(950,0,50, 500));
 			floors.add(new Floor(750,200,250, 20));
-			doors.add(new Door( 850, 100, door2, 5, 450, 282));
+			doors.add(new Door( 850, 100, door2, 5, 450, 282,true));
 			ladders.add(new Ladder(750, 196, 4, ladder, this));
 			mainCharacter.addFloor(floors);
 			mainCharacter.addLadder(ladders);
@@ -387,8 +398,8 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(0, 420, 1000, 80));
 			floors.add(new Floor(0, 0, 50, 500));
 			floors.add(new Floor(950,0,50, 500));
-			doors.add(new Door( 50, 320, door2, 5, 850, 320));
-			doors.add(new Door( 850, 320, door2, 8, 50, 150));
+			doors.add(new Door( 50, 320, door2, 5, 850, 320,true));
+			doors.add(new Door( 850, 320, door2, 8, 50, 150,true));
 			mainCharacter.addFloor(floors);
 			break;
 		case 8:
@@ -406,7 +417,7 @@ public class GameStage extends PApplet{
 			ladders.add(new Ladder(85, 330, 1, ladder, this));
 			ladders.add(new Ladder(85, 370, 1, ladder, this));
 			ladders.add(new Ladder(880, 130, 4, ladder, this));
-			doors.add(new Door( 50, 150, door2, 7, 850, 320));
+			doors.add(new Door( 50, 150, door2, 7, 850, 320,true));
 			items.add(new Book(books,450,100,this,null,null, null, true));
 			mainCharacter.addFloor(floors);
 			mainCharacter.addLadder(ladders);
@@ -476,11 +487,21 @@ public class GameStage extends PApplet{
 			{
 				if( whereisch(d) )
 				{
-					clearItem();
-					transport(d.getgoal());
-					goalX = d.goalX - 3;
-					goalY = d.goalY - 3;
-//					isnotdone = false;
+					if(d.isopen())
+					{
+						clearItem();
+						transport(d.getgoal());
+						goalX = d.goalX - 3;
+						goalY = d.goalY - 3;
+//						isnotdone = false;
+					}
+					else
+					{
+						String[] s = new String[2];
+						s[0] = "不知道是用什麼材質做成的淺灰色門板，就算用腳踹門也不會發出任何\n聲音。";
+						s[1] = "打不開啊.......\n是少了鑰匙嗎？";
+						opendialog(s);
+					}
 					break;
 				}
 			}
@@ -498,8 +519,6 @@ public class GameStage extends PApplet{
 			if(!hasdialog)
 			{
 				boolean isnotdone = true;
-				
-				
 				for(AbstractItem i : items)
 				{
 					if(whereisch(i))
@@ -657,7 +676,7 @@ public class GameStage extends PApplet{
 	}
 	
 	public boolean whereisch(Object thing)
-	{		
+	{		System.out.println("AAA");
 		if(thing.getClass().getName().equals("Game.Door"))
 		{
 			Door d = (Door)thing;
@@ -705,6 +724,21 @@ public class GameStage extends PApplet{
 			Deadman b = (Deadman)thing;
 			if( (b.x < mainCharacter.x) && (b.x + b.width > mainCharacter.x)
 					&& (b.y - 3 < mainCharacter.y + man1.height) 
+						&& (b.y + b.height + 50 > mainCharacter.y + man1.height) )
+			{//if charater is at the bed
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else if(thing.getClass().getName().equals("Game.Paper"))
+		{
+			
+			Paper b = (Paper)thing;
+			if( (b.x - 3 < mainCharacter.x) && (b.x + b.width + 3 > mainCharacter.x)
+					&& (b.y - 50 < mainCharacter.y + man1.height) 
 						&& (b.y + b.height + 50 > mainCharacter.y + man1.height) )
 			{//if charater is at the bed
 				return true;

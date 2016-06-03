@@ -6,7 +6,9 @@ import processing.core.PImage;
 public class Box extends AbstractItem{
 
 	private boolean isspecial, isdone;
-	public Box(PImage image ,int x, int y, GameStage parent, String[] text1, String[] text2, boolean special)
+	private String[] text3;
+	public Box(PImage image ,int x, int y, GameStage parent, String[] text1,
+									String[] text2, String[] text3, boolean special)
 	{
 		this.image = image;
 		this.x = x;
@@ -16,6 +18,7 @@ public class Box extends AbstractItem{
 		this.parent = parent;
 		this.text1 = text1;
 		this.text2 = text2;
+		this.text3 = text3;
 		isspecial = special;
 		isdone = false;
 	}
@@ -32,17 +35,13 @@ public class Box extends AbstractItem{
 		// TODO Auto-generated method stub
 		if(switchs && isspecial && !isdone)
 		{
-			parent.goalX = 847;
-			parent.goalY = 93;
-			parent.transport(6);
+			parent.stage_5_floor = true;
 			isdone = true;
 			return text2;
 		}
 		else if(switchs && isspecial)
 		{
-			parent.goalX = 847;
-			parent.goalY = 93;
-			parent.transport(6);
+			return text3;
 		}
 		return text1;
 	}

@@ -3,11 +3,12 @@ package Game;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Bookcase extends AbstractItem{
+public class Paper extends AbstractItem{
 
-	public Bookcase(int x, int y, GameStage parent, String[] text1, String[] text2)
+	private boolean switchs;
+	public Paper(PImage image,int x, int y, GameStage parent, String[] text1, String[] text2)
 	{
-//		this.image = image;
+		this.image = image;
 		this.x = x;
 		this.y = y;
 		width = image.width;
@@ -15,19 +16,21 @@ public class Bookcase extends AbstractItem{
 		this.parent = parent;
 		this.text1 = text1;
 		this.text2 = text2;
+		switchs = false;
 	}
 	@Override
 	public void display() {
 		// TODO Auto-generated method stub
-//		parent.image(image,x,y);
+		parent.image(image,x,y);
 	}
 
 	@Override
 	public String[] dialog_event(boolean switchs) {
 		// TODO Auto-generated method stub
-		if(switchs)
+		if(this.switchs)
 		{
-			parent.stage_5_floor = true;
+			this.switchs = true;
+			parent.stage_5_box = true;
 			return text2;
 		}
 		

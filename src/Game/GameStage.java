@@ -16,7 +16,11 @@ public class GameStage extends PApplet{
 	private final static int width = 1000, height = 500;
 	
 	public PImage man, bullet, books, book, bloodletter, diamand, phone, skull, monster, monster2, strike, box, bed, ladder, door1, door2, man1, man2, man3, man4
+<<<<<<< HEAD
 	              , man5, man6, man7, man8, man_die, man_c1, man_c2, fireBall1, fireBall2;
+=======
+	              , man5, man6, man7, man8, man_c1, man_c2, dead_man, fireBall1, fireBall2;
+>>>>>>> 9e70e04e030eec5e5e28fb11d24863a041ba16f7
 	public PImage[] man_a = new PImage[10];
 	private Character mainCharacter; 
 	private ArrayList<Monster> monsters;
@@ -67,6 +71,7 @@ public class GameStage extends PApplet{
 		this.man8 = loadImage("man_run8.png");
 		this.man_c1 = loadImage("man_climb1.png");
 		this.man_c2 = loadImage("man_climb2.png");
+		this.dead_man = loadImage("man_die.png");
 		int i;
 		for(i = 1; i <= 8; i++){
 			this.man_a[i] = loadImage("man_gun"+Integer.toString(i)+".png");
@@ -233,7 +238,7 @@ public class GameStage extends PApplet{
 		mainCharacter.deleteFloor();
 		mainCharacter.deleteLadder();
 		System.out.println(stage_num);
-		String[] s;
+		String[] s,t,u;
 		switch(stage_num)
 		{
 		case 0://test stage
@@ -278,16 +283,11 @@ public class GameStage extends PApplet{
 //				start[3] = "這裡是......宿舍？為什麼都是黑白的？\n到底......發生什麼事了？";
 //				start[4] = "呃？在我枕頭底下這個難道是......槍？\n為什麼我會有這種東西？";
 //				start[5] = "......\n不管了，先到處看看再說。";
-//				hasdialog = true;
-//				dialog.open();
-//				dialog.settext(start);
-//				dialog.showtext();
+//				opendialog(start);
 //				firststart = false;
 //			}
 			break;
 		case 2:
-//			mainCharacter.x = 120;
-//			mainCharacter.y = 320;
 			floors.add(new Floor(0, 0, 1000, 40));
 			floors.add(new Floor(0, 430, 1000, 40));
 			floors.add(new Floor(0, 0, 40, 500));
@@ -298,9 +298,10 @@ public class GameStage extends PApplet{
 			doors.add(new Door( 50, 330, door2, 1, 860, 320));
 			doors.add(new Door( 860, 330, door2, 3, 50, 220));
 			doors.add(new Door( 860, 60, door2, 4, 50 ,320));
-			monsters.add(new Monster(this,monster,"none",400,300,100,this,200,460));
-			monsters.add(new Monster(this,monster,"none",430,300,100,this,200,460));
-			monsters.add(new Monster(this,monster,"none",480,210,100,this,460,700));
+
+//			monsters.add(new Monster(this,monster,"none",400,300,100,this,200,460));
+//			monsters.add(new Monster(this,monster,"none",430,300,100,this,200,460));
+//			monsters.add(new Monster(this,monster,"none",480,210,100,this,460,700));
 			mainCharacter.addFloor(floors);
 			break;
 		case 3:
@@ -312,6 +313,15 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(950,0,50, 500));
 			doors.add(new Door( 50, 220, door2, 2, 860, 330));
 			doors.add(new Door( 800, 220, door1, 5, 50, 100));
+			s = new String[4];
+			s[0] = "喂！你還好嗎？沒事吧？\n......你說什麼？太小聲我聽不清楚？";
+			s[1] = "喂？......喂！\n「沒想到我最後一次跟我媽說話竟然是跟她吵架」？\n不要隨便替自己立flag啊！";
+			s[2] = "喂！什麼叫「我把希望交給你了」，說的好像是你的遺言似的\n想點正面的東西對你的生命比較好不是嗎？";
+			s[3] = "喂喂！\n......交給我這把鑰匙之後居然就真的死了\n嘖，這種被託付希望的感覺真不好受。";
+			t = new String[2];
+			t[0] = "雖然找不到任何傷口，卻一動也不動的冰冷遺體。";
+			t[1] = "嘖......\n我會連你的份一起活下去的，你就好好安息吧。";
+			items.add(new Deadman(dead_man,600,265,this,s,t));
 			monsters.add(new Monster(this,monster,"none",400,220,100,this,350,450));
 			mainCharacter.addFloor(floors);
 			break;
@@ -400,7 +410,7 @@ public class GameStage extends PApplet{
 			ladders.add(new Ladder(85, 370, 1, ladder, this));
 			ladders.add(new Ladder(880, 130, 4, ladder, this));
 			doors.add(new Door( 50, 150, door2, 7, 850, 320));
-			items.add(new Book(books,500,150,this,null,null, null, true));
+			items.add(new Book(books,450,100,this,null,null, null, true));
 			mainCharacter.addFloor(floors);
 			mainCharacter.addLadder(ladders);
 			break;
@@ -495,18 +505,18 @@ public class GameStage extends PApplet{
 				
 				for(AbstractItem i : items)
 				{
-					String text[] = i.dialog_event(true);
-//					String text[] = new String[2];
-//					textFont(cnFont);
-//					text[0] = "測試";
-//					text[1] = "test";
-					if( isnotdone && whereisch(i) && (text != null) )//if need dialog
+					if(whereisch(i))
 					{
-						hasdialog = true;
-						dialog.open();
-						dialog.settext(text);
-						dialog.showtext();
-						break;
+						String text[] = i.dialog_event(true);
+//						String text[] = new String[2];
+//						textFont(cnFont);
+//						text[0] = "測試";
+//						text[1] = "test";
+						if( isnotdone && (text != null) )//if need dialog
+						{
+							opendialog(text);
+							break;
+						}
 					}
 				}
 			}
@@ -543,7 +553,13 @@ public class GameStage extends PApplet{
 		}
 			
 	}
-	
+	public void opendialog(String[] text)
+	{
+		hasdialog = true;
+		dialog.open();
+		dialog.settext(text);
+		dialog.showtext();
+	}
 	public PImage getImage(PImage image) {
 		return image;
 	}
@@ -679,6 +695,20 @@ public class GameStage extends PApplet{
 			if( (b.x < mainCharacter.x) && (b.x + b.width > mainCharacter.x)
 					&& (b.y - 5 < mainCharacter.y + man1.height) 
 						&& (b.y + b.height + 5 > mainCharacter.y + man1.height) )
+			{//if charater is at the bed
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else if(thing.getClass().getName().equals("Game.Deadman"))
+		{
+			Deadman b = (Deadman)thing;
+			if( (b.x < mainCharacter.x) && (b.x + b.width > mainCharacter.x)
+					&& (b.y - 3 < mainCharacter.y + man1.height) 
+						&& (b.y + b.height + 50 > mainCharacter.y + man1.height) )
 			{//if charater is at the bed
 				return true;
 			}

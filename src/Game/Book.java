@@ -24,9 +24,10 @@ public class Book extends AbstractItem{
 	@Override
 	public void display() {
 		// TODO Auto-generated method stub
-		parent.image(image, x + image.width/2, y);
-		parent.image(image, x, y + image.height);
-		parent.image(image, x + image.width, y + image.height);
+		parent.image(image, x, y, 150, 150);
+//		parent.image(image, x + image.width/2, y);
+//		parent.image(image, x, y + image.height);
+//		parent.image(image, x + image.width, y + image.height);
 	}
 
 	@Override

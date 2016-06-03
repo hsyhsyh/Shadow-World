@@ -133,7 +133,7 @@ public class Character extends AbstractCharacter implements Runnable{
 				if(this.now_HP <= 0 && gs.GameOver_y<250) {
 					isOnLadder=false;
 					gs.GameOver_y +=0.5;
-					this.chaImage = gs.man_die;
+					this.chaImage = gs.dead_man;
 				}
 				if(gs.GameOver_y == 250) {
 					if(i%80 == 0) {

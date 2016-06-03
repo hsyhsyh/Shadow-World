@@ -15,12 +15,9 @@ public class GameStage extends PApplet{
 	private static final long serialVersionUID = 1L;
 	private final static int width = 1000, height = 500;
 	
-//	public PImage man, bullet, books, book, bloodletter, diamand, phone, skull, monster, monster2, strike, box, bed, ladder, door1, door2, man1, man2, man3, man4
-//<<<<<<< HEAD
-//	              , man5, man6, man7, man8, man_die, man_c1, man_c2, fireBall1, fireBall2;
-//=======
-//	              , man5, man6, man7, man8, man_c1, man_c2, dead_man, fireBall1, fireBall2;
-//>>>>>>> 9e70e04e030eec5e5e28fb11d24863a041ba16f7
+	public PImage man, bullet, books, book, bloodletter, diamand, phone, skull, monster, monster2, strike, box, bed, ladder, door1, door2, man1, man2, man3, man4
+                  , man5, man6, man7, man8, man_c1, man_c2, dead_man, fireBall1, fireBall2;
+
 	public PImage[] man_a = new PImage[10];
 	private Character mainCharacter; 
 	private ArrayList<Monster> monsters;
@@ -52,41 +49,41 @@ public class GameStage extends PApplet{
 		size(width, height);
 		smooth();
 		
-//		this.books = loadImage("books.png");
-//		this.bullet = loadImage("bullet.png");
-//		this.book = loadImage("book.png");
-//		this.bloodletter = loadImage("bloodletter.png");
-//		this.phone = loadImage("phone.png");
-//		this.diamand = loadImage("diamand.png");
-//		this.skull = loadImage("skull.png");
-//		this.man = loadImage("man2.png");
-//		this.man_die = loadImage("man_die.png");
-//		this.man1 = loadImage("man_run1.png");
-//		this.man2 = loadImage("man_run2.png");
-//		this.man3 = loadImage("man_run3.png");
-//		this.man4 = loadImage("man_run4.png");
-//		this.man5 = loadImage("man_run5.png");
-//		this.man6 = loadImage("man_run6.png");
-//		this.man7 = loadImage("man_run7.png");
-//		this.man8 = loadImage("man_run8.png");
-//		this.man_c1 = loadImage("man_climb1.png");
-//		this.man_c2 = loadImage("man_climb2.png");
-//		this.dead_man = loadImage("man_die.png");
+		this.books = loadImage("books.png");
+		this.bullet = loadImage("bullet.png");
+		this.book = loadImage("book.png");
+		this.bloodletter = loadImage("bloodletter.png");
+		this.phone = loadImage("phone.png");
+		this.diamand = loadImage("diamand.png");
+		this.skull = loadImage("skull.png");
+		this.man = loadImage("man2.png");
+		this.dead_man = loadImage("man_die.png");
+		this.man1 = loadImage("man_run1.png");
+		this.man2 = loadImage("man_run2.png");
+		this.man3 = loadImage("man_run3.png");
+		this.man4 = loadImage("man_run4.png");
+		this.man5 = loadImage("man_run5.png");
+		this.man6 = loadImage("man_run6.png");
+		this.man7 = loadImage("man_run7.png");
+		this.man8 = loadImage("man_run8.png");
+		this.man_c1 = loadImage("man_climb1.png");
+		this.man_c2 = loadImage("man_climb2.png");
+		this.dead_man = loadImage("man_die.png");
 		int i;
 		for(i = 1; i <= 8; i++){
 			this.man_a[i] = loadImage("man_gun"+Integer.toString(i)+".png");
 		}
-//		this.monster = loadImage("monster.png");
-//		this.monster2 = loadImage("monster2.png");
-//		this.strike = loadImage("strike.png");
-//		this.box = loadImage("box.png");
-//		this.bed = loadImage("bed.png");
-//		this.ladder = loadImage("lader.png");
-//		this.door1 = loadImage("closedoor.png");
-//		this.door2 = loadImage("opendoor.png");
-//		this.fireBall1 = loadImage("fireball.png");
-//		this.fireBall2 = loadImage("fireball2.png");
-//		mainCharacter = new Character(this,man,"none",0,0,100,this);
+		this.monster = loadImage("monster.png");
+		this.monster2 = loadImage("monster2.png");
+		this.strike = loadImage("strike.png");
+		this.box = loadImage("box.png");
+		this.bed = loadImage("bed.png");
+		this.ladder = loadImage("lader.png");
+		this.door1 = loadImage("closedoor.png");
+		this.door2 = loadImage("opendoor.png");
+		this.fireBall1 = loadImage("fireball.png");
+		this.fireBall2 = loadImage("fireball2.png");
+		mainCharacter = new Character(this,man,"none",0,0,100,this);
 		monsters = new ArrayList<Monster>();
 		floors = new ArrayList<Floor>();
 		doors = new ArrayList<Door>();
@@ -299,9 +296,9 @@ public class GameStage extends PApplet{
 			doors.add(new Door( 860, 330, door2, 3, 50, 220));
 			doors.add(new Door( 860, 60, door2, 4, 50 ,320));
 
-//			monsters.add(new Monster(this,monster,"none",400,300,100,this,200,460));
-//			monsters.add(new Monster(this,monster,"none",430,300,100,this,200,460));
-//			monsters.add(new Monster(this,monster,"none",480,210,100,this,460,700));
+			monsters.add(new Monster(this,monster,"none",400,300,100,this,200,460));
+			monsters.add(new Monster(this,monster,"none",430,300,100,this,200,460));
+			monsters.add(new Monster(this,monster,"none",480,210,100,this,460,700));
 			mainCharacter.addFloor(floors);
 			break;
 		case 3:
@@ -313,15 +310,15 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(950,0,50, 500));
 			doors.add(new Door( 50, 220, door2, 2, 860, 330));
 			doors.add(new Door( 800, 220, door1, 5, 50, 100));
-			s = new String[4];
-			s[0] = "喂！你還好嗎？沒事吧？\n......你說什麼？太小聲我聽不清楚？";
-			s[1] = "喂？......喂！\n「沒想到我最後一次跟我媽說話竟然是跟她吵架」？\n不要隨便替自己立flag啊！";
-			s[2] = "喂！什麼叫「我把希望交給你了」，說的好像是你的遺言似的\n想點正面的東西對你的生命比較好不是嗎？";
-			s[3] = "喂喂！\n......交給我這把鑰匙之後居然就真的死了\n嘖，這種被託付希望的感覺真不好受。";
-			t = new String[2];
-			t[0] = "雖然找不到任何傷口，卻一動也不動的冰冷遺體。";
-			t[1] = "嘖......\n我會連你的份一起活下去的，你就好好安息吧。";
-			items.add(new Deadman(dead_man,600,265,this,s,t));
+//			s = new String[4];
+//			s[0] = "喂！你還好嗎？沒事吧？\n......你說什麼？太小聲我聽不清楚？";
+//			s[1] = "喂？......喂！\n「沒想到我最後一次跟我媽說話竟然是跟她吵架」？\n不要隨便替自己立flag啊！";
+//			s[2] = "喂！什麼叫「我把希望交給你了」，說的好像是你的遺言似的\n想點正面的東西對你的生命比較好不是嗎？";
+//			s[3] = "喂喂！\n......交給我這把鑰匙之後居然就真的死了\n嘖，這種被託付希望的感覺真不好受。";
+//			t = new String[2];
+//			t[0] = "雖然找不到任何傷口，卻一動也不動的冰冷遺體。";
+//			t[1] = "嘖......\n我會連你的份一起活下去的，你就好好安息吧。";
+//			items.add(new Deadman(dead_man,600,265,this,s,t));
 			monsters.add(new Monster(this,monster,"none",400,220,100,this,350,450));
 			mainCharacter.addFloor(floors);
 			break;

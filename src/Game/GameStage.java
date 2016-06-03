@@ -278,10 +278,7 @@ public class GameStage extends PApplet{
 //				start[3] = "這裡是......宿舍？為什麼都是黑白的？\n到底......發生什麼事了？";
 //				start[4] = "呃？在我枕頭底下這個難道是......槍？\n為什麼我會有這種東西？";
 //				start[5] = "......\n不管了，先到處看看再說。";
-//				hasdialog = true;
-//				dialog.open();
-//				dialog.settext(start);
-//				dialog.showtext();
+//				opendialog(start);
 //				firststart = false;
 //			}
 			break;
@@ -297,9 +294,9 @@ public class GameStage extends PApplet{
 			doors.add(new Door( 860, 330, door2, 3, 50, 220));
 			doors.add(new Door( 860, 60, door2, 4, 50 ,320));
 
-			monsters.add(new Monster(this,monster,"none",400,300,100,this,200,460));
-			monsters.add(new Monster(this,monster,"none",430,300,100,this,200,460));
-			monsters.add(new Monster(this,monster,"none",480,210,100,this,460,700));
+//			monsters.add(new Monster(this,monster,"none",400,300,100,this,200,460));
+//			monsters.add(new Monster(this,monster,"none",430,300,100,this,200,460));
+//			monsters.add(new Monster(this,monster,"none",480,210,100,this,460,700));
 			mainCharacter.addFloor(floors);
 			break;
 		case 3:
@@ -505,10 +502,7 @@ public class GameStage extends PApplet{
 //						text[1] = "test";
 						if( isnotdone && (text != null) )//if need dialog
 						{
-							hasdialog = true;
-							dialog.open();
-							dialog.settext(text);
-							dialog.showtext();
+							opendialog(text);
 							break;
 						}
 					}
@@ -544,7 +538,13 @@ public class GameStage extends PApplet{
 		}
 			
 	}
-	
+	public void opendialog(String[] text)
+	{
+		hasdialog = true;
+		dialog.open();
+		dialog.settext(text);
+		dialog.showtext();
+	}
 	public PImage getImage(PImage image) {
 		return image;
 	}

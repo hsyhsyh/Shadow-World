@@ -219,9 +219,24 @@ public class Character extends AbstractCharacter implements Runnable{
 							break;
 						}
 					}
-				}	
+				}
 				//System.out.println(i);
 				i ++;
+				
+				if(this.now_HP <= 0 && gs.GameOver_y<250) {
+					gs.GameOver_y +=0.5;
+				}
+				if(gs.GameOver_y == 250) {
+					if(i%80 == 0) {
+						gs.GameOver_color = 250;
+						gs.GameOver_color2 = 250;
+					}
+					if(i%80 == 40) {
+						gs.GameOver_color = 250;
+						gs.GameOver_color2 = 0;
+					}
+				}
+				
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

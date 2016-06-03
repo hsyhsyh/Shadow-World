@@ -36,6 +36,8 @@ public class GameStage extends PApplet{
 	private int alpha;
 	public int goalX,goalY;
 	private PFont cnFont;
+	public float GameOver_x = 350,GameOver_y = 0;
+	public int GameOver_color = 250, GameOver_color2 = 0;
 	
 	public void setup() {
 		
@@ -88,7 +90,7 @@ public class GameStage extends PApplet{
 		//bullets = new ArrayList<Bullet>();
 		dialog = new Dialog();
 		
-		stage_num = 3;
+		stage_num = 1;
 		
 		
 		isLoading = false;
@@ -213,6 +215,15 @@ public class GameStage extends PApplet{
         		is_transport = false;
         	}
         }
+		
+		//Game over
+		if(mainCharacter.now_HP <= 0) {
+			fill(this.GameOver_color,GameOver_color2,0);
+			this.textFont(createFont("Arial", 12), 50);
+	        this.text("Game over", this.GameOver_x, this.GameOver_y);
+	        fill(0);
+		}
+			
 		
 	}
 	
@@ -459,6 +470,7 @@ public class GameStage extends PApplet{
 		case KeyEvent.VK_UP://up to ladder
 			for(Door d : doors)
 			{
+				clearItem();
 				if( whereisch(d) )
 				{
 					transport(d.getgoal());
@@ -717,17 +729,19 @@ public class GameStage extends PApplet{
 	
 	private void clearplace()
 	{
+		floors.clear();
+		doors.clear();
+		monsters.clear();
+		items.clear();
+		ladders.clear();
+	}
+	private void clearItem() {
 		for(Monster monster:monsters) {
 			monster.vanish();
 		}
 		for(Ladder ladder : ladders){
 			ladder.vanish();
 		}
-		floors.clear();
-		doors.clear();
-		monsters.clear();
-		items.clear();
-		ladders.clear();
 	}
 
 	public Character getCharacter() {

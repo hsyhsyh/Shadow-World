@@ -461,6 +461,7 @@ public class GameStage extends PApplet{
 		case KeyEvent.VK_UP://up to ladder
 			for(Door d : doors)
 			{
+				clearItem();
 				if( whereisch(d) )
 				{
 					transport(d.getgoal());
@@ -702,17 +703,19 @@ public class GameStage extends PApplet{
 	
 	private void clearplace()
 	{
+		floors.clear();
+		doors.clear();
+		monsters.clear();
+		items.clear();
+		ladders.clear();
+	}
+	private void clearItem() {
 		for(Monster monster:monsters) {
 			monster.vanish();
 		}
 		for(Ladder ladder : ladders){
 			ladder.vanish();
 		}
-		floors.clear();
-		doors.clear();
-		monsters.clear();
-		items.clear();
-		ladders.clear();
 	}
 
 	public Character getCharacter() {

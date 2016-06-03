@@ -1,6 +1,5 @@
 package Game;
 
-import processing.core.PApplet;
 import processing.core.PImage;
 
 abstract public class AbstractItem {
@@ -20,5 +19,5 @@ abstract public class AbstractItem {
 //		this.text2 = text2;
 //	}
 	abstract public void display();
-	abstract public String[] dialog_event(boolean switchs);
+	abstract public String[] dialog_event();
 }

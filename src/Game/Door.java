@@ -6,7 +6,6 @@ public class Door {
 	
 	public int x,y, goalX, goalY;
 	private PImage image;
-	private boolean isOpen;
 	private int goal;
 	private boolean isopen;
 	public Door(int x, int y, PImage image, int goal, int goalX, int goalY, boolean open){

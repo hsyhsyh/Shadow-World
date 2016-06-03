@@ -1,6 +1,5 @@
 package Game;
 
-import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Book extends AbstractItem{
@@ -31,15 +30,15 @@ public class Book extends AbstractItem{
 	}
 
 	@Override
-	public String[] dialog_event(boolean switchs) {
+	public String[] dialog_event() {
 		// TODO Auto-generated method stub
-		if(switchs && isspecial && !isdone)
+		if(isspecial && !isdone)
 		{
 			parent.stage_5_floor = true;
 			isdone = true;
 			return text2;
 		}
-		else if(switchs && isspecial)
+		else if(isspecial)
 		{
 			return text3;
 		}

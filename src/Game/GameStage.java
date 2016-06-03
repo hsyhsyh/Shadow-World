@@ -28,7 +28,7 @@ public class GameStage extends PApplet{
 	//private ArrayList<Bullet> bullets;
 //	private ArrayList<strike> traps;
 	private Dialog dialog;
-	private boolean hasdialog;
+	public boolean hasdialog;
 	private int stage_num;
 	public boolean isLoading = true;
 	private boolean is_transport;
@@ -92,13 +92,13 @@ public class GameStage extends PApplet{
 		//bullets = new ArrayList<Bullet>();
 		dialog = new Dialog();
 		
-		stage_num = 4;
+		stage_num = 5;
 		
 		
 		isLoading  = false;
 		hasdialog = false;
 		is_transport = false;
-		stage_2_door = stage_3_door = stage_5_floor = stage_5_box = false;
+		stage_2_door = stage_3_door = stage_5_floor = stage_5_box = true;
 		firststart = true;
 		loadData();
 		
@@ -363,15 +363,15 @@ public class GameStage extends PApplet{
 			s = new String[2];
 			s[0] = "宛如壁紙一般，側面看過去甚至看不見的箱子\n詭異的是，從正面伸手居然還摸的到木質般的實體";
 			s[1] = "這是什麼鬼箱子啊......\n碰都不想碰......";
-			t = new String[3];
-			t[0] = "";
-			t[1] = "";
-			t[2] = "";
-			u = new String[3];
-			u[0] = "";
-			u[1] = "";
-			u[2] = "";
-			items.add(new Box(box, 400, 282, this ,s,null, null, true));
+			t = new String[1];
+			t[0] = "如果紙條寫的是對的話，那這裡應該會有門......\n咦咦還真的有！";
+//			t[1] = "";
+//			t[2] = "";
+			u = new String[1];
+			u[0] = "摸起來是箱子的東西居然用力推開會變成門......\n這到底是什麼地方啊.......";
+//			u[1] = "";
+//			u[2] = "";
+			items.add(new Box(box, 400, 282, this ,s,t, u, true));
 			if(stage_5_floor)
 			{
 				floors.add(new Floor(450,250,150, 15));
@@ -379,8 +379,6 @@ public class GameStage extends PApplet{
 			mainCharacter.addFloor(floors);
 			break;
 		case 6:
-//			mainCharacter.x = 120;
-//			mainCharacter.y = 320;
 			floors.add(new Floor(0, 0, 1000, 50));
 			floors.add(new Floor(0, 420, 1000, 80));
 			floors.add(new Floor(0, 0, 50, 500));
@@ -523,7 +521,7 @@ public class GameStage extends PApplet{
 				{
 					if(whereisch(i))
 					{
-						String text[] = i.dialog_event(true);
+						String text[] = i.dialog_event();
 //						String text[] = new String[2];
 //						textFont(cnFont);
 //						text[0] = "測試";
@@ -676,7 +674,7 @@ public class GameStage extends PApplet{
 	}
 	
 	public boolean whereisch(Object thing)
-	{		System.out.println("AAA");
+	{
 		if(thing.getClass().getName().equals("Game.Door"))
 		{
 			Door d = (Door)thing;

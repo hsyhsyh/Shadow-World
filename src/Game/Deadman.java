@@ -1,6 +1,5 @@
 package Game;
 
-import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Deadman extends AbstractItem{
@@ -25,7 +24,7 @@ public class Deadman extends AbstractItem{
 	}
 
 	@Override
-	public String[] dialog_event(boolean switchs) {
+	public String[] dialog_event() {
 		// TODO Auto-generated method stub
 		if(this.switchs)
 		{

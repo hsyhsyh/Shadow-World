@@ -1,6 +1,5 @@
 package Game;
 
-import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Box extends AbstractItem{
@@ -31,17 +30,57 @@ public class Box extends AbstractItem{
 	}
 
 	@Override
-	public String[] dialog_event(boolean switchs) {
+	public String[] dialog_event() {
 		// TODO Auto-generated method stub
-		if(switchs && isspecial && !isdone)
+		if(isspecial && !isdone && parent.stage_5_box)
 		{
-			parent.stage_5_floor = true;
+//			parent.stage_5_floor = true;
 			isdone = true;
-			return text2;
+			parent.opendialog(text2);
+			Thread s = new Thread(new Runnable(){
+				public void run()
+				{
+					while(true)
+					{
+//						System.out.println(parent.hasdialog);
+						if(!parent.hasdialog)
+						{
+//							System.out.println(parent.hasdialog);
+							parent.goalX = 847;
+							parent.goalY = 97;
+							parent.transport(6);
+							break;
+						}
+					}
+				}
+			});
+			s.start(); 
+			return null;
+			
 		}
-		else if(switchs && isspecial)
+		else if(isspecial && isdone)
 		{
-			return text3;
+			parent.opendialog(text3);
+			Thread s = new Thread(new Runnable(){
+				public void run()
+				{
+					while(true)
+					{
+						System.out.println(parent.hasdialog);
+						if(!parent.hasdialog)
+						{
+							
+							parent.goalX = 847;
+							parent.goalX = 97;
+							parent.transport(6);
+							break;
+						}
+					}
+				}
+			});
+			s.start(); 
+			
+	 		return null;
 		}
 		return text1;
 	}

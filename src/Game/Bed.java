@@ -1,6 +1,5 @@
 package Game;
 
-import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Bed extends AbstractItem{
@@ -23,7 +22,7 @@ public class Bed extends AbstractItem{
 	}
 
 	@Override
-	public String[] dialog_event(boolean switchs) {
+	public String[] dialog_event() {
 		// TODO Auto-generated method stub
 		return text1;
 	}

@@ -127,6 +127,31 @@ public class Character extends AbstractCharacter implements Runnable{
 					UpDown="Up";
 				else if(this.velocityForDirectionY<0)
 					UpDown="Down";
+				//System.out.println(i);
+				i ++;
+				
+				if(this.now_HP <= 0 && gs.GameOver_y<250) {
+					isOnLadder=false;
+					gs.GameOver_y +=0.5;
+					this.chaImage = gs.man_die;
+				}
+				if(gs.GameOver_y == 250) {
+					if(i%80 == 0) {
+						gs.GameOver_color = 250;
+						gs.GameOver_color2 = 250;
+					}
+					if(i%80 == 40) {
+						gs.GameOver_color = 250;
+						gs.GameOver_color2 = 0;
+					}
+				}
+				fallDown();
+				for(Bullet bullet: bullets){
+					bullet.move();
+				}
+				Thread.sleep(5);
+				
+				if(this.now_HP > 0) {
 				if(direction.equals("left")||direction.equals("right")){
 					int moving=1;
 					for(Floor floor : floors){
@@ -147,11 +172,6 @@ public class Character extends AbstractCharacter implements Runnable{
 						}
 					}
 				}
-				fallDown();
-				for(Bullet bullet: bullets){
-					bullet.move();
-				}
-				Thread.sleep(5);
 				if(waitAttackTime>0)
 					waitAttackTime--;
 				if(waitAttackTime==0){
@@ -220,23 +240,7 @@ public class Character extends AbstractCharacter implements Runnable{
 						}
 					}
 				}
-				//System.out.println(i);
-				i ++;
-				
-				if(this.now_HP <= 0 && gs.GameOver_y<250) {
-					gs.GameOver_y +=0.5;
 				}
-				if(gs.GameOver_y == 250) {
-					if(i%80 == 0) {
-						gs.GameOver_color = 250;
-						gs.GameOver_color2 = 250;
-					}
-					if(i%80 == 40) {
-						gs.GameOver_color = 250;
-						gs.GameOver_color2 = 0;
-					}
-				}
-				
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

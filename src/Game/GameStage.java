@@ -16,7 +16,7 @@ public class GameStage extends PApplet{
 	private final static int width = 1000, height = 500;
 	
 	public PImage man, bullet, books, book, bloodletter, diamand, phone, skull, monster, monster2, strike, box, bed, ladder, door1, door2, man1, man2, man3, man4
-	              , man5, man6, man7, man8, man_c1, man_c2, fireBall1, fireBall2;
+	              , man5, man6, man7, man8, man_die, man_c1, man_c2, fireBall1, fireBall2;
 	public PImage[] man_a = new PImage[10];
 	private Character mainCharacter; 
 	private ArrayList<Monster> monsters;
@@ -56,6 +56,7 @@ public class GameStage extends PApplet{
 		this.diamand = loadImage("diamand.png");
 		this.skull = loadImage("skull.png");
 		this.man = loadImage("man2.png");
+		this.man_die = loadImage("man_die.png");
 		this.man1 = loadImage("man_run1.png");
 		this.man2 = loadImage("man_run2.png");
 		this.man3 = loadImage("man_run3.png");
@@ -430,6 +431,7 @@ public class GameStage extends PApplet{
 		switch(keyCode)
 		{
 		case KeyEvent.VK_LEFT:
+			if(mainCharacter.now_HP > 0) {
 			if(mainCharacter.isOnLadder){
 				mainCharacter.isOnLadder=false;
 				mainCharacter.y-=20;
@@ -438,8 +440,10 @@ public class GameStage extends PApplet{
 			mainCharacter.bulletDirection="left";
 			mainCharacter.move("left");
 			mainCharacter.isWalk = true;
+			}
 			break;
 		case KeyEvent.VK_RIGHT:
+			if(mainCharacter.now_HP > 0) {
 			if(mainCharacter.isOnLadder){
 				mainCharacter.isOnLadder=false;
 				mainCharacter.y-=20;
@@ -448,9 +452,10 @@ public class GameStage extends PApplet{
 			mainCharacter.bulletDirection="right";
 			mainCharacter.move("right");
 			mainCharacter.isWalk = true;
+			}
 			break;
 		case KeyEvent.VK_SPACE://jump
-			if(mainCharacter.isGround)
+			if(mainCharacter.isGround && mainCharacter.now_HP > 0)
 			{
 				mainCharacter.jump();
 				//mainCharacter.isWalk=false;
@@ -459,11 +464,12 @@ public class GameStage extends PApplet{
 		case KeyEvent.VK_DOWN://down to ladder
 			break;
 		case KeyEvent.VK_UP://up to ladder
+			if(mainCharacter.now_HP > 0) {
 			for(Door d : doors)
 			{
-				clearItem();
 				if( whereisch(d) )
 				{
+					clearItem();
 					transport(d.getgoal());
 					goalX = d.goalX - 3;
 					goalY = d.goalY - 3;
@@ -478,8 +484,10 @@ public class GameStage extends PApplet{
 					mainCharacter.velocityForDirectionY=5;
 				}
 			}
+			}
 			break;
 		case KeyEvent.VK_A:
+			if(mainCharacter.now_HP > 0) {
 			if(!hasdialog)
 			{
 				boolean isnotdone = true;
@@ -506,14 +514,17 @@ public class GameStage extends PApplet{
 			{
 				dialog.dosomething();
 			}
+			}
 			break;
 		case KeyEvent.VK_Z://find
 			//attack
+			if(mainCharacter.now_HP > 0) {
 			if(mainCharacter.isOnLadder){
 				mainCharacter.isOnLadder=false;
 				mainCharacter.y-=20;
 			}
 			mainCharacter.isAttack = true;
+			}
 			break;
 			
 		}

@@ -1,10 +1,16 @@
 package Game;
 
+import java.util.Random;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Monster extends AbstractCharacter implements Runnable{
 	
+	private Bullet bullets[]=new Bullet[20];
+	public int waitAttackTime=0;
+	private int bulletNumberLeft=0;
+	private int bulletNumberRight=1;
 	private boolean isboom = false;
 	private int leftBound, rightBound;
 	
@@ -24,6 +30,12 @@ public class Monster extends AbstractCharacter implements Runnable{
 		this.leftBound = leftBound;
 		this.rightBound = rightBound;
 		this.direction="right";
+		for(int i=0;i<20;i+=2){
+			bullets[i]= new Bullet(gs.fireBall1,10000,10000,0);
+		}
+		for(int i=1;i<20;i+=2){
+			bullets[i]= new Bullet(gs.fireBall2,10000,10000,0);
+		}
 	}
 
 
@@ -63,6 +75,25 @@ public class Monster extends AbstractCharacter implements Runnable{
 	@Override
 	public void attack() {
 		// TODO Auto-generated method stub
+		Random random=new Random();
+		int a=random.nextInt(2);
+		if(a==0)
+			bulletDirection="right";
+		else if(a==1)
+			bulletDirection="left";
+		if(bulletDirection.equals("right")){
+			bullets[bulletNumberRight%20].x=this.x+40;
+			bullets[bulletNumberRight%20].y=this.y+50;
+			bullets[bulletNumberRight%20].velocity=20;
+			bulletNumberRight+=2;
+		}
+		else if(bulletDirection.equals("left")){
+			bullets[bulletNumberLeft%20].x=this.x-12;
+			bullets[bulletNumberLeft%20].y=this.y+50;
+			bullets[bulletNumberLeft%20].velocity=-20;
+			bulletNumberLeft+=2;
+		}
+		
 		
 	}
 	
@@ -87,6 +118,15 @@ public class Monster extends AbstractCharacter implements Runnable{
 					ch.now_HP = 0;
 				ch.isMonsterTouch = true;
 			}
+		
+
+		for(Bullet bullet: bullets){
+			if(bullet.x>=ch.x && bullet.x<=ch.x+ch.chaImage.width && bullet.y>=ch.y+5 && bullet.y<=ch.y+ch.chaImage.height-5){
+				bullet.vanish();
+				gs.hurt();
+				ch.now_HP -=5;
+		}
+	}
    }
 	
 	public boolean isDead() {
@@ -97,9 +137,14 @@ public class Monster extends AbstractCharacter implements Runnable{
 			return false;
 	}
 	
+
 	public void vanish(){
 		this.x=10000;
 		this.y=10000;
+	}
+	
+	public Bullet[] getBullet(){
+		return bullets;
 	}
 	
 	int i = 0,j = 0;
@@ -111,6 +156,11 @@ public class Monster extends AbstractCharacter implements Runnable{
 				RandomMove();
 				beAttacked(gs.getCharacter());
 				CharacterBeAttacked(gs.getCharacter());
+				if(waitAttackTime>0)
+					waitAttackTime--;
+				if(waitAttackTime==0){
+					this.canAttack=true;
+				}
 				if(this.isDead())
 					vanish();
 				if(this.isboom == true) i ++;
@@ -119,12 +169,22 @@ public class Monster extends AbstractCharacter implements Runnable{
 					this.chaImage=gs.monster;
 					this.isboom = false;
 				}
+				if(this.canAttack){
+					this.attack();
+					Random random=new Random();
+					int a=random.nextInt(100);
+					this.waitAttackTime=200+a;
+					this.canAttack = false;
+				}
 				if(gs.getCharacter().isMonsterTouch == true) j ++;
 				if(j == 80) {
 					j = 0;
 					gs.getCharacter().isMonsterTouch = false;
 				}
 				move();
+				for(Bullet bullet: bullets){
+					bullet.move();
+				}
 				Thread.sleep(5);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block

@@ -4,10 +4,13 @@ import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import ddf.minim.AudioPlayer;
+import ddf.minim.Minim;
 import de.looksgood.ani.Ani;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
+
 
 
 public class GameStage extends PApplet{
@@ -16,7 +19,7 @@ public class GameStage extends PApplet{
 	private final static int width = 1000, height = 500;
 	
 	public PImage man, bullet, books, book, bloodletter, diamand, phone, skull, monster, monster2, strike, box, bed, ladder, door1, door2, man1, man2, man3, man4
-                  , man5, man6, man7, man8, man_c1, man_c2, dead_man, kidnap, kidnap2, fireBall1, fireBall2;
+                  , man5, man6, man7, man8, man_c1, man_c2, man_s1, man_s2,dead_man, kidnap, kidnap2, fireBall1, fireBall2;
 
 	public PImage[] man_a = new PImage[10];
 	private Character mainCharacter; 
@@ -39,6 +42,8 @@ public class GameStage extends PApplet{
 	private PFont cnFont;
 	public float GameOver_x = 350,GameOver_y = 0;
 	public int GameOver_color = 250, GameOver_color2 = 0;
+	Minim minim;
+	AudioPlayer song;
 	
 	public void setup() {
 		
@@ -67,6 +72,8 @@ public class GameStage extends PApplet{
 		this.man8 = loadImage("man_run8.png");
 		this.man_c1 = loadImage("man_climb1.png");
 		this.man_c2 = loadImage("man_climb2.png");
+		this.man_s1 = loadImage("man_sit1.png");
+		this.man_s2 = loadImage("man_sit2.png");
 		this.dead_man = loadImage("man_die.png");
 		this.kidnap = loadImage("kidnap.png");
 		this.kidnap2 = loadImage("kidnap2.png");
@@ -102,6 +109,9 @@ public class GameStage extends PApplet{
 		stage_2_door = stage_3_door = stage_5_floor = stage_5_box = true;
 		firststart = true;
 		loadData();
+		minim=new Minim(this);
+		song=minim.loadFile("shadow.mp3");
+		song.play();
 		
 	}
 	
@@ -350,7 +360,7 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(950,0,50, 500));
 			floors.add(new Floor(750,305,250, 15));
 			floors.add(new Floor(50,200,200, 15));
-			floors.add(new Floor(400,250,100, 15,300,550));//maybe can move(add left and right bound in the end)
+			floors.add(new Floor(400,250,100, 15,300,600));//maybe can move(add left and right bound in the end)
 			doors.add(new Door( 50, 320, door2, 2, 860, 60,true));
 			doors.add(new Door( 850, 320, door1, 5, 50, 320,true));
 			monsters.add(new Monster(this,monster,"none",200,220,100,this,150,250));
@@ -480,7 +490,7 @@ public class GameStage extends PApplet{
 		switch(keyCode)
 		{
 		case KeyEvent.VK_LEFT:
-			if(mainCharacter.now_HP > 0) {
+			if(!mainCharacter.isCrouch && mainCharacter.now_HP > 0) {
 			if(mainCharacter.isOnLadder){
 				mainCharacter.isOnLadder=false;
 				mainCharacter.y-=20;
@@ -492,7 +502,7 @@ public class GameStage extends PApplet{
 			}
 			break;
 		case KeyEvent.VK_RIGHT:
-			if(mainCharacter.now_HP > 0) {
+			if(!mainCharacter.isCrouch && mainCharacter.now_HP > 0) {
 			if(mainCharacter.isOnLadder){
 				mainCharacter.isOnLadder=false;
 				mainCharacter.y-=20;
@@ -504,16 +514,20 @@ public class GameStage extends PApplet{
 			}
 			break;
 		case KeyEvent.VK_SPACE://jump
-			if(mainCharacter.isGround && mainCharacter.now_HP > 0)
+			if(!mainCharacter.isCrouch && mainCharacter.isGround && mainCharacter.now_HP > 0)
 			{
 				mainCharacter.jump();
 				//mainCharacter.isWalk=false;
 			}
 			break;
 		case KeyEvent.VK_DOWN://down to ladder
+			if(!mainCharacter.isOnLadder && mainCharacter.isGround && mainCharacter.now_HP > 0){
+				mainCharacter.crouch();
+				mainCharacter.direction = "";
+			}
 			break;
 		case KeyEvent.VK_UP://up to ladder
-			if(mainCharacter.now_HP > 0) {
+			if(!mainCharacter.isCrouch && mainCharacter.now_HP > 0) {
 			for(Door d : doors)
 			{
 				if( whereisch(d) )
@@ -600,6 +614,10 @@ public class GameStage extends PApplet{
 		}
 		else if(keyCode == KeyEvent.VK_Z){
 			mainCharacter.isAttack = false;
+		}
+		
+		if(keyCode == KeyEvent.VK_DOWN && mainCharacter.isCrouch){
+			mainCharacter.unCrouch();
 		}
 			
 	}

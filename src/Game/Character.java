@@ -13,6 +13,7 @@ public class Character extends AbstractCharacter implements Runnable{
 	private int bulletNumber=0;
 	public boolean isMonsterTouch = false;
 	public boolean isOnLadder = false;
+	public boolean isCrouch = false;
 	
 	public Character(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs){
         Ani.init(parent);
@@ -110,6 +111,19 @@ public class Character extends AbstractCharacter implements Runnable{
 		
 		
 	}
+	
+	public void crouch(){
+		if(!isCrouch){
+			isCrouch = true;
+			this.y+=38;
+		}
+	}
+	
+	public void unCrouch(){
+		isCrouch = false;
+		chaImage = gs.getImage(gs.man);
+		this.y-=38;
+	}
     
 	public Bullet[] getBullet(){
 		return bullets;
@@ -177,7 +191,17 @@ public class Character extends AbstractCharacter implements Runnable{
 				if(waitAttackTime==0){
 					this.canAttack=true;
 				}
-				if(this.isOnLadder){
+				
+				if(this.isCrouch){
+					if(bulletDirection.equals("right")){
+						chaImage = gs.getImage(gs.man_s1);
+					}
+					else if(bulletDirection.equals("left")){
+						chaImage = gs.getImage(gs.man_s2);
+					}
+					
+				}
+				else if(this.isOnLadder){
 					if(i%80 == 0)
 						chaImage = gs.getImage(gs.man_c1);
 					if(i%80 == 40)

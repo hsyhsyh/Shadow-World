@@ -368,7 +368,7 @@ public class GameStage extends PApplet{
 //			t[1] = "";
 //			t[2] = "";
 			u = new String[1];
-			u[0] = "摸起來是箱子的東西居然用力推開會變成門......\n這到底是什麼地方啊.......";
+			u[0] = "摸起來是箱子的東西居然用力推開會變成門......\n這到底是什麼鬼地方啊.......";
 //			u[1] = "";
 //			u[2] = "";
 			items.add(new Box(box, 400, 282, this ,s,t, u, true));

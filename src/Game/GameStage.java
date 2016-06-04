@@ -102,7 +102,7 @@ public class GameStage extends PApplet{
 		//bullets = new ArrayList<Bullet>();
 		dialog = new Dialog();
 		
-		stage_num = 5;
+		stage_num = 8;
 		
 		
 		isLoading  = false;
@@ -605,9 +605,18 @@ public class GameStage extends PApplet{
 			}
 			break;
 		case KeyEvent.VK_DOWN://down to ladder
-			if(!mainCharacter.isOnLadder && mainCharacter.isGround && mainCharacter.now_HP > 0){
-				mainCharacter.crouch();
-				mainCharacter.direction = "";
+			if(mainCharacter.now_HP > 0) {
+				for(Ladder ladder : ladders)
+				{
+					if(ladder.isLadder(mainCharacter)){
+						mainCharacter.isOnLadder=true;
+						mainCharacter.velocityForDirectionY = -5;
+					}
+				}
+				if(!mainCharacter.isOnLadder && mainCharacter.isGround){
+					mainCharacter.crouch();
+					mainCharacter.direction = "";
+				}
 			}
 			break;
 		case KeyEvent.VK_UP://up to ladder

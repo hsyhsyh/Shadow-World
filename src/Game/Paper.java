@@ -5,7 +5,8 @@ import processing.core.PImage;
 public class Paper extends AbstractItem{
 
 //	private boolean switchs;
-	public Paper(PImage image,int x, int y, GameStage parent, String[] text1, String[] text2)
+	public Paper(PImage image ,int x, int y, GameStage parent, String[] text1, 
+			 boolean[] m1,String[] text2, boolean[] m2)
 	{
 		this.image = image;
 		this.x = x;
@@ -14,8 +15,9 @@ public class Paper extends AbstractItem{
 		height = image.height;
 		this.parent = parent;
 		this.text1 = text1;
+		mantalk1 = m1;
 		this.text2 = text2;
-//		switchs = false;
+		mantalk2 = m2;
 	}
 	@Override
 	public void display() {
@@ -24,7 +26,7 @@ public class Paper extends AbstractItem{
 	}
 
 	@Override
-	public String[] dialog_event() {
+	public void dialog_event() {
 		// TODO Auto-generated method stub
 //		if(this.switchs)
 //		{
@@ -32,8 +34,8 @@ public class Paper extends AbstractItem{
 			parent.stage_5_box = true;
 //			return text2;
 //		}
-		
-		return text1;
+		parent.opendialog(text1, mantalk1);
+//		return text1;
 	}
 
 }

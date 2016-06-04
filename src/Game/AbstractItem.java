@@ -7,6 +7,7 @@ abstract public class AbstractItem {
 	public int x,y;
 	protected int width,height;
 	protected String[] text1, text2;
+	protected boolean[] mantalk1,mantalk2;
 	protected PImage image;
 	protected GameStage parent;
 //	public void set(PImage simage ,int sx, int sy, PApplet sparent, String[] text1, String[] text2)
@@ -19,5 +20,5 @@ abstract public class AbstractItem {
 //		this.text2 = text2;
 //	}
 	abstract public void display();
-	abstract public String[] dialog_event();
+	abstract public void dialog_event();
 }

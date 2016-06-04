@@ -111,8 +111,7 @@ public class GameStage extends PApplet{
 		firststart = true;
 		loadData();
 		minim = new Minim(this);
-		song=minim.loadFile("shadow.mp3");
-		song.setVolume((float)0.02);
+		song=minim.loadFile("shadow.wav");
 		song.loop();
 		//song.play();
 		effect[0]=minim.loadFile("shoot.wav");

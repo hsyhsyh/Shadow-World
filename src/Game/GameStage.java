@@ -100,7 +100,7 @@ public class GameStage extends PApplet{
 		//bullets = new ArrayList<Bullet>();
 		dialog = new Dialog();
 		
-		stage_num = 3;
+		stage_num = 1;
 		
 		
 		isLoading  = false;
@@ -343,7 +343,7 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(950,0,50, 500));
 			floors.add(new Floor(750,305,250, 15));
 			floors.add(new Floor(50,200,200, 15));
-			floors.add(new Floor(400,250,100, 15,300,550));//maybe can move(add left and right bound in the end)
+			floors.add(new Floor(400,250,100, 15,300,600));//maybe can move(add left and right bound in the end)
 			doors.add(new Door( 50, 320, door2, 2, 860, 60,true));
 			doors.add(new Door( 850, 320, door1, 5, 50, 320,true));
 			monsters.add(new Monster(this,monster,"none",200,220,100,this,150,250));

@@ -92,7 +92,8 @@ public class Character extends AbstractCharacter implements Runnable{
 	
 	@Override
     public void attack(){
-		
+		gs.effect[0].loop();
+		gs.effect[0].play();
 		if(bulletDirection.equals("right")){
 			bullets[bulletNumber%20].x=this.x+40;
 			bullets[bulletNumber%20].y=this.y+15;

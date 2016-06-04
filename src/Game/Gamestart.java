@@ -38,6 +38,8 @@ public class Gamestart extends PApplet implements ActionListener {
 		this.add(statis);
 		}
 	public void draw() {
+		this.setLayout(null);
+    	image(this.startbg, -300, -300);
 		if(index<4){
     		image(imgs[index], 0, 0);
     		try{  
@@ -48,9 +50,7 @@ public class Gamestart extends PApplet implements ActionListener {
             	}  
     		index=index+1;  
     	}
-		else{
-	    	this.setLayout(null);
-	    	image(this.startbg, -300, -300);
+		else if(index >= 4){
 	    	this.start.setLocation(500,100);
 	    	this.start.setSize(100, 40);
 	    	start.addActionListener(this);
@@ -67,6 +67,7 @@ public class Gamestart extends PApplet implements ActionListener {
 	 		this.statis.setLocation(500, 300);
 	 		statis.addActionListener(this);
 	 		statis.setActionCommand("statis");
+	 		index=index+1;
 		}
 	   }
 	@Override
@@ -75,7 +76,6 @@ public class Gamestart extends PApplet implements ActionListener {
 			//start the game
 		}
 		else if("achievement".equals(e.getActionCommand())){
-			this.stop();
 			this.add(ach);
 		}
 		else if("statis".equals(e.getActionCommand())){

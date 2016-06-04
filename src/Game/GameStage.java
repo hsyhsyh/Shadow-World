@@ -45,6 +45,7 @@ public class GameStage extends PApplet{
 	public int GameOver_color = 250, GameOver_color2 = 0;
 	Minim minim;
 	AudioPlayer song;
+	public AudioPlayer effect[]=new AudioPlayer[10];
 	
 	public void setup() {
 		
@@ -113,9 +114,10 @@ public class GameStage extends PApplet{
 		firststart = true;
 		loadData();
 		minim = new Minim(this);
-		song=minim.loadFile("shadow.mp3");
-		song.play();
-		
+		song=minim.loadFile("shadow.wav");
+		song.loop();
+		//song.play();
+		effect[0]=minim.loadFile("shoot.wav");
 	}
 	
 	public void draw() 

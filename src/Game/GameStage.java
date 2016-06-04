@@ -4,10 +4,13 @@ import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import ddf.minim.AudioPlayer;
+import ddf.minim.Minim;
 import de.looksgood.ani.Ani;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
+
 
 
 public class GameStage extends PApplet{
@@ -39,6 +42,8 @@ public class GameStage extends PApplet{
 	private PFont cnFont;
 	public float GameOver_x = 350,GameOver_y = 0;
 	public int GameOver_color = 250, GameOver_color2 = 0;
+	Minim minim;
+	AudioPlayer song;
 	
 	public void setup() {
 		
@@ -104,6 +109,9 @@ public class GameStage extends PApplet{
 		stage_2_door = stage_3_door = stage_5_floor = stage_5_box = true;
 		firststart = true;
 		loadData();
+		minim=new Minim(this);
+		song=minim.loadFile("shadow.mp3");
+		song.play();
 		
 	}
 	
@@ -571,7 +579,7 @@ public class GameStage extends PApplet{
 			mainCharacter.isAttack = false;
 		}
 		
-		if(keyCode == KeyEvent.VK_DOWN){
+		if(keyCode == KeyEvent.VK_DOWN && mainCharacter.isCrouch){
 			mainCharacter.unCrouch();
 		}
 			

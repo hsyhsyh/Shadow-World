@@ -36,6 +36,9 @@ public class Deadman extends AbstractItem{
 			return text1;
 		}
 	}
+	public void getImage(PImage image) {
+		this.image = image;
+	}
 
 }
 

@@ -521,7 +521,7 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(950,0,50, 500));
 			floors.add(new Floor(750,200,250, 20));
 			doors.add(new Door( 850, 100, door2, 5, 450, 282,true));
-			ladders.add(new Ladder(750, 196, 4, ladder, this));
+			ladders.add(new Ladder(750, 190, 4, ladder, this));
 			s = new String[4];
 			s[0] = "地上寫著一段話\n雖然變成了深灰色，卻仍然可以讓人感覺出那是用血書寫而成的";
 			s[1] = "對不起，@%#.......\n我居然懷疑你劈腿......\n如果有來世，能讓我繼續守護妳嗎......";
@@ -645,16 +645,29 @@ public class GameStage extends PApplet{
 			}
 			break;
 		case KeyEvent.VK_SPACE://jump
-			if(!mainCharacter.isCrouch && mainCharacter.isGround && mainCharacter.now_HP > 0)
+			if(!mainCharacter.isOnLadder && !mainCharacter.isCrouch && mainCharacter.isGround && mainCharacter.now_HP > 0)
 			{
 				mainCharacter.jump();
 				//mainCharacter.isWalk=false;
 			}
 			break;
 		case KeyEvent.VK_DOWN://down to ladder
-			if(!mainCharacter.isOnLadder && mainCharacter.isGround && mainCharacter.now_HP > 0){
-				mainCharacter.crouch();
-				mainCharacter.direction = "";
+			if(mainCharacter.now_HP > 0) {
+				for(Ladder ladder : ladders)
+				{
+					if(ladder.isLadder(mainCharacter)){
+						if(!mainCharacter.isOnLadder)
+							mainCharacter.y-=12;
+						mainCharacter.isOnLadder=true;
+						if(ladder.isOnTopLadder(mainCharacter))
+							mainCharacter.isOnTopLadder=true;
+						mainCharacter.velocityForDirectionY = -5;
+					}
+				}
+				if(!mainCharacter.isOnLadder && mainCharacter.isGround){
+					mainCharacter.crouch();
+					mainCharacter.direction = "";
+				}
 			}
 			break;
 		case KeyEvent.VK_UP://up to ladder

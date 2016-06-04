@@ -40,6 +40,13 @@ public class Ladder {
 			return false;
 	}
 	
+	public boolean isOnTopLadder(AbstractCharacter ch){
+		if(ch.x<this.x+this.width && ch.x+ch.chaImage.width>this.x && ch.y+ch.chaImage.height<this.y+40 && ch.y+ch.chaImage.height>this.y-15)
+			return true;
+		else 
+			return false;
+	}
+	
 	public void vanish(){
 		this.x=10000;
 		this.y=10000;

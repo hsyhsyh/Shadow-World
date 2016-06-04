@@ -37,7 +37,8 @@ public class GameStage extends PApplet{
 	private boolean is_transport;
 	private boolean is_hurt;
 	public boolean firststart,stage_2_door,stage_3_door,stage_5_floor, stage_5_box_1
-			,stage_5_box_2, stage_8_bookcase_1, stage_8_bookcase_2,be_end,the_end;
+			,stage_5_box_2, stage_8_bookcase_1, stage_8_bookcase_2,be_end,the_end
+			,end_dialog;
 	private int alpha;
 	public int goalX,goalY;
 	private PFont cnFont;
@@ -102,7 +103,7 @@ public class GameStage extends PApplet{
 		//bullets = new ArrayList<Bullet>();
 		dialog = new Dialog();
 		
-		stage_num = 5;
+		stage_num = 1;
 		
 		
 		isLoading  = false;
@@ -110,7 +111,7 @@ public class GameStage extends PApplet{
 		is_transport = false;
 		stage_2_door = stage_3_door = stage_5_floor = stage_5_box_1 
 				= stage_5_box_2 = stage_8_bookcase_1 = stage_8_bookcase_2 = be_end 
-				= the_end = true;
+				= the_end = end_dialog = false;
 		firststart = true;
 		loadData();
 		minim = new Minim(this);
@@ -198,6 +199,35 @@ public class GameStage extends PApplet{
         	image(bullet.getImage(),bullet.x,bullet.y);
         	}
    
+        if(end_dialog)
+		{
+        	is_hurt = false;
+			fill(0,0,0,alpha);
+        	rect(0,0,width,height);
+        	if(alpha == 255)
+        	{
+//        		loadData();
+//        		Ani.to(this, (float)1.5, "alpha", 0);
+        		String[] en = new String[8];
+        		en[0] = "喂！你睡一整天了耶！\n身為你的室友我真的看不下去了，你是要不要起床啊？";
+        		en[1] = "我......回來了？我沒死？";
+        		en[2] = "你在說什麼啊？\n喂我跟你說，今天老師說他期末考有一題改錯了，所以幾乎全班都有加到分";
+        		en[3] = "所以說......";
+        		en[4] = "所以說你沒有被二一";
+        		en[5] = "喔喔喔太好啦！";
+        		en[6] = "喂高興就高興，不要鬼吼鬼叫的吵死啦！";
+        		en[7] = "管你的哈哈哈！";
+        		boolean[] as = new boolean[8];
+        		as[0] = as[1] = as[2] = as[3] = as[4] = as[5] =as[6] = false;
+        		as[7] = as[8] = false;
+        		opendialog(en,as);
+//        		===================the end=====================
+        	}
+//        	if(alpha == 0)
+//        	{
+//        		is_transport = false;
+//        	}
+		}
         
         if(hasdialog)
         {
@@ -231,6 +261,8 @@ public class GameStage extends PApplet{
         		is_transport = false;
         	}
         }
+		
+		
 		
 		//Game over
 		if(mainCharacter.now_HP <= 0) {
@@ -307,16 +339,31 @@ public class GameStage extends PApplet{
 			if(the_end)
 			{
 				u = new String[2];
-				u[0] = "";
-				u[1] = "";
-//				u[2] = "";
-//				u[3] = "";
+				u[0] = "最後，還是回到這裡了嗎......\n看來好像出不去了呢......";
+				u[1] = "昨天我還因為成績而覺得沮喪，沒想到一覺醒來之後就再也回不去了......";
+				u[2] = "哈哈......\n成績不好又怎樣？被二一了又怎樣？只要還活著就還有機會啊！";
+				u[3] = "我現在才終於了解，人總是要失去了才懂得珍惜啊......";
 				c = new boolean[2];
 				c[0] = true;
 				c[1] = true;
-//				c[2] = true;
-//				c[3] = true;
+				c[2] = true;
+				c[3] = true;
 				opendialog(u,c);
+				Thread e = new Thread(new Runnable(){
+					public void run()
+					{
+						while(true)
+						{
+							if(!hasdialog)
+							{
+								end_dialog = true;
+								Ani.to(this, (float)1.5, "alpha", 255);
+								break;
+							}
+						}
+					}
+				});
+				e.start();
 				the_end = false;
 			}
 			break;

@@ -5,7 +5,8 @@ import processing.core.PImage;
 public class Deadman extends AbstractItem{
 
 	private boolean switchs;
-	public Deadman(PImage image ,int x, int y, GameStage parent, String[] text1, String[] text2)
+	public Deadman(PImage image ,int x, int y, GameStage parent, String[] text1, 
+			 boolean[] m1,String[] text2, boolean[] m2)
 	{
 		this.image = image;
 		this.x = x;
@@ -14,7 +15,9 @@ public class Deadman extends AbstractItem{
 		height = image.height;
 		this.parent = parent;
 		this.text1 = text1;
+		mantalk1 = m1;
 		this.text2 = text2;
+		mantalk2 = m2;
 		switchs = false;
 	}
 	@Override
@@ -24,16 +27,16 @@ public class Deadman extends AbstractItem{
 	}
 
 	@Override
-	public String[] dialog_event() {
+	public void dialog_event() {
 		// TODO Auto-generated method stub
 		if(this.switchs)
 		{
-			return text2;
+			parent.opendialog(text2,mantalk2);
 		}
 		else
 		{
 			this.switchs = true;
-			parent.opendialog(text1);
+			parent.opendialog(text1,mantalk1);
 			Thread s = new Thread(new Runnable(){
 				public void run()
 				{
@@ -50,7 +53,7 @@ public class Deadman extends AbstractItem{
 				}
 			});
 			s.start(); 
-			return null;
+//			return null;
 		}
 	}
 	public void getImage(PImage image) {

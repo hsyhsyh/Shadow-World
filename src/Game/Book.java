@@ -6,7 +6,9 @@ public class Book extends AbstractItem{
 
 	private boolean isspecial, isdone;
 	private String[] text3;
-	public Book(PImage image ,int x, int y, GameStage parent, String[] text1, String[] text2, String[] text3, boolean special)
+	private boolean[] mantalk3;
+	public Book(PImage image ,int x, int y, GameStage parent, String[] text1, boolean[] m1,
+			String[] text2, boolean[] m2, String[] text3, boolean[] m3, boolean special)
 	{
 		this.image = image;
 		this.x = x;
@@ -15,8 +17,11 @@ public class Book extends AbstractItem{
 		height = image.height * 2;
 		this.parent = parent;
 		this.text1 = text1;
+		mantalk1 = m1;
 		this.text2 = text2;
+		mantalk2 = m2;
 		this.text3 = text3;
+		mantalk3 = m3;
 		isspecial = special;
 		isdone = false;
 	}
@@ -24,25 +29,32 @@ public class Book extends AbstractItem{
 	public void display() {
 		// TODO Auto-generated method stub
 		parent.image(image, x, y, 150, 150);
-//		parent.image(image, x + image.width/2, y);
-//		parent.image(image, x, y + image.height);
-//		parent.image(image, x + image.width, y + image.height);
 	}
 
 	@Override
-	public String[] dialog_event() {
+	public void dialog_event() {
 		// TODO Auto-generated method stub
-		if(isspecial && !isdone)
+		if(isspecial && !isdone && parent.stage_5_box)
 		{
-			parent.stage_5_floor = true;
+//			parent.stage_5_floor = true;
 			isdone = true;
-			return text2;
+			parent.opendialog(text2, mantalk2);
+
+//			return null;
+			
 		}
-		else if(isspecial)
+		else if(isspecial && isdone)
 		{
-			return text3;
+			parent.opendialog(text3,mantalk3);
+
+			
+//	 		return null;
 		}
-		return text1;
+		else
+		{
+			parent.opendialog(text1,mantalk1);
+		}
+		
 	}
 
 }

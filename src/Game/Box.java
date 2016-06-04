@@ -6,8 +6,9 @@ public class Box extends AbstractItem{
 
 	private boolean isspecial, isdone;
 	private String[] text3;
-	public Box(PImage image ,int x, int y, GameStage parent, String[] text1,
-									String[] text2, String[] text3, boolean special)
+	private boolean[] mantalk3;
+	public Box(PImage image ,int x, int y, GameStage parent, String[] text1, boolean[] m1,
+			String[] text2, boolean[] m2, String[] text3, boolean[] m3, boolean special)
 	{
 		this.image = image;
 		this.x = x;
@@ -16,8 +17,11 @@ public class Box extends AbstractItem{
 		height = image.height * 2;
 		this.parent = parent;
 		this.text1 = text1;
+		mantalk1 = m1;
 		this.text2 = text2;
+		mantalk2 = m2;
 		this.text3 = text3;
+		mantalk3 = m3;
 		isspecial = special;
 		isdone = false;
 	}
@@ -30,19 +34,19 @@ public class Box extends AbstractItem{
 	}
 
 	@Override
-	public String[] dialog_event() {
+	public void dialog_event() {
 		// TODO Auto-generated method stub
 		if(isspecial && !isdone && parent.stage_5_box)
 		{
 //			parent.stage_5_floor = true;
 			isdone = true;
-			parent.opendialog(text2);
+			parent.opendialog(text2, mantalk2);
 			Thread s = new Thread(new Runnable(){
 				public void run()
 				{
 					while(true)
 					{
-//						System.out.println(parent.hasdialog);
+						System.out.println(parent.hasdialog);
 						if(!parent.hasdialog)
 						{
 //							System.out.println(parent.hasdialog);
@@ -55,12 +59,12 @@ public class Box extends AbstractItem{
 				}
 			});
 			s.start(); 
-			return null;
+//			return null;
 			
 		}
 		else if(isspecial && isdone)
 		{
-			parent.opendialog(text3);
+			parent.opendialog(text3,mantalk3);
 			Thread s = new Thread(new Runnable(){
 				public void run()
 				{
@@ -80,9 +84,13 @@ public class Box extends AbstractItem{
 			});
 			s.start(); 
 			
-	 		return null;
+//	 		return null;
 		}
-		return text1;
+		else
+		{
+			parent.opendialog(text1,mantalk1);
+		}
+		
 	}
 
 }

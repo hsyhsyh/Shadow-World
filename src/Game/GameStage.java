@@ -93,7 +93,7 @@ public class GameStage extends PApplet{
 		//bullets = new ArrayList<Bullet>();
 		dialog = new Dialog();
 		
-		stage_num = 3;
+		stage_num = 5;
 		
 		
 		isLoading  = false;
@@ -235,6 +235,7 @@ public class GameStage extends PApplet{
 		mainCharacter.deleteLadder();
 		System.out.println(stage_num);
 		String[] s,t,u;
+		boolean[] a,b,c;
 		switch(stage_num)
 		{
 		case 0://test stage
@@ -267,7 +268,10 @@ public class GameStage extends PApplet{
 			s = new String[2];
 			s[0] = "雖然失去了色彩，但還是看的出來這就是自己的位置。\n在枕頭和書桌的正中央各貼著一張紙條。";
 			s[1] = "左右方向鍵行走，上方向鍵可以開門以及爬梯子，下方向鍵可以蹲下\n以及下梯子，A鍵可以調查事物，Z鍵可以發射子彈。";
-			items.add(new Bed(bed, 60, 110, this ,s, null));
+			a = new boolean[2];
+			a[0] = false;
+			a[1] = false;
+			items.add(new Bed(bed, 60, 110, this ,s,a, null,null));
 			mainCharacter.addFloor(floors);
 			mainCharacter.addLadder(ladders);
 			if(firststart)
@@ -279,7 +283,10 @@ public class GameStage extends PApplet{
 				start[3] = "這裡是......宿舍？為什麼都是黑白的？\n到底......發生什麼事了？";
 				start[4] = "呃？在我枕頭底下這個難道是......槍？\n為什麼我會有這種東西？";
 				start[5] = "......\n不管了，先到處看看再說。";
-				opendialog(start);
+				a = new boolean[6];
+				a[0] = a[1] = a[2] = a[3] = a[4] = a[5] = true;
+//				a[1] = true;
+				opendialog(start,a);
 				firststart = false;
 			}
 			break;
@@ -319,10 +326,20 @@ public class GameStage extends PApplet{
 			s[1] = "喂？......喂！\n「沒想到我最後一次跟我媽說話竟然是跟她吵架」？\n不要隨便替自己立flag啊！";
 			s[2] = "喂！什麼叫「我把希望交給你了」，說的好像是你的遺言似的\n想點正面的東西對你的生命比較好不是嗎？";
 			s[3] = "喂喂！\n......交給我這把鑰匙之後居然就真的死了\n嘖，這種被託付希望的感覺真不好受。";
+			a = new boolean[4];
+			a[0] = true;
+			a[1] = true;
+			a[2] = true;
+			a[3] = true;
 			t = new String[2];
 			t[0] = "雖然找不到任何傷口，卻一動也不動的冰冷遺體。";
 			t[1] = "嘖......\n我會連你的份一起活下去的，你就好好安息吧。";
-			items.add(new Deadman(kidnap,600,255,this,s,t));
+			b = new boolean[2];
+			b[0] = false;
+			b[1] = true;
+//			b[2] = true;
+//			b[3] = true;
+			items.add(new Deadman(kidnap,600,255,this,s, a,t,b));
 			monsters.add(new Monster(this,monster,"none",400,220,100,this,350,450));
 			mainCharacter.addFloor(floors);
 			break;
@@ -341,13 +358,21 @@ public class GameStage extends PApplet{
 			s = new String[2];
 			s[0] = "宛如壁紙一般，側面看過去甚至看不見的箱子\n詭異的是，從正面伸手居然還摸的到木質般的實體";
 			s[1] = "這是什麼鬼箱子啊......\n碰都不想碰......";
-			items.add(new Box(box, 250, 282, this ,s, null, null, false));
+			a = new boolean[2];
+			a[0] = false;
+			a[1] = true;
+			items.add(new Box(box, 250, 282, this ,s,a, null,null,null,null, false));
 			t = new String[4];
 			t[0] = "牆壁上貼著一張便利貼，似乎才剛貼上去不久。\n上面以潦草的字跡寫了一段話。";
 			t[1] = "我是@%#，我家閃光正要去前面那個房間，說是在箱子中找到一扇門\n如果你有看到的話，就往前走吧";
 			t[2] = "對不起，跟你分開之後，我想了一想，我不應該為了開冷氣這種小事跟你吵架的，如果可以從這裡出去，我們還會是好室友，好閨蜜口";
 			t[3] = "嘖，最後一句話好像沒寫完，真令人在意......\n那個遮住名字的污漬也是......";
-			items.add(new Paper(bloodletter, 90, 140, this ,t, null));
+			b = new boolean[4];
+			b[0] = false;
+			b[1] = false;
+			b[2] = false;
+			b[3] = true;
+			items.add(new Paper(bloodletter, 90, 140, this ,t,b,null, null));
 			mainCharacter.addFloor(floors);
 			break;
 		case 5:
@@ -364,15 +389,22 @@ public class GameStage extends PApplet{
 			s = new String[2];
 			s[0] = "宛如壁紙一般，側面看過去甚至看不見的箱子\n詭異的是，從正面伸手居然還摸的到木質般的實體";
 			s[1] = "這是什麼鬼箱子啊......\n碰都不想碰......";
+			a = new boolean[2];
+			a[0] = false;
+			a[1] = true;
 			t = new String[1];
 			t[0] = "如果紙條寫的是對的話，那這裡應該會有門......\n咦咦還真的有！";
+			b = new boolean[1];
+			b[0] = true;
 //			t[1] = "";
 //			t[2] = "";
 			u = new String[1];
 			u[0] = "摸起來是箱子的東西居然用力推開會變成門......\n這到底是什麼鬼地方啊.......";
 //			u[1] = "";
 //			u[2] = "";
-			items.add(new Box(box, 400, 282, this ,s,t, u, true));
+			c = new boolean[1];
+			c[0] = true;
+			items.add(new Box(box, 400, 282, this ,s,a,t,b, u,c, true));
 			if(stage_5_floor)
 			{
 				floors.add(new Floor(450,250,150, 15));
@@ -417,7 +449,7 @@ public class GameStage extends PApplet{
 			ladders.add(new Ladder(85, 370, 1, ladder, this));
 			ladders.add(new Ladder(880, 130, 4, ladder, this));
 			doors.add(new Door( 50, 150, door2, 7, 850, 320,true));
-			items.add(new Book(books,450,100,this,null,null, null, true));
+			items.add(new Book(books,450,100,this,null,null,null,null,null, null, true));
 			mainCharacter.addFloor(floors);
 			mainCharacter.addLadder(ladders);
 			break;
@@ -499,7 +531,10 @@ public class GameStage extends PApplet{
 						String[] s = new String[2];
 						s[0] = "不知道是用什麼材質做成的淺灰色門板，就算用腳踹門也不會發出任何\n聲音。";
 						s[1] = "打不開啊.......\n是少了鑰匙嗎？";
-						opendialog(s);
+						boolean[] a = new boolean[2];
+						a[0] = false;
+						a[1] = true;
+						opendialog(s,a);
 					}
 					break;
 				}
@@ -522,16 +557,16 @@ public class GameStage extends PApplet{
 				{
 					if(whereisch(i))
 					{
-						String text[] = i.dialog_event();
+						i.dialog_event();
 //						String text[] = new String[2];
 //						textFont(cnFont);
 //						text[0] = "測試";
 //						text[1] = "test";
-						if( isnotdone && (text != null) )//if need dialog
-						{
-							opendialog(text);
-							break;
-						}
+//						if( isnotdone && (text != null) )//if need dialog
+//						{
+//							opendialog(text);
+//							break;
+//						}
 					}
 				}
 			}
@@ -568,12 +603,16 @@ public class GameStage extends PApplet{
 		}
 			
 	}
-	public void opendialog(String[] text)
+	public void opendialog(String[] text, boolean[] m)
 	{
-		hasdialog = true;
-		dialog.open();
-		dialog.settext(text);
-		dialog.showtext();
+		if(text != null)
+		{
+			hasdialog = true;
+			
+			dialog.settext(text,m);
+			dialog.open();
+			dialog.showtext();
+		}
 	}
 	public PImage getImage(PImage image) {
 		return image;
@@ -588,6 +627,7 @@ public class GameStage extends PApplet{
 		private int textnum;
 		private int textpagenum;
 		private int now_textpagenum;
+		private boolean[] mantalk;
 		public Dialog()
 		{
 			wide = 1;
@@ -629,6 +669,7 @@ public class GameStage extends PApplet{
 				textnum = 0;
 				Ani.to(this, (float)(text[now_textpagenum].length()*0.1),
 						"textnum", text[now_textpagenum].length(), Ani.LINEAR);
+				showman();
 			}
 			else if (textnum == text[now_textpagenum].length() && now_textpagenum == textpagenum)
 			{
@@ -639,7 +680,8 @@ public class GameStage extends PApplet{
 		{
 			Ani.to(this, (float)1.0, "wide", 950, Ani.SINE_OUT);
 			Ani.to(this, (float)1.0, "high", 150, Ani.SINE_OUT);
-			Ani.to(this, (float)0.3, "manX", 20, Ani.SINE_OUT);
+//			Ani.to(this, (float)0.3, "manX", 20, Ani.SINE_OUT);
+			showman();
 		}
 		private void closed()
 		{
@@ -650,18 +692,32 @@ public class GameStage extends PApplet{
 			Ani.to(this, (float)0.5, "high", 1, Ani.SINE_OUT);
 			Ani.to(this, (float)0.3, "manX", -200, Ani.SINE_OUT);
 		}
-		public void settext(String[] t)
+		public void settext(String[] t, boolean[] m)
 		{
+			mantalk = m;
 			textpagenum = t.length - 1;
 			text = new String[textpagenum];
 			now_textpagenum = 0;
 			text = t;
 			textnum = 0;
+//			System.out.println(mantalk[0]);
 		}
 		public void showtext()
 		{
 			Ani.to(this, (float)(text[now_textpagenum].length()*0.1),
 							"textnum", text[now_textpagenum].length(), Ani.LINEAR);
+		}
+		private void showman()
+		{
+//			System.out.println(mantalk[0]);
+			if(mantalk[now_textpagenum])
+			{
+				Ani.to(this, (float)0.3, "manX", 20, Ani.SINE_OUT);
+			}
+			else
+			{
+				Ani.to(this, (float)0.3, "manX", -200, Ani.SINE_OUT);
+			}
 		}
 	}
 	

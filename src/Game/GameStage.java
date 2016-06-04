@@ -16,7 +16,7 @@ public class GameStage extends PApplet{
 	private final static int width = 1000, height = 500;
 	
 	public PImage man, bullet, books, book, bloodletter, diamand, phone, skull, monster, monster2, strike, box, bed, ladder, door1, door2, man1, man2, man3, man4
-                  , man5, man6, man7, man8, man_c1, man_c2, dead_man, fireBall1, fireBall2;
+                  , man5, man6, man7, man8, man_c1, man_c2, dead_man, kidnap, kidnap2, fireBall1, fireBall2;
 
 	public PImage[] man_a = new PImage[10];
 	private Character mainCharacter; 
@@ -57,7 +57,6 @@ public class GameStage extends PApplet{
 		this.diamand = loadImage("diamand.png");
 		this.skull = loadImage("skull.png");
 		this.man = loadImage("man2.png");
-		this.dead_man = loadImage("man_die.png");
 		this.man1 = loadImage("man_run1.png");
 		this.man2 = loadImage("man_run2.png");
 		this.man3 = loadImage("man_run3.png");
@@ -69,6 +68,8 @@ public class GameStage extends PApplet{
 		this.man_c1 = loadImage("man_climb1.png");
 		this.man_c2 = loadImage("man_climb2.png");
 		this.dead_man = loadImage("man_die.png");
+		this.kidnap = loadImage("kidnap.png");
+		this.kidnap2 = loadImage("kidnap2.png");
 		int i;
 		for(i = 1; i <= 8; i++){
 			this.man_a[i] = loadImage("man_gun"+Integer.toString(i)+".png");
@@ -321,7 +322,7 @@ public class GameStage extends PApplet{
 			t = new String[2];
 			t[0] = "雖然找不到任何傷口，卻一動也不動的冰冷遺體。";
 			t[1] = "嘖......\n我會連你的份一起活下去的，你就好好安息吧。";
-			items.add(new Deadman(dead_man,600,265,this,s,t));
+			items.add(new Deadman(kidnap,600,255,this,s,t));
 			monsters.add(new Monster(this,monster,"none",400,220,100,this,350,450));
 			mainCharacter.addFloor(floors);
 			break;

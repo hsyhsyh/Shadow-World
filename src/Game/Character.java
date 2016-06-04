@@ -13,6 +13,7 @@ public class Character extends AbstractCharacter implements Runnable{
 	private int bulletNumber=0;
 	public boolean isMonsterTouch = false;
 	public boolean isOnLadder = false;
+	public boolean isOnTopLadder = false;
 	public boolean isCrouch = false;
 	
 	public Character(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs){
@@ -49,7 +50,7 @@ public class Character extends AbstractCharacter implements Runnable{
     		{
     			velocityForDirectionY = 0;
     		}
-    		else if(floor.IsGround(this) && velocityForDirectionY<0)
+    		else if(isGround && velocityForDirectionY<0 && !isOnTopLadder)
     		{
     			velocityForDirectionY=0;
     		}
@@ -183,6 +184,16 @@ public class Character extends AbstractCharacter implements Runnable{
 						if(ladder.isLadder(this))
 						{
 							isOnLadder=true;
+							break;
+						}
+					}
+				}
+				if(isOnTopLadder){
+					isOnTopLadder=false;
+					for(Ladder ladder : ladders){
+						if(ladder.isOnTopLadder(this))
+						{
+							isOnTopLadder=true;
 							break;
 						}
 					}

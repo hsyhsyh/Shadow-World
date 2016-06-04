@@ -609,7 +609,11 @@ public class GameStage extends PApplet{
 				for(Ladder ladder : ladders)
 				{
 					if(ladder.isLadder(mainCharacter)){
+						if(!mainCharacter.isOnLadder)
+							mainCharacter.y-=12;
 						mainCharacter.isOnLadder=true;
+						if(ladder.isOnTopLadder(mainCharacter))
+							mainCharacter.isOnTopLadder=true;
 						mainCharacter.velocityForDirectionY = -5;
 					}
 				}

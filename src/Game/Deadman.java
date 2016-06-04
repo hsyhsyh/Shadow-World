@@ -33,7 +33,24 @@ public class Deadman extends AbstractItem{
 		else
 		{
 			this.switchs = true;
-			return text1;
+			parent.opendialog(text1);
+			Thread s = new Thread(new Runnable(){
+				public void run()
+				{
+					while(true)
+					{
+						System.out.println(parent.hasdialog);
+						if(!parent.hasdialog)
+						{
+//							System.out.println(parent.hasdialog);
+							image = parent.kidnap2;
+							break;
+						}
+					}
+				}
+			});
+			s.start(); 
+			return null;
 		}
 	}
 	public void getImage(PImage image) {

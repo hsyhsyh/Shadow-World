@@ -93,7 +93,7 @@ public class GameStage extends PApplet{
 		//bullets = new ArrayList<Bullet>();
 		dialog = new Dialog();
 		
-		stage_num = 5;
+		stage_num = 3;
 		
 		
 		isLoading  = false;

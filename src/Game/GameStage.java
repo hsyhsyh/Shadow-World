@@ -598,7 +598,7 @@ public class GameStage extends PApplet{
 			}
 			break;
 		case KeyEvent.VK_SPACE://jump
-			if(!mainCharacter.isCrouch && mainCharacter.isGround && mainCharacter.now_HP > 0)
+			if(!mainCharacter.isOnLadder && !mainCharacter.isCrouch && mainCharacter.isGround && mainCharacter.now_HP > 0)
 			{
 				mainCharacter.jump();
 				//mainCharacter.isWalk=false;

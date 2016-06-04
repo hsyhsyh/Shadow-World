@@ -20,7 +20,7 @@ import processing.core.PApplet;
 public class Achieve extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	boolean achieve1, achieve2, achieve3, achieve4, achieve5, achieve6, achieve7, achieve8;
-	JLabel label1, label2, label3, label4, label5, label6, label7, label8;
+	JLabel label1, label2, label3, label4, label5, label6, label7, label8, label9;
 	BufferedImage image1 = null;
 	BufferedImage image2 = null;
 	BufferedImage image3 = null;
@@ -29,17 +29,18 @@ public class Achieve extends JPanel implements ActionListener{
 	BufferedImage image6 = null;
 	BufferedImage image7 = null;
 	BufferedImage image8 = null;
+	BufferedImage image9 = null;
 	Gamestart game;
 	public Achieve(Gamestart ga){
 		this.game = ga; 
-		achieve1 = false;
-		achieve2 = false;
-		achieve3 = false;
-		achieve4 = false;
-		achieve5 = false;
-		achieve6 = false;
-		achieve7 = false;
-		achieve8 = false;
+		achieve1 = true;
+		achieve2 = true;
+		achieve3 = true;
+		achieve4 = true;
+		achieve5 = true;
+		achieve6 = true;
+		achieve7 = true;
+		achieve8 = true;
 		File file1 = new File("achieve1.png");
 		File file2 = new File("achieve2.png");
 		File file3 = new File("achieve3.png");
@@ -48,6 +49,7 @@ public class Achieve extends JPanel implements ActionListener{
 		File file6 = new File("achieve6.png");
 		File file7 = new File("achieve7.png");
 		File file8 = new File("achieve8.png");
+		File file9 = new File("startbg.png");
 		try {
 			this.image1 = ImageIO.read(file1);
 			this.image2 = ImageIO.read(file2);
@@ -57,6 +59,7 @@ public class Achieve extends JPanel implements ActionListener{
 			this.image6 = ImageIO.read(file6);
 			this.image7 = ImageIO.read(file7);
 			this.image8 = ImageIO.read(file8);
+			this.image9 = ImageIO.read(file9);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -68,50 +71,54 @@ public class Achieve extends JPanel implements ActionListener{
 		this.label6 = new JLabel(new ImageIcon(this.image6));
 		this.label7 = new JLabel(new ImageIcon(this.image7));
 		this.label8 = new JLabel(new ImageIcon(this.image8));
+		this.label9 = new JLabel(new ImageIcon(this.image9));
 	}
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
-		this.setSize(800, 500);
-		this.setLocation(300, 0);
+		this.setSize(1000, 500);
+		this.setLocation(0, 0);
+		this.add(this.label9, -1);
+		label9.setSize(1000,500);
+		label9.setLocation(0, 0);
 		if(achieve1){
-			this.add(this.label1);
-			label1.setSize(50,50);
+			this.add(this.label1, 0);
+			label1.setSize(100,100);
 			label1.setLocation(100, 100);
 		}
-		else if(achieve2){
-			this.add(this.label2);
-			label2.setSize(50,50);
-			label2.setLocation(150, 100);
+		if(achieve2){
+			this.add(this.label2, 0);
+			label2.setSize(100,100);
+			label2.setLocation(300, 100);
 		}
-		else if(achieve3){
-			this.add(this.label3);
-			label3.setSize(50,50);
-			label3.setLocation(200, 100);
+		if(achieve3){
+			this.add(this.label3, 0);
+			label3.setSize(100,100);
+			label3.setLocation(500, 100);
 		}
-		else if(achieve4){
-			this.add(this.label4);
-			label4.setSize(50,50);
-			label4.setLocation(250, 100);
+		if(achieve4){
+			this.add(this.label4, 0);
+			label4.setSize(100,100);
+			label4.setLocation(700, 100);
 		}
-		else if(achieve5){
-			this.add(this.label5);
-			label5.setSize(50,50);
-			label5.setLocation(100, 200);
+		if(achieve5){
+			this.add(this.label5, 0);
+			label5.setSize(100,100);
+			label5.setLocation(100, 300);
 		}
-		else if(achieve6){
-			this.add(this.label6);
-			label6.setSize(50,50);
-			label6.setLocation(150, 200);
+		if(achieve6){
+			this.add(this.label6, 0);
+			label6.setSize(100,100);
+			label6.setLocation(300, 300);
 		}
-		else if(achieve7){
-			this.add(this.label7);
-			label7.setSize(50,50);
-			label7.setLocation(200, 200);
+		if(achieve7){
+			this.add(this.label7, 0);
+			label7.setSize(100,100);
+			label7.setLocation(500, 300);
 		}
-		else if(achieve8){
-			this.add(this.label8);
-			label8.setSize(50,50);
-			label8.setLocation(250, 200);
+		if(achieve8){
+			this.add(this.label8, 0);
+			label8.setSize(100,100);
+			label8.setLocation(700, 300);
 		}
 		JButton button = new JButton("Return");
 		button.addActionListener(this);
@@ -124,6 +131,32 @@ public class Achieve extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if("return".equals(e.getActionCommand())){
 			this.game.start();
+		}
+	}
+	public void setachieve(int num){
+		if(num == 1){
+			achieve1 = true;
+		}
+		if(num == 2){
+			achieve2 = true;
+		}
+		if(num == 3){
+			achieve3 = true;
+		}
+		if(num == 4){
+			achieve4 = true;
+		}
+		if(num == 5){
+			achieve5 = true;
+		}
+		if(num == 6){
+			achieve6 = true;
+		}
+		if(num == 7){
+			achieve7 = true;
+		}
+		if(num == 8){
+			achieve8 = true;
 		}
 	}
 }

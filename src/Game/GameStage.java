@@ -109,7 +109,7 @@ public class GameStage extends PApplet{
 		stage_2_door = stage_3_door = stage_5_floor = stage_5_box = true;
 		firststart = true;
 		loadData();
-		minim=new Minim(this);
+		minim = new Minim(this);
 		song=minim.loadFile("shadow.mp3");
 		song.play();
 		

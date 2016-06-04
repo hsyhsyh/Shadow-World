@@ -489,8 +489,10 @@ public class GameStage extends PApplet{
 			}
 			break;
 		case KeyEvent.VK_DOWN://down to ladder
-			if(mainCharacter.isGround && mainCharacter.now_HP > 0)
+			if(!mainCharacter.isOnLadder && mainCharacter.isGround && mainCharacter.now_HP > 0){
 				mainCharacter.crouch();
+				mainCharacter.direction = "";
+			}
 			break;
 		case KeyEvent.VK_UP://up to ladder
 			if(!mainCharacter.isCrouch && mainCharacter.now_HP > 0) {

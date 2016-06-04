@@ -102,7 +102,7 @@ public class GameStage extends PApplet{
 		//bullets = new ArrayList<Bullet>();
 		dialog = new Dialog();
 		
-		stage_num = 8;
+		stage_num = 6;
 		
 		
 		isLoading  = false;
@@ -474,7 +474,7 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(950,0,50, 500));
 			floors.add(new Floor(750,200,250, 20));
 			doors.add(new Door( 850, 100, door2, 5, 450, 282,true));
-			ladders.add(new Ladder(750, 196, 4, ladder, this));
+			ladders.add(new Ladder(750, 190, 4, ladder, this));
 			s = new String[4];
 			s[0] = "地上寫著一段話\n雖然變成了深灰色，卻仍然可以讓人感覺出那是用血書寫而成的";
 			s[1] = "對不起，@%#.......\n我居然懷疑你劈腿......\n如果有來世，能讓我繼續守護妳嗎......";

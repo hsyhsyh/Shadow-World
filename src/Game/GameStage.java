@@ -16,7 +16,7 @@ public class GameStage extends PApplet{
 	private final static int width = 1000, height = 500;
 	
 	public PImage man, bullet, books, book, bloodletter, diamand, phone, skull, monster, monster2, strike, box, bed, ladder, door1, door2, man1, man2, man3, man4
-                  , man5, man6, man7, man8, man_c1, man_c2, dead_man, kidnap, kidnap2, fireBall1, fireBall2;
+                  , man5, man6, man7, man8, man_c1, man_c2, man_s1, man_s2,dead_man, kidnap, kidnap2, fireBall1, fireBall2;
 
 	public PImage[] man_a = new PImage[10];
 	private Character mainCharacter; 
@@ -67,6 +67,8 @@ public class GameStage extends PApplet{
 		this.man8 = loadImage("man_run8.png");
 		this.man_c1 = loadImage("man_climb1.png");
 		this.man_c2 = loadImage("man_climb2.png");
+		this.man_s1 = loadImage("man_sit1.png");
+		this.man_s2 = loadImage("man_sit2.png");
 		this.dead_man = loadImage("man_die.png");
 		this.kidnap = loadImage("kidnap.png");
 		this.kidnap2 = loadImage("kidnap2.png");
@@ -448,7 +450,7 @@ public class GameStage extends PApplet{
 		switch(keyCode)
 		{
 		case KeyEvent.VK_LEFT:
-			if(mainCharacter.now_HP > 0) {
+			if(!mainCharacter.isCrouch && mainCharacter.now_HP > 0) {
 			if(mainCharacter.isOnLadder){
 				mainCharacter.isOnLadder=false;
 				mainCharacter.y-=20;
@@ -460,7 +462,7 @@ public class GameStage extends PApplet{
 			}
 			break;
 		case KeyEvent.VK_RIGHT:
-			if(mainCharacter.now_HP > 0) {
+			if(!mainCharacter.isCrouch && mainCharacter.now_HP > 0) {
 			if(mainCharacter.isOnLadder){
 				mainCharacter.isOnLadder=false;
 				mainCharacter.y-=20;
@@ -472,16 +474,18 @@ public class GameStage extends PApplet{
 			}
 			break;
 		case KeyEvent.VK_SPACE://jump
-			if(mainCharacter.isGround && mainCharacter.now_HP > 0)
+			if(!mainCharacter.isCrouch && mainCharacter.isGround && mainCharacter.now_HP > 0)
 			{
 				mainCharacter.jump();
 				//mainCharacter.isWalk=false;
 			}
 			break;
 		case KeyEvent.VK_DOWN://down to ladder
+			if(mainCharacter.isGround && mainCharacter.now_HP > 0)
+				mainCharacter.crouch();
 			break;
 		case KeyEvent.VK_UP://up to ladder
-			if(mainCharacter.now_HP > 0) {
+			if(!mainCharacter.isCrouch && mainCharacter.now_HP > 0) {
 			for(Door d : doors)
 			{
 				if( whereisch(d) )
@@ -565,6 +569,10 @@ public class GameStage extends PApplet{
 		}
 		else if(keyCode == KeyEvent.VK_Z){
 			mainCharacter.isAttack = false;
+		}
+		
+		if(keyCode == KeyEvent.VK_DOWN){
+			mainCharacter.unCrouch();
 		}
 			
 	}

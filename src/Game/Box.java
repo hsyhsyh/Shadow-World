@@ -23,7 +23,6 @@ public class Box extends AbstractItem{
 		this.text3 = text3;
 		mantalk3 = m3;
 		isspecial = special;
-		isdone = false;
 	}
 	@Override
 	public void display() {
@@ -36,17 +35,18 @@ public class Box extends AbstractItem{
 	@Override
 	public void dialog_event() {
 		// TODO Auto-generated method stub
-		if(isspecial && !isdone && parent.stage_5_box)
+		System.out.println(isspecial + " " + isdone);
+		if(isspecial && !parent.stage_5_box_2 && parent.stage_5_box_1)
 		{
 //			parent.stage_5_floor = true;
-			isdone = true;
+			parent.stage_5_box_2 = true;
 			parent.opendialog(text2, mantalk2);
 			Thread s = new Thread(new Runnable(){
 				public void run()
 				{
 					while(true)
 					{
-						System.out.println(parent.hasdialog);
+						System.out.print(parent.hasdialog);
 						if(!parent.hasdialog)
 						{
 //							System.out.println(parent.hasdialog);
@@ -62,7 +62,7 @@ public class Box extends AbstractItem{
 //			return null;
 			
 		}
-		else if(isspecial && isdone)
+		else if(isspecial && parent.stage_5_box_2)
 		{
 			parent.opendialog(text3,mantalk3);
 			Thread s = new Thread(new Runnable(){
@@ -70,12 +70,12 @@ public class Box extends AbstractItem{
 				{
 					while(true)
 					{
-						System.out.println(parent.hasdialog);
+						System.out.print(parent.hasdialog);
 						if(!parent.hasdialog)
 						{
 							
 							parent.goalX = 847;
-							parent.goalX = 97;
+							parent.goalY = 97;
 							parent.transport(6);
 							break;
 						}

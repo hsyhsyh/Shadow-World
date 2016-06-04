@@ -4,7 +4,7 @@ import processing.core.PImage;
 
 public class Book extends AbstractItem{
 
-	private boolean isspecial, isdone;
+	private boolean isspecial;
 	private String[] text3;
 	private boolean[] mantalk3;
 	public Book(PImage image ,int x, int y, GameStage parent, String[] text1, boolean[] m1,
@@ -23,7 +23,6 @@ public class Book extends AbstractItem{
 		this.text3 = text3;
 		mantalk3 = m3;
 		isspecial = special;
-		isdone = false;
 	}
 	@Override
 	public void display() {
@@ -34,16 +33,18 @@ public class Book extends AbstractItem{
 	@Override
 	public void dialog_event() {
 		// TODO Auto-generated method stub
-		if(isspecial && !isdone && parent.stage_5_box)
+		if(isspecial && !parent.stage_8_bookcase_2 && parent.stage_8_bookcase_1)
 		{
 //			parent.stage_5_floor = true;
-			isdone = true;
+			parent.stage_8_bookcase_2 = true;
+			parent.stage_5_floor = true;
+			parent.be_end = true;
 			parent.opendialog(text2, mantalk2);
 
 //			return null;
 			
 		}
-		else if(isspecial && isdone)
+		else if(isspecial && parent.stage_8_bookcase_2)
 		{
 			parent.opendialog(text3,mantalk3);
 

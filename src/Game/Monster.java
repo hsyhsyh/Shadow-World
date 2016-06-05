@@ -191,7 +191,7 @@ public class Monster extends AbstractCharacter implements Runnable{
 					this.canAttack = false;
 				}
 				if(gs.getCharacter().isMonsterTouch == true) j ++;
-				if(j == 80) {
+				if(j == 160) {
 					j = 0;
 					gs.getCharacter().isMonsterTouch = false;
 				}

@@ -37,6 +37,7 @@ public class Deadman extends AbstractItem{
 		}
 		else
 		{
+			parent.stage_2_door = true;
 			this.switchs = true;
 			parent.opendialog(text1,mantalk1);
 			Thread s = new Thread(new Runnable(){

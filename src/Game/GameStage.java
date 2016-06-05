@@ -489,7 +489,7 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(50,200,200, 15));
 			floors.add(new Floor(400,250,100, 15,300,600));//maybe can move(add left and right bound in the end)
 			doors.add(new Door( 50, 320, door2, 2, 860, 60,true));
-			doors.add(new Door( 850, 320, door1, 5, 50, 320,true));
+			doors.add(new Door( 850, 320, door2, 5, 50, 320,true));
 			monsters.add(new Monster(this,monster,"none",200,220,100,this,150,250));
 			monsters.add(new Monster(this,monster,"none",400,220,100,this,350,450));
 			s = new String[2];
@@ -599,7 +599,7 @@ public class GameStage extends PApplet{
 			monsters.add(new Monster(this,monster,"none",600,200,100,this,350,650) );
 			t = new String[2];
 			t[0] = "雖然找不到任何傷口，卻一動也不動的冰冷遺體。";
-			t[1] = "嘖......\n我會連你的份一起活下去的，你就好好安息吧。";
+			t[1] = "嘖......\n又是一個死人嗎.......";
 			b = new boolean[2];
 			b[0] = false;
 			b[1] = true;

@@ -13,8 +13,8 @@ public class Main extends JFrame{
 	public Main()
 	{
 		
-		applet2 = new GameStage();
-		applet1 = new Gamestart();
+		applet1 = new GameStage();
+		applet2 = new Gamestart();
 //		changeapplet(applet1);
 		mainapplet = applet1;
 		mainapplet.init();

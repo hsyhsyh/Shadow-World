@@ -22,7 +22,7 @@ public class Gamestart extends PApplet implements ActionListener {
     PImage [] imgs=new PImage[4];
 	public void setup() {
 		ach = new Achieve(this);
-		this.startbg = loadImage("startbg.png");
+		this.startbg = loadImage("startbg1.png");
 		for(int i=0;i<4;i++){  
         	this.imgs[i] = loadImage("start" + (i+1) + ".png"); 
         }
@@ -39,7 +39,8 @@ public class Gamestart extends PApplet implements ActionListener {
 		}
 	public void draw() {
 		this.setLayout(null);
-    	image(this.startbg, -300, -300);
+		background(startbg);
+//    	image(this.startbg, -300, -300);
 		if(index<4){
     		image(imgs[index], 0, 0);
     		try{  

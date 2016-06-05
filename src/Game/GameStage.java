@@ -106,7 +106,7 @@ public class GameStage extends PApplet{
 		//bullets = new ArrayList<Bullet>();
 		dialog = new Dialog();
 		
-		stage_num = 1;
+		stage_num = 7;
 		
 		
 		isLoading  = false;
@@ -154,8 +154,14 @@ public class GameStage extends PApplet{
 	        this.text("HP", 70, 80);
         }
         //level
+        if(stage_num == 3 || stage_num == 7) {
         this.textFont(createFont("Arial", 12), 20);
-        this.text("LEVEL  "+mainCharacter.level , 200, 80);
+        this.text("LEVEL  "+mainCharacter.level , 200, 190);
+        }
+        else {
+        	this.textFont(createFont("Arial", 12), 20);
+            this.text("LEVEL  "+mainCharacter.level , 200, 80);
+        }
         
 		if(!monsters.isEmpty())
 		{

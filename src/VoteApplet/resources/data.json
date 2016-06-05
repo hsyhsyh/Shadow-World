@@ -3,7 +3,7 @@
     {
       "name": "QUI-GON",
       "value": 60,
-      "colour": "#FF4f4fb1",
+      "ID": "1",
       "pic0": "src/VoteApplet/resources/1_0.png",
       "v0": 1,
       "v1": 2,
@@ -16,7 +16,7 @@
     {
       "name": "OBI-WAN",
       "value": 33,
-      "colour": "#FF48D1CC",
+      "ID": "2",
       "pic0": "src/VoteApplet/resources/2_0.png",
       "v0": 1,
       "v1": 2,
@@ -29,7 +29,7 @@
     {
       "name": "EMPEROR",
       "value": 13,
-      "colour": "#FF191970",
+      "ID": "3",
       "pic0": "src/VoteApplet/resources/3_0.png",
       "v0": 1,
       "v1": 2,
@@ -42,7 +42,7 @@
     {
       "name": "PADME",
       "value": 30,
-      "colour": "#FFDDA0DD",
+      "ID": "4",
       "pic0": "src/VoteApplet/resources/4_0.png",
       "v0": 1,
       "v1": 2,
@@ -55,7 +55,7 @@
     {
       "name": "ANAKIN",
       "value": 40,
-      "colour": "#FFce3b59",
+      "ID": "5",
       "pic0": "src/VoteApplet/resources/5_0.png",
       "v0": 1,
       "v1": 2,
@@ -68,7 +68,7 @@
     {
       "name": "C-3PO",
       "value": 5,
-      "colour": "#FFFFD700",
+      "ID": "6",
       "pic0": "src/VoteApplet/resources/6_0.png",
       "v0": 1,
       "v1": 2,
@@ -81,7 +81,7 @@
     {
       "name": "YODA",
       "value": 6,
-      "colour": "#FF9ACD32",
+      "ID": "7",
       "pic0": "src/VoteApplet/resources/7_0.png",
       "v0": 1,
       "v1": 2,
@@ -92,56 +92,76 @@
       "subject":"Statistics"
     }
   ],
-  "links": [
+  "account": [
     {
-      "source": 0,
-      "target": 6,
-      "value": 2
+      "account": "102021101",
+      "passwd":  "102021101",
+      "L1": "YODA,ANAKIN,C-3PO,PADME,EMPEROR,OBI-WAN",
+      "L2": "4,5,6",
+      "L3": "7,1,2"
     },
     {
-      "source": 4,
-      "target": 6,
-      "value": 3
+      "account": "102021102",
+      "passwd":  "102021102",
+      "L1": "3,2,5",
+      "L2": "2,4,6",
+      "L3": "7,1,2"
     },
     {
-      "source": 5,
-      "target": 3,
-      "value": 2
+      "account": "102021103",
+      "passwd":  "102021103",
+      "L1": "",
+      "L2": "",
+      "L3": ""
     },
     {
-      "source": 5,
-      "target": 0,
-      "value": 1
+      "account": "102021104",
+      "passwd":  "102021104",
+      "L1": "",
+      "L2": "",
+      "L3": ""
     },
     {
-      "source": 3,
-      "target": 0,
-      "value": 16
+      "account": "102021105",
+      "passwd":  "102021105",
+      "L1": "",
+      "L2": "",
+      "L3": ""
     },
     {
-      "source": 2,
-      "target": 0,
-      "value": 1
+      "account": "102021106",
+      "passwd":	 "102021106",
+      "L1": "",
+      "L2": "",
+      "L3": ""
     },
     {
-      "source": 2,
-      "target": 3,
-      "value": 1
+      "account": "102021107",
+      "passwd":  "102021107",
+      "L1": "",
+      "L2": "",
+      "L3": ""
     },
     {
-      "source": 1,
-      "target": 0,
-      "value": 26
+      "account": "102021108",
+      "passwd":  "102021108",
+      "L1": "",
+      "L2": "",
+      "L3": ""
     },
     {
-      "source": 1,
-      "target": 6,
-      "value": 3
+      "account": "102021109",
+      "passwd":  "102021109",
+      "L1": "",
+      "L2": "",
+      "L3": ""
     },
     {
-      "source": 1,
-      "target": 3,
-      "value": 1
+      "account": "102021110",
+      "passwd":  "102021110",
+      "L1": "",
+      "L2": "",
+      "L3": ""
     }
   ]
 }

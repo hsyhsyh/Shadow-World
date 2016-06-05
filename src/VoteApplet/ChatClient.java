@@ -127,7 +127,7 @@ public class ChatClient extends JFrame {
 			this.socket = new Socket(this.destinationIPAddr, this.destinationPortNum);
 			this.writer = new PrintWriter(new OutputStreamWriter(this.socket.getOutputStream()));
 			BufferedReader reader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-			new CleintThread(reader).start();
+			new CleintThread(reader,parent).start();
 			sendMessage("login:"+this.username+":"+this.password);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -150,9 +150,10 @@ public class ChatClient extends JFrame {
 	// Define an inner class for handling message reading
 	class CleintThread extends Thread{
 		private BufferedReader reader;
-		
-		public CleintThread(BufferedReader reader){
+		private VoteApplet parent;
+		public CleintThread(BufferedReader reader,VoteApplet p){
 			this.reader = reader;
+			this.parent=p;
 		}
 		
 		public void run(){
@@ -160,21 +161,12 @@ public class ChatClient extends JFrame {
 				try{
 					String line = this.reader.readLine();
 					addLine(line);
+					this.parent.receiveMessage(line);
 				}catch(IOException e){
 					e.printStackTrace();
 				}
 			}
 		}
 	}
-	
-	/*public static void main(String[] args) {
 		
-		ChatClient client = new ChatClient();
-		
-		
-		 Equivalent of the above
-		// ChatClient client = new ChatClient("127.0.0.1", 8000);
-		// client.connect();
-	}*/
-
 }

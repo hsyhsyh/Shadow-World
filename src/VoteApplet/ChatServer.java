@@ -30,8 +30,10 @@ public class ChatServer implements Runnable{
 	private ServerSocket serverSocket;
 	public List<ConnectionThread> connections = new ArrayList<ConnectionThread>();
 	private VoteSever parent;
-	public ChatServer(int portNum,VoteSever p){
+	private JSONArray accounts;
+	public ChatServer(int portNum,VoteSever p,JSONArray j){
 		this.parent=p;
+		this.accounts=j;
 		try {
 			this.serverSocket = new ServerSocket(portNum);
 			System.out.printf("Server starts listening on port %d.\n", portNum);
@@ -44,7 +46,6 @@ public class ChatServer implements Runnable{
 	}
 	
 	public void runForever() {
-		System.out.println("Server starts waiting for client.");
 		// Create a loop to make server wait for client forever (unless you stop it)
 		// Make sure you do create a connectionThread and add it into 'connections'
 		while(true){
@@ -55,7 +56,7 @@ public class ChatServer implements Runnable{
 				System.out.println("Get connection from client "
 						 + connectionToClient.getInetAddress() + ":"
 						 + connectionToClient.getPort());
-				ConnectionThread connThread = new ConnectionThread(connectionToClient);
+				ConnectionThread connThread = new ConnectionThread(connectionToClient,accounts);
 				connThread.start();
 				connections.add(connThread);
 				
@@ -74,7 +75,6 @@ public class ChatServer implements Runnable{
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		System.out.println("chatserver thread run OK");
 		runForever();
 		
 	}

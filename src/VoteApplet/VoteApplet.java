@@ -12,9 +12,9 @@ public class VoteApplet extends PApplet{
 
 	private String file = "src/VoteApplet/resources/data.json";
 	JSONObject data;
-	JSONArray nodes, links;
+	JSONArray nodes, accounts;
 	private ArrayList<VoteCharacter> characters;
-	private ArrayList<VoteCharacter> showlist;
+	private ArrayList<VoteCharacter> showlist,showlist1,showlist2,showlist3;
 	private PImage bg;
 	private boolean done,reset,quit;
 	private ChatClient client;
@@ -35,6 +35,7 @@ public class VoteApplet extends PApplet{
 		
 		//socket
 		this.client = new ChatClient(this);
+		loadList("L1");
 	}
 	
 	public void draw(){
@@ -43,15 +44,12 @@ public class VoteApplet extends PApplet{
 		image(bg,0,0);
 		stroke(60, 119, 119);
 		strokeWeight(4);
-		
+		int i=0;
 		for(VoteCharacter character: this.showlist){
-			/*if(character.showinf_b){
-				character.display_client0();
-			}else{
-				character.display_client1();
-			}*/
-			
-			character.display_client0();
+			if(i<3){
+			character.display_client0(i);
+			i++;
+			}
 		}
 		
 		if(done){
@@ -83,7 +81,7 @@ public class VoteApplet extends PApplet{
 
 	public void keyPressed(){
 		if(keyCode==32)
-			sendList();
+			loadList("L2");
 	}
 	
 	public void mouseMoved(MouseEvent e){
@@ -110,10 +108,10 @@ public class VoteApplet extends PApplet{
 		data = loadJSONObject(file);
 		
 		nodes = data.getJSONArray("nodes");
-		links = data.getJSONArray("links");
-
+		accounts = data.getJSONArray("account");
+		showlist=new ArrayList<VoteCharacter>();
 		System.out.println("Number of nodes: " + nodes.size());
-		System.out.println("Number of links: " + links.size());
+		System.out.println("Number of links: " + accounts.size());
 	
 		for(int i=0; i<nodes.size(); i++){
 			JSONObject node = nodes.getJSONObject(i);
@@ -123,16 +121,14 @@ public class VoteApplet extends PApplet{
 		    character.pic[0] = loadImage(node.getString("pic0").toString());
 		    
 		}
-		
-		loadList();
 	}
 	
-	public void loadList(){
-		showlist=new ArrayList<VoteCharacter>();
-		showlist.add(characters.get(1));
+	public void loadList(String s){
+		client.sendMessage("ask:"+s+":");
+		/*showlist.add(characters.get(1));
 		showlist.add(characters.get(2));
 		showlist.add(characters.get(3));
-		showlist.add(characters.get(4));
+		showlist.add(characters.get(4));*/
 	}
 	
 	public void sendList(){
@@ -220,13 +216,15 @@ public void btnClick(float mx,float my){
 	public void receiveMessage(String line){
 		String[] operation=new String[3];
 		operation=line.split(":",3);
-		
 		if(operation[0].equals("load")){
 			for(VoteCharacter character:characters){
 				if(character.getName().toString().equals(operation[1])){
+					this.stop();
 					showlist.add(character);
+					this.start();
 				}
 			}
 		}
 	}
+	
 }

@@ -13,7 +13,7 @@ import processing.data.JSONObject;
 public class VoteSever extends PApplet{
 	private String file = "src/VoteApplet/resources/data.json";
 	JSONObject data;
-	JSONArray nodes, links;
+	JSONArray nodes, accounts;
 	private ArrayList<VoteCharacter> characters;
 	private ArrayList<VoteCharacter> showlist;
 	private PImage bg;
@@ -35,7 +35,7 @@ public class VoteSever extends PApplet{
 		this.setVisible(true);
 		
 		//socket
-		this.server= new ChatServer(8000,this);
+		this.server= new ChatServer(8000,this,accounts);
 		Thread th=new Thread(server);
 		th.start();
 	}
@@ -87,10 +87,10 @@ private void loadData(){
 	data = loadJSONObject(file);
 	
 	nodes = data.getJSONArray("nodes");
-	links = data.getJSONArray("links");
+	accounts = data.getJSONArray("account");
 
 	System.out.println("Number of nodes: " + nodes.size());
-	System.out.println("Number of links: " + links.size());
+	System.out.println("Number of accounts: " + accounts.size());
 	int total=0;
 	for(int i=0; i<nodes.size(); i++){
 		JSONObject node = nodes.getJSONObject(i);
@@ -168,9 +168,6 @@ public void btnClick(float mx,float my){
 	}
 }
 
-public void sendList(String name,int n){
-	
-}
 
 public void voteAccess(String name,int n){
 	for(VoteCharacter character:characters){

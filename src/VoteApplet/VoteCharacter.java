@@ -88,11 +88,11 @@ public class VoteCharacter {
 	
 	public void voteAccess(int n){
 		this.votevalue[n]++;
-		System.out.println("votevalue[0]="+votevalue[1]);
-		System.out.println("votevalue[1]="+votevalue[2]);
-		System.out.println("votevalue[2]="+votevalue[3]);
-		System.out.println("votevalue[3]="+votevalue[4]);
-		System.out.println("votevalue[4]="+votevalue[5]);
+		System.out.println("votevalue[0]="+votevalue[0]);
+		System.out.println("votevalue[1]="+votevalue[1]);
+		System.out.println("votevalue[2]="+votevalue[2]);
+		System.out.println("votevalue[3]="+votevalue[3]);
+		System.out.println("votevalue[4]="+votevalue[4]);
 	}
 	
 	

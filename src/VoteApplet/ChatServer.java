@@ -38,6 +38,9 @@ public class ChatServer implements Runnable{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		Checker checker=new Checker(parent,connections);
+		Thread th=new Thread(checker);
+		th.start();
 	}
 	
 	public void runForever() {
@@ -45,18 +48,7 @@ public class ChatServer implements Runnable{
 		// Create a loop to make server wait for client forever (unless you stop it)
 		// Make sure you do create a connectionThread and add it into 'connections'
 		while(true){
-			System.out.println("chatserver thread run");
-			for(ConnectionThread client:this.connections){
-				if(client.clientAction==1){
-					//sendList(client.username,client.listnum);
-					client.listnum=0;
-					client.clientAction=0;
-				}else if(client.clientAction==2){
-					this.parent.voteAccess(client.charactername,client.votevalue);
-					System.out.println("chatServer "+client.charactername+client.votevalue);;
-					client.clientAction=0;
-				}
-			}
+			
 			
 			try {
 				Socket connectionToClient = this.serverSocket.accept();
@@ -79,15 +71,41 @@ public class ChatServer implements Runnable{
 		
 	}
 	
-	
-	// Define an inner class (class name should be ConnectionThread)
-	
-
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		System.out.println("chatserver thread run OK");
 		runForever();
 		
-	}	
+	}
+	
+	// Define an inner class (class name should be ConnectionThread)
+	private class Checker implements Runnable{
+		public List<ConnectionThread> connections;
+		public VoteSever server;
+		public Checker(VoteSever v,List<ConnectionThread> c){
+			connections=c;
+			server=v;
+		}
+		@Override
+		public void run() {
+			while(true){
+				for(ConnectionThread client:this.connections){
+					if(client.clientAction==1){
+						//sendList(client.username,client.listnum);
+						client.listnum=0;
+						client.clientAction=0;
+					}else if(client.clientAction==2){
+						this.server.voteAccess(client.charactername,client.votevalue);
+						System.out.println("chatServer "+client.charactername+client.votevalue);;
+						client.clientAction=0;
+					}
+				}
+			}
+			
+		}
+		
+	}
+
+		
 }

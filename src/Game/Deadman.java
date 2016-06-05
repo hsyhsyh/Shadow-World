@@ -5,10 +5,12 @@ import processing.core.PImage;
 public class Deadman extends AbstractItem{
 
 	private boolean switchs;
-	public Deadman(PImage image ,int x, int y, GameStage parent, String[] text1, 
+	private PImage image2;
+	public Deadman(PImage image1, PImage image2 ,int x, int y, GameStage parent, String[] text1, 
 			 boolean[] m1,String[] text2, boolean[] m2)
 	{
-		this.image = image;
+		this.image = image1;
+		this.image2 = image2;
 		this.x = x;
 		this.y = y;
 		width = image.width;
@@ -46,7 +48,7 @@ public class Deadman extends AbstractItem{
 						if(!parent.hasdialog)
 						{
 //							System.out.println(parent.hasdialog);
-							image = parent.kidnap2;
+							image = image2;
 							break;
 						}
 					}

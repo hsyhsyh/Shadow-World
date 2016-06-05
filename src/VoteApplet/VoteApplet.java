@@ -139,34 +139,34 @@ public class VoteApplet extends PApplet{
 		for(VoteCharacter character:showlist){
 			boolean flag=true;
 			if(character.option_b[1][0]){
-				System.out.println("vote:"+character.getName()+":0");
-				client.sendMessage("vote:"+character.getName()+":"+"0");
-				flag=false;
-			}
-			if(character.option_b[1][1]){
-				System.out.println("vote:"+character.getName()+":1");
+				//System.out.println("vote:"+character.getName()+":1");
 				client.sendMessage("vote:"+character.getName()+":"+"1");
 				flag=false;
 			}
-			if(character.option_b[1][2]){
-				System.out.println("vote:"+character.getName()+":2");
+			if(character.option_b[1][1]){
+				//System.out.println("vote:"+character.getName()+":2");
 				client.sendMessage("vote:"+character.getName()+":"+"2");
 				flag=false;
 			}
-			if(character.option_b[1][3]){
-				System.out.println("vote:"+character.getName()+":3");
+			if(character.option_b[1][2]){
+				//System.out.println("vote:"+character.getName()+":3");
 				client.sendMessage("vote:"+character.getName()+":"+"3");
 				flag=false;
 			}
-			if(character.option_b[1][4]){
-				System.out.println("vote:"+character.getName()+":4");
+			if(character.option_b[1][3]){
+				//System.out.println("vote:"+character.getName()+":4");
 				client.sendMessage("vote:"+character.getName()+":"+"4");
+				flag=false;
+			}
+			if(character.option_b[1][4]){
+				//System.out.println("vote:"+character.getName()+":5");
+				client.sendMessage("vote:"+character.getName()+":"+"5");
 				flag=false;
 			}
 			
 			if(flag){
-				System.out.println("vote:"+character.getName()+":no vote");
-				client.sendMessage("vote:"+character.getName()+":"+"5");
+				//System.out.println("vote:"+character.getName()+":no vote");
+				client.sendMessage("vote:"+character.getName()+":"+"0");
 			}
 		}
 	}
@@ -197,7 +197,7 @@ public class VoteApplet extends PApplet{
 public void btnClick(float mx,float my){
 		
 		if(650<=my && my<700){
-			//senlist
+			sendList();
 			if(400<=mx && mx<=550){
 				sendList();
 			}

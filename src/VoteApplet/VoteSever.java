@@ -35,7 +35,9 @@ public class VoteSever extends PApplet{
 		this.setVisible(true);
 		
 		//socket
-		this.server= new ChatServer(8000);
+		this.server= new ChatServer(8000,this);
+		Thread th=new Thread(server);
+		th.start();
 	}
 	
 public void draw(){
@@ -99,9 +101,6 @@ private void loadData(){
 	    total=total+character.total;
 	}
 	
-	for(VoteCharacter character:characters){
-		character.setAllTotal(total);
-	}
 }
 
 public void btnTouch(float mx,float my){
@@ -127,23 +126,8 @@ public void btnTouch(float mx,float my){
 	}
 }
 
-public void receiveMessage(String line){
-	String[] operation=new String[3];
-	operation=line.split(":",3);
-	
-	if(operation[0].equals("load")){
-		for(VoteCharacter character:characters){
-			if(character.getName().toString().equals(operation[1])){
-				showlist.add(character);
-			}
-		}
-	}
-}
 
-public void keyPressed(){
-	if(keyCode==32)
-		sendList();
-}
+
 
 public void mouseMoved(MouseEvent e){
 	for(VoteCharacter character: this.characters){
@@ -166,7 +150,7 @@ public void btnClick(float mx,float my){
 	if(850<=my && my<900){
 		//senlist
 		if(600<=mx && mx<=750){
-			sendList();
+		
 		}
 		//reset
 		if(800<=mx && mx<=950){
@@ -184,8 +168,22 @@ public void btnClick(float mx,float my){
 	}
 }
 
-public void sendList(){
+public void sendList(String name,int n){
 	
 }
 
+public void voteAccess(String name,int n){
+	for(VoteCharacter character:characters){
+		if(character.getName().equals(name)){
+			if(0<n && n<=5){
+				character.voteAccess(n-1);
+				System.out.println("voteserver"+n);
+			}
+		}
+	}
 }
+	
+	
+}
+
+

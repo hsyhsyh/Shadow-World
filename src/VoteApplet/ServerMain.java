@@ -15,5 +15,6 @@ public static void main(String [] args){
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setSize(1000,500);
 		window.setVisible(true);
+		
 	}
 }

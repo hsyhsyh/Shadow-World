@@ -64,7 +64,7 @@ public class VoteCharacter {
 		this.showinf_b[2]=true;
 		
 		/*cp5=new ControlP5(this.parent);
-		cp5.addRadioButton("checkBox").setPosition(this.x+pic_width,this.y) 
+		cp5.add("pieChart").setPosition(this.x+pic_width,this.y) 
 		.setColorLabels(100)
 		.setColorActive(175)
         .setSize(50,bar_height)
@@ -78,14 +78,23 @@ public class VoteCharacter {
         .addItem("3",3)
         .addItem("4",4)
         .addItem("5",5)
-        ;;*/
+        ;*/
 		// Initialize the target list
 		this.targets = new ArrayList<Character>();
+		
+		
+   
 	}
 	
-	public void setAllTotal(int n){
-		this.all_total=n;
+	public void voteAccess(int n){
+		this.votevalue[n]++;
+		System.out.println("votevalue[0]="+votevalue[1]);
+		System.out.println("votevalue[1]="+votevalue[2]);
+		System.out.println("votevalue[2]="+votevalue[3]);
+		System.out.println("votevalue[3]="+votevalue[4]);
+		System.out.println("votevalue[4]="+votevalue[5]);
 	}
+	
 	
 	public void display_client0(){
 		
@@ -286,6 +295,7 @@ public class VoteCharacter {
 		}
 		}
 	}	
+	
 	public void boxClick(float mx,float my){
 		boolean[] temp=new boolean[2];
 		temp[0]=showinf_b[1];
@@ -294,7 +304,7 @@ public class VoteCharacter {
 			if(this.y+pic_width+10<=my && my<=this.y+pic_width+50){
 				showinf_b[2]=temp[0];
 				showinf_b[1]=!temp[1];
-				System.out.println("btn_click_"+showinf_b[1]);
+				//System.out.println("btn_click_"+showinf_b[1]);
 			}
 		}
 		

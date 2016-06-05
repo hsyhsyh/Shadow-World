@@ -130,6 +130,19 @@ public class Character extends AbstractCharacter implements Runnable{
 	public Bullet[] getBullet(){
 		return bullets;
 	}
+	
+	private void levelUp(){
+		System.out.println(this.experienceValue);
+		if(this.level<3){
+			if(this.experienceValue>=5*this.level){
+				gs.effect[1].loop();
+				gs.effect[1].play();
+				this.MAX_HP+=10;
+				this.level++;
+				this.now_HP= this.MAX_HP;
+				}
+		}
+	}
 
 	@Override
 	public void run() {
@@ -161,6 +174,7 @@ public class Character extends AbstractCharacter implements Runnable{
 						gs.GameOver_color2 = 0;
 					}
 				}
+				levelUp();
 				fallDown();
 				for(Bullet bullet: bullets){
 					bullet.move();

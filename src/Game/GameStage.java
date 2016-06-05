@@ -122,6 +122,7 @@ public class GameStage extends PApplet{
 		song.loop();
 		//song.play();
 		effect[0]=minim.loadFile("shoot.wav");
+		effect[1]=minim.loadFile("levelUp.wav");
 	}
 	
 	public void draw() 

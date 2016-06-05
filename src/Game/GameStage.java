@@ -153,6 +153,9 @@ public class GameStage extends PApplet{
 	        this.textFont(createFont("Arial", 12), 20);
 	        this.text("HP", 70, 80);
         }
+        //level
+        this.textFont(createFont("Arial", 12), 20);
+        this.text("LEVEL  "+mainCharacter.level , 200, 80);
         
 		if(!monsters.isEmpty())
 		{

@@ -132,7 +132,7 @@ public class Character extends AbstractCharacter implements Runnable{
 	}
 	
 	private void levelUp(){
-		System.out.println(this.experienceValue);
+
 		if(this.level<3){
 			if(this.experienceValue>=5*this.level){
 				gs.effect[1].loop();

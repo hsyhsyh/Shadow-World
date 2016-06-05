@@ -106,7 +106,7 @@ public class GameStage extends PApplet{
 		//bullets = new ArrayList<Bullet>();
 		dialog = new Dialog();
 		
-		stage_num = 1;
+		stage_num = 4;
 		
 		
 		isLoading  = false;
@@ -498,8 +498,8 @@ public class GameStage extends PApplet{
 			items.add(new Box(box, 250, 282, this ,s,a, null,null,null,null, false));
 			t = new String[4];
 			t[0] = "牆壁上貼著一張便利貼，似乎才剛貼上去不久。\n上面以潦草的字跡寫了一段話。";
-			t[1] = "我是@%#，我那個爛男友正要去前面那個房間，說是在箱子中找到一扇門\n如果你有看到的話，就往前走吧";
-			t[2] = "對不起，跟你分開之後，我想了一想，我不應該為了開冷氣這種小事跟你吵架的，如果可以從這裡出去，我們還會是好室友，好閨蜜口";
+			t[1] = "我是@%#，我那個爛男友正要去前面那個房間，\n說是在箱子中找到一扇門。\n如果你有看到的話，就往前走吧...";
+			t[2] = "對不起，跟你分開之後，我想了一想，\n我不應該為了開冷氣這種小事跟你吵架的，\n如果可以從這裡出去，我們還會是好室友，好閨蜜口";
 			t[3] = "嘖，最後一句話好像沒寫完，真令人在意......\n那個遮住名字的污漬也是......";
 			b = new boolean[4];
 			b[0] = false;

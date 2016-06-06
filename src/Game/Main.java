@@ -8,15 +8,18 @@ public class Main extends JFrame{
 	
 	private final static int windowWidth = 1000, windowHeight = 500;
 	private PApplet mainapplet;
+	public Gamestart gamestart;
+	public GameStage gamestage;
 	public PApplet applet1, applet2;
 	
 	public Main()
 	{
 		
-		applet1 = new GameStage();
-		applet2 = new Gamestart();
+		gamestage = new GameStage(this);
+		gamestart = new Gamestart();
+		gamestage.setgs(gamestart);
 //		changeapplet(applet1);
-		mainapplet = applet1;
+		mainapplet = gamestage;
 		mainapplet.init();
 		mainapplet.start();
 		add(mainapplet);
@@ -25,11 +28,13 @@ public class Main extends JFrame{
 	
 	public void change_into_applet(PApplet tem)
 	{
+		mainapplet.stop();
 		remove(mainapplet);
 //		removeAll();
 		mainapplet = tem;
 		mainapplet.init();
 		mainapplet.start();
+		System.out.println("DDDDD");
 		add(mainapplet);
 		
 	}

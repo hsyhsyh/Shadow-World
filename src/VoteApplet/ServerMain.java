@@ -16,6 +16,5 @@ public static void main(String [] args){
 		window.setSize(1800,800);
 		window.setVisible(true);
 		window.setResizable(false);
-		
 	}
 }

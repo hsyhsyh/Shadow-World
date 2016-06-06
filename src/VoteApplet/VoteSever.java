@@ -94,7 +94,7 @@ private void loadData(){
 	int total=0;
 	for(int i=0; i<nodes.size(); i++){
 		JSONObject node = nodes.getJSONObject(i);
-		VoteCharacter character=new VoteCharacter(this, node.getString("name"), 100+400*(i/2),100+300*(i%2),node.getInt("v0"),node.getInt("v1"),node.getInt("v2"),node.getInt("v3"),node.getInt("v4"),node.getInt("total"),node.getString("subject"),node.getInt("studentnum"));
+		VoteCharacter character=new VoteCharacter(this, node.getString("name"), 100+400*(i/2),100+300*(i%2),node.getInt("v0"),node.getInt("v1"),node.getInt("v2"),node.getInt("v3"),node.getInt("v4"),node.getInt("total"),node.getString("subject"),node.getInt("studentnum"),node.getString("inf"));
 		characters.add(character);
 		character.pic[0] = new PImage();
 	    character.pic[0] = loadImage(node.getString("pic0").toString());

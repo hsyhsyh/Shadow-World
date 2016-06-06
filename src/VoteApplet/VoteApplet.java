@@ -32,7 +32,7 @@ public class VoteApplet extends PApplet{
 		bg=new PImage();
 		bg=loadImage("src/VoteApplet/resources/horror.jpg");
 		
-		this.setVisible(true);
+		this.setVisible(false);
 		
 		//socket
 		this.client = new ChatClient(this);
@@ -112,7 +112,7 @@ public class VoteApplet extends PApplet{
 	
 		for(int i=0; i<nodes.size(); i++){
 			JSONObject node = nodes.getJSONObject(i);
-			VoteCharacter character=new VoteCharacter(this, node.getString("name"), 100+400*(i/2),100+300*(i%2),node.getInt("v0"),node.getInt("v1"),node.getInt("v2"),node.getInt("v3"),node.getInt("v4"),node.getInt("total"),node.getString("subject"),node.getInt("studentnum"));
+			VoteCharacter character=new VoteCharacter(this, node.getString("name"), 100+400*(i/2),100+300*(i%2),node.getInt("v0"),node.getInt("v1"),node.getInt("v2"),node.getInt("v3"),node.getInt("v4"),node.getInt("total"),node.getString("subject"),node.getInt("studentnum"),node.getString("inf"));
 			characters.add(character);
 			character.pic[0] = new PImage();
 		    character.pic[0] = loadImage(node.getString("pic0").toString());
@@ -124,10 +124,15 @@ public class VoteApplet extends PApplet{
 		listnum=0;
 		showlist=new ArrayList<VoteCharacter>();
 		client.sendMessage("ask:"+s+":");
+		this.setVisible(true);
 		/*showlist.add(characters.get(1));
 		showlist.add(characters.get(2));
 		showlist.add(characters.get(3));
 		showlist.add(characters.get(4));*/
+	}
+	
+	public void setVoteVisible(boolean b){
+		this.setVisible(b);
 	}
 	
 	public void sendList(){

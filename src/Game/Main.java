@@ -1,6 +1,7 @@
 package Game;
 import javax.swing.JFrame;
 
+import VoteApplet.VoteApplet;
 import processing.core.PApplet;
 
 @SuppressWarnings("serial")
@@ -9,12 +10,20 @@ public class Main extends JFrame{
 	private final static int windowWidth = 1000, windowHeight = 500;
 	private PApplet mainapplet;
 	public PApplet applet1, applet2;
-	
+	public PApplet VoteApplet;
 	public Main()
 	{
+		//Voteapplet
+		VoteApplet voteapplet = new VoteApplet();
+		voteapplet.init();
+		voteapplet.start();
+		voteapplet.setFocusable(true);
+		//loadList(String) "L1" "L2" "L3" Load list
+		//setVoteVisible(boolean) 
 		
 		applet1 = new GameStage();
 		applet2 = new Gamestart();
+		
 //		changeapplet(applet1);
 		mainapplet = applet1;
 		mainapplet.init();

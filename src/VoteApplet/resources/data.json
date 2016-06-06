@@ -12,6 +12,7 @@
       "v4": 5,
       "total":15,
       "studentnum":50,
+      "inf":"ClassID:\nD1234\nclassTime:\n10:10~11:00\nStudent Number:\n",
       "subject":"Computer Architecture"
     },
     {
@@ -26,6 +27,7 @@
       "v4": 5,
       "total":15,
       "studentnum":100,
+      "inf":"ClassID:\nD1234\nclassTime:\n10:10~11:00\nStudent Number:\n",
       "subject":"Software Studio"
     },
     {
@@ -40,6 +42,7 @@
       "v4": 5,
       "total":15,
       "studentnum":80,
+      "inf":"ClassID:\nD1234\nclassTime:\n10:10~11:00\nStudent Number:\n",
       "subject":"Discrete Mathematics"
     },
     {
@@ -54,6 +57,7 @@
       "v4": 5,
       "total":15,
       "studentnum":75,
+      "inf":"ClassID:\nD1234\nclassTime:\n10:10~11:00\nStudent Number:\n",
       "subject":"English III"
     },
     {
@@ -68,6 +72,7 @@
       "v4": 5,
       "total":15,
       "studentnum":40,
+      "inf":"ClassID:\nD1234\nclassTime:\n10:10~11:00\nStudent Number:\n",
       "subject":"Geometric "
     },
     {
@@ -82,6 +87,7 @@
       "v4": 5,
       "total":15,
       "studentnum":63,
+      "inf":"ClassID:\nD1234\nclassTime:\n10:10~11:00\nStudent Number:\n",
       "subject":"Linear Algebra"
     },
     {
@@ -96,6 +102,7 @@
       "v4": 5,
       "total":15,
       "studentnum":30,
+      "inf":"ClassID:\nD1234\nclassTime:\n10:10~11:00\nStudent Number:\n",
       "subject":"Statistics"
     }
   ],

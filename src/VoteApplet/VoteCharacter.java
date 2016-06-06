@@ -4,6 +4,7 @@ package VoteApplet;
 import java.util.ArrayList;
 
 import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 
 import controlP5.ControlP5;
 import processing.core.PApplet;
@@ -23,12 +24,13 @@ public class VoteCharacter {
 	private String subject;
 	public boolean[][] option_b;
 	public boolean[] showinf_b;
+	public String information;
 	int pic_width=150;
 	int bar_width=150;
 	int bar_height=30;
 	int word_x=10;
 	int word_y=10;
-	public VoteCharacter(PApplet parent, String name, float x, float y,int v0,int v1,int v2,int v3,int v4,int total,String subject,int num){
+	public VoteCharacter(PApplet parent, String name, float x, float y,int v0,int v1,int v2,int v3,int v4,int total,String subject,int num,String inf){
 		
 		this.parent = parent;
 		this.name = name;
@@ -36,6 +38,7 @@ public class VoteCharacter {
 		this.y = y;
 		this.radius = 25;
 		this.subject=subject;
+		this.information=inf+studentnum;
 		pic=new PImage[2];
 		pic[0]= null;
 		
@@ -62,6 +65,7 @@ public class VoteCharacter {
 		this.showinf_b[1]=true;
 		this.showinf_b[2]=true;
 		
+		
 		/*cp5=new ControlP5(this.parent);
 		cp5.add("pieChart").setPosition(this.x+pic_width,this.y) 
 		.setColorLabels(100)
@@ -79,6 +83,7 @@ public class VoteCharacter {
         .addItem("5",5)
         ;*/
 		// Initialize the target list
+		//information="ClassID:\nD1234\nclassTime:\n10:10~11:00\nStudent Number:\n"+studentnum;
 	}
 	
 	public void voteAccess(int n){
@@ -114,8 +119,14 @@ public class VoteCharacter {
 				this.parent.fill(0,128,255);
 				this.parent.rect(x+pic_width, y+pic_width+10, bar_width, 40, 12, 12, 12, 12);
 			}
+			this.parent.fill(255,100,0);
+			this.parent.rect(x+pic_width,y,bar_width,pic_width);
+			
 			this.parent.fill(0);
 			this.parent.text("Click To Vote",x+pic_width+10,(int)(y+pic_width+40));
+			this.parent.textSize(16);
+			this.parent.text(information, x+pic_width+12, y+15);
+			this.parent.textSize(20);
 		}else{
 			
 			if(showinf_b[0]){
@@ -211,6 +222,9 @@ public class VoteCharacter {
 			}
 			this.parent.fill(0);
 			this.parent.text("Click To Vote",x+pic_width+10,(int)(y+pic_width+40));
+			if(pic[0]!=null){
+				
+			}
 		}else{
 			if(showinf_b[0]){
 				this.parent.fill(0,255,0);

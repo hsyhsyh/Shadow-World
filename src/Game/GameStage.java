@@ -14,10 +14,11 @@ import processing.core.PImage;
 
 
 public class GameStage extends PApplet{
-	
 	private static final long serialVersionUID = 1L;
 	private final static int width = 1000, height = 500;
-	
+	private GameStage self;
+	private Main m;
+	private Gamestart gs;
 	public PImage man, bullet, books, book, bloodletter, diamand, phone, skull, monster, 
 				monster2, strike, box, bed, ladder, door1, door2, man1, man2, man3, man4
                 , man5, man6, man7, man8, man_c1, man_c2, man_s1, man_s2,dead_man, 
@@ -50,6 +51,11 @@ public class GameStage extends PApplet{
 	AudioPlayer song;
 	public AudioPlayer effect[]=new AudioPlayer[10];
 	
+	public GameStage(Main m)
+	{
+		this.m = m;
+	}
+	
 	public void setup() {
 		
 		cnFont = new PFont(new Font
@@ -58,7 +64,7 @@ public class GameStage extends PApplet{
 		
 		size(width, height);
 		smooth();
-		
+		self = this;
 		this.books = loadImage("books.png");
 		this.bullet = loadImage("bullet.png");
 		this.book = loadImage("book.png");
@@ -217,14 +223,14 @@ public class GameStage extends PApplet{
         	is_hurt = false;
 			fill(0,0,0,alpha);
         	rect(0,0,width,height);
-        	if(alpha == 255)
+        	if(alpha == 255 && !hasdialog)
         	{
 //        		loadData();
 //        		Ani.to(this, (float)1.5, "alpha", 0);
         		String[] en = new String[8];
         		en[0] = "喂！你睡一整天了耶！\n身為你的室友我真的看不下去了，你是要不要起床啊？";
         		en[1] = "我......回來了？我沒死？";
-        		en[2] = "你在說什麼啊？\n喂我跟你說，今天老師說他期末考有一題改錯了，所以幾乎全班都有加到分";
+        		en[2] = "你在說什麼啊？\n喂我跟你說，今天老師說他期末考有一題改錯了\n所以幾乎全班都有加到分";
         		en[3] = "所以說......";
         		en[4] = "所以說你沒有被二一";
         		en[5] = "喔喔喔太好啦！";
@@ -232,14 +238,37 @@ public class GameStage extends PApplet{
         		en[7] = "管你的哈哈哈！";
         		boolean[] as = new boolean[8];
         		as[0] = as[1] = as[2] = as[3] = as[4] = as[5] =as[6] = false;
-        		as[7] = as[8] = false;
+        		as[7] = false;
         		opendialog(en,as);
 //        		===================the end=====================
+        		Thread end = new Thread(new Runnable(){
+        			public void run(){
+        				try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+        				while(true)
+        				{
+        					System.out.println(hasdialog);
+        					if(!hasdialog)
+        					{
+        						end_dialog = false;
+        						break;
+        					}
+        				}
+
+        				m.change_into_applet(gs);
+        			}
+        		});
+        		end.start();
         	}
 //        	if(alpha == 0)
 //        	{
 //        		is_transport = false;
 //        	}
+        	
 		}
         
         if(hasdialog)
@@ -333,6 +362,8 @@ public class GameStage extends PApplet{
 			mainCharacter.addFloor(floors);
 			break;
 		case 1:
+			the_end = true;
+			firststart = false;
 			mainCharacter.x = 120;
 			mainCharacter.y = 20;
 			floors.add(new Floor(0, 0, 1000, 50));
@@ -371,7 +402,7 @@ public class GameStage extends PApplet{
 			{
 				u = new String[4];
 				u[0] = "最後，還是回到這裡了嗎......\n看來好像出不去了呢......";
-				u[1] = "昨天我還因為成績而覺得沮喪，沒想到一覺醒來之後就再也回不去了......";
+				u[1] = "昨天我還因為成績而覺得沮喪\n沒想到一覺醒來之後就再也回不去了......";
 				u[2] = "哈哈......\n成績不好又怎樣？被二一了又怎樣？只要還活著就還有機會啊！";
 				u[3] = "我現在才終於了解，人總是要失去了才懂得珍惜啊......";
 				c = new boolean[4];
@@ -385,10 +416,11 @@ public class GameStage extends PApplet{
 					{
 						while(true)
 						{
+							System.out.println(hasdialog);
 							if(!hasdialog)
 							{
 								end_dialog = true;
-								Ani.to(this, (float)1.5, "alpha", 255);
+								Ani.to(self, (float)1.5, "alpha", 255);
 								break;
 							}
 						}
@@ -399,6 +431,7 @@ public class GameStage extends PApplet{
 			}
 			break;
 		case 2:
+			
 			floors.add(new Floor(0, 0, 1000, 40));
 			floors.add(new Floor(0, 430, 1000, 40));
 			floors.add(new Floor(0, 0, 40, 500));
@@ -1239,6 +1272,10 @@ public class GameStage extends PApplet{
 		}
 	}
 
+	public void setgs(Gamestart s)
+	{
+		gs = s;
+	}
 	public Character getCharacter() {
 		// TODO Auto-generated method stub
 		return this.mainCharacter;

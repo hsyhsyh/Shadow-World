@@ -318,6 +318,7 @@ public class VoteCharacter {
 					this.parent.fill(0,255,0);
 				}
 				this.parent.rect(x,y+pic_width+55,(int)(pic_width*1.5*(double)total/(double)studentnum),bar_height);
+				//this.parent.rect(x+(pic_width*1.5),y+pic_width+55,(pic_width*0.5));
 				//this.parent.text(x+10,x)
 			}
 		}

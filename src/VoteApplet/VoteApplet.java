@@ -18,6 +18,7 @@ public class VoteApplet extends PApplet{
 	private PImage bg;
 	private boolean done,reset,quit;
 	private ChatClient client;
+	private int listnum;
 	public void setup(){
 		
 		size(1000, 500);
@@ -44,12 +45,8 @@ public class VoteApplet extends PApplet{
 		image(bg,0,0);
 		stroke(60, 119, 119);
 		strokeWeight(4);
-		int i=0;
 		for(VoteCharacter character: this.showlist){
-			if(i<3){
-			character.display_client0(i);
-			i++;
-			}
+			character.display_client0();
 		}
 		
 		if(done){
@@ -124,6 +121,7 @@ public class VoteApplet extends PApplet{
 	}
 	
 	public void loadList(String s){
+		listnum=0;
 		client.sendMessage("ask:"+s+":");
 		/*showlist.add(characters.get(1));
 		showlist.add(characters.get(2));
@@ -219,9 +217,14 @@ public void btnClick(float mx,float my){
 		if(operation[0].equals("load")){
 			for(VoteCharacter character:characters){
 				if(character.getName().toString().equals(operation[1])){
+					if(!showlist.contains(character)){
 					this.stop();
+					character.setPos(100+400*(listnum/2),100+300*(listnum%2));
 					showlist.add(character);
+					listnum++;
+					System.out.println("list get"+listnum);
 					this.start();
+					}
 				}
 			}
 		}

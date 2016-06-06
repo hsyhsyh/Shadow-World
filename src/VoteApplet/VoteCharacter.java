@@ -91,10 +91,7 @@ public class VoteCharacter {
 	}
 	
 	
-	public void display_client0(int n){
-		System.out.println("display_client0"+n);
-		this.x=100+400*(n/2);
-		this.y=100+300*(n%2);
+	public void display_client0(){
 		
 		this.parent.fill(2, 247, 141);
 		this.parent.rect(x-subject.length()*6+bar_width/2+10, y-50, subject.length()*15, 40, 12, 12, 12, 12);

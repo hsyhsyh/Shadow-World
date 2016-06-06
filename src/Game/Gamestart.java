@@ -18,16 +18,11 @@ public class Gamestart extends PApplet implements ActionListener {
 	private final static int width = 1000, height = 500;
 	private PImage startbg;
 	JButton start, stop, achievement, statis;
-	Achieve ach;
+	Achieve achi;
 	int index=0;   
     PImage [] imgs=new PImage[4];
 	public void setup() {
-<<<<<<< HEAD
-		this.startbg = loadImage("startbg.png");
-=======
-		ach = new Achieve(this);
-		this.startbg = loadImage("startbg1.png");
->>>>>>> 564a66b934baf0ce2af1d61de5dfd9e41b128345
+		achi = new Achieve();
 		for(int i=0;i<4;i++){  
         	this.imgs[i] = loadImage("start" + (i+1) + ".png"); 
         }
@@ -52,20 +47,11 @@ public class Gamestart extends PApplet implements ActionListener {
 		}
 	public void draw() {
 		this.setLayout(null);
-<<<<<<< HEAD
 		if(index<=4){
-			if(index < 4){
-				image(imgs[index], 0, 0);
-				try{  
-					Thread.sleep(1500);  
-=======
-		background(startbg);
-//    	image(this.startbg, -300, -300);
 		if(index<4){
     		image(imgs[index], 0, 0);
     		try{  
     			Thread.sleep(1500);  
->>>>>>> 564a66b934baf0ce2af1d61de5dfd9e41b128345
             	}  
     			catch(Exception e){  
     				e.printStackTrace();  
@@ -107,7 +93,6 @@ public class Gamestart extends PApplet implements ActionListener {
 			//start the game
 		}
 		else if("achievement".equals(e.getActionCommand())){
-			Achieve achi = new Achieve();
 			achi.setLocation(100, 50);
 			achi.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			achi.setSize(1000, 500);

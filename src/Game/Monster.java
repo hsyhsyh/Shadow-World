@@ -12,6 +12,7 @@ public class Monster extends AbstractCharacter implements Runnable{
 	private int bulletNumberLeft=0;
 	private int bulletNumberRight=1;
 	private boolean isboom = false;
+	private boolean isAlive = true;
 	private int leftBound, rightBound;
 	
 	public Monster(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs, int leftBound, int rightBound){
@@ -141,6 +142,7 @@ public class Monster extends AbstractCharacter implements Runnable{
 	public void vanish(){
 		this.x=10000;
 		this.y=10000;
+		this.isAlive=false;
 		for(int i=0;i<20;i++){
 			bullets[i].x=10000;
 			bullets[i].y=10000;
@@ -168,8 +170,13 @@ public class Monster extends AbstractCharacter implements Runnable{
 				if(waitAttackTime==0){
 					this.canAttack=true;
 				}
-				if(this.isDead())
-					vanish();
+				
+				if(isAlive){
+					if(this.isDead()){
+						gs.getCharacter().experienceValue++;
+						vanish();
+					}
+				}
 				if(this.isboom == true) i ++;
 				if(i == 25) {
 					i = 0;
@@ -184,7 +191,7 @@ public class Monster extends AbstractCharacter implements Runnable{
 					this.canAttack = false;
 				}
 				if(gs.getCharacter().isMonsterTouch == true) j ++;
-				if(j == 80) {
+				if(j == 160) {
 					j = 0;
 					gs.getCharacter().isMonsterTouch = false;
 				}

@@ -15,6 +15,7 @@ public class Character extends AbstractCharacter implements Runnable{
 	public boolean isOnLadder = false;
 	public boolean isOnTopLadder = false;
 	public boolean isCrouch = false;
+	public boolean isForDemo = false;
 	
 	public Character(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs){
         Ani.init(parent);

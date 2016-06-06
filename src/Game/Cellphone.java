@@ -38,6 +38,7 @@ public class Cellphone extends AbstractItem {
 		// TODO Auto-generated method stub
 //		bigger = true;
 //		System.out.println(isspecial + " " + isdone);
+		parent.is_voting = true;
 		if(isspecial)
 		{
 			parent.opendialog(text2, mantalk2);

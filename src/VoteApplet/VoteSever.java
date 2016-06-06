@@ -56,26 +56,26 @@ public void draw(){
 		}else{
 			this.fill(255,255,0);
 		}
-		this.rect(600, 850, 150, 50);
+		this.rect(600, 700, 150, 50);
 		
 		if(reset){
 			this.fill(0,255,0);
 		}else{
 			this.fill(255,255,0);
 		}
-		this.rect(800, 850, 150, 50);
+		this.rect(800, 700, 150, 50);
 		if(quit){
 			this.fill(0,255,0);
 		}else{
 			this.fill(255,255,0);
 		}
-		this.rect(1000, 850, 150, 50);
+		this.rect(1000, 700, 150, 50);
 		
 		this.fill(0);
 		this.textSize(20);;
-		this.text("Done!",645,885);
-		this.text("Reset!",845,885);
-		this.text("Quit!",1050,885);
+		this.text("Done!",645,735);
+		this.text("Reset!",845,735);
+		this.text("Quit!",1050,735);
 	
 	}
 
@@ -135,6 +135,7 @@ public void mouseMoved(MouseEvent e){
 	}
 	btnTouch(e.getX(),e.getY());
 	//this.repaint();
+	
 }
 
 public void mousePressed(MouseEvent e){
@@ -147,7 +148,7 @@ public void mousePressed(MouseEvent e){
 
 public void btnClick(float mx,float my){
 	
-	if(850<=my && my<900){
+	if(700<=my && my<750){
 		//senlist
 		if(600<=mx && mx<=750){
 		
@@ -179,6 +180,11 @@ public void voteAccess(String name,int n){
 		}
 	}
 }
+
+public void dataWrite(){
+	
+}
+
 	
 	
 }

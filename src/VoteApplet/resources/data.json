@@ -12,7 +12,7 @@
       "v4": 5,
       "total":15,
       "studentnum":50,
-      "inf":"ClassID:\nD1234\nclassTime:\n10:10~11:00\nStudent Number:\n",
+      "inf":"ClassID:\nCS1234\nclassTime:\nTue 10:10~11:00\nStudent Number:\n",
       "subject":"Computer Architecture"
     },
     {
@@ -27,7 +27,7 @@
       "v4": 5,
       "total":15,
       "studentnum":100,
-      "inf":"ClassID:\nD1234\nclassTime:\n10:10~11:00\nStudent Number:\n",
+      "inf":"ClassID:\nCS2234\nclassTime:\nMon 15:30~17:50\nStudent Number:\n",
       "subject":"Software Studio"
     },
     {
@@ -42,7 +42,7 @@
       "v4": 5,
       "total":15,
       "studentnum":80,
-      "inf":"ClassID:\nD1234\nclassTime:\n10:10~11:00\nStudent Number:\n",
+      "inf":"ClassID:\nMT5542\nclassTime:\nTue 13:10~15:10\nStudent Number:\n",
       "subject":"Discrete Mathematics"
     },
     {
@@ -57,7 +57,7 @@
       "v4": 5,
       "total":15,
       "studentnum":75,
-      "inf":"ClassID:\nD1234\nclassTime:\n10:10~11:00\nStudent Number:\n",
+      "inf":"ClassID:\nLG2341\nclassTime:\nWen 13:20~15:10\nStudent Number:\n",
       "subject":"English III"
     },
     {
@@ -72,7 +72,7 @@
       "v4": 5,
       "total":15,
       "studentnum":40,
-      "inf":"ClassID:\nD1234\nclassTime:\n10:10~11:00\nStudent Number:\n",
+      "inf":"ClassID:\nMT9134\nclassTime:\nFri 10:10~12:00\nStudent Number:\n",
       "subject":"Geometric "
     },
     {
@@ -87,7 +87,7 @@
       "v4": 5,
       "total":15,
       "studentnum":63,
-      "inf":"ClassID:\nD1234\nclassTime:\n10:10~11:00\nStudent Number:\n",
+      "inf":"ClassID:\nMT1324\nclassTime:\nMon 8:00~9:50\nStudent Number:\n",
       "subject":"Linear Algebra"
     },
     {
@@ -102,7 +102,7 @@
       "v4": 5,
       "total":15,
       "studentnum":30,
-      "inf":"ClassID:\nD1234\nclassTime:\n10:10~11:00\nStudent Number:\n",
+      "inf":"ClassID:\nMTD3214\nclassTime:\nThu 10:10~12:00\nStudent Number:\n",
       "subject":"Statistics"
     }
   ],

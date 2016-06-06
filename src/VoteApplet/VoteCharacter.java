@@ -25,6 +25,7 @@ public class VoteCharacter {
 	public boolean[][] option_b;
 	public boolean[] showinf_b;
 	public String information;
+	double voterate;
 	int pic_width=150;
 	int bar_width=150;
 	int bar_height=30;
@@ -38,7 +39,9 @@ public class VoteCharacter {
 		this.y = y;
 		this.radius = 25;
 		this.subject=subject;
+		this.studentnum=num;
 		this.information=inf+studentnum;
+		System.out.println("studentnum"+studentnum);
 		pic=new PImage[2];
 		pic[0]= null;
 		
@@ -60,6 +63,8 @@ public class VoteCharacter {
 		this.votevalue[2]=v2;
 		this.votevalue[3]=v3;
 		this.votevalue[4]=v4;
+		this.voterate=(double)total/(double)studentnum;
+		
 		showinf_b=new boolean[3];
 		this.showinf_b[0]=false;
 		this.showinf_b[1]=true;
@@ -220,11 +225,14 @@ public class VoteCharacter {
 				this.parent.fill(0,128,255);
 				this.parent.rect(x+pic_width, y+pic_width+10, bar_width, 40, 12, 12, 12, 12);
 			}
+			this.parent.fill(255,100,0);
+			this.parent.rect(x+pic_width,y,bar_width,pic_width);
+			
 			this.parent.fill(0);
-			this.parent.text("Click To Vote",x+pic_width+10,(int)(y+pic_width+40));
-			if(pic[0]!=null){
-				
-			}
+			this.parent.text("Click To Score",x+pic_width+10,(int)(y+pic_width+40));
+			this.parent.textSize(16);
+			this.parent.text(information, x+pic_width+12, y+16);
+			this.parent.textSize(20);
 		}else{
 			if(showinf_b[0]){
 				this.parent.fill(0,255,0);
@@ -249,7 +257,7 @@ public class VoteCharacter {
 		this.parent.rect(x+pic_width,y+bar_height*2,bar_width+10,bar_height);
 		this.parent.rect(x+pic_width,y+bar_height*3,bar_width+10,bar_height);
 		this.parent.rect(x+pic_width,y+bar_height*4,bar_width+10,bar_height);
-		this.parent.rect(x, y+pic_width+55,pic_width*2,bar_height);
+		this.parent.rect(x, y+pic_width+55,(int)(pic_width*1.5),bar_height);
 		//==================
 		if(total !=0){
 			
@@ -301,7 +309,16 @@ public class VoteCharacter {
 		}
 		
 			if(studentnum!=0){
-				this.parent.rect(x,y+pic_width+55,(int)(pic_width*2*(double)total/(double)studentnum),bar_height);
+				System.out.println(name+"voterate:"+voterate);
+				if(voterate<0.33){
+					this.parent.fill(255,0,0);
+				}else if(voterate<0.66){
+					this.parent.fill(255,255,0);
+				}else{
+					this.parent.fill(0,255,0);
+				}
+				this.parent.rect(x,y+pic_width+55,(int)(pic_width*1.5*(double)total/(double)studentnum),bar_height);
+				//this.parent.text(x+10,x)
 			}
 		}
 	}	

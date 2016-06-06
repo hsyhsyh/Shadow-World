@@ -41,7 +41,7 @@ public class GameStage extends PApplet{
 	private boolean is_hurt;
 	public boolean firststart,stage_2_door,stage_3_door,stage_5_floor, stage_5_box_1
 			,stage_5_box_2, stage_8_bookcase_1, stage_8_bookcase_2,be_end,the_end
-			,end_dialog, is_voting;
+			,end_dialog, is_voting, change;
 	private int alpha, hurt_alpha;
 	public int goalX,goalY;
 	private PFont cnFont;
@@ -120,7 +120,7 @@ public class GameStage extends PApplet{
 		is_transport = false;
 		stage_2_door = stage_3_door = stage_5_floor = stage_5_box_1 
 				= stage_5_box_2 = stage_8_bookcase_1 = stage_8_bookcase_2 = be_end 
-				= the_end = end_dialog = is_voting = false;
+				= the_end = end_dialog = is_voting = change = false;
 		firststart = true;
 		loadData();
 		minim = new Minim(this);
@@ -129,6 +129,21 @@ public class GameStage extends PApplet{
 		//song.play();
 		effect[0]=minim.loadFile("shoot.wav");
 		effect[1]=minim.loadFile("levelUp.wav");
+   		Thread ch = new Thread(new Runnable(){
+			public void run(){
+				while(true)
+				{
+					System.out.print(change);
+					if(change)
+					{
+						m.change_into_applet(gs);
+						break;
+					}
+				}
+				
+			}
+		});
+		ch.start();
 	}
 	
 	public void draw() 
@@ -223,7 +238,7 @@ public class GameStage extends PApplet{
         	is_hurt = false;
 			fill(0,0,0,alpha);
         	rect(0,0,width,height);
-        	if(alpha == 255 && !hasdialog)
+        	if(alpha == 255 && !hasdialog && !change)
         	{
 //        		loadData();
 //        		Ani.to(this, (float)1.5, "alpha", 0);
@@ -243,23 +258,23 @@ public class GameStage extends PApplet{
 //        		===================the end=====================
         		Thread end = new Thread(new Runnable(){
         			public void run(){
-//        				try {
-//							Thread.sleep(1000);
-//						} catch (InterruptedException e) {
-//							// TODO Auto-generated catch block
-//							e.printStackTrace();
-//						}
+        				try {
+							Thread.sleep(500);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
         				while(true)
         				{
         					System.out.println(hasdialog);
         					if(!hasdialog)
         					{
-        						end_dialog = false;
+        						change = true;
         						break;
         					}
         				}
-        				System.out.println("?????");
-        				m.change_into_applet(gs);
+//        				System.out.println("?????");
+//        				m.change_into_applet(gs);
         			}
         		});
         		end.start();
@@ -268,7 +283,7 @@ public class GameStage extends PApplet{
 //        	{
 //        		is_transport = false;
 //        	}
-        	System.out.println("XXXXX");
+//        	System.out.println("XXXXX");
 		}
         
         if(hasdialog)
@@ -362,8 +377,8 @@ public class GameStage extends PApplet{
 			mainCharacter.addFloor(floors);
 			break;
 		case 1:
-//			the_end = true;
-//			firststart = false;
+			the_end = true;
+			firststart = false;
 			mainCharacter.x = 120;
 			mainCharacter.y = 20;
 			floors.add(new Floor(0, 0, 1000, 50));

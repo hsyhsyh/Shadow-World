@@ -18,8 +18,10 @@ public class GameStage extends PApplet{
 	private static final long serialVersionUID = 1L;
 	private final static int width = 1000, height = 500;
 	
-	public PImage man, bullet, books, book, bloodletter, diamand, phone, skull, monster, monster2, strike, box, bed, ladder, door1, door2, man1, man2, man3, man4
-                  , man5, man6, man7, man8, man_c1, man_c2, man_s1, man_s2,dead_man, kidnap, kidnap2, fireBall1, fireBall2;
+	public PImage man, bullet, books, book, bloodletter, diamand, phone, skull, monster, 
+				monster2, strike, box, bed, ladder, door1, door2, man1, man2, man3, man4
+                , man5, man6, man7, man8, man_c1, man_c2, man_s1, man_s2,dead_man, 
+                kidnap, kidnap2, fireBall1, fireBall2, cellphone;
 
 	public PImage[] man_a = new PImage[10];
 	private Character mainCharacter; 
@@ -38,7 +40,7 @@ public class GameStage extends PApplet{
 	private boolean is_hurt;
 	public boolean firststart,stage_2_door,stage_3_door,stage_5_floor, stage_5_box_1
 			,stage_5_box_2, stage_8_bookcase_1, stage_8_bookcase_2,be_end,the_end
-			,end_dialog;
+			,end_dialog, is_voting;
 	private int alpha;
 	public int goalX,goalY;
 	private PFont cnFont;
@@ -80,6 +82,7 @@ public class GameStage extends PApplet{
 		this.dead_man = loadImage("man_die.png");
 		this.kidnap = loadImage("kidnap.png");
 		this.kidnap2 = loadImage("kidnap2.png");
+		this.cellphone = loadImage("phone.png");
 		int i;
 		for(i = 1; i <= 8; i++){
 			this.man_a[i] = loadImage("man_gun"+Integer.toString(i)+".png");
@@ -103,7 +106,7 @@ public class GameStage extends PApplet{
 		//bullets = new ArrayList<Bullet>();
 		dialog = new Dialog();
 		
-		stage_num = 4;
+		stage_num = 1;
 		
 		
 		isLoading  = false;
@@ -111,7 +114,7 @@ public class GameStage extends PApplet{
 		is_transport = false;
 		stage_2_door = stage_3_door = stage_5_floor = stage_5_box_1 
 				= stage_5_box_2 = stage_8_bookcase_1 = stage_8_bookcase_2 = be_end 
-				= the_end = end_dialog = false;
+				= the_end = end_dialog = is_voting = false;
 		firststart = true;
 		loadData();
 		minim = new Minim(this);
@@ -119,6 +122,7 @@ public class GameStage extends PApplet{
 		song.loop();
 		//song.play();
 		effect[0]=minim.loadFile("shoot.wav");
+		effect[1]=minim.loadFile("levelUp.wav");
 	}
 	
 	public void draw() 
@@ -128,7 +132,7 @@ public class GameStage extends PApplet{
         strokeWeight(1);
 //        textFont(cnFont);
         //blood
-        if(stage_num == 3) {
+        if(stage_num == 3 || stage_num == 7) {
 	        fill(200);
 	        stroke(200);
 	        this.rect(80+mainCharacter.now_HP, 195, 100-mainCharacter.now_HP, 5);
@@ -149,6 +153,15 @@ public class GameStage extends PApplet{
 	        	this.rect(70, 85, mainCharacter.now_HP, 5);
 	        this.textFont(createFont("Arial", 12), 20);
 	        this.text("HP", 70, 80);
+        }
+        //level
+        if(stage_num == 3 || stage_num == 7) {
+        this.textFont(createFont("Arial", 12), 20);
+        this.text("LEVEL  "+mainCharacter.level , 200, 190);
+        }
+        else {
+        	this.textFont(createFont("Arial", 12), 20);
+            this.text("LEVEL  "+mainCharacter.level , 200, 80);
         }
         
 		if(!monsters.isEmpty())
@@ -288,7 +301,7 @@ public class GameStage extends PApplet{
 		case 0://test stage
 			mainCharacter.x = 120;
 			mainCharacter.y = 320;
-			monsters.add(new Monster(this,monster,"none",400,320,100,this,350,450) );
+//			monsters.add(new Monster(this,monster,"none",400,320,100,this,350,450) );
 			floors.add(new Floor(0, 0, 1000, 50));
 			floors.add(new Floor(0, 420, 1000, 80));
 			floors.add(new Floor(0, 0, 50, 500));
@@ -299,6 +312,24 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(660,360,100, 20));
 			doors.add(new Door( 80, 300, door2, 0, 120, 320,true));
 			doors.add(new Door( 300, 100, door2, 0, 120, 320,true));
+			s = new String[2];
+			s[0] = "不知道是誰遺落在這裡的手機，似乎是摔壞了\n手機只能開啟某個APP";
+			s[1] = "要開啟投票系統嗎？\nY鍵確定，N鍵......A鍵返回";
+			a = new boolean[2];
+			a[0] = false;
+			a[1] = false;
+			t = new String[4];
+			t[0] = "不知道是誰遺落在這裡的手機，似乎是摔壞了\n手機只能看簡訊或開啟某個APP";
+			t[1] = "要做什麼呢？\nY鍵開啟投票系統，A鍵看簡訊，N鍵返回";
+			t[2] = "我終於知道是誰偷我的錢了，明明小偷還跟我炫耀過......\n可笑的是我居然反而懷疑你"
+					+ "\n如果我們能活著出去的話，我一定要跟你說聲對不起......";
+			t[3] = "手機裡只有這封簡訊能看......";
+			b = new boolean[4];
+			b[0] = false;
+			b[1] = false;
+			b[2] = false;
+			b[3] = true;
+			items.add(new Cellphone(cellphone,200,350,this,s,a,t,b,true));
 			mainCharacter.addFloor(floors);
 			break;
 		case 1:
@@ -386,9 +417,27 @@ public class GameStage extends PApplet{
 				doors.add(new Door( 860, 60, door1, 4, 50 ,320,false));
 			}
 
-			monsters.add(new Monster(this,monster,"none",400,300,100,this,200,460));
-			monsters.add(new Monster(this,monster,"none",430,300,100,this,200,460));
-			monsters.add(new Monster(this,monster,"none",480,210,100,this,460,700));
+//			monsters.add(new Monster(this,monster,"none",400,300,100,this,200,460));
+//			monsters.add(new Monster(this,monster,"none",430,300,100,this,200,460));
+//			monsters.add(new Monster(this,monster,"none",480,210,100,this,460,700));
+			s = new String[2];
+			s[0] = "不知道是誰遺落在這裡的大螢幕手機，似乎是摔壞了\n手機只能開啟某個APP";
+			s[1] = "要開啟投票系統嗎？\nY鍵確定，N鍵......A鍵返回";
+			a = new boolean[2];
+			a[0] = false;
+			a[1] = false;
+			t = new String[4];
+			t[0] = "不知道是誰遺落在這裡的大螢幕手機，似乎是摔壞了\n手機只能看簡訊或開啟某個APP";
+			t[1] = "要做什麼呢？\nY鍵開啟投票系統，A鍵看簡訊，N鍵返回";
+			t[2] = "我終於知道是誰偷我的錢了，明明小偷還跟我炫耀過......\n可笑的是我居然反而懷疑你"
+					+ "\n如果我們能活著出去的話，我一定要跟你說聲對不起......";
+			t[3] = "手機裡只有這封簡訊能看......";
+			b = new boolean[4];
+			b[0] = false;
+			b[1] = false;
+			b[2] = false;
+			b[3] = true;
+			items.add(new Cellphone(cellphone,60,170,this,s,a,t,b,false));
 			mainCharacter.addFloor(floors);
 			break;
 		case 3:
@@ -416,7 +465,7 @@ public class GameStage extends PApplet{
 			b[1] = true;
 //			b[2] = true;
 //			b[3] = true;
-			items.add(new Deadman(kidnap,600,255,this,s, a,t,b));
+			items.add(new Deadman(kidnap,kidnap2,600,255,this,s, a,t,b));
 			if(!be_end)
 			{
 				monsters.add(new Monster(this,monster,"none",400,220,100,this,350,450));
@@ -447,7 +496,7 @@ public class GameStage extends PApplet{
 			floors.add(new Floor(50,200,200, 15));
 			floors.add(new Floor(400,250,100, 15,300,600));//maybe can move(add left and right bound in the end)
 			doors.add(new Door( 50, 320, door2, 2, 860, 60,true));
-			doors.add(new Door( 850, 320, door1, 5, 50, 320,true));
+			doors.add(new Door( 850, 320, door2, 5, 50, 320,true));
 			monsters.add(new Monster(this,monster,"none",200,220,100,this,150,250));
 			monsters.add(new Monster(this,monster,"none",400,220,100,this,350,450));
 			s = new String[2];
@@ -487,7 +536,7 @@ public class GameStage extends PApplet{
 				doors.add(new Door( 50, 320, door2, 4, 850, 320,true));
 			}
 			
-			doors.add(new Door( 850, 320, door2, 7, 120, 320,true));
+			doors.add(new Door( 850, 320, door2, 7, 50, 220,true));
 //			doors.add(new Door( 850, 320, door2, 8, 120, 320,true));
 			s = new String[2];
 			s[0] = "宛如壁紙一般，側面看過去甚至看不見的箱子\n詭異的是，從正面伸手居然還摸的到木質般的實體";
@@ -513,6 +562,8 @@ public class GameStage extends PApplet{
 				floors.add(new Floor(450,250,150, 15));
 			}
 			mainCharacter.addFloor(floors);
+			monsters.add(new Monster(this,monster,"none",600,320,100,this,600,750));
+			monsters.add(new Monster(this,monster,"none",500,200,100,this,600,750));
 			break;
 		case 6:
 			floors.add(new Floor(0, 0, 1000, 50));
@@ -538,18 +589,48 @@ public class GameStage extends PApplet{
 			b = new boolean[2];
 			b[0] = false;
 			b[1] = true;
-			items.add(new Bloodletter(null,600,320,this,s,a,null,null));
+			items.add(new Bloodletter(null,570,320,this,s,a,null,null));
 			items.add(new OtherItem(skull,680,340,this,t,b,null,null));
 			mainCharacter.addFloor(floors);
 			mainCharacter.addLadder(ladders);
 			break;
 		case 7:
-			floors.add(new Floor(0, 0, 1000, 50));
-			floors.add(new Floor(0, 420, 1000, 80));
+			floors.add(new Floor(0, 0, 1000, 150));
+			floors.add(new Floor(0, 320, 1000, 180));
 			floors.add(new Floor(0, 0, 50, 500));
 			floors.add(new Floor(950,0,50, 500));
-			doors.add(new Door( 50, 320, door2, 5, 850, 320,true));
-			doors.add(new Door( 850, 320, door2, 8, 50, 150,true));
+			doors.add(new Door( 50, 220, door2, 5, 850, 320,true));
+			doors.add(new Door( 850, 220, door2, 8, 50, 150,true));
+			monsters.add(new Monster(this,monster,"none",400,200,100,this,350,450) );
+			monsters.add(new Monster(this,monster,"none",500,200,100,this,350,550) );
+			monsters.add(new Monster(this,monster,"none",600,200,100,this,350,650) );
+			t = new String[2];
+			t[0] = "雖然找不到任何傷口，卻一動也不動的冰冷遺體。";
+			t[1] = "嘖......\n又是一個死人嗎.......";
+			b = new boolean[2];
+			b[0] = false;
+			b[1] = true;
+//			b[2] = true;
+//			b[3] = true;
+			items.add(new Deadman(dead_man,dead_man,600,265,this,null, null,t,b));
+			s = new String[2];
+			s[0] = "不知道是誰遺落在這裡的大螢幕手機，似乎是摔壞了\n手機只能開啟某個APP";
+			s[1] = "要開啟投票系統嗎？\nY鍵確定，N鍵......A鍵返回";
+			a = new boolean[2];
+			a[0] = false;
+			a[1] = false;
+			t = new String[4];
+			t[0] = "不知道是誰遺落在這裡的大螢幕手機，似乎是摔壞了\n手機只能看簡訊或開啟某個APP";
+			t[1] = "要做什麼呢？\nY鍵開啟投票系統，A鍵看簡訊，N鍵返回";
+			t[2] = "我終於知道是誰偷我的錢了，明明小偷還跟我炫耀過......\n可笑的是我居然反而懷疑你"
+					+ "\n如果我們能活著出去的話，我一定要跟你說聲對不起......";
+			t[3] = "手機裡只有這封簡訊能看......";
+			b = new boolean[4];
+			b[0] = false;
+			b[1] = false;
+			b[2] = false;
+			b[3] = true;
+			items.add(new Cellphone(cellphone,700,270,this,s,a,t,b,true));
 			mainCharacter.addFloor(floors);
 			break;
 		case 8:
@@ -567,7 +648,7 @@ public class GameStage extends PApplet{
 			ladders.add(new Ladder(85, 330, 1, ladder, this));
 			ladders.add(new Ladder(85, 370, 1, ladder, this));
 			ladders.add(new Ladder(880, 130, 4, ladder, this));
-			doors.add(new Door( 50, 150, door2, 7, 850, 320,true));
+			doors.add(new Door( 50, 150, door2, 7, 850, 220,true));
 			s = new String[2];
 			s[0] = "彷彿處於2D空間，側面看過去甚至會消失的書櫃\n詭異的是，從正面伸手居然還摸的到各式各樣的書本";
 			s[1] = "這什麼鬼東西啊......\n還是離遠一點好了......";
@@ -591,8 +672,30 @@ public class GameStage extends PApplet{
 			c[0] = false;
 			c[1] = true;
 			items.add(new Book(books,450,100,this,s,a,t,b,u, c, true));
+			s = new String[2];
+			s[0] = "不知道是誰遺落在這裡的大螢幕手機，似乎是摔壞了\n手機只能開啟某個APP";
+			s[1] = "要開啟投票系統嗎？\nY鍵確定，N鍵......A鍵返回";
+			a = new boolean[2];
+			a[0] = false;
+			a[1] = false;
+			t = new String[4];
+			t[0] = "不知道是誰遺落在這裡的大螢幕手機，似乎是摔壞了\n手機只能看簡訊或開啟某個APP";
+			t[1] = "要做什麼呢？\nY鍵開啟投票系統，A鍵看簡訊，N鍵返回";
+			t[2] = "我終於知道是誰偷我的錢了，明明小偷還跟我炫耀過......\n可笑的是我居然反而懷疑你"
+					+ "\n如果我們能活著出去的話，我一定要跟你說聲對不起......";
+			t[3] = "手機裡只有這封簡訊能看......";
+			b = new boolean[4];
+			b[0] = false;
+			b[1] = false;
+			b[2] = false;
+			b[3] = true;
+			items.add(new Cellphone(cellphone,200,370,this,s,a,t,b,false));
 			mainCharacter.addFloor(floors);
 			mainCharacter.addLadder(ladders);
+			monsters.add(new Monster(this,monster,"none",600,320,100,this,600,750));
+			monsters.add(new Monster(this,monster,"none",600,320,100,this,600,750));
+			monsters.add(new Monster(this,monster,"none",300,320,100,this,100,750));
+			monsters.add(new Monster(this,monster,"none",700,50,100,this,600,750));
 			break;
 //		case 9:
 //			mainCharacter.x = 120;
@@ -621,7 +724,7 @@ public class GameStage extends PApplet{
 		switch(keyCode)
 		{
 		case KeyEvent.VK_LEFT:
-			if(!mainCharacter.isCrouch && mainCharacter.now_HP > 0) {
+			if(!mainCharacter.isCrouch && mainCharacter.now_HP > 0 && !hasdialog) {
 			if(mainCharacter.isOnLadder){
 				mainCharacter.isOnLadder=false;
 				mainCharacter.y-=20;
@@ -633,7 +736,7 @@ public class GameStage extends PApplet{
 			}
 			break;
 		case KeyEvent.VK_RIGHT:
-			if(!mainCharacter.isCrouch && mainCharacter.now_HP > 0) {
+			if(!mainCharacter.isCrouch && mainCharacter.now_HP > 0 && !hasdialog) {
 			if(mainCharacter.isOnLadder){
 				mainCharacter.isOnLadder=false;
 				mainCharacter.y-=20;
@@ -645,14 +748,15 @@ public class GameStage extends PApplet{
 			}
 			break;
 		case KeyEvent.VK_SPACE://jump
-			if(!mainCharacter.isOnLadder && !mainCharacter.isCrouch && mainCharacter.isGround && mainCharacter.now_HP > 0)
+			if(!mainCharacter.isOnLadder && !mainCharacter.isCrouch && 
+					mainCharacter.isGround && mainCharacter.now_HP > 0 && !hasdialog)
 			{
 				mainCharacter.jump();
 				//mainCharacter.isWalk=false;
 			}
 			break;
 		case KeyEvent.VK_DOWN://down to ladder
-			if(mainCharacter.now_HP > 0) {
+			if(mainCharacter.now_HP > 0 && !hasdialog) {
 				for(Ladder ladder : ladders)
 				{
 					if(ladder.isLadder(mainCharacter)){
@@ -671,7 +775,7 @@ public class GameStage extends PApplet{
 			}
 			break;
 		case KeyEvent.VK_UP://up to ladder
-			if(!mainCharacter.isCrouch && mainCharacter.now_HP > 0) {
+			if(!mainCharacter.isCrouch && mainCharacter.now_HP > 0 && !hasdialog) {
 			for(Door d : doors)
 			{
 				if( whereisch(d) )
@@ -736,7 +840,7 @@ public class GameStage extends PApplet{
 			break;
 		case KeyEvent.VK_Z://find
 			//attack
-			if(mainCharacter.now_HP > 0) {
+			if(mainCharacter.now_HP > 0 && !hasdialog) {
 			if(mainCharacter.isOnLadder){
 				mainCharacter.isOnLadder=false;
 				mainCharacter.y-=20;
@@ -744,7 +848,28 @@ public class GameStage extends PApplet{
 			mainCharacter.isAttack = true;
 			}
 			break;
-			
+		case KeyEvent.VK_Y:
+			if(hasdialog && is_voting)
+			{
+				is_voting = false;
+				;//投票系統
+			}
+			break;
+		case KeyEvent.VK_N:
+			if(is_voting)
+			{
+				is_voting = false;
+				dialog.closed();
+			}
+			break;
+		case KeyEvent.VK_D:
+			mainCharacter.isForDemo=true;
+			String d[] = new String[1];
+			d[0] = "(Demo Mode On)";
+			boolean b[] = new boolean[1];
+			b[0] = true;
+			opendialog(d,b);
+			break;
 		}
 	}
 
@@ -790,6 +915,7 @@ public class GameStage extends PApplet{
 		private int textpagenum;
 		private int now_textpagenum;
 		private boolean[] mantalk;
+		private boolean speed;
 		public Dialog()
 		{
 			wide = 1;
@@ -801,6 +927,7 @@ public class GameStage extends PApplet{
 //			text = "1234567890\n1234567890\n1234567890";
 			manX = -200;
 			manY = 160;
+			speed = false;
 		}
 		public void display()
 		{
@@ -825,17 +952,30 @@ public class GameStage extends PApplet{
 		}
 		public void dosomething()
 		{
+			if(now_textpagenum >= 3)
+			{
+				is_voting = false;
+			}
 			if(textnum == text[now_textpagenum].length() && now_textpagenum < textpagenum)
 			{
 				now_textpagenum++;
 				textnum = 0;
-				Ani.to(this, (float)(text[now_textpagenum].length()*0.1),
-						"textnum", text[now_textpagenum].length(), Ani.LINEAR);
+//				Ani.to(this, (float)(text[now_textpagenum].length()*0.1),
+//						"textnum", text[now_textpagenum].length(), Ani.LINEAR);
+				showtext();
 				showman();
 			}
 			else if (textnum == text[now_textpagenum].length() && now_textpagenum == textpagenum)
 			{
 				closed();
+			}
+			else if (textnum < text[now_textpagenum].length() &&
+					wide == 950 && high == 150 )
+			{
+				speed = true;
+//				System.out.println("AAA");
+//				textnum = text[now_textpagenum].length();
+//				System.out.println("AAA" + textnum);
 			}
 		}
 		public void open()
@@ -845,7 +985,7 @@ public class GameStage extends PApplet{
 //			Ani.to(this, (float)0.3, "manX", 20, Ani.SINE_OUT);
 			showman();
 		}
-		private void closed()
+		public void closed()
 		{
 			textnum = 0;
 			textpagenum = 0;
@@ -866,8 +1006,31 @@ public class GameStage extends PApplet{
 		}
 		public void showtext()
 		{
-			Ani.to(this, (float)(text[now_textpagenum].length()*0.1),
-							"textnum", text[now_textpagenum].length(), Ani.LINEAR);
+			Thread t = new Thread(new Runnable(){
+				public void run(){
+					while(textnum != text[now_textpagenum].length())
+					{
+						try {
+							if(speed)
+							{
+								textnum = text[now_textpagenum].length();
+								speed = false;
+							}
+							else
+							{
+								textnum++;
+								Thread.sleep(100);
+							}
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+			});
+			t.start();
+//			Ani.to(this, (float)(text[now_textpagenum].length()*0.1),
+//							"textnum", text[now_textpagenum].length(), Ani.LINEAR);
 		}
 		private void showman()
 		{
@@ -995,6 +1158,36 @@ public class GameStage extends PApplet{
 				return false;
 			}
 		}
+		else if(thing.getClass().getName().equals("Game.Cellphone"))
+		{
+			
+			Cellphone b = (Cellphone)thing;
+			if( (b.x - 3 < mainCharacter.x) && (b.x + b.width + 3 > mainCharacter.x)
+					&& (b.y - 40 < mainCharacter.y + man1.height) 
+						&& (b.y + b.height + 40 > mainCharacter.y + man1.height) )
+			{//if charater is at the bed
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else if(thing.getClass().getName().equals("Game.Bloodletter"))
+		{
+			
+			Bloodletter b = (Bloodletter)thing;
+			if( (b.x - 3 < mainCharacter.x) && (b.x + b.width + 3 > mainCharacter.x)
+					&& (b.y - 5 < mainCharacter.y + man1.height) 
+						&& (b.y + b.height + 5 > mainCharacter.y + man1.height) )
+			{//if charater is at the bed
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 //		else if(thing.getClass().getName().equals("Game.Trap"))
 //		{
 //			Trap t = (Trap)thing;
@@ -1022,6 +1215,7 @@ public class GameStage extends PApplet{
 	
 	private void clearplace()
 	{
+		clearItem();
 		floors.clear();
 		doors.clear();
 		monsters.clear();

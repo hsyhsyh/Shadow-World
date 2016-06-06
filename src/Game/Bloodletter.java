@@ -17,7 +17,7 @@ public class Bloodletter extends AbstractItem {
 		}
 		else
 		{
-			width = 50;
+			width = 100;
 			height = 100;
 		}
 		this.parent = parent;
@@ -36,8 +36,8 @@ public class Bloodletter extends AbstractItem {
 		}
 		else
 		{
-			parent.fill(255,0,0);
-			parent.rect(x, y, width, height);
+//			parent.fill(255,0,0);
+//			parent.rect(x, y, width, height);
 		}
 
 	}
@@ -45,6 +45,7 @@ public class Bloodletter extends AbstractItem {
 	@Override
 	public void dialog_event() {
 		// TODO Auto-generated method stub
+		System.out.println(text1[0]);
 		parent.stage_8_bookcase_1 = true;
 		parent.opendialog(text1, mantalk1);
 	}

@@ -15,6 +15,7 @@ public class Character extends AbstractCharacter implements Runnable{
 	public boolean isOnLadder = false;
 	public boolean isOnTopLadder = false;
 	public boolean isCrouch = false;
+	public boolean isForDemo = false;
 	
 	public Character(PApplet parent, PImage chaImage, String name, float x, float y , int HP, GameStage gs){
         Ani.init(parent);
@@ -130,6 +131,19 @@ public class Character extends AbstractCharacter implements Runnable{
 	public Bullet[] getBullet(){
 		return bullets;
 	}
+	
+	private void levelUp(){
+
+		if(this.level<3){
+			if(this.experienceValue>=5*this.level){
+				gs.effect[1].loop();
+				gs.effect[1].play();
+				this.MAX_HP+=10;
+				this.level++;
+				this.now_HP= this.MAX_HP;
+				}
+		}
+	}
 
 	@Override
 	public void run() {
@@ -161,6 +175,7 @@ public class Character extends AbstractCharacter implements Runnable{
 						gs.GameOver_color2 = 0;
 					}
 				}
+				levelUp();
 				fallDown();
 				for(Bullet bullet: bullets){
 					bullet.move();

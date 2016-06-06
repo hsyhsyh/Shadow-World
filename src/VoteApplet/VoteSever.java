@@ -105,7 +105,7 @@ private void loadData(){
 
 public void btnTouch(float mx,float my){
 	
-	if(850<=my && my<900){
+	if(700<=my && my<750){
 		if(600<=mx && mx<=750){
 			done=true;
 		}else{

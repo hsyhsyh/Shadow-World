@@ -377,8 +377,8 @@ public class GameStage extends PApplet{
 			mainCharacter.addFloor(floors);
 			break;
 		case 1:
-			the_end = true;
-			firststart = false;
+//			the_end = true;
+//			firststart = false;
 			mainCharacter.x = 120;
 			mainCharacter.y = 20;
 			floors.add(new Floor(0, 0, 1000, 50));

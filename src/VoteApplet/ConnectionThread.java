@@ -70,10 +70,6 @@ class ConnectionThread extends Thread{
 					sendMessage("load:"+list[0]+":");
 					sendMessage("load:"+list[1]+":");
 					sendMessage("load:"+list[2]+":");
-					sendMessage("load:"+list[3]+":");
-					sendMessage("load:"+list[4]+":");
-					sendMessage("load:"+list[5]+":");
-					
 				}else if(operation[0].equals("vote")){
 					sendMessage(line);
 					clientAction=2;

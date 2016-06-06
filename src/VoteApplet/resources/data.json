@@ -11,6 +11,7 @@
       "v3": 4,
       "v4": 5,
       "total":15,
+      "studentnum":50,
       "subject":"Computer Architecture"
     },
     {
@@ -24,6 +25,7 @@
       "v3": 4,
       "v4": 5,
       "total":15,
+      "studentnum":100,
       "subject":"Software Studio"
     },
     {
@@ -37,6 +39,7 @@
       "v3": 4,
       "v4": 5,
       "total":15,
+      "studentnum":80,
       "subject":"Discrete Mathematics"
     },
     {
@@ -50,7 +53,8 @@
       "v3": 4,
       "v4": 5,
       "total":15,
-      "subject":"Fundamentals of English"
+      "studentnum":75,
+      "subject":"English III"
     },
     {
       "name": "ANAKIN",
@@ -63,7 +67,8 @@
       "v3": 4,
       "v4": 5,
       "total":15,
-      "subject":"Geometric Construction"
+      "studentnum":40,
+      "subject":"Geometric "
     },
     {
       "name": "C-3PO",
@@ -76,6 +81,7 @@
       "v3": 4,
       "v4": 5,
       "total":15,
+      "studentnum":63,
       "subject":"Linear Algebra"
     },
     {
@@ -89,6 +95,7 @@
       "v3": 4,
       "v4": 5,
       "total":15,
+      "studentnum":30,
       "subject":"Statistics"
     }
   ],
@@ -96,9 +103,9 @@
     {
       "account": "102021101",
       "passwd":  "102021101",
-      "L1": "YODA,ANAKIN,C-3PO,PADME,EMPEROR,OBI-WAN",
-      "L2": "4,5,6",
-      "L3": "7,1,2"
+      "L1": "YODA,ANAKIN,C-3PO",
+      "L2": "PADME,EMPEROR,OBI-WAN",
+      "L3": "QUI-GON,,"
     },
     {
       "account": "102021102",

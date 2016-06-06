@@ -13,8 +13,9 @@ public static void main(String [] args){
 		JFrame window = new JFrame("server");
 		window.setContentPane(applet);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setSize(1000,500);
+		window.setSize(1800,800);
 		window.setVisible(true);
+		window.setResizable(false);
 		
 	}
 }

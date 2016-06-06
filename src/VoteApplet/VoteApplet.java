@@ -54,26 +54,26 @@ public class VoteApplet extends PApplet{
 		}else{
 			this.fill(255,255,0);
 		}
-		this.rect(400, 650, 150, 50);
+		this.rect(200, 350, 150, 50);
 		
 		if(reset){
 			this.fill(0,255,0);
 		}else{
 			this.fill(255,255,0);
 		}
-		this.rect(600, 650, 150, 50);
+		this.rect(400, 350, 150, 50);
 		if(quit){
 			this.fill(0,255,0);
 		}else{
 			this.fill(255,255,0);
 		}
-		this.rect(800, 650, 150, 50);
+		this.rect(600, 350, 150, 50);
 		
 		this.fill(0);
 		this.textSize(30);;
-		this.text("Done!",430,682);
-		this.text("Reset!",630,682);
-		this.text("Quit!",830,682);
+		this.text("Done!",230,382);
+		this.text("Reset!",430,382);
+		this.text("Quit!",630,382);
 	}
 
 	public void keyPressed(){
@@ -112,7 +112,7 @@ public class VoteApplet extends PApplet{
 	
 		for(int i=0; i<nodes.size(); i++){
 			JSONObject node = nodes.getJSONObject(i);
-			VoteCharacter character=new VoteCharacter(this, node.getString("name"), 100+400*(i/2),100+300*(i%2),node.getInt("v0"),node.getInt("v1"),node.getInt("v2"),node.getInt("v3"),node.getInt("v4"),node.getInt("total"),node.getString("subject"));
+			VoteCharacter character=new VoteCharacter(this, node.getString("name"), 100+400*(i/2),100+300*(i%2),node.getInt("v0"),node.getInt("v1"),node.getInt("v2"),node.getInt("v3"),node.getInt("v4"),node.getInt("total"),node.getString("subject"),node.getInt("studentnum"));
 			characters.add(character);
 			character.pic[0] = new PImage();
 		    character.pic[0] = loadImage(node.getString("pic0").toString());
@@ -122,6 +122,7 @@ public class VoteApplet extends PApplet{
 	
 	public void loadList(String s){
 		listnum=0;
+		showlist=new ArrayList<VoteCharacter>();
 		client.sendMessage("ask:"+s+":");
 		/*showlist.add(characters.get(1));
 		showlist.add(characters.get(2));
@@ -167,20 +168,20 @@ public class VoteApplet extends PApplet{
 	
 	public void btnTouch(float mx,float my){
 		
-		if(650<=my && my<700){
-			if(400<=mx && mx<=550){
+		if(350<=my && my<400){
+			if(200<=mx && mx<=350){
 				done=true;
 			}else{
 				done=false;
 			}
 			
-			if(600<=mx && mx<=750){
+			if(400<=mx && mx<=550){
 				reset=true;
 			}else{
 				reset=false;
 			}
 			
-			if(800<=mx && mx<=950){
+			if(600<=mx && mx<=750){
 				quit=true;
 			}else{
 				quit=false;
@@ -190,13 +191,13 @@ public class VoteApplet extends PApplet{
 	
 public void btnClick(float mx,float my){
 		
-		if(650<=my && my<700){
+		if(350<=my && my<400){
 			sendList();
-			if(400<=mx && mx<=550){
+			if(200<=mx && mx<=350){
 				sendList();
 			}
 			//reset
-			if(600<=mx && mx<=750){
+			if(400<=mx && mx<=550){
 				for(VoteCharacter character:showlist){
 					for(int i=0;i<5;i++){
 						character.option_b[0][i]=false;
@@ -205,7 +206,7 @@ public void btnClick(float mx,float my){
 				}
 			}
 			//quit
-			if(800<=mx && mx<=950){
+			if(600<=mx && mx<=750){
 				
 			}
 		}
@@ -219,7 +220,7 @@ public void btnClick(float mx,float my){
 				if(character.getName().toString().equals(operation[1])){
 					if(!showlist.contains(character)){
 					this.stop();
-					character.setPos(100+400*(listnum/2),100+300*(listnum%2));
+					character.setPos(10+320*listnum,100);
 					showlist.add(character);
 					listnum++;
 					System.out.println("list get"+listnum);

@@ -16,5 +16,6 @@ public class VoteMain extends JFrame{
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setSize(1000, 500);
 		window.setVisible(true);
+		window.setResizable(false);
 	}
 }

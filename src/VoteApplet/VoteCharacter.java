@@ -19,7 +19,7 @@ public class VoteCharacter {
 	private ControlP5 cp5;
 	private int[] votevalue=new int[5];
 	public int total;
-	private int all_total;
+	private int studentnum;
 	private String subject;
 	public boolean[][] option_b;
 	public boolean[] showinf_b;
@@ -28,7 +28,7 @@ public class VoteCharacter {
 	int bar_height=30;
 	int word_x=10;
 	int word_y=10;
-	public VoteCharacter(PApplet parent, String name, float x, float y,int v0,int v1,int v2,int v3,int v4,int total,String subject){
+	public VoteCharacter(PApplet parent, String name, float x, float y,int v0,int v1,int v2,int v3,int v4,int total,String subject,int num){
 		
 		this.parent = parent;
 		this.name = name;
@@ -83,6 +83,7 @@ public class VoteCharacter {
 	
 	public void voteAccess(int n){
 		this.votevalue[n]++;
+		this.total++;
 		System.out.println("votevalue[0]="+votevalue[0]);
 		System.out.println("votevalue[1]="+votevalue[1]);
 		System.out.println("votevalue[2]="+votevalue[2]);
@@ -285,9 +286,9 @@ public class VoteCharacter {
 		}
 		}
 		
-		if(all_total!=0){
-			this.parent.rect(x,y+pic_width+55,(int)(pic_width*2*(double)total/(double)all_total),bar_height);
-		}
+			if(studentnum!=0){
+				this.parent.rect(x,y+pic_width+55,(int)(pic_width*2*(double)total/(double)studentnum),bar_height);
+			}
 		}
 	}	
 	

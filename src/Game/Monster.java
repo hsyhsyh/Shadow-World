@@ -114,7 +114,8 @@ public class Monster extends AbstractCharacter implements Runnable{
 		if(ch.isMonsterTouch == false)
 			if(ch.x<this.x+this.chaImage.width && ch.x+ch.chaImage.width>this.x && ch.y<this.y+this.chaImage.height && ch.y+ch.chaImage.height>this.y){
 				gs.hurt();
-				ch.now_HP -=5;
+				if(!ch.isForDemo)
+					ch.now_HP -=5;
 				ch.isMonsterTouch = true;
 			}
 		
@@ -123,7 +124,8 @@ public class Monster extends AbstractCharacter implements Runnable{
 			if(bullet.x>=ch.x && bullet.x<=ch.x+ch.chaImage.width && bullet.y>=ch.y+5 && bullet.y<=ch.y+ch.chaImage.height-5){
 				bullet.vanish();
 				gs.hurt();
-				ch.now_HP -=5;
+				if(!ch.isForDemo)
+					ch.now_HP -=5;
 				}
 			}
 		if(ch.now_HP < 0)

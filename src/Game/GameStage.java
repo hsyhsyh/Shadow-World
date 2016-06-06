@@ -856,6 +856,14 @@ public class GameStage extends PApplet{
 		case KeyEvent.VK_N:
 			dialog.closed();
 			break;
+		case KeyEvent.VK_D:
+			mainCharacter.isForDemo=true;
+			String d[] = new String[1];
+			d[0] = "(Demo Mode On)";
+			boolean b[] = new boolean[1];
+			b[0] = true;
+			opendialog(d,b);
+			break;
 		}
 	}
 

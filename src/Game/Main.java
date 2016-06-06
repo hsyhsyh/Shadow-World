@@ -23,14 +23,22 @@ public class Main extends JFrame{
 		
 	}
 	
-	public void changeapplet(PApplet tem)
+	public void change_into_applet(PApplet tem)
 	{
 		remove(mainapplet);
+//		removeAll();
 		mainapplet = tem;
 		mainapplet.init();
 		mainapplet.start();
 		add(mainapplet);
 		
+	}
+	
+	public void applet(PApplet tem)
+	{
+		tem.init();
+		tem.start();
+		add(tem);
 	}
 	public static void main(String [] args){
 //		GameStage applet1 = new GameStage();
@@ -66,7 +74,7 @@ public class Main extends JFrame{
 //				try {
 //					Thread.sleep(2000);
 //					System.out.println("AAA");
-//					m.changeapplet(m.applet2);
+//					m.change_into_applet(m.applet2);
 //				} catch (InterruptedException e) {
 //					// TODO Auto-generated catch block
 //					e.printStackTrace();

@@ -589,7 +589,7 @@ public class GameStage extends PApplet{
 			b = new boolean[2];
 			b[0] = false;
 			b[1] = true;
-			items.add(new Bloodletter(null,600,320,this,s,a,null,null));
+			items.add(new Bloodletter(null,500,320,this,s,a,null,null));
 			items.add(new OtherItem(skull,680,340,this,t,b,null,null));
 			mainCharacter.addFloor(floors);
 			mainCharacter.addLadder(ladders);
@@ -901,6 +901,7 @@ public class GameStage extends PApplet{
 		private int textpagenum;
 		private int now_textpagenum;
 		private boolean[] mantalk;
+		private boolean speed;
 		public Dialog()
 		{
 			wide = 1;
@@ -912,6 +913,7 @@ public class GameStage extends PApplet{
 //			text = "1234567890\n1234567890\n1234567890";
 			manX = -200;
 			manY = 160;
+			speed = false;
 		}
 		public void display()
 		{
@@ -940,13 +942,22 @@ public class GameStage extends PApplet{
 			{
 				now_textpagenum++;
 				textnum = 0;
-				Ani.to(this, (float)(text[now_textpagenum].length()*0.1),
-						"textnum", text[now_textpagenum].length(), Ani.LINEAR);
+//				Ani.to(this, (float)(text[now_textpagenum].length()*0.1),
+//						"textnum", text[now_textpagenum].length(), Ani.LINEAR);
+				showtext();
 				showman();
 			}
 			else if (textnum == text[now_textpagenum].length() && now_textpagenum == textpagenum)
 			{
 				closed();
+			}
+			else if (textnum < text[now_textpagenum].length() &&
+					wide == 950 && high == 150 )
+			{
+				speed = true;
+//				System.out.println("AAA");
+//				textnum = text[now_textpagenum].length();
+//				System.out.println("AAA" + textnum);
 			}
 		}
 		public void open()
@@ -977,8 +988,31 @@ public class GameStage extends PApplet{
 		}
 		public void showtext()
 		{
-			Ani.to(this, (float)(text[now_textpagenum].length()*0.1),
-							"textnum", text[now_textpagenum].length(), Ani.LINEAR);
+			Thread t = new Thread(new Runnable(){
+				public void run(){
+					while(textnum != text[now_textpagenum].length())
+					{
+						try {
+							if(speed)
+							{
+								textnum = text[now_textpagenum].length();
+								speed = false;
+							}
+							else
+							{
+								textnum++;
+								Thread.sleep(100);
+							}
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+			});
+			t.start();
+//			Ani.to(this, (float)(text[now_textpagenum].length()*0.1),
+//							"textnum", text[now_textpagenum].length(), Ani.LINEAR);
 		}
 		private void showman()
 		{
@@ -1148,6 +1182,7 @@ public class GameStage extends PApplet{
 	
 	private void clearplace()
 	{
+		clearItem();
 		floors.clear();
 		doors.clear();
 		monsters.clear();

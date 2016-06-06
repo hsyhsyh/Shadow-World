@@ -22,7 +22,7 @@ public class Box extends AbstractItem{
 		mantalk2 = m2;
 		this.text3 = text3;
 		mantalk3 = m3;
-//		isspecial = special;
+		isspecial = special;
 	}
 	@Override
 	public void display() {
@@ -35,7 +35,7 @@ public class Box extends AbstractItem{
 	@Override
 	public void dialog_event() {
 		// TODO Auto-generated method stub
-//		System.out.println(isspecial + " " + isdone);
+		System.out.println(isspecial + " " + parent.stage_5_box_1 + " " + parent.stage_5_box_2);
 		if(isspecial && !parent.stage_5_box_2 && parent.stage_5_box_1)
 		{
 //			parent.stage_5_floor = true;

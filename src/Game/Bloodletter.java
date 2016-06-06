@@ -17,7 +17,7 @@ public class Bloodletter extends AbstractItem {
 		}
 		else
 		{
-			width = 50;
+			width = 100;
 			height = 100;
 		}
 		this.parent = parent;

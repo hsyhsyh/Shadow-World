@@ -243,12 +243,12 @@ public class GameStage extends PApplet{
 //        		===================the end=====================
         		Thread end = new Thread(new Runnable(){
         			public void run(){
-        				try {
-							Thread.sleep(1000);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+//        				try {
+//							Thread.sleep(1000);
+//						} catch (InterruptedException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
         				while(true)
         				{
         					System.out.println(hasdialog);
@@ -258,7 +258,7 @@ public class GameStage extends PApplet{
         						break;
         					}
         				}
-
+        				System.out.println("?????");
         				m.change_into_applet(gs);
         			}
         		});
@@ -268,7 +268,7 @@ public class GameStage extends PApplet{
 //        	{
 //        		is_transport = false;
 //        	}
-        	
+        	System.out.println("XXXXX");
 		}
         
         if(hasdialog)
@@ -362,8 +362,8 @@ public class GameStage extends PApplet{
 			mainCharacter.addFloor(floors);
 			break;
 		case 1:
-			the_end = true;
-			firststart = false;
+//			the_end = true;
+//			firststart = false;
 			mainCharacter.x = 120;
 			mainCharacter.y = 20;
 			floors.add(new Floor(0, 0, 1000, 50));

@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -17,12 +18,11 @@ public class Gamestart extends PApplet implements ActionListener {
 	private final static int width = 1000, height = 500;
 	private PImage startbg;
 	JButton start, stop, achievement, statis;
-	Achieve ach;
+	Achieve achi;
 	int index=0;   
     PImage [] imgs=new PImage[4];
 	public void setup() {
-		ach = new Achieve(this);
-		this.startbg = loadImage("startbg1.png");
+		achi = new Achieve();
 		for(int i=0;i<4;i++){  
         	this.imgs[i] = loadImage("start" + (i+1) + ".png"); 
         }
@@ -32,6 +32,14 @@ public class Gamestart extends PApplet implements ActionListener {
 		this.stop = new JButton("Exit");
 		this.achievement = new JButton("achievement");
 		this.statis = new JButton("statis");
+		start.addActionListener(this);
+		start.setActionCommand("start");
+		stop.addActionListener(this);
+		stop.setActionCommand("stop");
+		achievement.addActionListener(this);
+		achievement.setActionCommand("achievement");
+		statis.addActionListener(this);
+		statis.setActionCommand("statis");
 		this.add(start);
 		this.add(stop);
 		this.add(achievement);
@@ -39,45 +47,56 @@ public class Gamestart extends PApplet implements ActionListener {
 		}
 	public void draw() {
 		this.setLayout(null);
-		background(startbg);
-//    	image(this.startbg, -300, -300);
+		if(index<=4){
 		if(index<4){
     		image(imgs[index], 0, 0);
     		try{  
     			Thread.sleep(1500);  
             	}  
-    		catch(Exception e){  
-    			e.printStackTrace();  
+    			catch(Exception e){  
+    				e.printStackTrace();  
+            	}
+			}
+			else{
+				image(this.startbg, -300, -300);
+				try{  
+					Thread.sleep(1500);  
             	}  
+    			catch(Exception e){  
+    				e.printStackTrace();  
+            	}
+			}
     		index=index+1;  
     	}
-		else if(index >= 4){
-	    	this.start.setLocation(500,100);
-	    	this.start.setSize(100, 40);
-	    	start.addActionListener(this);
-	    	start.setActionCommand("start");
-	 		this.stop.setLocation(500, 400);
-	 		this.stop.setSize(100, 40);
-	 		stop.addActionListener(this);
-	 		stop.setActionCommand("stop");
-	 		this.achievement.setLocation(500, 200);
-	 		this.achievement.setSize(100, 40);
-	 		achievement.addActionListener(this);
-	 		achievement.setActionCommand("achievement");
-	 		this.statis.setSize(100,40);
-	 		this.statis.setLocation(500, 300);
-	 		statis.addActionListener(this);
-	 		statis.setActionCommand("statis");
-	 		index=index+1;
+		else if(index == 5){
+			image(this.startbg, -300, -300);
+			index=index+1;
+		}
+		else if(index > 5){
+			while(true){
+				this.start.setLocation(500,100);
+	    		this.start.setSize(100, 40);
+	 			this.stop.setLocation(500, 400);
+	 			this.stop.setSize(100, 40);
+	 			this.achievement.setLocation(500, 200);
+	 			this.achievement.setSize(100, 40);
+	 			this.statis.setSize(100,40);
+	 			this.statis.setLocation(500, 300);
+	 			index=index+1;
+			}
 		}
 	   }
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if("start".equals(e.getActionCommand())){
+			System.out.println("1234");
 			//start the game
 		}
 		else if("achievement".equals(e.getActionCommand())){
-			this.add(ach);
+			achi.setLocation(100, 50);
+			achi.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			achi.setSize(1000, 500);
+			achi.setVisible(true);
 		}
 		else if("statis".equals(e.getActionCommand())){
 			// show the statis

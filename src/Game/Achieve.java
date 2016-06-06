@@ -10,6 +10,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -17,7 +18,7 @@ import com.sun.prism.paint.Color;
 
 import processing.core.PApplet;
 
-public class Achieve extends JPanel implements ActionListener{
+public class Achieve extends JFrame{
 	private static final long serialVersionUID = 1L;
 	boolean achieve1, achieve2, achieve3, achieve4, achieve5, achieve6, achieve7, achieve8;
 	JLabel label1, label2, label3, label4, label5, label6, label7, label8, label9;
@@ -30,9 +31,8 @@ public class Achieve extends JPanel implements ActionListener{
 	BufferedImage image7 = null;
 	BufferedImage image8 = null;
 	BufferedImage image9 = null;
-	Gamestart game;
-	public Achieve(Gamestart ga){
-		this.game = ga; 
+	JPanel panel;
+	public Achieve(){
 		achieve1 = true;
 		achieve2 = true;
 		achieve3 = true;
@@ -72,14 +72,6 @@ public class Achieve extends JPanel implements ActionListener{
 		this.label7 = new JLabel(new ImageIcon(this.image7));
 		this.label8 = new JLabel(new ImageIcon(this.image8));
 		this.label9 = new JLabel(new ImageIcon(this.image9));
-	}
-	protected void paintComponent(Graphics g){
-		super.paintComponent(g);
-		this.setSize(1000, 500);
-		this.setLocation(0, 0);
-		this.add(this.label9, -1);
-		label9.setSize(1000,500);
-		label9.setLocation(0, 0);
 		if(achieve1){
 			this.add(this.label1, 0);
 			label1.setSize(100,100);
@@ -120,17 +112,10 @@ public class Achieve extends JPanel implements ActionListener{
 			label8.setSize(100,100);
 			label8.setLocation(700, 300);
 		}
-		JButton button = new JButton("Return");
-		button.addActionListener(this);
-		button.setActionCommand("return");
-		this.add(button);
-		button.setLayout(null);
-		button.setLocation(300, 400);
-	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if("return".equals(e.getActionCommand())){
-			this.game.start();
+		if(achieve8){
+			this.add(this.label9, -1);
+			label9.setSize(100,100);
+			label9.setLocation(700, 300);
 		}
 	}
 	public void setachieve(int num){

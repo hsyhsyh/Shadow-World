@@ -41,7 +41,7 @@ public class GameStage extends PApplet{
 	public boolean firststart,stage_2_door,stage_3_door,stage_5_floor, stage_5_box_1
 			,stage_5_box_2, stage_8_bookcase_1, stage_8_bookcase_2,be_end,the_end
 			,end_dialog, is_voting;
-	private int alpha;
+	private int alpha, hurt_alpha;
 	public int goalX,goalY;
 	private PFont cnFont;
 	public float GameOver_x = 350,GameOver_y = 0;
@@ -249,9 +249,9 @@ public class GameStage extends PApplet{
 		
         if(is_hurt)
         {
-			fill(255,0,0,alpha);
+			fill(255,0,0,hurt_alpha);
         	rect(0,0,width,height);
-        	if(alpha == 0)
+        	if(hurt_alpha == 0)
         	{
         		is_hurt = false;
         	}
@@ -369,12 +369,12 @@ public class GameStage extends PApplet{
 			}
 			if(the_end)
 			{
-				u = new String[2];
+				u = new String[4];
 				u[0] = "最後，還是回到這裡了嗎......\n看來好像出不去了呢......";
 				u[1] = "昨天我還因為成績而覺得沮喪，沒想到一覺醒來之後就再也回不去了......";
 				u[2] = "哈哈......\n成績不好又怎樣？被二一了又怎樣？只要還活著就還有機會啊！";
 				u[3] = "我現在才終於了解，人總是要失去了才懂得珍惜啊......";
-				c = new boolean[2];
+				c = new boolean[4];
 				c[0] = true;
 				c[1] = true;
 				c[2] = true;
@@ -465,7 +465,10 @@ public class GameStage extends PApplet{
 			b[1] = true;
 //			b[2] = true;
 //			b[3] = true;
-			items.add(new Deadman(kidnap,kidnap2,600,255,this,s, a,t,b));
+			if(!stage_5_floor)
+			{
+				items.add(new Deadman(kidnap,kidnap2,600,255,this,s, a,t,b));
+			}
 			if(!be_end)
 			{
 				monsters.add(new Monster(this,monster,"none",400,220,100,this,350,450));
@@ -485,6 +488,7 @@ public class GameStage extends PApplet{
 //				c[3] = true;
 				opendialog(u,c);
 				be_end = false;
+				the_end = true;
 			}
 			break;
 		case 4:
@@ -1209,8 +1213,12 @@ public class GameStage extends PApplet{
 	public void hurt()
 	{
 		is_hurt = true;
-		alpha = 255;
-		Ani.to(this, (float)0.5, "alpha", 0);
+		hurt_alpha = 255;
+//		Thread h = new Thread(new Runnable(){
+//			public 
+//		});
+//		h.start();
+		Ani.to(this, (float)0.5, "hurt_alpha", 0);
 	}
 	
 	private void clearplace()

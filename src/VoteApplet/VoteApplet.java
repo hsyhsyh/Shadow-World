@@ -200,6 +200,7 @@ public void btnClick(float mx,float my){
 			sendList();
 			if(200<=mx && mx<=350){
 				sendList();
+				setVoteVisible(false);
 			}
 			//reset
 			if(400<=mx && mx<=550){
@@ -212,7 +213,7 @@ public void btnClick(float mx,float my){
 			}
 			//quit
 			if(600<=mx && mx<=750){
-				
+				setVisible(false);
 			}
 		}
 	}

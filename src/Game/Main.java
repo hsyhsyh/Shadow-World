@@ -16,10 +16,12 @@ public class Main extends JFrame{
 	{
 		
 		gamestage = new GameStage(this);
-		gamestart = new Gamestart();
+		gamestart = new Gamestart(this);
+		gamestart.setgs(gamestage);
 		gamestage.setgs(gamestart);
+		
 //		changeapplet(applet1);
-		mainapplet = gamestage;
+		mainapplet = gamestart;
 		mainapplet.init();
 		mainapplet.start();
 		add(mainapplet);
@@ -34,7 +36,6 @@ public class Main extends JFrame{
 		mainapplet = tem;
 		mainapplet.init();
 		mainapplet.start();
-		System.out.println("DDDDD");
 		add(mainapplet);
 		
 	}

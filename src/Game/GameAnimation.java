@@ -35,7 +35,7 @@ public class GameAnimation extends PApplet {
     		index=index+1;  
     	}
     	else if(index == 4){
-    		Gamestart applet3 = new Gamestart();
+    		Gamestart applet3 = new Gamestart(new Main());//?????????????
 			applet3.init();
 			applet3.start();
 			applet3.setFocusable(true);

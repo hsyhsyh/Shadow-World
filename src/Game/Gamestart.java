@@ -16,11 +16,19 @@ import processing.core.PImage;
 public class Gamestart extends PApplet implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private final static int width = 1000, height = 500;
+	private GameStage gs;
+	private Main m;
 	private PImage startbg;
 	JButton start, stop, achievement, statis;
 	Achieve achi;
 	int index=0;   
     PImage [] imgs=new PImage[4];
+    
+    public Gamestart(Main main)
+    {
+    	m = main;
+    }
+    
 	public void setup() {
 		achi = new Achieve();
 		for(int i=0;i<4;i++){  
@@ -28,6 +36,7 @@ public class Gamestart extends PApplet implements ActionListener {
         }
 		size(width, height);
 		smooth();
+		startbg = loadImage("startbg.png");
 		this.start = new JButton("Start");
 		this.stop = new JButton("Exit");
 		this.achievement = new JButton("achievement");
@@ -90,6 +99,7 @@ public class Gamestart extends PApplet implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if("start".equals(e.getActionCommand())){
 			System.out.println("1234");
+			m.change_into_applet(gs);
 			//start the game
 		}
 		else if("achievement".equals(e.getActionCommand())){
@@ -104,6 +114,11 @@ public class Gamestart extends PApplet implements ActionListener {
 		else if("stop".equals(e.getActionCommand())){
 			//exit game
 		}
+	}
+	
+	public void setgs(GameStage g)
+	{
+		gs = g;
 	}
 		
 }

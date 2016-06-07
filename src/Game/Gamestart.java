@@ -27,6 +27,7 @@ public class Gamestart extends PApplet implements ActionListener {
     public Gamestart(Main main)
     {
     	m = main;
+    	index = 5;
     }
     
 	public void setup() {
@@ -53,12 +54,13 @@ public class Gamestart extends PApplet implements ActionListener {
 		this.add(stop);
 		this.add(achievement);
 		this.add(statis);
+		
 		}
 	public void draw() {
 		this.setLayout(null);
 		if(index<=4){
 		if(index<4){
-    		image(imgs[index], 0, 0);
+			image(imgs[index], 0, 0);
     		try{  
     			Thread.sleep(1500);  
             	}  
@@ -67,14 +69,15 @@ public class Gamestart extends PApplet implements ActionListener {
             	}
 			}
 			else{
-				image(this.startbg, -300, -300);
+//				image(this.startbg, -300, -300);
+				
 				try{  
-					Thread.sleep(1500);  
+					Thread.sleep(1500); m.change_into_applet(gs); 
             	}  
     			catch(Exception e){  
     				e.printStackTrace();  
             	}
-			}
+			};
     		index=index+1;  
     	}
 		else if(index == 5){
@@ -82,7 +85,7 @@ public class Gamestart extends PApplet implements ActionListener {
 			index=index+1;
 		}
 		else if(index > 5){
-			while(true){
+			while(index > 5){
 				this.start.setLocation(500,100);
 	    		this.start.setSize(100, 40);
 	 			this.stop.setLocation(500, 400);
@@ -91,15 +94,19 @@ public class Gamestart extends PApplet implements ActionListener {
 	 			this.achievement.setSize(100, 40);
 	 			this.statis.setSize(100,40);
 	 			this.statis.setLocation(500, 300);
-	 			index=index+1;
+//	 			index=index+1;
 			}
 		}
 	   }
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if("start".equals(e.getActionCommand())){
-			System.out.println("1234");
-			m.change_into_applet(gs);
+//			System.out.println("1234");
+			this.remove(start);
+			this.remove(stop);
+			this.remove(achievement);
+			this.remove(statis);
+			index = 0;
 			//start the game
 		}
 		else if("achievement".equals(e.getActionCommand())){
@@ -113,6 +120,7 @@ public class Gamestart extends PApplet implements ActionListener {
 		}
 		else if("stop".equals(e.getActionCommand())){
 			//exit game
+			exit();
 		}
 	}
 	

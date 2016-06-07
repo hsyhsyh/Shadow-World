@@ -3,6 +3,7 @@ package Game;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Random;
 
 import VoteApplet.VoteApplet;
 import ddf.minim.AudioPlayer;
@@ -115,7 +116,7 @@ public class GameStage extends PApplet{
 		//bullets = new ArrayList<Bullet>();
 		dialog = new Dialog();
 		
-		stage_num = 1;
+		stage_num = 2;
 		
 		
 		isLoading  = false;
@@ -908,6 +909,7 @@ public class GameStage extends PApplet{
 			{
 				is_voting = false;
 				dialog.closed();
+				
 				m.addapplet(va);
 				;//投票系統
 			}

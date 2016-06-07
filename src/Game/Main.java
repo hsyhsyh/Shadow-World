@@ -49,6 +49,7 @@ public class Main extends JFrame{
 	public void addapplet(PApplet tem)
 	{
 		mainapplet.stop();
+		remove(mainapplet);
 		tem.init();
 		tem.start();
 		tem.setVisible(true);
@@ -58,6 +59,7 @@ public class Main extends JFrame{
 	{
 		mainapplet.start();
 		remove(tem);
+		add(mainapplet);
 	}
 	
 	public static void main(String [] args){

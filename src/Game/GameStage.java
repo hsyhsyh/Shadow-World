@@ -907,6 +907,7 @@ public class GameStage extends PApplet{
 			if(hasdialog && is_voting)
 			{
 				is_voting = false;
+				dialog.closed();
 				m.addapplet(va);
 				;//投票系統
 			}

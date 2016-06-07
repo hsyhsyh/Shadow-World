@@ -97,7 +97,7 @@ public class ChatServer implements Runnable{
 						client.clientAction=0;
 					}else if(client.clientAction==2){
 						this.server.voteAccess(client.charactername,client.votevalue);
-						System.out.println("chatServer "+client.charactername+client.votevalue);;
+						//System.out.println("chatServer "+client.charactername+client.votevalue);;
 						client.clientAction=0;
 					}
 				}

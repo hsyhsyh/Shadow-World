@@ -19,6 +19,7 @@ public class VoteSever extends PApplet{
 	private PImage bg;
 	private boolean done,reset,quit;
 	public ChatServer server;
+	public int shownum;
 	
 	public void setup(){
 		size(1000, 500);
@@ -38,6 +39,7 @@ public class VoteSever extends PApplet{
 		this.server= new ChatServer(8000,this,accounts);
 		Thread th=new Thread(server);
 		th.start();
+		shownum=1;
 	}
 	
 public void draw(){
@@ -47,11 +49,11 @@ public void draw(){
 		stroke(60, 119, 119);
 		strokeWeight(4);
 		
-		for(VoteCharacter character: this.characters){
+		for(VoteCharacter character: this.showlist){
 			character.display_server();
 		}
 		
-		if(done){
+		/*if(done){
 			this.fill(0,255,0);
 		}else{
 			this.fill(255,255,0);
@@ -75,7 +77,7 @@ public void draw(){
 		this.textSize(20);;
 		this.text("Done!",645,735);
 		this.text("Reset!",845,735);
-		this.text("Quit!",1050,735);
+		this.text("Quit!",1050,735);*/
 	
 	}
 
@@ -100,7 +102,10 @@ private void loadData(){
 	    character.pic[0] = loadImage(node.getString("pic0").toString());
 	    total=total+character.total;
 	}
-	
+	for(int i=shownum;i<=shownum+5;i++){
+		characters.get(i).setPos(100+400*(i/2),100+300*(i%2));
+		showlist.add(characters.get(i));
+	}
 }
 
 public void btnTouch(float mx,float my){

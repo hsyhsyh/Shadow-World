@@ -41,7 +41,7 @@ public class VoteCharacter {
 		this.subject=subject;
 		this.studentnum=num;
 		this.information=inf+studentnum;
-		System.out.println("studentnum"+studentnum);
+		//System.out.println("studentnum"+studentnum);
 		pic=new PImage[2];
 		pic[0]= null;
 		
@@ -94,11 +94,11 @@ public class VoteCharacter {
 	public void voteAccess(int n){
 		this.votevalue[n]++;
 		this.total++;
-		System.out.println("votevalue[0]="+votevalue[0]);
-		System.out.println("votevalue[1]="+votevalue[1]);
-		System.out.println("votevalue[2]="+votevalue[2]);
-		System.out.println("votevalue[3]="+votevalue[3]);
-		System.out.println("votevalue[4]="+votevalue[4]);
+		//System.out.println("votevalue[0]="+votevalue[0]);
+		//System.out.println("votevalue[1]="+votevalue[1]);
+		//System.out.println("votevalue[2]="+votevalue[2]);
+		//System.out.println("votevalue[3]="+votevalue[3]);
+		//System.out.println("votevalue[4]="+votevalue[4]);
 	}
 	
 	
@@ -309,7 +309,7 @@ public class VoteCharacter {
 		}
 		
 			if(studentnum!=0){
-				System.out.println(name+"voterate:"+voterate);
+				//System.out.println(name+"voterate:"+voterate);
 				if(voterate<0.33){
 					this.parent.fill(255,0,0);
 				}else if(voterate<0.66){
@@ -318,6 +318,7 @@ public class VoteCharacter {
 					this.parent.fill(0,255,0);
 				}
 				this.parent.rect(x,y+pic_width+55,(int)(pic_width*1.5*(double)total/(double)studentnum),bar_height);
+				this.parent.text(total+"/"+studentnum,x+(int)(pic_width*1.5),y+pic_width+80 );
 				//this.parent.rect(x+(pic_width*1.5),y+pic_width+55,(pic_width*0.5));
 				//this.parent.text(x+10,x)
 			}

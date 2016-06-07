@@ -40,7 +40,7 @@ class ConnectionThread extends Thread{
 		while(true){
 			try{
 				String line = this.reader.readLine();
-				System.out.println(line);
+				//System.out.println(line);
 				String[] operation=new String[3];
 				operation=line.split(":",3);
 				if(operation[0].equals("login")){
@@ -75,7 +75,7 @@ class ConnectionThread extends Thread{
 					clientAction=2;
 					charactername=operation[1];
 					votevalue=Integer.valueOf(operation[2]);
-					System.out.println("connectionThread"+operation[0]+operation[1]+operation[2]);
+					//System.out.println("connectionThread"+operation[0]+operation[1]+operation[2]);
 				}else if(operation[0].equals("finish")){
 					
 				}

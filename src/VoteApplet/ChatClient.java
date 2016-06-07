@@ -52,7 +52,7 @@ public class ChatClient extends JFrame {
 		this.textArea.setEditable(false);
 		this.textArea.setPreferredSize(new Dimension(500,550));
 		JScrollPane scrollPane = new JScrollPane(this.textArea);
-	    this.add(scrollPane);
+	    //this.add(scrollPane);
 	    
 	    // Initialize textField
 	    this.textField = new JTextField();
@@ -65,7 +65,7 @@ public class ChatClient extends JFrame {
 			}
 	    	
 	    });
-	    this.add(this.textField);
+	    //this.add(this.textField);
 	    
 	    this.pack();
 	    // Ask for nickname before showing client window

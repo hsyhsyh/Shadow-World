@@ -40,11 +40,12 @@ public class VoteApplet extends PApplet{
 		bg=new PImage();
 		bg=loadImage("src/VoteApplet/resources/horror.jpg");
 		
-		this.setVisible(false);
+		
 		
 		//socket
 		this.client = new ChatClient(this);
 		loadList("L1");
+		this.setVisible(false);
 	}
 	
 	public void draw(){

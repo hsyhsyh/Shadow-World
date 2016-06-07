@@ -1,4 +1,6 @@
 package Game;
+import java.util.Random;
+
 import javax.swing.JFrame;
 
 import VoteApplet.VoteApplet;
@@ -9,14 +11,17 @@ public class Main extends JFrame{
 	
 	private final static int windowWidth = 1000, windowHeight = 500;
 	private PApplet mainapplet;
+	private boolean is_voted;
 	public Gamestart gamestart;
 	public GameStage gamestage;
 	public PApplet applet1, applet2;
 	public VoteApplet voteapplet;
 	public Main()
 	{
+		is_voted = false;
 		//Voteapplet
 		voteapplet = new VoteApplet(this);
+//		voteapplet.init();
 //		voteapplet.init();
 //		voteapplet.start();
 //		voteapplet.setFocusable(true);
@@ -25,9 +30,11 @@ public class Main extends JFrame{
 		
 		gamestage = new GameStage(this,voteapplet);
 		gamestart = new Gamestart(this);
+//		gamestage.init();
+//		gamestart.init();
 		gamestart.setgs(gamestage);
 		gamestage.setgs(gamestart);
-		mainapplet = gamestart;
+		mainapplet = gamestage;
 		mainapplet.init();
 		mainapplet.start();
 		add(mainapplet);
@@ -46,11 +53,19 @@ public class Main extends JFrame{
 		
 	}
 	//102021101
-	public void addapplet(PApplet tem)
+	public void addapplet(VoteApplet tem)
 	{
 		mainapplet.stop();
 		remove(mainapplet);
-		tem.init();
+		if(!is_voted)
+		{
+			tem.init();
+			is_voted = true;
+		}
+		Random tems = new Random();
+		int a = (tems.nextInt(3) + 1);
+		tem.loadList("L" + a );
+		System.out.println("SDADADADS" + a);
 		tem.start();
 		tem.setVisible(true);
 		add(tem);
@@ -58,6 +73,7 @@ public class Main extends JFrame{
 	public void removeapplet(PApplet tem)
 	{
 		mainapplet.start();
+//		tem.stop();
 		remove(tem);
 		add(mainapplet);
 	}

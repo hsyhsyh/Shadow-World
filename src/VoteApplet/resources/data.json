@@ -112,7 +112,7 @@
       "passwd":  "102021101",
       "L1": "YODA,ANAKIN,C-3PO",
       "L2": "PADME,EMPEROR,OBI-WAN",
-      "L3": "QUI-GON,,"
+      "L3": "QUI-GON,PADME,EMPEROR"
     },
     {
       "account": "102021102",

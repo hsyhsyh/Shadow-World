@@ -156,7 +156,7 @@ public void btnClick(float mx,float my){
 	if(700<=my && my<750){
 		//senlist
 		if(600<=mx && mx<=750){
-		
+			nextpage();
 		}
 		//reset
 		if(800<=mx && mx<=950){
@@ -186,8 +186,14 @@ public void voteAccess(String name,int n){
 	}
 }
 
-public void dataWrite(){
-	
+public void nextpage(){
+	this.stop();
+	shownum++;
+	for(int i=shownum;i<=shownum+5;i++){
+		characters.get(i).setPos(100+400*(i/2),100+300*(i%2));
+		showlist.add(characters.get(i));
+	}
+	this.start();
 }
 
 	

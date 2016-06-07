@@ -12,32 +12,21 @@ public class Main extends JFrame{
 	public Gamestart gamestart;
 	public GameStage gamestage;
 	public PApplet applet1, applet2;
-	public PApplet VoteApplet;
+	public VoteApplet voteapplet;
 	public Main()
 	{
 		//Voteapplet
-		VoteApplet voteapplet = new VoteApplet();
-		voteapplet.init();
-		voteapplet.start();
-		voteapplet.setFocusable(true);
+		voteapplet = new VoteApplet(this);
+//		voteapplet.init();
+//		voteapplet.start();
+//		voteapplet.setFocusable(true);
 		//loadList(String) "L1" "L2" "L3" Load list
 		//setVoteVisible(boolean) 
 		
-<<<<<<< HEAD
-		applet1 = new GameStage();
-		applet2 = new Gamestart();
-		
-=======
-		gamestage = new GameStage(this);
+		gamestage = new GameStage(this,voteapplet);
 		gamestart = new Gamestart(this);
 		gamestart.setgs(gamestage);
 		gamestage.setgs(gamestart);
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
-		
->>>>>>> 2dc165273b037cc454b9b53ab2682e92979fd236
-//		changeapplet(applet1);
 		mainapplet = gamestart;
 		mainapplet.init();
 		mainapplet.start();
@@ -56,13 +45,21 @@ public class Main extends JFrame{
 		add(mainapplet);
 		
 	}
-	
-	public void applet(PApplet tem)
+	//102021101
+	public void addapplet(PApplet tem)
 	{
+		mainapplet.stop();
 		tem.init();
 		tem.start();
+		tem.setVisible(true);
 		add(tem);
 	}
+	public void removeapplet(PApplet tem)
+	{
+		mainapplet.start();
+		remove(tem);
+	}
+	
 	public static void main(String [] args){
 //		GameStage applet1 = new GameStage();
 //		Gamestart applet2 = new Gamestart();

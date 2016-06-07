@@ -2,6 +2,7 @@ package VoteApplet;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import Game.Main;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.data.JSONArray;
@@ -19,6 +20,13 @@ public class VoteApplet extends PApplet{
 	private boolean done,reset,quit;
 	private ChatClient client;
 	private int listnum;
+	private Main main;
+	
+	public VoteApplet(Main m)
+	{
+		main = m;
+	}
+	
 	public void setup(){
 		
 		size(1000, 500);
@@ -201,6 +209,7 @@ public void btnClick(float mx,float my){
 			if(200<=mx && mx<=350){
 				sendList();
 				setVoteVisible(false);
+				main.removeapplet(this);
 			}
 			//reset
 			if(400<=mx && mx<=550){

@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import VoteApplet.VoteApplet;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import de.looksgood.ani.Ani;
@@ -19,6 +20,7 @@ public class GameStage extends PApplet{
 	private GameStage self;
 	private Main m;
 	private Gamestart gs;
+	private VoteApplet va;
 	public PImage man, bullet, books, book, bloodletter, diamand, phone, skull, monster, 
 				monster2, strike, box, bed, ladder, door1, door2, man1, man2, man3, man4
                 , man5, man6, man7, man8, man_c1, man_c2, man_s1, man_s2,dead_man, 
@@ -51,9 +53,10 @@ public class GameStage extends PApplet{
 	AudioPlayer song;
 	public AudioPlayer effect[]=new AudioPlayer[10];
 	
-	public GameStage(Main m)
+	public GameStage(Main m, VoteApplet voteapplet)
 	{
 		this.m = m;
+		va = voteapplet;
 	}
 	
 	public void setup() {
@@ -904,6 +907,7 @@ public class GameStage extends PApplet{
 			if(hasdialog && is_voting)
 			{
 				is_voting = false;
+				m.addapplet(va);
 				;//投票系統
 			}
 			break;

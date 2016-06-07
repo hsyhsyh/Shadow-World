@@ -101,7 +101,7 @@ public class ChatClient extends JFrame {
 	}
 	
 	public void sendMessage(String message) {
-		System.out.println(SwingUtilities.isEventDispatchThread());
+//		System.out.println(SwingUtilities.isEventDispatchThread());
 		/*StringBuilder sBuilder = new StringBuilder(this.username);
 		sBuilder.append(": ").append(message);
 		*/

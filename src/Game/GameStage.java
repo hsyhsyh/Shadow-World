@@ -116,7 +116,7 @@ public class GameStage extends PApplet{
 		//bullets = new ArrayList<Bullet>();
 		dialog = new Dialog();
 		
-		stage_num = 2;
+		stage_num = 1;
 		
 		
 		isLoading  = false;

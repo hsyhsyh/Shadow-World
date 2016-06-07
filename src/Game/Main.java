@@ -36,7 +36,7 @@ public class Main extends JFrame{
 //		gamestart.init();
 		gamestart.setgs(gamestage);
 		gamestage.setgs(gamestart);
-		mainapplet = gamestage;
+		mainapplet = gamestart;
 		mainapplet.init();
 		mainapplet.start();
 		add(mainapplet);
@@ -64,19 +64,30 @@ public class Main extends JFrame{
 			//voteapplet.init();
 			is_voted = true;
 		}
+//<<<<<<< 8f4f56755e7c636f4d548a5f8f7e38719ba6a88f
 		Random tems = new Random();
 		int a = (tems.nextInt(3) + 1);
 		voteapplet.loadList("L" + a );
-		System.out.println("SDADADADS" + a);
-		//voteapplet.start();
-		voteapplet.setVisible(true);
+//		System.out.println("SDADADADS" + a);
+		voteapplet.start();
+		voteapplet.setVoteVisible(true);
 		//add(tem);
+//=======
+////		Random tems = new Random();
+////		int a = (tems.nextInt(3) + 1);
+////		System.out.println("SDADADADS" + a);
+//		tem.loadList("L2" );
+//		
+//		tem.start();
+//		tem.setVisible(true);
+//		add(tem);
+//>>>>>>> deug mode
 	}
 	public void removeapplet(PApplet tem)
 	{
 		mainapplet.start();
-//		tem.stop();
-		remove(tem);
+		tem.stop();
+//		remove(tem);
 		add(mainapplet);
 	}
 	

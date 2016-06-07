@@ -910,7 +910,7 @@ public class GameStage extends PApplet{
 				is_voting = false;
 				dialog.closed();
 				
-				m.addapplet(va);
+				m.addapplet();
 				;//投票系統
 			}
 			break;

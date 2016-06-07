@@ -21,7 +21,9 @@ public class Main extends JFrame{
 		is_voted = false;
 		//Voteapplet
 		voteapplet = new VoteApplet(this);
-//		voteapplet.init();
+		this.add(voteapplet);
+		voteapplet.init();
+		voteapplet.setVisible(false);
 //		voteapplet.init();
 //		voteapplet.start();
 //		voteapplet.setFocusable(true);
@@ -53,22 +55,22 @@ public class Main extends JFrame{
 		
 	}
 	//102021101
-	public void addapplet(VoteApplet tem)
+	public void addapplet()
 	{
 		mainapplet.stop();
 		remove(mainapplet);
 		if(!is_voted)
 		{
-			tem.init();
+			//voteapplet.init();
 			is_voted = true;
 		}
 		Random tems = new Random();
 		int a = (tems.nextInt(3) + 1);
-		tem.loadList("L" + a );
+		voteapplet.loadList("L" + a );
 		System.out.println("SDADADADS" + a);
-		tem.start();
-		tem.setVisible(true);
-		add(tem);
+		//voteapplet.start();
+		voteapplet.setVisible(true);
+		//add(tem);
 	}
 	public void removeapplet(PApplet tem)
 	{

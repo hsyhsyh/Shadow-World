@@ -48,7 +48,6 @@ public class Deadman extends AbstractItem{
 						System.out.println(parent.hasdialog);
 						if(!parent.hasdialog)
 						{
-//							System.out.println(parent.hasdialog);
 							image = image2;
 							break;
 						}
@@ -56,7 +55,6 @@ public class Deadman extends AbstractItem{
 				}
 			});
 			s.start(); 
-//			return null;
 		}
 	}
 	public void getImage(PImage image) {

@@ -4,7 +4,6 @@ import processing.core.PImage;
 
 public class Paper extends AbstractItem{
 
-//	private boolean switchs;
 	public Paper(PImage image ,int x, int y, GameStage parent, String[] text1, 
 			 boolean[] m1,String[] text2, boolean[] m2)
 	{
@@ -28,14 +27,7 @@ public class Paper extends AbstractItem{
 	@Override
 	public void dialog_event() {
 		// TODO Auto-generated method stub
-//		if(this.switchs)
-//		{
-//			this.switchs = true;
-			parent.stage_5_box_1 = true;
-//			return text2;
-//		}
 		parent.opendialog(text1, mantalk1);
-//		return text1;
 	}
 
 }

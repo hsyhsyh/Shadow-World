@@ -8,7 +8,6 @@ public class Ladder {
 	private int size;
 	private PImage image;
 	private PApplet parent;
-//	private
 	public Ladder(int x, int y, int size, PImage image, PApplet parent)
 	{
 		this.x = x;

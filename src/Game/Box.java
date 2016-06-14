@@ -35,10 +35,8 @@ public class Box extends AbstractItem{
 	@Override
 	public void dialog_event() {
 		// TODO Auto-generated method stub
-//		System.out.println(isspecial + " " + parent.stage_5_box_1 + " " + parent.stage_5_box_2);
 		if(isspecial && !parent.stage_5_box_2 && parent.stage_5_box_1)
 		{
-//			parent.stage_5_floor = true;
 			parent.stage_5_box_2 = true;
 			parent.opendialog(text2, mantalk2);
 			Thread s = new Thread(new Runnable(){
@@ -49,7 +47,6 @@ public class Box extends AbstractItem{
 						System.out.print(parent.hasdialog);
 						if(!parent.hasdialog)
 						{
-//							System.out.println(parent.hasdialog);
 							parent.goalX = 847;
 							parent.goalY = 97;
 							parent.transport(6);
@@ -59,8 +56,6 @@ public class Box extends AbstractItem{
 				}
 			});
 			s.start(); 
-//			return null;
-			
 		}
 		else if(isspecial && parent.stage_5_box_2)
 		{
@@ -83,8 +78,6 @@ public class Box extends AbstractItem{
 				}
 			});
 			s.start(); 
-			
-//	 		return null;
 		}
 		else
 		{

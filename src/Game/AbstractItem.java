@@ -10,15 +10,6 @@ abstract public class AbstractItem {
 	protected boolean[] mantalk1,mantalk2;
 	protected PImage image;
 	protected GameStage parent;
-//	public void set(PImage simage ,int sx, int sy, PApplet sparent, String[] text1, String[] text2)
-//	{
-//		this.image = image;
-//		this.x = x;
-//		this.y = y;
-//		this.parent = parent;
-//		this.text1 = text1;
-//		this.text2 = text2;
-//	}
 	abstract public void display();
 	abstract public void dialog_event();
 }

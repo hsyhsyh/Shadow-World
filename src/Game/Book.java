@@ -35,21 +35,15 @@ public class Book extends AbstractItem{
 		// TODO Auto-generated method stub
 		if(isspecial && !parent.stage_8_bookcase_2 && parent.stage_8_bookcase_1)
 		{
-//			parent.stage_5_floor = true;
 			parent.stage_8_bookcase_2 = true;
 			parent.stage_5_floor = true;
 			parent.be_end = true;
 			parent.opendialog(text2, mantalk2);
-
-//			return null;
 			
 		}
 		else if(isspecial && parent.stage_8_bookcase_2)
 		{
 			parent.opendialog(text3,mantalk3);
-
-			
-//	 		return null;
 		}
 		else
 		{

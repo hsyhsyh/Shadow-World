@@ -34,11 +34,6 @@ public class Bloodletter extends AbstractItem {
 		{
 			parent.image(image,x,y);
 		}
-		else
-		{
-//			parent.fill(255,0,0);
-//			parent.rect(x, y, width, height);
-		}
 
 	}
 

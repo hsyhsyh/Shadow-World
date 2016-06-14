@@ -3,9 +3,7 @@ package Game;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Random;
 
-import VoteApplet.VoteApplet;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import de.looksgood.ani.Ani;
@@ -21,7 +19,6 @@ public class GameStage extends PApplet{
 	private GameStage self;
 	private Main m;
 	private Gamestart gs;
-	private VoteApplet va;
 	public PImage man, bullet, books, book, bloodletter, diamand, phone, skull, monster, 
 				monster2, strike, box, bed, ladder, door1, door2, man1, man2, man3, man4
                 , man5, man6, man7, man8, man_c1, man_c2, man_s1, man_s2,dead_man, 
@@ -34,14 +31,11 @@ public class GameStage extends PApplet{
 	private ArrayList<Door> doors;
 	private ArrayList<AbstractItem> items;
 	private ArrayList<Ladder> ladders;
-	//private ArrayList<Bullet> bullets;
-//	private ArrayList<strike> traps;
 	private Dialog dialog;
 	public boolean hasdialog;
 	private int stage_num;
 	public boolean isLoading = true;
 	private boolean is_transport;
-	private boolean is_hurt;
 	public boolean firststart,stage_2_door,stage_3_door,stage_5_floor, stage_5_box_1
 			,stage_5_box_2, stage_8_bookcase_1, stage_8_bookcase_2,be_end,the_end
 			,end_dialog, is_voting, change;
@@ -54,10 +48,9 @@ public class GameStage extends PApplet{
 	AudioPlayer song;
 	public AudioPlayer effect[]=new AudioPlayer[10];
 	
-	public GameStage(Main m, VoteApplet voteapplet)
+	public GameStage(Main m)
 	{
 		this.m = m;
-		va = voteapplet;
 	}
 	
 	public void setup() {
@@ -113,7 +106,6 @@ public class GameStage extends PApplet{
 		doors = new ArrayList<Door>();
 		items = new ArrayList<AbstractItem>();
 		ladders = new ArrayList<Ladder>();
-		//bullets = new ArrayList<Bullet>();
 		dialog = new Dialog();
 		
 		stage_num = 1;
@@ -130,7 +122,6 @@ public class GameStage extends PApplet{
 		minim = new Minim(this);
 		song=minim.loadFile("shadow.wav");
 		song.loop();
-		//song.play();
 		effect[0]=minim.loadFile("shoot.wav");
 		effect[1]=minim.loadFile("levelUp.wav");
    		Thread ch = new Thread(new Runnable(){
@@ -155,7 +146,6 @@ public class GameStage extends PApplet{
 		
 		background(255);
         strokeWeight(1);
-//        textFont(cnFont);
         //blood
         if(stage_num == 3 || stage_num == 7) {
 	        fill(200);
@@ -222,7 +212,6 @@ public class GameStage extends PApplet{
         if(!ladders.isEmpty())
         {
         	for(Ladder ladder : ladders){
-//        		image(ladder.getImage(),ladder.x, ladder.y);
         		ladder.display();
             }
         }
@@ -239,13 +228,10 @@ public class GameStage extends PApplet{
    
         if(end_dialog)
 		{
-        	is_hurt = false;
 			fill(0,0,0,alpha);
         	rect(0,0,width,height);
         	if(alpha == 255 && !hasdialog && !change)
         	{
-//        		loadData();
-//        		Ani.to(this, (float)1.5, "alpha", 0);
         		String[] en = new String[8];
         		en[0] = "喂！你睡一整天了耶！\n身為你的室友我真的看不下去了，你是要不要起床啊？";
         		en[1] = "我......回來了？我沒死？";
@@ -277,17 +263,10 @@ public class GameStage extends PApplet{
         						break;
         					}
         				}
-//        				System.out.println("?????");
-//        				m.change_into_applet(gs);
         			}
         		});
         		end.start();
         	}
-//        	if(alpha == 0)
-//        	{
-//        		is_transport = false;
-//        	}
-//        	System.out.println("XXXXX");
 		}
         
         if(hasdialog)
@@ -295,19 +274,16 @@ public class GameStage extends PApplet{
         	dialog.display();
         } 
 		
-        if(is_hurt)
+		fill(255,0,0,hurt_alpha);
+        rect(0,0,width,height);
+        hurt_alpha-=10;
+        if(hurt_alpha < 0)
         {
-			fill(255,0,0,hurt_alpha);
-        	rect(0,0,width,height);
-        	if(hurt_alpha == 0)
-        	{
-        		is_hurt = false;
-        	}
+        	hurt_alpha = 0;
         }
         
 		if(is_transport)
         {
-			is_hurt = false;
 			fill(0,0,0,alpha);
         	rect(0,0,width,height);
         	if(alpha == 255)
@@ -349,7 +325,6 @@ public class GameStage extends PApplet{
 		case 0://test stage
 			mainCharacter.x = 120;
 			mainCharacter.y = 320;
-//			monsters.add(new Monster(this,monster,"none",400,320,100,this,350,450) );
 			floors.add(new Floor(0, 0, 1000, 50));
 			floors.add(new Floor(0, 420, 1000, 80));
 			floors.add(new Floor(0, 0, 50, 500));
@@ -381,8 +356,6 @@ public class GameStage extends PApplet{
 			mainCharacter.addFloor(floors);
 			break;
 		case 1:
-//			the_end = true;
-//			firststart = false;
 			mainCharacter.x = 120;
 			mainCharacter.y = 20;
 			floors.add(new Floor(0, 0, 1000, 50));
@@ -413,7 +386,6 @@ public class GameStage extends PApplet{
 				start[5] = "......\n不管了，先到處看看再說。";
 				a = new boolean[6];
 				a[0] = a[1] = a[2] = a[3] = a[4] = a[5] = true;
-//				a[1] = true;
 				opendialog(start,a);
 				firststart = false;
 			}
@@ -468,10 +440,7 @@ public class GameStage extends PApplet{
 			{
 				doors.add(new Door( 860, 60, door1, 4, 50 ,320,false));
 			}
-
-//			monsters.add(new Monster(this,monster,"none",400,300,100,this,200,460));
-//			monsters.add(new Monster(this,monster,"none",430,300,100,this,200,460));
-//			monsters.add(new Monster(this,monster,"none",480,210,100,this,460,700));
+			
 			s = new String[2];
 			s[0] = "不知道是誰遺落在這裡的大螢幕手機，似乎是摔壞了\n手機只能開啟某個APP";
 			s[1] = "要開啟投票系統嗎？\nY鍵確定，N鍵......A鍵返回";
@@ -515,8 +484,6 @@ public class GameStage extends PApplet{
 			b = new boolean[2];
 			b[0] = false;
 			b[1] = true;
-//			b[2] = true;
-//			b[3] = true;
 			if(!stage_5_floor)
 			{
 				items.add(new Deadman(kidnap,kidnap2,600,255,this,s, a,t,b));
@@ -531,13 +498,9 @@ public class GameStage extends PApplet{
 				u = new String[2];
 				u[0] = "怎麼又回到這裡了......我開錯門了嗎？\n不對，門怎麼鎖住了回不去？";
 				u[1] = "......\n算了，還是繼續看看其他地方吧";
-//				u[2] = "";
-//				u[3] = "";
 				c = new boolean[2];
 				c[0] = true;
 				c[1] = true;
-//				c[2] = true;
-//				c[3] = true;
 				opendialog(u,c);
 				be_end = false;
 				the_end = true;
@@ -593,7 +556,6 @@ public class GameStage extends PApplet{
 			}
 			
 			doors.add(new Door( 850, 320, door2, 7, 50, 220,true));
-//			doors.add(new Door( 850, 320, door2, 8, 120, 320,true));
 			s = new String[2];
 			s[0] = "宛如壁紙一般，側面看過去甚至看不見的箱子\n詭異的是，從正面伸手居然還摸的到木質般的實體";
 			s[1] = "這是什麼鬼箱子啊......\n碰都不想碰......";
@@ -604,12 +566,8 @@ public class GameStage extends PApplet{
 			t[0] = "如果紙條寫的是對的話，那這裡應該會有門......\n咦咦還真的有！";
 			b = new boolean[1];
 			b[0] = true;
-//			t[1] = "";
-//			t[2] = "";
 			u = new String[1];
 			u[0] = "摸起來是箱子的東西居然用力推開會變成門......\n這到底是什麼鬼地方啊.......";
-//			u[1] = "";
-//			u[2] = "";
 			c = new boolean[1];
 			c[0] = true;
 			items.add(new Box(box, 400, 282, this ,s,a,t,b, u,c, true));
@@ -666,8 +624,6 @@ public class GameStage extends PApplet{
 			b = new boolean[2];
 			b[0] = false;
 			b[1] = true;
-//			b[2] = true;
-//			b[3] = true;
 			items.add(new Deadman(dead_man,dead_man,600,265,this,null, null,t,b));
 			s = new String[2];
 			s[0] = "不知道是誰遺落在這裡的大螢幕手機，似乎是摔壞了\n手機只能開啟某個APP";
@@ -690,8 +646,6 @@ public class GameStage extends PApplet{
 			mainCharacter.addFloor(floors);
 			break;
 		case 8:
-//			mainCharacter.x = 120;
-//			mainCharacter.y = 320;
 			floors.add(new Floor(0, 0, 1000, 50));
 			floors.add(new Floor(0, 420, 1000, 50));
 			floors.add(new Floor(0, 0, 50, 500));
@@ -714,16 +668,12 @@ public class GameStage extends PApplet{
 			t = new String[2];
 			t[0] = "彷彿處於2D空間，側面看過去甚至會消失的書櫃\n詭異的是，從正面伸手居然還摸的到各式各樣的書本";
 			t[1] = "嗯？書本之間居然還有一根拉桿？剛剛明明就沒有的啊？\n嘖......反正也沒有路可以走了，就直接拉下去算了";
-//			t[2] = "";
 			b = new boolean[2];
 			b[0] = false;
 			b[1] = true;
-//			t[1] = "";
-//			t[2] = "";
 			u = new String[2];
 			u[0] = "彷彿處於2D空間，側面看過去甚至會消失的書櫃\n詭異的是，從正面伸手居然還摸的到各式各樣的書本";
 			u[1] = "一個沒注意拉桿又不見了......\n我還是離它遠一點好了......";
-//			u[2] = "";
 			c = new boolean[2];
 			c[0] = false;
 			c[1] = true;
@@ -753,24 +703,6 @@ public class GameStage extends PApplet{
 			monsters.add(new Monster(this,monster,"none",300,320,100,this,100,750));
 			monsters.add(new Monster(this,monster,"none",700,50,100,this,600,750));
 			break;
-//		case 9:
-//			mainCharacter.x = 120;
-//			mainCharacter.y = 320;
-//			floors.add(new Floor(0, 0, 1000, 50));
-//			floors.add(new Floor(0, 420, 1000, 80));
-//			floors.add(new Floor(0, 0, 50, 500));
-//			floors.add(new Floor(950,0,50, 500));
-//			mainCharacter.addFloor(floors);
-//			break;
-//		case 10:
-//			mainCharacter.x = 120;
-//			mainCharacter.y = 320;
-//			floors.add(new Floor(0, 0, 1000, 50));
-//			floors.add(new Floor(0, 420, 1000, 80));
-//			floors.add(new Floor(0, 0, 50, 500));
-//			floors.add(new Floor(950,0,50, 500));
-//			mainCharacter.addFloor(floors);
-//			break;
 		}
 	}
 	
@@ -808,7 +740,6 @@ public class GameStage extends PApplet{
 					mainCharacter.isGround && mainCharacter.now_HP > 0 && !hasdialog)
 			{
 				mainCharacter.jump();
-				//mainCharacter.isWalk=false;
 			}
 			break;
 		case KeyEvent.VK_DOWN://down to ladder
@@ -842,7 +773,6 @@ public class GameStage extends PApplet{
 						transport(d.getgoal());
 						goalX = d.goalX - 3;
 						goalY = d.goalY - 3;
-//						isnotdone = false;
 					}
 					else
 					{
@@ -870,21 +800,11 @@ public class GameStage extends PApplet{
 			if(mainCharacter.now_HP > 0) {
 			if(!hasdialog)
 			{
-//				boolean isnotdone = true;
 				for(AbstractItem i : items)
 				{
 					if(whereisch(i))
 					{
 						i.dialog_event();
-//						String text[] = new String[2];
-//						textFont(cnFont);
-//						text[0] = "測試";
-//						text[1] = "test";
-//						if( isnotdone && (text != null) )//if need dialog
-//						{
-//							opendialog(text);
-//							break;
-//						}
 					}
 				}
 			}
@@ -894,7 +814,7 @@ public class GameStage extends PApplet{
 			}
 			}
 			break;
-		case KeyEvent.VK_Z://find
+		case KeyEvent.VK_Z:
 			//attack
 			if(mainCharacter.now_HP > 0 && !hasdialog) {
 			if(mainCharacter.isOnLadder){
@@ -911,7 +831,7 @@ public class GameStage extends PApplet{
 				dialog.closed();
 				
 				m.addapplet();
-				;//投票系統
+				//投票系統
 			}
 			break;
 		case KeyEvent.VK_N:
@@ -936,7 +856,6 @@ public class GameStage extends PApplet{
 		// TODO Auto-generated method stub
 		if(keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_RIGHT)
 		{
-			//mainCharacter.isWalk=false;
 			mainCharacter.move("stop");
 			mainCharacter.direction = "";
 		}
@@ -982,8 +901,7 @@ public class GameStage extends PApplet{
 			hasdialog = true;
 			textpagenum = 0;
 			now_textpagenum = 0;
-			textnum = 0;//one row 45 letters, at most 3 column
-//			text = "1234567890\n1234567890\n1234567890";
+			textnum = 0;
 			manX = -200;
 			manY = 160;
 			speed = false;
@@ -1019,8 +937,6 @@ public class GameStage extends PApplet{
 			{
 				now_textpagenum++;
 				textnum = 0;
-//				Ani.to(this, (float)(text[now_textpagenum].length()*0.1),
-//						"textnum", text[now_textpagenum].length(), Ani.LINEAR);
 				showtext();
 				showman();
 			}
@@ -1032,16 +948,12 @@ public class GameStage extends PApplet{
 					wide == 950 && high == 150 )
 			{
 				speed = true;
-//				System.out.println("AAA");
-//				textnum = text[now_textpagenum].length();
-//				System.out.println("AAA" + textnum);
 			}
 		}
 		public void open()
 		{
 			Ani.to(this, (float)1.0, "wide", 950, Ani.SINE_OUT);
 			Ani.to(this, (float)1.0, "high", 150, Ani.SINE_OUT);
-//			Ani.to(this, (float)0.3, "manX", 20, Ani.SINE_OUT);
 			showman();
 		}
 		public void closed()
@@ -1061,7 +973,6 @@ public class GameStage extends PApplet{
 			now_textpagenum = 0;
 			text = t;
 			textnum = 0;
-//			System.out.println(mantalk[0]);
 		}
 		public void showtext()
 		{
@@ -1088,12 +999,9 @@ public class GameStage extends PApplet{
 				}
 			});
 			t.start();
-//			Ani.to(this, (float)(text[now_textpagenum].length()*0.1),
-//							"textnum", text[now_textpagenum].length(), Ani.LINEAR);
 		}
 		private void showman()
 		{
-//			System.out.println(mantalk[0]);
 			if(mantalk[now_textpagenum])
 			{
 				Ani.to(this, (float)0.3, "manX", 20, Ani.SINE_OUT);
@@ -1130,20 +1038,6 @@ public class GameStage extends PApplet{
 				return false;
 			}
 		}
-//		else if(thing.getClass().getName().equals("Game.Bed"))
-//		{
-//			Bed b = (Bed)thing;
-//			if( (b.x < mainCharacter.x) && (b.x + b.width > mainCharacter.x)
-//					&& (b.y - 5 < mainCharacter.y + man1.height) 
-//						&& (b.y + b.height + 5 > mainCharacter.y + man1.height) )
-//			{//if charater is at the bed
-//				return true;
-//			}
-//			else
-//			{
-//				return false;
-//			}
-//		}
 		else if(thing.getClass().getName().equals("Game.Box"))
 		{
 			Box b = (Box)thing;
@@ -1164,7 +1058,7 @@ public class GameStage extends PApplet{
 			if( (b.x < mainCharacter.x) && (b.x + b.width > mainCharacter.x)
 					&& (b.y - 3 < mainCharacter.y + man1.height) 
 						&& (b.y + b.height + 50 > mainCharacter.y + man1.height) )
-			{//if charater is at the bed
+			{
 				return true;
 			}
 			else
@@ -1179,7 +1073,7 @@ public class GameStage extends PApplet{
 			if( (b.x - 3 < mainCharacter.x) && (b.x + b.width + 3 > mainCharacter.x)
 					&& (b.y - 50 < mainCharacter.y + man1.height) 
 						&& (b.y + b.height + 50 > mainCharacter.y + man1.height) )
-			{//if charater is at the bed
+			{
 				return true;
 			}
 			else
@@ -1194,7 +1088,7 @@ public class GameStage extends PApplet{
 			if( (b.x - 3 < mainCharacter.x) && (b.x + b.width + 3 > mainCharacter.x)
 					&& (b.y - 8 < mainCharacter.y + man1.height) 
 						&& (b.y + b.height + 8 > mainCharacter.y + man1.height) )
-			{//if charater is at the bed
+			{
 				return true;
 			}
 			else
@@ -1209,7 +1103,7 @@ public class GameStage extends PApplet{
 			if( (b.x - 3 < mainCharacter.x) && (b.x + b.width + 3 > mainCharacter.x)
 					&& (b.y - 8 < mainCharacter.y + man1.height) 
 						&& (b.y + b.height + 8 > mainCharacter.y + man1.height) )
-			{//if charater is at the bed
+			{
 				return true;
 			}
 			else
@@ -1224,7 +1118,7 @@ public class GameStage extends PApplet{
 			if( (b.x - 3 < mainCharacter.x) && (b.x + b.width + 3 > mainCharacter.x)
 					&& (b.y - 40 < mainCharacter.y + man1.height) 
 						&& (b.y + b.height + 40 > mainCharacter.y + man1.height) )
-			{//if charater is at the bed
+			{
 				return true;
 			}
 			else
@@ -1239,7 +1133,7 @@ public class GameStage extends PApplet{
 			if( (b.x - 3 < mainCharacter.x) && (b.x + b.width + 3 > mainCharacter.x)
 					&& (b.y - 5 < mainCharacter.y + man1.height) 
 						&& (b.y + b.height + 5 > mainCharacter.y + man1.height) )
-			{//if charater is at the bed
+			{
 				return true;
 			}
 			else
@@ -1247,33 +1141,13 @@ public class GameStage extends PApplet{
 				return false;
 			}
 		}
-//		else if(thing.getClass().getName().equals("Game.Trap"))
-//		{
-//			Trap t = (Trap)thing;
-//			if( (t.x < mainCharacter.x) && (t.x + t.width > mainCharacter.x)
-//					&& (t.y < mainCharacter.y + mainCharacter.height) 
-//						&& (t.y + t.height > mainCharacter.y + mainCharacter.height) )
-//			{//if charater is at the trap
-//				return true;
-//			}
-//			else
-//			{
-//				return false;
-//			}
-//		}
 		
 		return false;
 	}
 	
 	public void hurt()
 	{
-		is_hurt = true;
 		hurt_alpha = 255;
-//		Thread h = new Thread(new Runnable(){
-//			public 
-//		});
-//		h.start();
-		Ani.to(this, (float)0.5, "hurt_alpha", 0);
 	}
 	
 	private void clearplace()

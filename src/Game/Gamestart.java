@@ -1,10 +1,7 @@
 package Game;
 
-import java.awt.Button;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -69,7 +66,6 @@ public class Gamestart extends PApplet implements ActionListener {
             	}
 			}
 			else{
-//				image(this.startbg, -300, -300);
 				
 				try{  
 					Thread.sleep(1500); m.change_into_applet(gs); 
@@ -94,14 +90,12 @@ public class Gamestart extends PApplet implements ActionListener {
 	 			this.achievement.setSize(100, 40);
 	 			this.statis.setSize(100,40);
 	 			this.statis.setLocation(500, 300);
-//	 			index=index+1;
 			}
 		}
 	   }
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if("start".equals(e.getActionCommand())){
-//			System.out.println("1234");
 			this.remove(start);
 			this.remove(stop);
 			this.remove(achievement);

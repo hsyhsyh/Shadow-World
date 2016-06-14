@@ -21,19 +21,11 @@ public class Main extends JFrame{
 		is_voted = false;
 		//Voteapplet
 		voteapplet = new VoteApplet(this);
-		this.add(voteapplet);
 		voteapplet.init();
-		voteapplet.setVisible(false);
-//		voteapplet.init();
-//		voteapplet.start();
-//		voteapplet.setFocusable(true);
-		//loadList(String) "L1" "L2" "L3" Load list
-		//setVoteVisible(boolean) 
+		voteapplet.setVoteVisible(false);
 		
-		gamestage = new GameStage(this,voteapplet);
+		gamestage = new GameStage(this);
 		gamestart = new Gamestart(this);
-//		gamestage.init();
-//		gamestart.init();
 		gamestart.setgs(gamestage);
 		gamestage.setgs(gamestart);
 		mainapplet = gamestart;
@@ -41,76 +33,46 @@ public class Main extends JFrame{
 		mainapplet.start();
 		add(mainapplet);
 		
+		
 	}
 	
 	public void change_into_applet(PApplet tem)
 	{
 		mainapplet.stop();
 		remove(mainapplet);
-//		removeAll();
 		mainapplet = tem;
 		mainapplet.init();
 		mainapplet.start();
 		add(mainapplet);
 		
 	}
-	//102021101
+	//±b¸¹±K½X¬Ò¬O102021101
 	public void addapplet()
 	{
 		mainapplet.stop();
 		remove(mainapplet);
 		if(!is_voted)
 		{
-			//voteapplet.init();
 			is_voted = true;
 		}
-//<<<<<<< 8f4f56755e7c636f4d548a5f8f7e38719ba6a88f
 		Random tems = new Random();
 		int a = (tems.nextInt(3) + 1);
 		voteapplet.loadList("L" + a );
-//		System.out.println("SDADADADS" + a);
+		System.out.println("SDADADADS" + a);
+		add(voteapplet);
 		voteapplet.start();
 		voteapplet.setVoteVisible(true);
-		//add(tem);
-//=======
-////		Random tems = new Random();
-////		int a = (tems.nextInt(3) + 1);
-////		System.out.println("SDADADADS" + a);
-//		tem.loadList("L2" );
-//		
-//		tem.start();
-//		tem.setVisible(true);
-//		add(tem);
-//>>>>>>> deug mode
+
 	}
 	public void removeapplet(PApplet tem)
 	{
 		mainapplet.start();
 		tem.stop();
-//		remove(tem);
+		remove(tem);
 		add(mainapplet);
 	}
 	
 	public static void main(String [] args){
-//		GameStage applet1 = new GameStage();
-//		Gamestart applet2 = new Gamestart();
-//		applet2.init();
-//		applet2.start();
-//		applet2.setFocusable(true);
-//		
-////		applet1.init();
-////		applet1.start();
-////		applet1.setFocusable(true);
-//		
-//		
-//		JFrame window = new JFrame("Shadow-World");
-//		window.setLocation(100, 50);
-////		window.setContentPane(applet1);
-//		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		window.setSize(windowWidth, windowHeight);
-//		window.setVisible(true);
-//		window.setResizable(false);
-//		window.add(applet2);
 		
 		Main m = new Main();
 		m.setTitle("Shadow-World");
@@ -119,20 +81,6 @@ public class Main extends JFrame{
 		m.setSize(windowWidth, windowHeight);
 		m.setVisible(true);
 		m.setResizable(false);
-//		Thread test = new Thread(new Runnable(){
-//			public void run()
-//			{
-//				try {
-//					Thread.sleep(2000);
-//					System.out.println("AAA");
-//					m.change_into_applet(m.applet2);
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				
-//			}
-//		});
-//		test.start();
+
 	}
 }

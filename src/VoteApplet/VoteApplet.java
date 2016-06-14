@@ -224,6 +224,7 @@ public void btnClick(float mx,float my){
 			//quit
 			if(600<=mx && mx<=750){
 				setVisible(false);
+				main.removeapplet(this);
 			}
 		}
 	}

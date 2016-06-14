@@ -157,7 +157,6 @@ public class Character extends AbstractCharacter implements Runnable{
 					UpDown="Up";
 				else if(this.velocityForDirectionY<0)
 					UpDown="Down";
-				//System.out.println(i);
 				i ++;
 				
 				if(this.now_HP <= 0 && gs.GameOver_y<250) {

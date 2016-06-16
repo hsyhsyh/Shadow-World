@@ -30,11 +30,11 @@ public class Gamestart extends PApplet implements ActionListener {
 	public void setup() {
 		achi = new Achieve();
 		for(int i=0;i<4;i++){  
-        	this.imgs[i] = loadImage("start" + (i+1) + ".png"); 
+        	this.imgs[i] = loadImage("res/start" + (i+1) + ".png"); 
         }
 		size(width, height);
 		smooth();
-		startbg = loadImage("startbg.png");
+		startbg = loadImage("res/startbg.png");
 		this.start = new JButton("Start");
 		this.stop = new JButton("Exit");
 		this.achievement = new JButton("achievement");

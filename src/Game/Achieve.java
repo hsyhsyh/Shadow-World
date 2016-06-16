@@ -41,15 +41,15 @@ public class Achieve extends JFrame{
 		achieve6 = true;
 		achieve7 = true;
 		achieve8 = true;
-		File file1 = new File("achieve1.png");
-		File file2 = new File("achieve2.png");
-		File file3 = new File("achieve3.png");
-		File file4 = new File("achieve4.png");
-		File file5 = new File("achieve5.png");
-		File file6 = new File("achieve6.png");
-		File file7 = new File("achieve7.png");
-		File file8 = new File("achieve8.png");
-		File file9 = new File("startbg.png");
+		File file1 = new File("res/achieve1.png");
+		File file2 = new File("res/achieve2.png");
+		File file3 = new File("res/achieve3.png");
+		File file4 = new File("res/achieve4.png");
+		File file5 = new File("res/achieve5.png");
+		File file6 = new File("res/achieve6.png");
+		File file7 = new File("res/achieve7.png");
+		File file8 = new File("res/achieve8.png");
+		File file9 = new File("res/startbg.png");
 		try {
 			this.image1 = ImageIO.read(file1);
 			this.image2 = ImageIO.read(file2);
